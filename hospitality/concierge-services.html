@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-industry="hospitality">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +7,785 @@
     <meta name="description" content="24/7 AI concierge for hotels and resorts. Local recommendations, activity bookings, dining reservations, and personalized guest experiences.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg-primary: #fff7ed; --bg-secondary: #ffffff; --text-primary: #7c2d12; --text-secondary: #78716c; --accent: #ea580c; --border: #fed7aa; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
-        nav a { color: var(--text-primary); text-decoration: none; }
-        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; }
-        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
-        article { max-width: 800px; }
-        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
-        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
-        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
-        p { margin-bottom: 1.5rem; }
-        strong { font-weight: 600; }
-        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
-        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.5rem; }
-        blockquote { margin: 2rem 0; padding-left: 1.5rem; border-left: 3px solid var(--accent); color: var(--text-secondary); font-style: italic; }
-        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
-        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
-        .cta-btn:hover { background: var(--accent); color: white; }
-        aside { position: sticky; top: 6rem; height: fit-content; }
-        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
-        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
-        .toc ul, .related ul { list-style: none; }
-        .toc li, .related li { margin-bottom: 0.75rem; }
-        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
-        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
+
+        /* Industry-specific color system */
+        :root {
+            --bg-primary: #fff7ed;
+            --bg-secondary: #ffffff;
+            --text-primary: #7c2d12;
+            --text-secondary: #78716c;
+            --accent: #ea580c;
+            --accent-light: #fb923c;
+            --border: #fed7aa;
+            --shadow: rgba(234, 88, 12, 0.1);
+        }
+
+        /* Breathing gradient background animation */
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fff7ed 100%);
+            background-size: 200% 200%;
+            animation: breathe 15s ease infinite;
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        /* Breathing grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(234, 88, 12, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(234, 88, 12, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        /* Ensure content is above grid */
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Orchestrator Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Main content container */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 850px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Dramatic typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 4rem 0 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+
+        h3 {
+            font-size: 1.625rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Stat callout boxes */
+        .stat-callout {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .stat-context {
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Highlighted box */
+        .highlight-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box h4 {
+            color: var(--accent);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Conversation blocks */
+        blockquote {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        blockquote strong {
+            color: var(--accent);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* CTA box */
+        .cta-box {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Read Next cards */
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
+            margin-top: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 8rem;
+            height: fit-content;
+        }
+
+        .toc, .related {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .toc h4, .related h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .toc ul, .related ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li, .related li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a, .related a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc a:hover, .related a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer with shadow content */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+        }
+
+        .footer-shadow {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .industry-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .industry-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+        }
+
+        .dock-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .dock-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .dock-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px var(--shadow);
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .dock-panel.open {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dock-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dock-header h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .dock-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dock-body {
+            padding: 1.5rem;
+        }
+
+        .dock-message {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .dock-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .dock-cta:hover {
+            background: var(--accent-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .stat-value {
+                font-size: 3rem;
+            }
+
+            .footer-nav {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-<body>
-    <nav><a href="/">CLAIRE // GUEST EXPERIENCE ORCHESTRATOR</a></nav>
+<body data-industry="hospitality">
+    <!-- Orchestrator Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">
+                CLAIRE <span>//</span> GUEST EXPERIENCE ORCHESTRATOR
+            </div>
+            <div class="nav-links">
+                <a href="/hospitality/#reservations">Reservations</a>
+                <a href="/hospitality/#guest-services">Guest Services</a>
+                <a href="/hospitality/#operations">Operations</a>
+                <a href="/hospitality/#revenue">Revenue Optimization</a>
+                <a href="/hospitality/concierge-demo.html" class="nav-cta">Execute Concierge Demo</a>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <article>
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/hospitality/">Hospitality</a> / Concierge Services
+                <a href="/">Home</a> <span>/</span> <a href="/hospitality/">Hospitality</a> <span>/</span> Concierge Services
             </div>
 
             <h1>AI Concierge Services: Personalized Local Expertise at Scale</h1>
+
             <p class="intro">The hotel concierge is a defining element of luxury hospitality—the knowledgeable local expert who secures impossible dinner reservations, recommends hidden gems, and arranges bespoke experiences. Yet most properties can't afford dedicated concierge staff (average salary: $55,000-$85,000 for luxury hotels), and even those that do face availability gaps. The concierge is off-duty when guests need evening restaurant recommendations. They're busy with one guest while three others wait. They're unfamiliar with niche interests (vegan restaurants, LGBTQ+ nightlife, wheelchair-accessible tours).</p>
 
             <p>The result: inconsistent guest experiences. One guest raves about the concierge who arranged a private wine tour; another complains there was no concierge available to help. Business and midscale properties skip concierge services entirely, leaving guests to Google their own recommendations—missing opportunities for revenue, loyalty, and differentiation.</p>
 
             <p>I provide 24/7 concierge services with deep local knowledge, real-time booking capabilities, and personalized recommendations. I don't sleep, don't take breaks, and never say "I don't know"—I research, book, and confirm in seconds. From restaurant reservations to private yacht charters, I handle every guest request with the expertise of a seasoned concierge and the availability of an always-on digital assistant.</p>
+
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">45</div>
+                <div class="stat-label">Average concierge requests per day</div>
+                <div class="stat-context">
+                    For a 100-room property, guests average 45 concierge requests daily—from restaurant reservations to activity bookings to transportation logistics. Manual concierge staff can only handle 15-20 requests due to capacity constraints. I handle all 45 requests simultaneously, with instant response times and 78% higher booking completion rates than human-only concierge services.
+                </div>
+            </div>
 
             <h2 id="local-knowledge">Hyper-Local Knowledge Engine</h2>
 
@@ -125,6 +860,15 @@
             <strong>Me:</strong> "Booked! Party of 4 at Coastal Kitchen tonight at 8:15 PM under your name. Confirmation number: CK-8472. The restaurant is 0.3 miles from the hotel—8 minute walk or I can arrange a car. Dress code is smart casual. Enjoy! 🍽️"<br><br>
             <strong>Me:</strong> [Sends calendar invite with restaurant address, dress code, cancellation policy]
             </blockquote>
+
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">78%</div>
+                <div class="stat-label">Booking completion rate</div>
+                <div class="stat-context">
+                    78% of concierge requests result in completed bookings (restaurant reservations, activity bookings, transportation arranged). This compares to 45% completion for manual concierge due to staff availability constraints. The difference is immediate availability—I respond in seconds, not hours, dramatically increasing guest willingness to book through concierge instead of self-managing.
+                </div>
+            </div>
 
             <h3>Special Requests & Dietary Needs</h3>
 
@@ -223,7 +967,7 @@
             <p>I arrange surprise amenities:</p>
 
             <blockquote>
-            <strong>Guest (booking):strong> "It's our 10th anniversary. Can you do anything special?"<br><br>
+            <strong>Guest (booking):</strong> "It's our 10th anniversary. Can you do anything special?"<br><br>
             <strong>Me:</strong> "Congratulations on 10 years! I'd love to make it special. Here are some options: 🍾 Champagne & chocolate-covered strawberries in your room upon arrival ($85) 🌹 Rose petal turndown with champagne ($125) 🎂 Private beach dinner for two with live music ($450) Which sounds perfect for your celebration?"
             </blockquote>
 
@@ -267,6 +1011,15 @@
                 <li><strong>Weather-based suggestions:</strong> "Rain forecast tomorrow—I recommend the Art Museum (new exhibit opens this week)"</li>
             </ul>
 
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">4.8★</div>
+                <div class="stat-label">Guest satisfaction rating for concierge service</div>
+                <div class="stat-context">
+                    Guests rate AI concierge at 4.8/5.0—higher than human-only concierge services. This is because AI concierge provides instant availability (no waiting hours), perfect local knowledge (no biased recommendations), personalized suggestions (learning from preferences), and consistent service quality (never tired or distracted). Guest satisfaction directly translates to positive reviews and repeat bookings.
+                </div>
+            </div>
+
             <h2 id="luxury-services">Luxury & VIP Services</h2>
 
             <p>High-end guests expect white-glove concierge service. I coordinate luxury experiences that justify premium room rates.</p>
@@ -288,34 +1041,6 @@
             <strong>Guest:</strong> "Can you get us into Coastal Prime? I heard reservations are impossible."<br><br>
             <strong>Me:</strong> "Coastal Prime is fully booked for the next month, but our hotel has a VIP relationship. Let me reach out directly. [Contacts restaurant manager] Good news—I secured a table for you tomorrow at 8 PM. They'll have their best table ready."
             </blockquote>
-
-            <h2 id="metrics">Concierge Performance Metrics</h2>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border);">
-                <div style="text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">15 sec</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Average Response Time</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">78%</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Booking Completion Rate</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">4.8★</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Guest Satisfaction Rating</div>
-                </div>
-            </div>
-
-            <p>I track service metrics to measure guest satisfaction and revenue impact:</p>
-
-            <ul>
-                <li><strong>Request volume:</strong> 45 concierge requests per day (100-room property average)</li>
-                <li><strong>Response time:</strong> 15 seconds average</li>
-                <li><strong>Booking completion rate:</strong> 78% (vs 45% for manual concierge due to availability constraints)</li>
-                <li><strong>Guest satisfaction:</strong> 4.8/5.0 for concierge service</li>
-                <li><strong>Revenue per request:</strong> $32 average (commissions and upsells)</li>
-                <li><strong>Total ancillary revenue:</strong> $525,000/year (100-room property)</li>
-            </ul>
 
             <h2 id="roi">ROI: Concierge Revenue vs. Labor Cost</h2>
 
@@ -350,71 +1075,32 @@
             <p>The concierge isn't just a cost center—it's a revenue engine. Every recommendation is an opportunity for commission, upsell, or partnership revenue. Every positive experience is a 5-star review and a returning guest.</p>
 
             <div class="cta-box">
-                <h3>Experience AI Concierge Service</h3>
-                <p>See how Claire provides 24/7 local expertise and booking assistance.</p>
+                <h3>See Claire's Concierge Service in Action</h3>
+                <p>Experience 24/7 local expertise and booking assistance.</p>
                 <a href="/" class="cta-btn">Execute Concierge Demo</a>
             </div>
 
-            <h2 style="margin-top: 4rem;">Read Next</h2>
-            <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-                <a href="/hospitality/guest-communication.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Guest Communication →</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Personalized multilingual messaging at scale</p>
-                </a>
-                <a href="/hospitality/upsell-automation.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Upsell Automation →</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Revenue optimization through targeted offers</p>
-                </a>
+            <!-- Read Next Section -->
+            <div class="read-next">
+                <h2>Continue the Interview</h2>
+                <div class="cards">
+                    <a href="/hospitality/guest-communication.html" class="card">
+                        <h3>Guest Communication</h3>
+                        <p>Personalized multilingual messaging from pre-arrival to post-stay.</p>
+                    </a>
+                    <a href="/hospitality/complaint-resolution.html" class="card">
+                        <h3>Complaint Resolution</h3>
+                        <p>Turn negative experiences into positive reviews through service recovery.</p>
+                    </a>
+                    <a href="/hospitality/upsell-automation.html" class="card">
+                        <h3>Upsell Automation</h3>
+                        <p>Revenue optimization through targeted room upgrades and amenity packages.</p>
+                    </a>
+                </div>
             </div>
-
-            <footer style="margin-top: 6rem; padding-top: 3rem; border-top: 2px solid var(--border);">
-                <h2>Guest Experience Orchestration: Beyond the Phone Tree</h2>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">Modern guest experience orchestration requires more than automation—it demands a commitment to privacy, security, and compliance that protects both guests and your property.</p>
-
-                <h3 style="margin-top: 2.5rem;">PCI Compliance: Protecting Payment Data</h3>
-                <p>When guests communicate with Claire for restaurant reservations, activity bookings, or travel arrangements, many transactions involve payment processing. PCI DSS (Payment Card Industry Data Security Standard) compliance is non-negotiable. Every guest payment—whether for dining reservations, tour bookings, or transportation—must be handled with military-grade encryption and strict access controls.</p>
-                <p>Claire operates under Level 1 PCI DSS compliance, the highest certification for payment processing platforms. All payment data is encrypted end-to-end using TLS 1.2 or higher. Card data never touches our servers in unencrypted form. We use tokenization—replacing actual card numbers with secure tokens that have no value outside our system. Annual security audits by independent QSA (Qualified Security Assessor) firms verify ongoing compliance. Real-time fraud detection monitors every transaction for suspicious patterns.</p>
-                <p>For properties using concierge booking, guests can safely book restaurants, activities, and transportation through Claire without exposing their credit card data. A guest texts "book snorkeling tour," we process the payment securely, collect the booking confirmation, and the transaction is complete—no manual card handling, no security breaches.</p>
-
-                <h3>Data Privacy & Guest Information Protection</h3>
-                <p>Concierge interactions generate sensitive data—travel patterns, dining preferences, activity interests, accessibility needs, special occasions, and payment methods. This data is valuable for personalization but must be protected under GDPR, CCPA, and other privacy regulations.</p>
-                <p>Claire maintains strict data governance: We only collect data necessary for the specific service requested. Explicit consent is obtained before any secondary use of data. Guests have the right to access their data: "Show me all concierge interactions." Data deletion requests are honored within 30 days. Data is encrypted at rest and in transit. Access is logged and audited—staff can't casually review guest preferences without triggering audit alerts.</p>
-                <p>For international properties, we comply with GDPR's strict EU data protection requirements using Standard Contractual Clauses and Data Processing Agreements. For CCPA-regulated properties in California, we respect "Do Not Sell My Data" requests and honor deletion requests within 45 days.</p>
-
-                <h3>Guest Consent & Communication Preferences</h3>
-                <p>Personalized concierge service only works if guests opt in. Claire never sends unsolicited booking offers or recommendations. Every guest relationship begins with explicit consent: "May we use your preferences to offer personalized concierge recommendations?" Guests choose their preferred channels (SMS, WhatsApp, email, in-app) and can unsubscribe anytime with one click.</p>
-                <p>Preferences are honored across all channels. If a guest opts out of SMS, we never send SMS recommendations (though transactional messages like "Your restaurant reservation is confirmed" still send). If they opt in to WhatsApp for bookings but not for promotional recommendations, they receive confirmation messages but not "Try this new restaurant" offers. This granularity respects guest autonomy while enabling great service.</p>
-
-                <h3>Location Privacy & Travel Patterns</h3>
-                <p>Concierge often involves location data—"Where are you now?" "What's nearby?" "How far is the airport?" Location data reveals travel patterns, frequent locations, and behavioral information that's highly personal. Claire ensures location privacy by: Only collecting location data with explicit guest consent. Never storing location history permanently—only real-time location for active assistance. Not sharing location data with third parties without explicit permission. Allowing guests to disable location tracking anytime. Deleting location data immediately after concierge request is fulfilled.</p>
-                <p>If a guest asks "What restaurants are near me?" we use their location temporarily to provide recommendations, then delete the location data. We never maintain a history like "Guest visited Coral Bay on Thursday, seafood restaurant on Friday, spa on Saturday."</p>
-
-                <h3>Third-Party Vendor Data Agreements</h3>
-                <p>Concierge involves booking with restaurants, tour operators, transportation providers, and other vendors. These vendors are data processors—they handle guest data on our behalf. Claire ensures all vendors sign Data Processing Agreements (DPAs) committing to the same privacy standards we maintain. We audit vendor compliance annually and can terminate relationships with vendors that don't meet our standards.</p>
-                <p>When we book a restaurant, we share only the information necessary (guest name, phone, party size, special requests). We never share the entire guest profile or payment information with the restaurant.</p>
-
-                <h3>Booking Confirmation & Receipt Privacy</h3>
-                <p>When guests book restaurants, tours, or activities through concierge, they receive confirmation emails or SMS. These confirmations often contain sensitive information—booking times, locations, pricing, special requests. Claire ensures confirmation privacy by: Using secure email delivery (TLS encryption). Allowing guests to choose communication method (email, SMS, in-app only). Not including sensitive details in automated SMS (send a link instead: "Click here for your confirmation"). Expiring confirmation links after booking is used. Not retaining receipt data longer than required for dispute resolution (typically 1 year).</p>
-
-                <h3>Regulatory Compliance Beyond PCI & Privacy</h3>
-                <p>Fair Housing Act: Concierge recommendations can't discriminate based on protected characteristics. We ensure recommendations are applied equitably. ADA Compliance: Guests with disabilities must receive the same concierge service quality. We ensure communication channels are accessible. CASL Compliance (Canada): Explicit opt-in required before any promotional communication. TPD Compliance (Australia): Strict privacy requirements for Australian guests with appropriate Data Processing Agreements.</p>
-
-                <h3>Vendor Security & Breach Response</h3>
-                <p>If a restaurant, tour operator, or activity vendor experiences a data breach, Claire's incident response includes: Notifying affected guests within 72 hours. Suspending bookings with that vendor until security is verified. Conducting a security audit of the vendor's practices. Offering affected guests credit for alternative booking. Maintaining cyber insurance covering third-party vendor breaches.</p>
-
-                <h3>Transparency & Guest Data Ownership</h3>
-                <p>Guests should understand what concierge data we hold. Claire provides: Transparent privacy policies explaining data usage. Annual concierge activity reports: "You made 28 restaurant reservations, 5 activity bookings, 12 transportation requests." Data export options in standard formats. The philosophy is simple: This is the guest's data and their activity history. They should control it.</p>
-
-                <h3>Security Infrastructure for Concierge Bookings</h3>
-                <p>Protecting booking data requires robust security. Claire implements: Multi-factor authentication for all staff accessing guest booking data. Role-based access control—restaurant partners see only their bookings, not full guest profiles. Audit logging of all booking access and modifications. Security patches deployed within 24 hours of critical vulnerability releases. Annual penetration testing by independent firms. SIEM monitoring detects unusual activity like bulk data exports or impossible login locations.</p>
-
-                <h3>Continuous Improvement & Compliance Audits</h3>
-                <p>Compliance is ongoing. We conduct: Quarterly internal audits reviewing PCI, privacy, and security compliance. Annual third-party audits by independent firms (SOC 2 Type II certification). Regular staff training on data handling and privacy. Vulnerability scanning of all systems weekly. Privacy impact assessments whenever we introduce new concierge features. Guest feedback reviews to ensure privacy controls meet real-world needs.</p>
-
-                <p style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-left: 3px solid var(--accent);"><strong>Bottom line:</strong> AI concierge service requires trust. Guests share their preferences, travel plans, and payment information expecting discretion and security. We protect that trust through PCI compliance, privacy governance, secure booking infrastructure, third-party vendor oversight, and continuous security auditing. Your property's concierge reputation depends on it.</p>
-            </footer>
         </article>
 
+        <!-- Enhanced Sidebar -->
         <aside>
             <div class="toc">
                 <h4>On This Page</h4>
@@ -426,23 +1112,180 @@
                     <li><a href="#special-events">Special Events</a></li>
                     <li><a href="#local-insights">Local Insider Knowledge</a></li>
                     <li><a href="#luxury-services">Luxury & VIP Services</a></li>
-                    <li><a href="#metrics">Performance Metrics</a></li>
                     <li><a href="#roi">ROI Analysis</a></li>
                     <li><a href="#conclusion">Conclusion</a></li>
                 </ul>
             </div>
 
             <div class="related">
-                <h4>Related Topics</h4>
+                <h4>Related Capabilities</h4>
                 <ul>
                     <li><a href="/hospitality/">← Hospitality Overview</a></li>
                     <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
-                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
                     <li><a href="/hospitality/complaint-resolution.html">Complaint Resolution</a></li>
                     <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
                 </ul>
             </div>
         </aside>
     </main>
+
+    <!-- Footer with Shadow Content -->
+    <footer>
+        <div class="footer-shadow">
+            <h2>Guest Experience Orchestration: Beyond the Phone Tree</h2>
+            <p class="footer-shadow-intro">
+                Modern guest experience orchestration requires more than automation—it demands a commitment to privacy, security, and compliance that protects both guests and your property. When AI handles concierge bookings and recommendations, the architecture must preserve data privacy while delivering personalized service.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Privacy & Compliance Analysis</button>
+
+            <div class="shadow-content" id="shadowContent">
+                <h3>Section 1: PCI Compliance for Guest Transactions</h3>
+
+                <p>When guests communicate with Claire for restaurant reservations, activity bookings, or travel arrangements, many transactions involve payment processing. PCI DSS (Payment Card Industry Data Security Standard) compliance is non-negotiable. Every guest payment—whether for dining reservations, tour bookings, or transportation—must be handled with military-grade encryption and strict access controls.</p>
+
+                <p>Claire operates under Level 1 PCI DSS compliance, the highest certification for payment processing platforms. This means:</p>
+
+                <ul>
+                    <li>All payment data is encrypted end-to-end using TLS 1.2 or higher</li>
+                    <li>Card data never touches our servers in unencrypted form</li>
+                    <li>We use tokenization—replacing actual card numbers with secure tokens that have no value outside our system</li>
+                    <li>Annual security audits by independent QSA (Qualified Security Assessor) firms verify ongoing compliance</li>
+                    <li>Real-time fraud detection monitors every transaction for suspicious patterns</li>
+                </ul>
+
+                <p>For properties with integrated payment processing, this means guests can safely book restaurants, activities, and transportation through Claire without exposing their credit card data to manual entry errors or insecure channels. A guest texts "book snorkeling tour," we process the payment securely, and the transaction is complete—no need to visit the front desk, no paper receipts with full card numbers, no human handling of sensitive data.</p>
+
+                <h3>Section 2: Data Privacy & Guest Information Protection</h3>
+
+                <p>Concierge interactions generate sensitive data—travel patterns, dining preferences, activity interests, accessibility needs, special occasions, and payment methods. This data is valuable for personalization but must be protected under GDPR, CCPA, and other privacy regulations.</p>
+
+                <p>Claire maintains strict data governance:</p>
+
+                <ul>
+                    <li>We only collect data necessary for the specific service requested</li>
+                    <li>Explicit consent is obtained before any secondary use of data (like marketing emails)</li>
+                    <li>Guests have the right to access their data: "Show me everything you know about me"</li>
+                    <li>Data deletion requests are honored within 30 days: "Delete my profile"</li>
+                    <li>Data is encrypted at rest (storage) and in transit (network transmission)</li>
+                    <li>Access is logged and audited—managers can't casually peek at guest data without triggering audit alerts</li>
+                </ul>
+
+                <p>For international properties, we comply with GDPR's strict EU data protection requirements: Data transfers outside the EU use Standard Contractual Clauses (SCCs) and ensure equivalent protection. Data processors (vendors handling data on our behalf) sign Data Processing Agreements (DPAs) committing to the same privacy standards.</p>
+
+                <h3>Section 3: Guest Consent & Communication Preferences</h3>
+
+                <p>Personalized concierge service only works if guests opt in. Claire never sends unsolicited booking offers or recommendations. Every guest relationship begins with explicit consent: "May we use your preferences to offer personalized concierge recommendations?" Guests choose their preferred channels (SMS, WhatsApp, email, in-app) and can unsubscribe anytime with one click.</p>
+
+                <p>Preferences are honored across all channels. If a guest opts out of SMS, we never send SMS recommendations (though transactional messages like "Your restaurant reservation is confirmed" still send). If they opt in to WhatsApp for bookings but not for promotional recommendations, they receive confirmation messages but not "Try this new restaurant" offers. This granularity respects guest autonomy while enabling great service.</p>
+
+                <h3>Conclusion: Orchestration Preserves Privacy by Design</h3>
+
+                <p>The fundamental difference between AI orchestration and traditional concierge service is possession vs. processing. Traditional concierge services possess guest data (store it, copy it, retain it). Claire processes guest data without possessing it—reading from your systems, generating recommendations back to your systems, retaining nothing beyond what's necessary for the current interaction.</p>
+
+                <p>This architectural distinction isn't just technical—it's legal. Guest privacy is most secure when no third party possesses the privileged information. By operating as an ephemeral processor rather than a data repository, Claire maintains the confidentiality necessary for privacy protection.</p>
+            </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Hospitality Capabilities</h4>
+                <ul>
+                    <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
+                    <li><a href="/hospitality/complaint-resolution.html">Complaint Resolution</a></li>
+                    <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compliance</h4>
+                <ul>
+                    <li><a href="/compliance/pci-dss.html">PCI DSS</a></li>
+                    <li><a href="/compliance/gdpr.html">GDPR Compliance</a></li>
+                    <li><a href="/compliance/ccpa.html">CCPA Compliance</a></li>
+                    <li><a href="/compliance/soc2.html">SOC 2 Type II</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Industry Switcher -->
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+    <!-- Claire Dock Component -->
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">
+            C
+        </div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">
+                    I'm Claire, your AI guest experience orchestrator. Want to see how I handle concierge services, local recommendations, and booking assistance?
+                </p>
+                <a href="/hospitality/concierge-demo.html" class="dock-cta">Execute Live Concierge Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDock() {
+            const panel = document.getElementById('dockPanel');
+            panel.classList.toggle('open');
+        }
+
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Privacy & Compliance Analysis'
+                : 'Read Full Privacy & Compliance Analysis';
+        }
+
+        // Close dock when clicking outside
+        document.addEventListener('click', function(event) {
+            const dock = document.querySelector('.claire-dock');
+            const panel = document.getElementById('dockPanel');
+            if (!dock.contains(event.target) && panel.classList.contains('open')) {
+                panel.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>
