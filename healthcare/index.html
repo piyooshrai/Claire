@@ -432,14 +432,48 @@ const userData = {
     industry: document.documentElement.getAttribute('data-industry') || ''
 };
 
+// DEBUG: Log all user data on page load
+console.log('=== PERSONALIZATION DEBUG ===');
+console.log('Build timestamp:', '2026-01-19 22:30:00');
+console.log('userData:', userData);
+console.log('Has name?', !!userData.name);
+console.log('Has timezone?', !!userData.timezone);
+console.log('Has weatherTemp?', !!userData.weatherTemp);
+console.log('Has weatherDesc?', !!userData.weatherDesc);
+
 // Personalize on page load
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded fired');
+
+    // Add debug banner at top of page
+    const debugBanner = document.createElement('div');
+    debugBanner.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #ff0000;
+        color: white;
+        padding: 0.5rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.75rem;
+        font-family: monospace;
+    `;
+    debugBanner.innerHTML = `BUILD: 2026-01-19 22:30 | NAME: ${userData.name || 'NONE'} | TIMEZONE: ${userData.timezone || 'NONE'} | WEATHER: ${userData.weatherTemp || 'NONE'}°F`;
+    document.body.insertBefore(debugBanner, document.body.firstChild);
+
     if (userData.name) {
+        console.log('Calling personalizeExperience()');
         personalizeExperience();
+    } else {
+        console.log('No userData.name, skipping personalization');
     }
 });
 
 function personalizeExperience() {
+    console.log('personalizeExperience() running');
+
     // Add personalization bar to navigation
     addPersonalizationBar();
 
@@ -532,8 +566,15 @@ function getConversationalGreeting() {
 }
 
 function addPersonalizationBar() {
+    console.log('addPersonalizationBar() called');
     const nav = document.querySelector('nav');
-    if (!nav || document.getElementById('personalization-bar')) return;
+    console.log('Found nav?', !!nav);
+    console.log('Bar already exists?', !!document.getElementById('personalization-bar'));
+
+    if (!nav || document.getElementById('personalization-bar')) {
+        console.log('Exiting early from addPersonalizationBar');
+        return;
+    }
 
     const bar = document.createElement('div');
     bar.id = 'personalization-bar';
@@ -547,6 +588,8 @@ function addPersonalizationBar() {
     `;
 
     const { timeGreeting, weatherContext } = getConversationalGreeting();
+    console.log('timeGreeting:', timeGreeting);
+    console.log('weatherContext:', weatherContext);
 
     let greeting = `<strong>${timeGreeting}</strong>`;
     if (weatherContext) {
@@ -554,8 +597,10 @@ function addPersonalizationBar() {
     }
     greeting += ` Orchestrating <strong>${capitalizeIndustry(userData.industry)}</strong> workflows`;
 
+    console.log('Final greeting:', greeting);
     bar.innerHTML = greeting;
     nav.parentNode.insertBefore(bar, nav.nextSibling);
+    console.log('Personalization bar inserted successfully!');
 }
 
 function personalizeDock() {
