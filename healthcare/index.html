@@ -413,24 +413,17 @@ function personalizeContent() {
     });
 }
 
-    </script>
-
-
-
-    <script>
-        // Conversational Personalization Script
+// === CONVERSATIONAL PERSONALIZATION ===
 // Time + weather aware greetings
+// (Merged with content personalization - using same userData object)
 
-// Load user data from sessionStorage
-const userData = {
-    name: sessionStorage.getItem('userName') || '',
-    email: sessionStorage.getItem('userEmail') || '',
-    location: sessionStorage.getItem('userLocation') || '',
-    timezone: sessionStorage.getItem('userTimezone') || '',
-    weatherTemp: sessionStorage.getItem('userWeatherTemp') || '',
-    weatherDesc: sessionStorage.getItem('userWeatherDesc') || '',
-    industry: document.documentElement.getAttribute('data-industry') || ''
-};
+// Extend userData with additional fields for conversational greetings
+userData.email = sessionStorage.getItem('userEmail') || '';
+userData.location = sessionStorage.getItem('userLocation') || '';
+userData.timezone = sessionStorage.getItem('userTimezone') || '';
+userData.weatherTemp = sessionStorage.getItem('userWeatherTemp') || '';
+userData.weatherDesc = sessionStorage.getItem('userWeatherDesc') || '';
+userData.industry = document.documentElement.getAttribute('data-industry') || '';
 
 // DEBUG: Log all user data on page load
 console.log('=== PERSONALIZATION DEBUG ===');
