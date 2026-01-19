@@ -30,17 +30,20 @@
         .metric-value { font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; }
         .metric-label { color: var(--text-secondary); font-size: 0.875rem; }
         .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: border-color 0.2s; }
-        .card:hover { border-color: var(--accent); }
-        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+        .card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s; cursor: pointer; position: relative; }
+        .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1); }
+        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent); }
+        .card h3::after { content: ' →'; opacity: 0; transition: opacity 0.2s; }
+        .card:hover h3::after { opacity: 1; }
         .card p { color: var(--text-secondary); font-size: 0.9375rem; }
         @media (max-width: 768px) { h2 { font-size: 1.5rem; } .section { padding: 3rem 0; } .cards { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <nav>
-        <div class="nav-brand">CLAIRE // LEGAL</div>
+        <div class="nav-brand"><a href="/" style="color: inherit; text-decoration: none;">CLAIRE</a> // LEGAL</div>
         <div class="nav-links">
+            <a href="/">← Back to Platform</a>
             <a href="#capabilities">Capabilities</a>
             <a href="#integration">Integration</a>
             <a href="#security">Security</a>
@@ -69,30 +72,30 @@
             </div>
 
             <div class="cards">
-                <div class="card">
+                <a href="/legal/client-intake.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Client Intake</h3>
-                    <p>I qualify leads, collect case details, and route to appropriate practice areas—all while maintaining attorney-client privilege.</p>
-                </div>
-                <div class="card">
+                    <p>24/7 automated intake from first contact through engagement. Lead qualification, conflict checks, and retainer collection.</p>
+                </a>
+                <a href="/legal/case-management.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Case Management</h3>
-                    <p>I organize matters, track deadlines, and manage document workflows across your practice management system.</p>
-                </div>
-                <div class="card">
+                    <p>Automated matter setup, deadline tracking, task workflows, and conflict checking across your practice management system.</p>
+                </a>
+                <a href="/legal/document-automation.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Document Automation</h3>
-                    <p>I generate engagement letters, retainer agreements, and standard pleadings from your template library.</p>
-                </div>
-                <div class="card">
+                    <p>Generate contracts, pleadings, briefs, and discovery from templates. Smart merge fields and conditional logic.</p>
+                </a>
+                <a href="/legal/billing-timekeeping.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Billing & Timekeeping</h3>
-                    <p>I track billable time, enforce billing rates, and generate invoices with proper activity codes.</p>
-                </div>
-                <div class="card">
-                    <h3>Conflict Checks</h3>
-                    <p>I screen new matters against existing clients to identify potential conflicts before engagement.</p>
-                </div>
-                <div class="card">
-                    <h3>Collections</h3>
-                    <p>I send payment reminders, process retainer replenishments, and escalate overdue accounts.</p>
-                </div>
+                    <p>Passive time capture, automated invoicing, and collections workflows. Recover 10% revenue leakage.</p>
+                </a>
+                <a href="/legal/confidentiality-security.html" class="card" style="text-decoration: none; color: inherit;">
+                    <h3>Attorney-Client Privilege</h3>
+                    <p>ABA Model Rule 1.6 compliance, ephemeral access architecture, work product protection, and state bar guidance.</p>
+                </a>
+                <a href="/legal/roi-calculator.html" class="card" style="text-decoration: none; color: inherit;">
+                    <h3>ROI Calculator</h3>
+                    <p>Complete cost analysis: AI vs paralegal expenses. Paralegal $90-130K vs Claire $48K with 1,369% ROI.</p>
+                </a>
             </div>
         </section>
 
