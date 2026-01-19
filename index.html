@@ -181,6 +181,40 @@
             opacity: 0.7;
         }
 
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         @media (max-width: 768px) {
             .chat-box {
                 padding: 2rem 1.5rem;
@@ -224,7 +258,35 @@
             msg.className = `chat-message ${className}`;
             if (text) msg.textContent = text;
             document.getElementById('chat-box').appendChild(msg);
+
+            // Auto-scroll to keep new messages visible and centered
+            setTimeout(() => {
+                msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+
             return msg;
+        }
+
+        function showTypingIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'chat-message claire typing-indicator';
+            indicator.id = 'typing-indicator';
+            indicator.innerHTML = '<span></span><span></span><span></span>';
+            document.getElementById('chat-box').appendChild(indicator);
+
+            // Auto-scroll to indicator
+            setTimeout(() => {
+                indicator.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+
+            return indicator;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
         }
 
         async function detectLocation() {
@@ -299,15 +361,21 @@
 
             // New visitor flow
             const msg1 = addMessage('');
-            await type(msg1, 'I am Claire.');
+            await type(msg1, 'Hello, I am Claire.');
 
-            await pause(1500);
+            await pause(800);
+
+            // Show typing indicator while detecting location
+            showTypingIndicator();
 
             // Detect location and WAIT for it to complete
             userLocation = await detectLocation();
             if (userLocation) {
                 sessionStorage.setItem('userLocation', userLocation);
             }
+
+            // Remove typing indicator
+            removeTypingIndicator();
 
             const msg2 = addMessage('');
             await type(msg2, 'What is your name?');
