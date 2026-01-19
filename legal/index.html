@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claire AI for Legal | Digital Labor Platform for Law Firms</title>
+    <meta name="description" content="Claire automates legal client intake, case management, and document workflows for law firms. ABA compliant, attorney-client privilege protected.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #faf5ff;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e1b4b;
+            --text-secondary: #6b7280;
+            --accent: #7c3aed;
+            --border: #e9d5ff;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; }
+        .nav-brand { font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
+        .nav-links { display: flex; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+        main { max-width: 1400px; margin: 0 auto; padding: 8rem 2rem 4rem; }
+        .section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+        .section-label { font-size: 0.875rem; color: var(--accent); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1.5rem; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0; }
+        .metric { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); }
+        .metric-value { font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; }
+        .metric-label { color: var(--text-secondary); font-size: 0.875rem; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: border-color 0.2s; }
+        .card:hover { border-color: var(--accent); }
+        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+        .card p { color: var(--text-secondary); font-size: 0.9375rem; }
+        @media (max-width: 768px) { h2 { font-size: 1.5rem; } .section { padding: 3rem 0; } .cards { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-brand">CLAIRE // LEGAL</div>
+        <div class="nav-links">
+            <a href="#capabilities">Capabilities</a>
+            <a href="#integration">Integration</a>
+            <a href="#security">Security</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section" id="capabilities">
+            <div class="section-label">Current Role: Legal Intake Specialist</div>
+            <h2>Handling Client Acquisition & Case Management</h2>
+            <p>I manage the complete client journey from initial contact through engagement. My reasoning engine handles intake workflows, conflict checks, and case organization with the precision of a senior paralegal.</p>
+
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">80%</div>
+                    <div class="metric-label">Faster Intake Process</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">24/7</div>
+                    <div class="metric-label">Availability</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">45%</div>
+                    <div class="metric-label">Higher Conversion Rate</div>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Client Intake</h3>
+                    <p>I qualify leads, collect case details, and route to appropriate practice areas—all while maintaining attorney-client privilege.</p>
+                </div>
+                <div class="card">
+                    <h3>Case Management</h3>
+                    <p>I organize matters, track deadlines, and manage document workflows across your practice management system.</p>
+                </div>
+                <div class="card">
+                    <h3>Document Automation</h3>
+                    <p>I generate engagement letters, retainer agreements, and standard pleadings from your template library.</p>
+                </div>
+                <div class="card">
+                    <h3>Billing & Timekeeping</h3>
+                    <p>I track billable time, enforce billing rates, and generate invoices with proper activity codes.</p>
+                </div>
+                <div class="card">
+                    <h3>Conflict Checks</h3>
+                    <p>I screen new matters against existing clients to identify potential conflicts before engagement.</p>
+                </div>
+                <div class="card">
+                    <h3>Collections</h3>
+                    <p>I send payment reminders, process retainer replenishments, and escalate overdue accounts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="integration">
+            <div class="section-label">Technical Skillset</div>
+            <h2>Practice Management Integration</h2>
+            <p>I integrate with your existing legal tech stack through standard APIs. No disruption to your current workflows.</p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Clio</h3>
+                    <p>Full integration with Clio Manage for matter management, time tracking, and billing</p>
+                </div>
+                <div class="card">
+                    <h3>MyCase</h3>
+                    <p>Seamless connection to MyCase for client portal, documents, and calendaring</p>
+                </div>
+                <div class="card">
+                    <h3>PracticePanther</h3>
+                    <p>API integration for tasks, workflows, and client communication</p>
+                </div>
+                <div class="card">
+                    <h3>LawPay</h3>
+                    <p>Payment processing with IOLTA compliance and trust accounting</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="security">
+            <div class="section-label">Security & Compliance</div>
+            <h2>Attorney-Client Privilege & Data Security</h2>
+            <p>I maintain attorney-client privilege through secure, ephemeral data access. All communications are protected under ABA Model Rule 1.6.</p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>ABA Compliant</h3>
+                    <p>Meets ABA Model Rules for confidentiality, competence, and technology use</p>
+                </div>
+                <div class="card">
+                    <h3>Privileged Communications</h3>
+                    <p>All client interactions maintain attorney-client privilege protections</p>
+                </div>
+                <div class="card">
+                    <h3>SOC 2 Type II</h3>
+                    <p>Independently audited security controls for client data protection</p>
+                </div>
+                <div class="card">
+                    <h3>Full Audit Trail</h3>
+                    <p>Complete logging for ethics compliance and malpractice defense</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Interview Claire for Your Firm</h2>
+            <p>I don't require bar admission, never miss billable time, and work 24/7 without overtime. I'm a digital teammate that handles intake and administrative work so your attorneys can focus on practicing law.</p>
+        </section>
+    </main>
+</body>
+</html>
