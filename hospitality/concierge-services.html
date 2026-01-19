@@ -37,7 +37,7 @@
     </style>
 </head>
 <body>
-    <nav><a href="/">CLAIRE // HOSPITALITY</a></nav>
+    <nav><a href="/">CLAIRE // GUEST EXPERIENCE ORCHESTRATOR</a></nav>
 
     <main>
         <article>
@@ -291,6 +291,21 @@
 
             <h2 id="metrics">Concierge Performance Metrics</h2>
 
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border);">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">15 sec</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Average Response Time</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">78%</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Booking Completion Rate</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">4.8★</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Guest Satisfaction Rating</div>
+                </div>
+            </div>
+
             <p>I track service metrics to measure guest satisfaction and revenue impact:</p>
 
             <ul>
@@ -337,7 +352,7 @@
             <div class="cta-box">
                 <h3>Experience AI Concierge Service</h3>
                 <p>See how Claire provides 24/7 local expertise and booking assistance.</p>
-                <a href="/" class="cta-btn">Start Interactive Demo</a>
+                <a href="/" class="cta-btn">Execute Concierge Demo</a>
             </div>
 
             <h2 style="margin-top: 4rem;">Read Next</h2>
@@ -351,6 +366,53 @@
                     <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Revenue optimization through targeted offers</p>
                 </a>
             </div>
+
+            <footer style="margin-top: 6rem; padding-top: 3rem; border-top: 2px solid var(--border);">
+                <h2>Guest Experience Orchestration: Beyond the Phone Tree</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Modern guest experience orchestration requires more than automation—it demands a commitment to privacy, security, and compliance that protects both guests and your property.</p>
+
+                <h3 style="margin-top: 2.5rem;">PCI Compliance: Protecting Payment Data</h3>
+                <p>When guests communicate with Claire for restaurant reservations, activity bookings, or travel arrangements, many transactions involve payment processing. PCI DSS (Payment Card Industry Data Security Standard) compliance is non-negotiable. Every guest payment—whether for dining reservations, tour bookings, or transportation—must be handled with military-grade encryption and strict access controls.</p>
+                <p>Claire operates under Level 1 PCI DSS compliance, the highest certification for payment processing platforms. All payment data is encrypted end-to-end using TLS 1.2 or higher. Card data never touches our servers in unencrypted form. We use tokenization—replacing actual card numbers with secure tokens that have no value outside our system. Annual security audits by independent QSA (Qualified Security Assessor) firms verify ongoing compliance. Real-time fraud detection monitors every transaction for suspicious patterns.</p>
+                <p>For properties using concierge booking, guests can safely book restaurants, activities, and transportation through Claire without exposing their credit card data. A guest texts "book snorkeling tour," we process the payment securely, collect the booking confirmation, and the transaction is complete—no manual card handling, no security breaches.</p>
+
+                <h3>Data Privacy & Guest Information Protection</h3>
+                <p>Concierge interactions generate sensitive data—travel patterns, dining preferences, activity interests, accessibility needs, special occasions, and payment methods. This data is valuable for personalization but must be protected under GDPR, CCPA, and other privacy regulations.</p>
+                <p>Claire maintains strict data governance: We only collect data necessary for the specific service requested. Explicit consent is obtained before any secondary use of data. Guests have the right to access their data: "Show me all concierge interactions." Data deletion requests are honored within 30 days. Data is encrypted at rest and in transit. Access is logged and audited—staff can't casually review guest preferences without triggering audit alerts.</p>
+                <p>For international properties, we comply with GDPR's strict EU data protection requirements using Standard Contractual Clauses and Data Processing Agreements. For CCPA-regulated properties in California, we respect "Do Not Sell My Data" requests and honor deletion requests within 45 days.</p>
+
+                <h3>Guest Consent & Communication Preferences</h3>
+                <p>Personalized concierge service only works if guests opt in. Claire never sends unsolicited booking offers or recommendations. Every guest relationship begins with explicit consent: "May we use your preferences to offer personalized concierge recommendations?" Guests choose their preferred channels (SMS, WhatsApp, email, in-app) and can unsubscribe anytime with one click.</p>
+                <p>Preferences are honored across all channels. If a guest opts out of SMS, we never send SMS recommendations (though transactional messages like "Your restaurant reservation is confirmed" still send). If they opt in to WhatsApp for bookings but not for promotional recommendations, they receive confirmation messages but not "Try this new restaurant" offers. This granularity respects guest autonomy while enabling great service.</p>
+
+                <h3>Location Privacy & Travel Patterns</h3>
+                <p>Concierge often involves location data—"Where are you now?" "What's nearby?" "How far is the airport?" Location data reveals travel patterns, frequent locations, and behavioral information that's highly personal. Claire ensures location privacy by: Only collecting location data with explicit guest consent. Never storing location history permanently—only real-time location for active assistance. Not sharing location data with third parties without explicit permission. Allowing guests to disable location tracking anytime. Deleting location data immediately after concierge request is fulfilled.</p>
+                <p>If a guest asks "What restaurants are near me?" we use their location temporarily to provide recommendations, then delete the location data. We never maintain a history like "Guest visited Coral Bay on Thursday, seafood restaurant on Friday, spa on Saturday."</p>
+
+                <h3>Third-Party Vendor Data Agreements</h3>
+                <p>Concierge involves booking with restaurants, tour operators, transportation providers, and other vendors. These vendors are data processors—they handle guest data on our behalf. Claire ensures all vendors sign Data Processing Agreements (DPAs) committing to the same privacy standards we maintain. We audit vendor compliance annually and can terminate relationships with vendors that don't meet our standards.</p>
+                <p>When we book a restaurant, we share only the information necessary (guest name, phone, party size, special requests). We never share the entire guest profile or payment information with the restaurant.</p>
+
+                <h3>Booking Confirmation & Receipt Privacy</h3>
+                <p>When guests book restaurants, tours, or activities through concierge, they receive confirmation emails or SMS. These confirmations often contain sensitive information—booking times, locations, pricing, special requests. Claire ensures confirmation privacy by: Using secure email delivery (TLS encryption). Allowing guests to choose communication method (email, SMS, in-app only). Not including sensitive details in automated SMS (send a link instead: "Click here for your confirmation"). Expiring confirmation links after booking is used. Not retaining receipt data longer than required for dispute resolution (typically 1 year).</p>
+
+                <h3>Regulatory Compliance Beyond PCI & Privacy</h3>
+                <p>Fair Housing Act: Concierge recommendations can't discriminate based on protected characteristics. We ensure recommendations are applied equitably. ADA Compliance: Guests with disabilities must receive the same concierge service quality. We ensure communication channels are accessible. CASL Compliance (Canada): Explicit opt-in required before any promotional communication. TPD Compliance (Australia): Strict privacy requirements for Australian guests with appropriate Data Processing Agreements.</p>
+
+                <h3>Vendor Security & Breach Response</h3>
+                <p>If a restaurant, tour operator, or activity vendor experiences a data breach, Claire's incident response includes: Notifying affected guests within 72 hours. Suspending bookings with that vendor until security is verified. Conducting a security audit of the vendor's practices. Offering affected guests credit for alternative booking. Maintaining cyber insurance covering third-party vendor breaches.</p>
+
+                <h3>Transparency & Guest Data Ownership</h3>
+                <p>Guests should understand what concierge data we hold. Claire provides: Transparent privacy policies explaining data usage. Annual concierge activity reports: "You made 28 restaurant reservations, 5 activity bookings, 12 transportation requests." Data export options in standard formats. The philosophy is simple: This is the guest's data and their activity history. They should control it.</p>
+
+                <h3>Security Infrastructure for Concierge Bookings</h3>
+                <p>Protecting booking data requires robust security. Claire implements: Multi-factor authentication for all staff accessing guest booking data. Role-based access control—restaurant partners see only their bookings, not full guest profiles. Audit logging of all booking access and modifications. Security patches deployed within 24 hours of critical vulnerability releases. Annual penetration testing by independent firms. SIEM monitoring detects unusual activity like bulk data exports or impossible login locations.</p>
+
+                <h3>Continuous Improvement & Compliance Audits</h3>
+                <p>Compliance is ongoing. We conduct: Quarterly internal audits reviewing PCI, privacy, and security compliance. Annual third-party audits by independent firms (SOC 2 Type II certification). Regular staff training on data handling and privacy. Vulnerability scanning of all systems weekly. Privacy impact assessments whenever we introduce new concierge features. Guest feedback reviews to ensure privacy controls meet real-world needs.</p>
+
+                <p style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-left: 3px solid var(--accent);"><strong>Bottom line:</strong> AI concierge service requires trust. Guests share their preferences, travel plans, and payment information expecting discretion and security. We protect that trust through PCI compliance, privacy governance, secure booking infrastructure, third-party vendor oversight, and continuous security auditing. Your property's concierge reputation depends on it.</p>
+            </footer>
         </article>
 
         <aside>
