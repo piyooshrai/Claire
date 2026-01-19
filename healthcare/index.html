@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-industry="healthcare">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,13 +120,21 @@
         }
         
         .card {
+            display: block;
             padding: 2rem;
             border: 1px solid var(--border);
             background: var(--bg-secondary);
-            transition: border-color 0.2s;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
-        
-        .card:hover { border-color: var(--accent); }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px var(--shadow);
+            transform: translateY(-2px);
+        }
         
         .card h3 {
             font-size: 1.25rem;
@@ -212,30 +220,30 @@
             </div>
 
             <div class="cards">
-                <div class="card">
+                <a href="/healthcare/patient-intake.html" class="card">
                     <h3>Patient Intake</h3>
                     <p>I collect demographic information, medical history, and consent forms through natural conversation. No more clipboards or outdated patient portals.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/healthcare/insurance-verification.html" class="card">
                     <h3>Insurance Verification</h3>
                     <p>I verify eligibility in real-time with payer APIs, check prior authorizations, and estimate patient responsibility before appointments.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/healthcare/intelligent-scheduling.html" class="card">
                     <h3>Intelligent Scheduling</h3>
                     <p>I understand provider preferences, appointment types, and patient needs to optimize scheduling. I handle conflicts and rescheduling autonomously.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/healthcare/prescription-refills.html" class="card">
                     <h3>Prescription Refills</h3>
                     <p>I process refill requests, check medication history in your EHR, and route to providers based on clinical protocols you define.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/healthcare/pre-visit-preparation.html" class="card">
                     <h3>Pre-Visit Preparation</h3>
                     <p>I send appointment reminders, collect pre-visit questionnaires, and ensure all documentation is ready when patients arrive.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/healthcare/post-visit-follow-up.html" class="card">
                     <h3>Post-Visit Follow-Up</h3>
                     <p>I schedule follow-ups, send care instructions, and coordinate referrals with external specialists—maintaining continuity of care.</p>
-                </div>
+                </a>
             </div>
 
             <div class="link-box">
@@ -351,8 +359,9 @@ function personalizeContent() {
     paragraphs.forEach((p, index) => {
         let text = p.innerHTML;
 
-        // Pattern 1: "I manage..." → "Alex, I manage..."
-        if (text.startsWith('I manage') || text.startsWith('I handle') || text.startsWith('I don\'t')) {
+        // Pattern 1: Any first-person statement "I [verb]..." → "Alex, I [verb]..."
+        // Matches: "I collect", "I verify", "I manage", "I don't", etc.
+        if (text.match(/^I [a-z]/)) {
             text = `${userData.name}, ${text}`;
         }
 
