@@ -330,14 +330,17 @@
     </main>
 
     <script>
-// Personalization Script Template
-// This will be inserted into all spoke pages
+        // Conversational Personalization Script
+// Time + weather aware greetings
 
 // Load user data from sessionStorage
 const userData = {
     name: sessionStorage.getItem('userName') || '',
     email: sessionStorage.getItem('userEmail') || '',
     location: sessionStorage.getItem('userLocation') || '',
+    timezone: sessionStorage.getItem('userTimezone') || '',
+    weatherTemp: sessionStorage.getItem('userWeatherTemp') || '',
+    weatherDesc: sessionStorage.getItem('userWeatherDesc') || '',
     industry: document.documentElement.getAttribute('data-industry') || ''
 };
 
@@ -356,6 +359,90 @@ function personalizeExperience() {
     personalizeDock();
 }
 
+function getTimeOfDay() {
+    // Get current hour in user's timezone
+    const userTime = userData.timezone ?
+        new Date().toLocaleString('en-US', { timeZone: userData.timezone, hour: '2-digit', hour12: false }) :
+        new Date().getHours();
+
+    const hour = parseInt(userTime);
+
+    if (hour >= 5 && hour < 7) return 'early_morning';
+    if (hour >= 7 && hour < 12) return 'morning';
+    if (hour >= 12 && hour < 17) return 'afternoon';
+    if (hour >= 17 && hour < 21) return 'evening';
+    return 'late_night';
+}
+
+function getConversationalGreeting() {
+    const timeOfDay = getTimeOfDay();
+    const temp = parseInt(userData.weatherTemp);
+    const weather = userData.weatherDesc;
+    const name = userData.name;
+    const location = userData.location;
+
+    // Time-based context
+    const timeContexts = {
+        early_morning: [
+            `You're up early, ${name}!`,
+            `Early riser, ${name}?`,
+            `Good morning, ${name}! You're ahead of the game`
+        ],
+        morning: [
+            `Good morning, ${name}!`,
+            `Morning, ${name}!`,
+            `Hey ${name}!`
+        ],
+        afternoon: [
+            `Good afternoon, ${name}!`,
+            `Afternoon, ${name}!`,
+            `Hey ${name}!`
+        ],
+        evening: [
+            `Evening, ${name}!`,
+            `Good evening, ${name}!`,
+            `Hey ${name}!`
+        ],
+        late_night: [
+            `Burning the midnight oil, ${name}?`,
+            `Working late, ${name}?`,
+            `Still at it, ${name}?`
+        ]
+    };
+
+    // Weather-based context (if available)
+    const weatherContexts = [];
+    if (temp && location) {
+        if (temp < 35) {
+            weatherContexts.push(`Hope you're staying warm in ${location} today`);
+            weatherContexts.push(`Bundle up out there in ${location} — it's ${temp}°F`);
+        } else if (temp > 85) {
+            weatherContexts.push(`Stay cool in ${location} — it's ${temp}°F today`);
+            weatherContexts.push(`Hot day in ${location} at ${temp}°F`);
+        }
+    }
+
+    if (weather && location) {
+        if (weather.includes('rain') || weather.includes('drizzle')) {
+            weatherContexts.push(`Rainy day in ${location}? Perfect time for workflow orchestration`);
+        } else if (weather.includes('snow')) {
+            weatherContexts.push(`Snowy in ${location}? Let's get you set up efficiently`);
+        } else if (weather.includes('sunny') || weather.includes('clear')) {
+            weatherContexts.push(`Beautiful day in ${location}`);
+        }
+    }
+
+    // Pick random greeting from time context
+    const timeGreetings = timeContexts[timeOfDay];
+    const timeGreeting = timeGreetings[Math.floor(Math.random() * timeGreetings.length)];
+
+    // Add weather context if available
+    const weatherContext = weatherContexts.length > 0 ?
+        weatherContexts[Math.floor(Math.random() * weatherContexts.length)] : '';
+
+    return { timeGreeting, weatherContext };
+}
+
 function addPersonalizationBar() {
     const nav = document.querySelector('nav');
     if (!nav || document.getElementById('personalization-bar')) return;
@@ -371,11 +458,13 @@ function addPersonalizationBar() {
         text-align: center;
     `;
 
-    let greeting = `<strong>${userData.name}</strong>`;
-    if (userData.location) {
-        greeting += ` from <strong>${userData.location}</strong>`;
+    const { timeGreeting, weatherContext } = getConversationalGreeting();
+
+    let greeting = `<strong>${timeGreeting}</strong>`;
+    if (weatherContext) {
+        greeting += ` ${weatherContext}.`;
     }
-    greeting += ` — orchestrating <strong>${capitalizeIndustry(userData.industry)}</strong> workflows`;
+    greeting += ` Orchestrating <strong>${capitalizeIndustry(userData.industry)}</strong> workflows`;
 
     bar.innerHTML = greeting;
     nav.parentNode.insertBefore(bar, nav.nextSibling);
@@ -385,14 +474,17 @@ function personalizeDock() {
     const dockMessage = document.querySelector('.dock-message');
     if (!dockMessage) return;
 
-    const originalMessage = dockMessage.textContent;
+    const { timeGreeting, weatherContext } = getConversationalGreeting();
 
-    // Create personalized greeting
-    let greeting = `Hi <strong>${userData.name}</strong>`;
-    if (userData.location) {
-        greeting += ` from ${userData.location}`;
+    // Create conversational greeting
+    let greeting = `<strong>${timeGreeting}</strong>`;
+    if (weatherContext) {
+        greeting += ` ${weatherContext}.`;
+    } else if (userData.location) {
+        greeting += ` from ${userData.location}!`;
+    } else {
+        greeting += `!`;
     }
-    greeting += `! `;
 
     // Wrap in paragraph and prepend to dock body
     const greetingP = document.createElement('p');
@@ -415,6 +507,6 @@ function capitalizeIndustry(industry) {
     return map[industry] || industry;
 }
 
-    </script>
+        </script>
 </body>
 </html>
