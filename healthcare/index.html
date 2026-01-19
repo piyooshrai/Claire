@@ -328,5 +328,93 @@
             <p>I don't require benefits, never call in sick, and work 24/7 without overtime. I'm a digital teammate, not a software implementation. Let's discuss how I can handle your administrative front-door.</p>
         </section>
     </main>
+
+    <script>
+// Personalization Script Template
+// This will be inserted into all spoke pages
+
+// Load user data from sessionStorage
+const userData = {
+    name: sessionStorage.getItem('userName') || '',
+    email: sessionStorage.getItem('userEmail') || '',
+    location: sessionStorage.getItem('userLocation') || '',
+    industry: document.documentElement.getAttribute('data-industry') || ''
+};
+
+// Personalize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    if (userData.name) {
+        personalizeExperience();
+    }
+});
+
+function personalizeExperience() {
+    // Add personalization bar to navigation
+    addPersonalizationBar();
+
+    // Personalize Claire Dock message
+    personalizeDock();
+}
+
+function addPersonalizationBar() {
+    const nav = document.querySelector('nav');
+    if (!nav || document.getElementById('personalization-bar')) return;
+
+    const bar = document.createElement('div');
+    bar.id = 'personalization-bar';
+    bar.style.cssText = `
+        background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        padding: 0.5rem 2rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+    `;
+
+    let greeting = `<strong>${userData.name}</strong>`;
+    if (userData.location) {
+        greeting += ` from <strong>${userData.location}</strong>`;
+    }
+    greeting += ` — orchestrating <strong>${capitalizeIndustry(userData.industry)}</strong> workflows`;
+
+    bar.innerHTML = greeting;
+    nav.parentNode.insertBefore(bar, nav.nextSibling);
+}
+
+function personalizeDock() {
+    const dockMessage = document.querySelector('.dock-message');
+    if (!dockMessage) return;
+
+    const originalMessage = dockMessage.textContent;
+
+    // Create personalized greeting
+    let greeting = `Hi <strong>${userData.name}</strong>`;
+    if (userData.location) {
+        greeting += ` from ${userData.location}`;
+    }
+    greeting += `! `;
+
+    // Wrap in paragraph and prepend to dock body
+    const greetingP = document.createElement('p');
+    greetingP.style.cssText = 'margin-bottom: 1rem; font-weight: 500;';
+    greetingP.innerHTML = greeting;
+
+    const dockBody = document.querySelector('.dock-body');
+    if (dockBody) {
+        dockBody.insertBefore(greetingP, dockBody.firstChild);
+    }
+}
+
+function capitalizeIndustry(industry) {
+    const map = {
+        'finance': 'Financial Services',
+        'healthcare': 'Healthcare',
+        'legal': 'Legal Services',
+        'hospitality': 'Hospitality'
+    };
+    return map[industry] || industry;
+}
+
+    </script>
 </body>
 </html>
