@@ -485,7 +485,12 @@
 
             inputContainer.appendChild(input);
             document.getElementById('chat-box').appendChild(inputContainer);
-            input.focus();
+
+            // Auto-scroll input to center
+            setTimeout(() => {
+                inputContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                input.focus();
+            }, 100);
         }
 
         async function respondToName() {
@@ -548,6 +553,11 @@
             msgContainer.appendChild(btnContainer);
 
             document.getElementById('chat-box').appendChild(msgContainer);
+
+            // Auto-scroll buttons to center
+            setTimeout(() => {
+                msgContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
         }
 
         async function selectIndustry(industryName, path) {
@@ -598,7 +608,12 @@
 
             inputContainer.appendChild(input);
             document.getElementById('chat-box').appendChild(inputContainer);
-            input.focus();
+
+            // Auto-scroll email input to center
+            setTimeout(() => {
+                inputContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                input.focus();
+            }, 100);
         }
 
         async function finalizeAndRedirect(path) {
