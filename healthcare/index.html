@@ -351,8 +351,9 @@ function personalizeContent() {
     paragraphs.forEach((p, index) => {
         let text = p.innerHTML;
 
-        // Pattern 1: "I manage..." → "Alex, I manage..."
-        if (text.startsWith('I manage') || text.startsWith('I handle') || text.startsWith('I don\'t')) {
+        // Pattern 1: Any first-person statement "I [verb]..." → "Alex, I [verb]..."
+        // Matches: "I collect", "I verify", "I manage", "I don't", etc.
+        if (text.match(/^I [a-z]/)) {
             text = `${userData.name}, ${text}`;
         }
 
