@@ -9,20 +9,42 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --text-secondary: #6b7280; --accent: #7c3aed; --border: #e9d5ff; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
         nav a { color: var(--text-primary); text-decoration: none; }
-        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; }
-        h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
         h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
         p { margin-bottom: 1.5rem; }
-        ul { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        .intro { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
     </style>
 </head>
 <body>
     <nav><a href="/">CLAIRE // LEGAL</a></nav>
+
     <main>
-        <h1>AI Document Automation for Law Firms: Contracts, Briefs, and Pleadings</h1>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/legal/">Legal</a> / Document Automation
+            </div>
+
+            <h1>AI Document Automation for Law Firms: Contracts, Briefs, and Pleadings</h1>
         <p class="intro">Attorneys spend 48% of their time on document preparation—drafting contracts, pleadings, briefs, discovery responses, and transactional documents (ABA Legal Technology Survey 2024). Much of this work is repetitive: pulling clauses from past documents, adapting templates to new facts, cite-checking, and formatting. This is billable time, but it's not the high-value strategic work that justifies premium rates or differentiates your firm from competitors.</p>
 
         <p>The problem compounds in litigation practice: associates spend hours drafting routine motions that follow predictable patterns. A motion to compel discovery follows the same structure every time—meet-and-confer certification, summary of discovery dispute, legal standard, argument, conclusion. The facts change, but the framework stays constant. Yet associates still spend 3-5 hours drafting each motion from scratch, reinventing the wheel instead of building on past work.</p>
@@ -31,7 +53,7 @@
 
         <p>I automate document generation while maintaining attorney oversight and customization. This isn't about replacing legal judgment—it's about eliminating the mechanical work so attorneys can focus on strategy, argumentation, and client counseling. Think of me as the paralegal who does the first draft, freeing you to add the legal expertise and persuasive force that justifies your fees.</p>
 
-        <h2>Template-Based Document Generation</h2>
+        <h2 id="templates">Template-Based Document Generation</h2>
 
         <p>Most legal documents start from templates—your firm has developed and refined these over years of practice. The challenge is customizing templates efficiently without introducing errors. Manual customization involves:</p>
 
@@ -114,7 +136,7 @@
 
         <p>This prevents the common problem where associates use outdated templates saved on local drives instead of current firm-approved versions.</p>
 
-        <h2>Intelligent Pleading Generation</h2>
+        <h2 id="pleadings">Intelligent Pleading Generation</h2>
 
         <p>For litigation practice, I generate first drafts of standard pleadings based on case facts and your firm's preferred approaches. This isn't boilerplate generation—I adapt to specific case circumstances while following proven templates.</p>
 
@@ -211,7 +233,7 @@
 
         <p>Output is a formatted Word document ready for attorney review and editing—not a finished product, but an 80% complete first draft that saves 2-4 hours of associate time. You add case-specific legal analysis, strengthen arguments, and refine language.</p>
 
-        <h2>Contract Review & Redlining</h2>
+        <h2 id="review">Contract Review & Redlining</h2>
 
         <p>For transactional practice, contract review is a time-intensive process: reading every provision, comparing to client's standard positions, identifying risks, and proposing revisions. A 50-page commercial agreement can take an associate 3-5 hours to review thoroughly. I accelerate this process while maintaining thoroughness.</p>
 
@@ -311,7 +333,7 @@
 
         <p>I suggest adding these provisions and provide template language for each.</p>
 
-        <h2>Precedent Search & Research Integration</h2>
+        <h2 id="precedent">Precedent Search & Research Integration</h2>
         <p>I search your firm's document repository for relevant precedents:</p>
 
         <ul>
@@ -322,7 +344,7 @@
 
         <p>This eliminates the "I know we drafted something like this before, but I can't find it" problem that leads to duplicated work.</p>
 
-        <h2>Cite Checking & Formatting</h2>
+        <h2 id="citing">Cite Checking & Formatting</h2>
         <p>I handle mechanical cite-checking and formatting tasks:</p>
 
         <ul>
@@ -333,7 +355,7 @@
 
         <p>These tasks consume hours of paralegal and associate time. Automation reduces this to minutes.</p>
 
-        <h2>Time Savings & ROI</h2>
+        <h2 id="roi">Time Savings & ROI</h2>
 
         <p>Document automation delivers immediate, measurable time savings that flow directly to the bottom line. Let me break down the financial impact for a typical 10-attorney litigation firm:</p>
 
@@ -436,7 +458,7 @@
         <p><strong>Conservative ROI: ($247,500 ÷ $48,000) × 100 = 516%</strong></p>
         <p><strong>Aggressive ROI: ($510,000 ÷ $48,000) × 100 = 1,063%</strong></p>
 
-        <h2>Conclusion: Automation as Competitive Advantage</h2>
+        <h2 id="conclusion">Conclusion: Automation as Competitive Advantage</h2>
 
         <p>Document automation isn't about replacing attorneys—it's about amplifying their impact. The firms that adopt AI-powered automation first gain three competitive advantages:</p>
 
@@ -447,6 +469,51 @@
         </ol>
 
         <p>The question isn't whether to automate—it's how quickly you can implement before competitors capture the advantage.</p>
-    </main>
+
+        <div class="cta-box">
+            <h3>Interview Claire for Your Firm</h3>
+            <p>See how I automate contracts, pleadings, and briefs for your practice areas.</p>
+            <a href="/" class="cta-btn">Start Interactive Demo</a>
+        </div>
+
+        <h2 style="margin-top: 4rem;">Read Next</h2>
+        <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+            <a href="/legal/case-management.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Case Management →</h3>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automate matter organization and deadline tracking</p>
+            </a>
+            <a href="/legal/billing-timekeeping.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Billing & Timekeeping →</h3>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Capture billable time automatically</p>
+            </a>
+        </div>
+    </article>
+
+    <aside>
+        <div class="toc">
+            <h4>On This Page</h4>
+            <ul>
+                <li><a href="#templates">Template Generation</a></li>
+                <li><a href="#pleadings">Pleading Generation</a></li>
+                <li><a href="#review">Contract Review</a></li>
+                <li><a href="#precedent">Precedent Search</a></li>
+                <li><a href="#citing">Cite Checking</a></li>
+                <li><a href="#roi">ROI Analysis</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+
+        <div class="related">
+            <h4>Related Topics</h4>
+            <ul>
+                <li><a href="/legal/">← Legal Services Overview</a></li>
+                <li><a href="/legal/case-management.html">Case Management</a></li>
+                <li><a href="/legal/client-intake.html">Client Intake</a></li>
+                <li><a href="/legal/billing-timekeeping.html">Billing & Timekeeping</a></li>
+                <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+            </ul>
+        </div>
+    </aside>
+</main>
 </body>
 </html>

@@ -15,26 +15,49 @@
             --accent: #059669;
             --border: #bbf7d0;
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; padding: 6rem 2rem 4rem; max-width: 800px; margin: 0 auto; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
         nav a { color: var(--text-primary); text-decoration: none; }
-        h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
         h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
         p { margin-bottom: 1.5rem; }
-        ul { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        .intro { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
     </style>
 </head>
 <body>
     <nav><a href="/">CLAIRE // FINANCE</a></nav>
-    
-    <h1>Automated Customer Onboarding for Banks</h1>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/finance/">Finance</a> / Customer Onboarding
+            </div>
+
+            <h1>Automated Customer Onboarding for Banks</h1>
     
     <p class="intro">Customer onboarding is where banks win or lose market share. A consumer wanting to open a checking account expects same-day approval—if your bank requires visiting a branch, mailing documents, and waiting 5-10 days for account activation, that customer opens an account with a digital-first competitor offering instant onboarding.</p>
 
     <p>I automate the complete onboarding process from application through account activation—enabling same-day account opening while maintaining full KYC/AML compliance. This transforms onboarding from a competitive weakness to a competitive advantage.</p>
 
-    <h2>The Onboarding Friction Problem</h2>
+    <h2 id="problem">The Onboarding Friction Problem</h2>
 
     <p>Traditional bank onboarding is designed around physical branches and paper processes. To open an account:</p>
 
@@ -55,7 +78,7 @@
         <li><strong>High CAC (Customer Acquisition Cost):</strong> Banks spend $200-$400 per customer acquisition between marketing and onboarding operations. 40% abandonment means wasted acquisition spend.</li>
     </ul>
 
-    <h2>How AI-Powered Onboarding Works</h2>
+    <h2 id="how">How AI-Powered Onboarding Works</h2>
 
     <p>I enable end-to-end digital onboarding completed in 5-10 minutes from customer's mobile device:</p>
 
@@ -105,7 +128,7 @@
 
     <p><strong>Total onboarding time: 5-10 minutes. Account immediately usable.</strong></p>
 
-    <h2>Business Account Onboarding</h2>
+    <h2 id="business">Business Account Onboarding</h2>
 
     <p>Business accounts require additional documentation (EIN, articles of incorporation, beneficial ownership information per FinCEN rules). I automate this workflow:</p>
 
@@ -123,7 +146,7 @@
 
     <p><strong>Timeline: 15-20 minutes for business onboarding vs 3-5 weeks with manual process</strong></p>
 
-    <h2>ROI: Improved Conversion & Reduced CAC</h2>
+    <h2 id="roi">ROI: Improved Conversion & Reduced CAC</h2>
 
     <p>For a regional bank targeting 50,000 new accounts annually:</p>
 
@@ -158,8 +181,52 @@
 
     <p><strong>ROI: 2,680%</strong></p>
 
-    <h2>Conclusion</h2>
+    <h2 id="conclusion">Conclusion</h2>
 
     <p>Customer onboarding is the front door to your bank. Traditional banks require customers to visit branches and wait weeks for account activation. Digital-first banks offer instant onboarding from mobile devices. The competitive gap is widening—and customers are voting with their deposits. Automated onboarding isn't a nice-to-have; it's table stakes for competing in 2025 and beyond.</p>
+
+    <div class="cta-box">
+        <h3>Automate Your Customer Onboarding</h3>
+        <p>See how I reduce onboarding time from weeks to minutes while improving conversion by 67%.</p>
+        <a href="/" class="cta-btn">Start Interactive Demo</a>
+    </div>
+
+    <h2 style="margin-top: 4rem;">Read Next</h2>
+    <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <a href="/finance/kyc-compliance.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">KYC Compliance →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automate identity verification and compliance</p>
+        </a>
+        <a href="/finance/fraud-detection.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Fraud Detection →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Real-time fraud detection and prevention</p>
+        </a>
+    </div>
+</article>
+
+<aside>
+    <div class="toc">
+        <h4>On This Page</h4>
+        <ul>
+            <li><a href="#problem">Onboarding Friction</a></li>
+            <li><a href="#how">How AI Onboarding Works</a></li>
+            <li><a href="#business">Business Accounts</a></li>
+            <li><a href="#roi">ROI Analysis</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </div>
+
+    <div class="related">
+        <h4>Related Topics</h4>
+        <ul>
+            <li><a href="/finance/">← Finance Services Overview</a></li>
+            <li><a href="/finance/kyc-compliance.html">KYC Compliance</a></li>
+            <li><a href="/finance/fraud-detection.html">Fraud Detection</a></li>
+            <li><a href="/finance/transaction-monitoring.html">Transaction Monitoring</a></li>
+            <li><a href="/finance/cost-reduction.html">Cost Reduction</a></li>
+        </ul>
+    </div>
+</aside>
+</main>
 </body>
 </html>

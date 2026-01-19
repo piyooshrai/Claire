@@ -15,21 +15,43 @@
             --accent: #ea580c;
             --border: #fed7aa;
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; padding: 6rem 2rem 4rem; max-width: 800px; margin: 0 auto; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
         nav a { color: var(--text-primary); text-decoration: none; }
-        h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
         h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
         h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
         p { margin-bottom: 1.5rem; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
         ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        .intro { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem; }
+        li { margin-bottom: 0.5rem; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
     </style>
 </head>
 <body>
     <nav><a href="/">CLAIRE // HOSPITALITY</a></nav>
-    
-    <h1>AI Reservation Management for Hotels & Restaurants</h1>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/hospitality/">Hospitality</a> / Reservation Management
+            </div>
+
+            <h1>AI Reservation Management for Hotels & Restaurants</h1>
     
     <p class="intro">Reservation management is the revenue backbone of hospitality: hotels optimize room inventory to maximize RevPAR (Revenue Per Available Room), restaurants balance table turnover with guest experience, event venues coordinate complex multi-space bookings. Yet most properties still manage reservations through fragmented systems requiring constant manual intervention.</p>
 
@@ -37,7 +59,7 @@
 
     <p>I automate reservation workflows from initial booking through check-in, optimizing pricing dynamically, managing waitlists intelligently, and reducing no-shows by 60%—increasing revenue per room by 30% while cutting front desk labor by 40%.</p>
 
-    <h2>The Manual Reservation Problem</h2>
+    <h2 id="problem">The Manual Reservation Problem</h2>
 
     <p><strong>Hotels:</strong> Front desk staff manually answer phone calls for booking inquiries—explaining room types, availability, rates. They enter reservations into the PMS (Property Management System), send confirmation emails, process modifications, handle cancellations, and manage overbooking situations. During peak seasons, phone lines are overwhelmed and potential guests give up trying to book.</p>
 
@@ -51,7 +73,7 @@
         <li>Staff time: Front desk/host staff spend 60-70% of time on reservation tasks instead of guest service</li>
     </ul>
 
-    <h2>How AI Reservation Management Works</h2>
+    <h2 id="how">How AI Reservation Management Works</h2>
 
     <h3>Intelligent Booking & Availability Management</h3>
 
@@ -130,7 +152,7 @@
     - Seat party of 6 at 7:00 PM (estimated departure 9:00 PM) → no second seating this table<br>
     - Result: 40% more covers served compared to manual seating (which leaves tables idle between services)</p>
 
-    <h2>Waitlist Management</h2>
+    <h2 id="waitlist">Waitlist Management</h2>
 
     <p>When fully booked, I manage waitlists intelligently rather than simply telling guests "we're sold out":</p>
 
@@ -151,7 +173,7 @@
 
     <p>I monitor table turnover in real-time and update wait estimates dynamically, texting guests when tables are ready.</p>
 
-    <h2>Integration with Property Management Systems</h2>
+    <h2 id="integration">Integration with Property Management Systems</h2>
 
     <p>I integrate with major hospitality platforms:</p>
 
@@ -169,7 +191,7 @@
         <li>Toast POS: Point-of-sale integration for table timing data</li>
     </ul>
 
-    <h2>ROI: Revenue & Efficiency Gains</h2>
+    <h2 id="roi">ROI: Revenue & Efficiency Gains</h2>
 
     <p>For a 200-room hotel with $20M annual revenue:</p>
 
@@ -213,8 +235,37 @@
 
     <p><strong>ROI: 2,820%</strong></p>
 
-    <h2>Conclusion</h2>
+    <h2 id="conclusion">Conclusion</h2>
 
     <p>Reservation management determines whether hospitality properties capture maximum revenue from limited inventory. Manual reservation processes leave money on the table through suboptimal pricing, booking friction, and no-shows. AI reservation management increases revenue 25-30% through dynamic pricing and occupancy optimization while cutting labor costs 40-50%. For a 200-room property, this translates to $2.8M+ annual benefit—the difference between thriving and barely surviving in competitive hospitality markets.</p>
+
+    <div class="cta-box">
+        <h3>Optimize Your Reservation Management</h3>
+        <p>See how I increase RevPAR by 30% through dynamic pricing and automated reservation optimization.</p>
+        <a href="/" class="cta-btn">Start Interactive Demo</a>
+    </div>
+</article>
+
+<aside>
+    <div class="toc">
+        <h4>On This Page</h4>
+        <ul>
+            <li><a href="#problem">Manual Reservation Problem</a></li>
+            <li><a href="#how">How AI Reservation Works</a></li>
+            <li><a href="#waitlist">Waitlist Management</a></li>
+            <li><a href="#integration">PMS Integration</a></li>
+            <li><a href="#roi">ROI Analysis</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </div>
+
+    <div class="related">
+        <h4>Related Topics</h4>
+        <ul>
+            <li><a href="/hospitality/">← Hospitality Services Overview</a></li>
+        </ul>
+    </div>
+</aside>
+</main>
 </body>
 </html>

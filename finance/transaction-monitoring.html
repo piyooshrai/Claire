@@ -15,29 +15,51 @@
             --accent: #059669;
             --border: #bbf7d0;
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; padding: 6rem 2rem 4rem; max-width: 800px; margin: 0 auto; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
         nav a { color: var(--text-primary); text-decoration: none; }
-        h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
         h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
         h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
         p { margin-bottom: 1.5rem; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
         ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        .intro { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem; }
+        li { margin-bottom: 0.5rem; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
     </style>
 </head>
 <body>
     <nav><a href="/">CLAIRE // FINANCE</a></nav>
-    
-    <h1>AI Transaction Monitoring for AML Compliance</h1>
-    
-    <p class="intro">Anti-money laundering (AML) transaction monitoring is the process of analyzing customer transactions to detect suspicious activity patterns that may indicate money laundering, terrorist financing, or other financial crimes. Financial institutions are legally required to monitor transactions and file Suspicious Activity Reports (SARs) with FinCEN when suspicious patterns are detected.</p>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/finance/">Finance</a> / Transaction Monitoring
+            </div>
+
+            <h1>AI Transaction Monitoring for AML Compliance</h1>
+
+            <p class="intro">Anti-money laundering (AML) transaction monitoring is the process of analyzing customer transactions to detect suspicious activity patterns that may indicate money laundering, terrorist financing, or other financial crimes. Financial institutions are legally required to monitor transactions and file Suspicious Activity Reports (SARs) with FinCEN when suspicious patterns are detected.</p>
 
     <p>The problem: Traditional rule-based transaction monitoring systems generate 95-98% false positives, overwhelming compliance teams with thousands of alerts daily while sophisticated money laundering schemes slip through undetected.</p>
 
     <p>I monitor transactions using machine learning pattern recognition that adapts to evolving money laundering techniques—detecting 40% more suspicious activity while reducing false positive alerts by 85%. This frees your compliance team to investigate real threats instead of drowning in noise.</p>
 
-    <h2>The Rule-Based Monitoring Problem</h2>
+    <h2 id="problem">The Rule-Based Monitoring Problem</h2>
 
     <p>Banks use rule-based transaction monitoring systems with static thresholds:</p>
 
@@ -63,7 +85,7 @@
 
     <p>Meanwhile, the 6,000 true positives (actual suspicious activity) get lost in the noise. Compliance analysts suffer from alert fatigue—when every alert is a false alarm, they stop taking alerts seriously. This creates regulatory risk: the actual money laundering that slips through becomes headline news and regulatory enforcement action.</p>
 
-    <h2>How AI Transaction Monitoring Works</h2>
+    <h2 id="how">How AI Transaction Monitoring Works</h2>
 
     <p>I analyze transaction patterns using behavioral baselines, network analysis, and anomaly detection to identify genuinely suspicious activity while filtering out legitimate transactions that superficially match risk patterns.</p>
 
@@ -134,7 +156,7 @@
         <li>Circular trading: Customer A sells to Customer B who sells to Customer C who sells back to Customer A (no economic purpose, just moving money in circles)</li>
     </ul>
 
-    <h2>Case Management & SAR Filing</h2>
+    <h2 id="cases">Case Management & SAR Filing</h2>
 
     <p>When I detect suspicious activity, I generate detailed case files for compliance analysts:</p>
 
@@ -164,7 +186,7 @@
 
     <p>Analyst reviews, edits, and submits SAR electronically to FinCEN BSA E-Filing System.</p>
 
-    <h2>Regulatory Compliance</h2>
+    <h2 id="compliance">Regulatory Compliance</h2>
 
     <p>I maintain full audit trails for regulatory examinations:</p>
 
@@ -177,7 +199,7 @@
 
     <p>When regulators examine your AML program, I provide comprehensive reporting demonstrating effective transaction monitoring.</p>
 
-    <h2>ROI: Cost Savings & Risk Reduction</h2>
+    <h2 id="roi">ROI: Cost Savings & Risk Reduction</h2>
 
     <p>For a bank processing 10 million transactions monthly:</p>
 
@@ -214,8 +236,53 @@
 
     <p><strong>ROI: 30,600%</strong></p>
 
-    <h2>Conclusion</h2>
+    <h2 id="conclusion">Conclusion</h2>
 
     <p>Transaction monitoring is the frontline defense against money laundering. Rule-based systems have failed—generating false positive noise while missing sophisticated schemes. AI transaction monitoring cuts through the noise, detecting 60% more suspicious activity while reducing false positives by 85%. The result: $150M+ in annual cost savings and dramatically reduced regulatory risk.</p>
+
+    <div class="cta-box">
+        <h3>Implement AI Transaction Monitoring</h3>
+        <p>See how I detect suspicious activity with 85% fewer false positives while improving detection rates by 60%.</p>
+        <a href="/" class="cta-btn">Start Interactive Demo</a>
+    </div>
+
+    <h2 style="margin-top: 4rem;">Read Next</h2>
+    <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <a href="/finance/fraud-detection.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Fraud Detection →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Real-time fraud detection and prevention</p>
+        </a>
+        <a href="/finance/kyc-compliance.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">KYC Compliance →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automate identity verification and compliance</p>
+        </a>
+    </div>
+</article>
+
+<aside>
+    <div class="toc">
+        <h4>On This Page</h4>
+        <ul>
+            <li><a href="#problem">Rule-Based Problems</a></li>
+            <li><a href="#how">How AI Monitoring Works</a></li>
+            <li><a href="#cases">Case Management</a></li>
+            <li><a href="#compliance">Regulatory Compliance</a></li>
+            <li><a href="#roi">ROI Analysis</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </div>
+
+    <div class="related">
+        <h4>Related Topics</h4>
+        <ul>
+            <li><a href="/finance/">← Finance Services Overview</a></li>
+            <li><a href="/finance/fraud-detection.html">Fraud Detection</a></li>
+            <li><a href="/finance/kyc-compliance.html">KYC Compliance</a></li>
+            <li><a href="/finance/regulatory-compliance.html">Regulatory Compliance</a></li>
+            <li><a href="/finance/customer-onboarding.html">Customer Onboarding</a></li>
+        </ul>
+    </div>
+</aside>
+</main>
 </body>
 </html>
