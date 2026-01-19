@@ -330,6 +330,94 @@
     </main>
 
     <script>
+// Content Personalization - Inject user name naturally into prose
+// This runs on landing pages (healthcare/index.html, finance/index.html, etc.)
+
+const userData = {
+    name: sessionStorage.getItem('userName') || ''
+};
+
+if (userData.name) {
+    personalizeContent();
+}
+
+function personalizeContent() {
+    // Find all paragraphs in the main content area
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    const paragraphs = main.querySelectorAll('p');
+
+    paragraphs.forEach((p, index) => {
+        let text = p.innerHTML;
+
+        // Pattern 1: "I manage..." → "Alex, I manage..."
+        if (text.startsWith('I manage')) {
+            text = `${userData.name}, ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+        }
+
+        // Pattern 2: "When you..." → "When you, Alex,..."
+        // Only do this for the first occurrence to avoid being repetitive
+        else if (index < 3 && text.match(/^When you /)) {
+            text = text.replace(/^When you /, `When you, ${userData.name}, `);
+        }
+
+        // Pattern 3: "You'll notice..." → "Alex, you'll notice..."
+        else if (text.match(/^You'(ll|re) /)) {
+            text = `${userData.name}, ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+        }
+
+        // Pattern 4: Mid-sentence injection for key phrases
+        // "The difference is..." → "The difference, Alex, is..."
+        else if (text.match(/^The difference is/) && index < 5) {
+            text = text.replace(/^The difference is/, `The difference, ${userData.name}, is`);
+        }
+
+        // Pattern 5: "Here's how..." → "Here's how, Alex,..."
+        else if (text.match(/^Here'?s how/) && index < 5) {
+            text = text.replace(/^(Here'?s how)/, `$1, ${userData.name},`);
+        }
+
+        // Pattern 6: Questions directed at reader
+        // "Want to see..." → "Want to see this in action, Alex?"
+        else if (text.match(/^Want to /)) {
+            text = text.replace(/\?$/, `, ${userData.name}?`);
+        }
+
+        p.innerHTML = text;
+    });
+
+    // Personalize headings that are questions or direct address
+    const headings = main.querySelectorAll('h1, h2, h3');
+    headings.forEach(h => {
+        let text = h.innerHTML;
+
+        // "Why Choose Claire?" → "Why Choose Claire, Alex?"
+        if (text.match(/\?$/)) {
+            text = text.replace(/\?$/, `, ${userData.name}?`);
+            h.innerHTML = text;
+        }
+    });
+
+    // Personalize section labels with direct address
+    const labels = main.querySelectorAll('.section-label');
+    labels.forEach(label => {
+        let text = label.textContent;
+
+        // Add casual address to role labels
+        // "Current Role: Patient Orchestrator" → "Current Role: Your Patient Orchestrator, Alex"
+        if (text.includes('Current Role:')) {
+            text = text.replace('Current Role:', `Current Role: Your`) + `, ${userData.name}`;
+            label.textContent = text;
+        }
+    });
+}
+
+    </script>
+
+
+
+    <script>
         // Conversational Personalization Script
 // Time + weather aware greetings
 
