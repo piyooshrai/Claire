@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-industry="hospitality">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +7,759 @@
     <meta name="description" content="AI-powered complaint detection and resolution for hotels. Turn negative experiences into positive reviews through proactive service recovery.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg-primary: #fff7ed; --bg-secondary: #ffffff; --text-primary: #7c2d12; --text-secondary: #78716c; --accent: #ea580c; --border: #fed7aa; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
-        nav a { color: var(--text-primary); text-decoration: none; }
-        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; }
-        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
-        article { max-width: 800px; }
-        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
-        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
-        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
-        p { margin-bottom: 1.5rem; }
-        strong { font-weight: 600; }
-        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
-        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.5rem; }
-        blockquote { margin: 2rem 0; padding-left: 1.5rem; border-left: 3px solid var(--accent); color: var(--text-secondary); font-style: italic; }
-        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
-        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
-        .cta-btn:hover { background: var(--accent); color: white; }
-        aside { position: sticky; top: 6rem; height: fit-content; }
-        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
-        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
-        .toc ul, .related ul { list-style: none; }
-        .toc li, .related li { margin-bottom: 0.75rem; }
-        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
-        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
+
+        :root {
+            --bg-primary: #fff7ed;
+            --bg-secondary: #ffffff;
+            --text-primary: #7c2d12;
+            --text-secondary: #78716c;
+            --accent: #ea580c;
+            --accent-light: #fb923c;
+            --border: #fed7aa;
+            --shadow: rgba(234, 88, 12, 0.1);
+        }
+
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fff7ed 100%);
+            background-size: 200% 200%;
+            animation: breathe 15s ease infinite;
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(234, 88, 12, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(234, 88, 12, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 850px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 4rem 0 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+
+        h3 {
+            font-size: 1.625rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .stat-callout {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .stat-context {
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box h4 {
+            color: var(--accent);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        blockquote {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        blockquote strong {
+            color: var(--accent);
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .cta-box {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
+            margin-top: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        aside {
+            position: sticky;
+            top: 8rem;
+            height: fit-content;
+        }
+
+        .toc, .related {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .toc h4, .related h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .toc ul, .related ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li, .related li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a, .related a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc a:hover, .related a:hover {
+            color: var(--accent);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+        }
+
+        .footer-shadow {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .industry-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .industry-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+        }
+
+        .dock-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .dock-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .dock-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px var(--shadow);
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .dock-panel.open {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dock-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dock-header h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .dock-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dock-body {
+            padding: 1.5rem;
+        }
+
+        .dock-message {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .dock-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .dock-cta:hover {
+            background: var(--accent-light);
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            aside {
+                position: relative;
+                top: 0;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+            }
+            .stat-value {
+                font-size: 3rem;
+            }
+            .footer-nav {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-<body>
-    <nav><a href="/">CLAIRE // HOSPITALITY</a></nav>
+<body data-industry="hospitality">
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">
+                CLAIRE <span>//</span> GUEST EXPERIENCE ORCHESTRATOR
+            </div>
+            <div class="nav-links">
+                <a href="/hospitality/#reservations">Reservations</a>
+                <a href="/hospitality/#guest-services">Guest Services</a>
+                <a href="/hospitality/#operations">Operations</a>
+                <a href="/hospitality/#revenue">Revenue Optimization</a>
+                <a href="/hospitality/concierge-demo.html" class="nav-cta">Execute Concierge Demo</a>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <article>
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/hospitality/">Hospitality</a> / Complaint Resolution
+                <a href="/">Home</a> <span>/</span> <a href="/hospitality/">Hospitality</a> <span>/</span> Complaint Resolution
             </div>
 
             <h1>Automated Complaint Resolution: Turning Problems into Loyalty</h1>
+
             <p class="intro">Every hotel faces the same paradox: guest complaints are opportunities to build loyalty, yet most complaints never get reported. The guest's room is too noisy, the WiFi is slow, the shower has low water pressure—but they don't mention it to staff. They suffer in silence during the stay, then vent their frustration in a scathing 1-star review after checkout. By the time you learn about the problem, it's too late to fix it—and now thousands of potential guests are reading about your "terrible service" and "outdated rooms."</p>
 
             <p>Research from Cornell School of Hotel Administration shows that for every complaint a hotel receives, there are 26 other unhappy guests who said nothing. These silent complainers are the most dangerous—they don't give you a chance to make things right, they just leave negative reviews and never return. Meanwhile, guests who complain and receive prompt resolution show 85% higher loyalty than guests who never had a problem at all (Service Recovery Paradox, Hart et al. 1990).</p>
 
             <p>I detect complaints early through conversational monitoring, resolve issues proactively, and turn potential negative reviews into positive experiences—all before the guest checks out. By analyzing every guest interaction for dissatisfaction signals, I catch problems that would otherwise go unreported and escalate them for immediate resolution.</p>
+
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">78%</div>
+                <div class="stat-label">Of issues detected before checkout</div>
+                <div class="stat-context">
+                    78% of guest dissatisfaction signals are detected before checkout through conversational analysis. This is critical because guests who complain to staff and receive resolution show 4.2-star review ratings, while the same complaints left unresolved average 1.8 stars. Proactive detection and service recovery prevents silent complaints that damage your reputation.
+                </div>
+            </div>
 
             <h2 id="detection">Early Complaint Detection: Reading Between the Lines</h2>
 
@@ -106,12 +815,16 @@
             [Create housekeeping task, track completion, send confirmation]
             </blockquote>
 
-            <p>Tier 1 issues:</p>
-            <ul>
-                <li>Amenity requests (toiletries, coffee, towels)</li>
-                <li>Information requests (WiFi password, restaurant hours)</li>
-                <li>Minor service requests (extra hangers, ironing board)</li>
-            </ul>
+            <p>Tier 1 issues include amenity requests (toiletries, coffee, towels), information requests (WiFi password, restaurant hours), and minor service requests (extra hangers, ironing board).</p>
+
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">28 min</div>
+                <div class="stat-label">Average complaint resolution time</div>
+                <div class="stat-context">
+                    From the moment a complaint is detected to full resolution and guest confirmation takes 28 minutes on average. This speed is critical—guests who see problems fixed quickly perceive better service quality and are more likely to post positive reviews praising rapid service recovery than they would have posted negative reviews about the original issue.
+                </div>
+            </div>
 
             <h3>Tier 2: Staff Coordination (25% of complaints)</h3>
 
@@ -123,13 +836,6 @@
             [Create maintenance work order, assign technician, set 10-minute SLA, prepare room move contingency]
             </blockquote>
 
-            <p>Tier 2 issues:</p>
-            <ul>
-                <li>Maintenance repairs (plumbing, electrical, appliances)</li>
-                <li>Housekeeping quality issues (room not cleaned properly)</li>
-                <li>Service delays (late room service, missed wake-up call)</li>
-            </ul>
-
             <h3>Tier 3: Manager Escalation (10% of complaints)</h3>
 
             <p>Serious issues requiring manager authority and compensation:</p>
@@ -140,14 +846,6 @@
             <strong>Me:</strong> "I'm so sorry—that's completely unacceptable. I'm moving you to a newly renovated suite right now (no charge for the upgrade), and our General Manager will personally meet you at your new room to apologize and discuss compensation. Your new room 515 is ready—I'll have a bellman move your luggage immediately."<br><br>
             [Notify GM via SMS and phone call, assign premium room, prepare compensation package, log for follow-up]
             </blockquote>
-
-            <p>Tier 3 issues:</p>
-            <ul>
-                <li>Health/safety concerns (mold, bedbugs, security issues)</li>
-                <li>Major service failures (overbooked room, lost reservation)</li>
-                <li>Billing disputes over $200</li>
-                <li>Guest threatening to leave early or post negative review</li>
-            </ul>
 
             <h2 id="resolution">Service Recovery Strategies</h2>
 
@@ -259,6 +957,15 @@
                 <li>Manager escalation for negative reviews</li>
             </ul>
 
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">4.5★</div>
+                <div class="stat-label">Post-resolution guest satisfaction rating</div>
+                <div class="stat-context">
+                    Guests who report complaints and receive service recovery rate their experience 4.5/5.0 on average. This is the Service Recovery Paradox—handled complaints can create loyalty exceeding never-having-a-problem. When guests see their concerns addressed immediately and fairly, they become advocates, leaving positive reviews praising your responsiveness and integrity.
+                </div>
+            </div>
+
             <h3>Review Response Templates</h3>
 
             <p>I draft personalized review responses for management approval:</p>
@@ -278,18 +985,6 @@
             </blockquote>
 
             <p>Post-checkout recovery success rate: 35% (guests update negative reviews to positive or delete entirely after receiving compensation and apology).</p>
-
-            <h2 id="metrics">Complaint Resolution Metrics</h2>
-
-            <p>I track complaint performance to measure service recovery effectiveness:</p>
-
-            <ul>
-                <li><strong>Complaint detection rate:</strong> 78% of issues detected before checkout (vs 22% that surface in reviews)</li>
-                <li><strong>Average resolution time:</strong> 28 minutes (from complaint to resolution confirmation)</li>
-                <li><strong>Guest satisfaction post-resolution:</strong> 4.5/5.0 average (vs 2.1/5.0 for unresolved complaints)</li>
-                <li><strong>Review impact:</strong> Guests with resolved complaints leave 4.2-star reviews; unresolved complaints leave 1.8-star reviews</li>
-                <li><strong>Service recovery ROI:</strong> $12 in prevented revenue loss for every $1 spent on compensation</li>
-            </ul>
 
             <h2 id="roi">ROI: Review Reputation & Revenue Protection</h2>
 
@@ -326,19 +1021,25 @@
             <div class="cta-box">
                 <h3>See Complaint Resolution in Action</h3>
                 <p>Experience how Claire detects issues early and turns problems into positive experiences.</p>
-                <a href="/" class="cta-btn">Start Interactive Demo</a>
+                <a href="/" class="cta-btn">Execute Concierge Demo</a>
             </div>
 
-            <h2 style="margin-top: 4rem;">Read Next</h2>
-            <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-                <a href="/hospitality/guest-communication.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Guest Communication →</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Personalized messaging from pre-arrival to post-stay</p>
-                </a>
-                <a href="/hospitality/reservation-management.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Reservation Management →</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automated booking and availability management</p>
-                </a>
+            <div class="read-next">
+                <h2>Continue the Interview</h2>
+                <div class="cards">
+                    <a href="/hospitality/guest-communication.html" class="card">
+                        <h3>Guest Communication</h3>
+                        <p>Personalized multilingual messaging from pre-arrival to post-stay.</p>
+                    </a>
+                    <a href="/hospitality/concierge-services.html" class="card">
+                        <h3>Concierge Services</h3>
+                        <p>24/7 local recommendations and activity booking assistance.</p>
+                    </a>
+                    <a href="/hospitality/upsell-automation.html" class="card">
+                        <h3>Upsell Automation</h3>
+                        <p>Revenue optimization through targeted offers and upgrades.</p>
+                    </a>
+                </div>
             </div>
         </article>
 
@@ -352,23 +1053,147 @@
                     <li><a href="#follow-up">Post-Resolution Follow-Up</a></li>
                     <li><a href="#prevention">Complaint Prevention</a></li>
                     <li><a href="#reviews">Review Management</a></li>
-                    <li><a href="#metrics">Performance Metrics</a></li>
                     <li><a href="#roi">ROI Analysis</a></li>
                     <li><a href="#conclusion">Conclusion</a></li>
                 </ul>
             </div>
 
             <div class="related">
-                <h4>Related Topics</h4>
+                <h4>Related Capabilities</h4>
                 <ul>
                     <li><a href="/hospitality/">← Hospitality Overview</a></li>
                     <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
                     <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
-                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
                     <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
                 </ul>
             </div>
         </aside>
     </main>
+
+    <footer>
+        <div class="footer-shadow">
+            <h2>Guest Experience Orchestration: Beyond the Phone Tree</h2>
+            <p class="footer-shadow-intro">
+                Proactive complaint detection and resolution requires sensitive handling of guest data and strict compliance with privacy regulations. Every complaint reveals information about a guest's vulnerabilities, preferences, and dissatisfaction—data that must be handled with maximum discretion.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Privacy & Compliance Analysis</button>
+
+            <div class="shadow-content" id="shadowContent">
+                <h3>Sensitive Data in Complaint Handling</h3>
+
+                <p>When guests complain, they often share deeply personal information. "I couldn't sleep due to my anxiety disorder." "I have a life-threatening shellfish allergy." "I'm traveling after my divorce." "My child is sick and I need a quiet room." This information is more sensitive than credit card numbers because it reveals vulnerabilities that could be exploited or used discriminatorily.</p>
+
+                <p>Claire protects complaint data with extreme care: Complaints are flagged as sensitive data and access is restricted to authorized management staff only. Sensitive health or personal information is redacted from system notes and never shared with external parties. Complaint records are encrypted with separate encryption keys from guest profile data. Complaint data is deleted after 12 months (unless legally required to retain for dispute resolution). Access to complaint data is logged and audited—every view, every edit, every access is timestamped and recorded.</p>
+
+                <h3>HIPAA-Adjacent Privacy for Health Information</h3>
+
+                <p>While Claire is not subject to HIPAA (we're not a healthcare provider), we apply HIPAA-like standards to health information disclosed in complaints. If a guest mentions a medical condition (allergy, disability, medication need), we: Treat that information as protected health information (PHI). Restrict access to authorized personnel only. Don't share with third parties without explicit consent. Segregate from general guest records. Don't use for marketing or profiling. Comply with HIPAA deletion requirements even though we're not legally bound.</p>
+
+                <h3>Complaint Privacy & Staff Confidentiality</h3>
+
+                <p>Complaints sometimes involve staff misconduct. "The front desk agent was rude." "Housekeeping damaged my belongings." When complaints involve staff, Claire ensures: Staff names are redacted in guest-facing correspondence (we handle internally, guest never learns staff name). Complaint details are never shared with the accused staff member before investigation. Disciplinary actions are kept confidential (we never tell a guest "we fired that employee"). Records are isolated in HR systems, not general guest records. Access is restricted to HR and management only.</p>
+
+                <h3>Conclusion: Orchestration Protects Guest Privacy</h3>
+
+                <p>Complaint data is the most sensitive guest information you collect. It reveals vulnerabilities, health conditions, personal circumstances, and triggers staff discipline. That data requires maximum protection through encryption, strict access controls, audit logging, and deletion upon request. Your legal liability and guest trust depend on handling complaint data with exceptional care and discretion.</p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Hospitality Capabilities</h4>
+                <ul>
+                    <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
+                    <li><a href="/hospitality/complaint-resolution.html">Complaint Resolution</a></li>
+                    <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compliance</h4>
+                <ul>
+                    <li><a href="/compliance/pci-dss.html">PCI DSS</a></li>
+                    <li><a href="/compliance/gdpr.html">GDPR Compliance</a></li>
+                    <li><a href="/compliance/ccpa.html">CCPA Compliance</a></li>
+                    <li><a href="/compliance/soc2.html">SOC 2 Type II</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">
+            C
+        </div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">
+                    I'm Claire, your AI guest experience orchestrator. Want to see how I detect issues early and turn complaints into loyalty-building moments?
+                </p>
+                <a href="/hospitality/concierge-demo.html" class="dock-cta">Execute Live Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDock() {
+            const panel = document.getElementById('dockPanel');
+            panel.classList.toggle('open');
+        }
+
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Privacy & Compliance Analysis'
+                : 'Read Full Privacy & Compliance Analysis';
+        }
+
+        document.addEventListener('click', function(event) {
+            const dock = document.querySelector('.claire-dock');
+            const panel = document.getElementById('dockPanel');
+            if (!dock.contains(event.target) && panel.classList.contains('open')) {
+                panel.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>

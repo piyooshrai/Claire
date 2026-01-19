@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-industry="finance">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Fraud Detection for Financial Institutions | Claire AI</title>
     <meta name="description" content="Real-time fraud detection using AI: transaction monitoring, behavioral analysis, synthetic identity detection. 99.6% accuracy with 90% fewer false positives.">
-    <link rel="canonical" href="https://letsaskclaire.com/finance/fraud-detection.html">
+    <meta property="og:title" content="AI Fraud Detection for Financial Institutions">
+    <meta property="og:description" content="AI-powered fraud detection: 99.6% accuracy, real-time behavioral analysis, synthetic identity detection. Reduce fraud losses by 10x while cutting false positives by 90%.">
+    <meta property="og:type" content="article">
+    <link rel="canonical" href="https://claire.ai/finance/fraud-detection.html">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -14,53 +18,723 @@
       "description": "Complete guide to AI-powered fraud detection for banks and fintech companies.",
       "author": {"@type": "Organization", "name": "Claire AI"},
       "publisher": {"@type": "Organization", "name": "Claire AI"},
-      "datePublished": "2025-01-19"
+      "datePublished": "2025-01-19",
+      "dateModified": "2025-01-19"
     }
     </script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Finance color system */
         :root {
-            --bg-primary: #f0fdf4;
+            --bg-primary: #ecfdf5;
             --bg-secondary: #ffffff;
-            --text-primary: #14532d;
-            --text-secondary: #6b7280;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
             --accent: #059669;
-            --border: #bbf7d0;
+            --accent-light: #10b981;
+            --border: #d1fae5;
+            --shadow: rgba(5, 150, 105, 0.1);
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
-        nav a { color: var(--text-primary); text-decoration: none; }
-        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; }
-        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
-        article { max-width: 800px; }
-        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
-        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
-        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
-        p { margin-bottom: 1.5rem; }
-        strong { font-weight: 600; }
-        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
-        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.5rem; }
-        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
-        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
-        .cta-btn:hover { background: var(--accent); color: white; }
-        aside { position: sticky; top: 6rem; height: fit-content; }
-        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
-        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
-        .toc ul, .related ul { list-style: none; }
-        .toc li, .related li { margin-bottom: 0.75rem; }
-        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
-        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
+
+        /* Breathing gradient background animation */
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #ecfdf5 100%);
+            background-size: 200% 200%;
+            animation: breathe 15s ease infinite;
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        /* Breathing grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(5, 150, 105, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(5, 150, 105, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        /* Ensure content is above grid */
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Orchestrator Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Main content container */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 850px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Dramatic typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 4rem 0 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+
+        h3 {
+            font-size: 1.625rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Stat callout boxes */
+        .stat-callout {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .stat-context {
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* Read Next cards */
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
+            margin-top: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 8rem;
+            height: fit-content;
+        }
+
+        .toc, .related {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .toc h4, .related h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .toc ul, .related ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li, .related li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a, .related a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc a:hover, .related a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer with shadow content */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+        }
+
+        .footer-shadow {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .shadow-content blockquote {
+            background: #f1f5f9;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+            line-height: 1.8;
+        }
+
+        .shadow-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .shadow-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .shadow-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .industry-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .industry-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+        }
+
+        .dock-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .dock-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .dock-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px var(--shadow);
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .dock-panel.open {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dock-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dock-header h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .dock-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dock-body {
+            padding: 1.5rem;
+        }
+
+        .dock-message {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .dock-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .dock-cta:hover {
+            background: var(--accent-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .stat-value {
+                font-size: 3rem;
+            }
+
+            .footer-nav {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-<body>
-    <nav><a href="/">CLAIRE // FINANCE</a></nav>
+<body data-industry="finance">
+    <!-- Orchestrator Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">
+                CLAIRE <span>//</span> COMPLIANCE ORCHESTRATOR
+            </div>
+            <div class="nav-links">
+                <a href="/finance/#work-history">Work History</a>
+                <a href="/finance/#technical-stack">Technical Stack</a>
+                <a href="/finance/#security-clearance">Security Clearance</a>
+                <a href="/finance/fraud-detection.html">Fraud Detection</a>
+                <a href="/finance/kyc-compliance.html" class="nav-cta">Execute KYC Demo</a>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <article>
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/finance/">Finance</a> / Fraud Detection
+                <a href="/">Home</a> <span>/</span> <a href="/finance/">Finance</a> <span>/</span> Fraud Detection
             </div>
 
             <h1>AI Fraud Detection for Financial Institutions</h1>
@@ -71,7 +745,14 @@
 
             <p>I detect fraud in real-time using behavioral analysis, pattern recognition, and anomaly detection—catching sophisticated fraud schemes while reducing false positives by 90%. This isn't about replacing fraud analysts; it's about augmenting them with AI that sees patterns humans can't and scales to analyze millions of transactions per second.</p>
 
-            <h2 id="problem">The Rule-Based Fraud Detection Problem</h2>
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">99.6%</div>
+                <div class="stat-label">Real-Time Fraud Detection Accuracy</div>
+                <div class="stat-context">AI detects sophisticated fraud schemes including synthetic identity fraud, account takeovers, and structured money laundering while reducing false positives by 90% compared to rule-based systems.</div>
+            </div>
+
+            <h2>The Rule-Based Fraud Detection Problem</h2>
 
             <p>Traditional fraud detection relies on static rules: "If transaction amount > $5,000 AND location != customer's home country, flag as suspicious." These rules are easy to understand but fundamentally limited:</p>
 
@@ -100,7 +781,14 @@
 
             <p>Rule-based systems can't detect synthetic identities because each transaction looks normal. The synthetic identity passes KYC checks (SSN is real), builds a credit history (small purchases, on-time payments), and only reveals itself as fraud when they bust out. By then, the loss is realized and the fraudster is gone.</p>
 
-            <h2 id="how">How AI-Powered Fraud Detection Works</h2>
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">$6B</div>
+                <div class="stat-label">Annual Synthetic Identity Fraud Cost</div>
+                <div class="stat-context">Fraudsters create fake identities that pass KYC verification, build credit slowly, then bust out by maxing credit lines. AI pattern recognition detects these schemes before bust-out occurs by analyzing application data, credit behavior patterns, and network connections to other accounts.</div>
+            </div>
+
+            <h2>How AI-Powered Fraud Detection Works</h2>
 
             <p>I analyze fraud using machine learning models trained on billions of transactions—identifying patterns that humans would never notice and fraudsters can't easily evade.</p>
 
@@ -155,83 +843,7 @@
 
             <p>I score each application for synthetic identity risk. High-risk applications are flagged for manual review before account opening (preventing fraud upfront, not after losses are realized).</p>
 
-            <h3>Real-Time Transaction Scoring</h3>
-
-            <p>I analyze transactions in under 50 milliseconds—fast enough to approve or decline before the customer's payment is processed:</p>
-
-            <p><strong>Transaction flow:</strong></p>
-            <ol>
-                <li>Customer swipes card at merchant (or enters card details online)</li>
-                <li>Merchant sends authorization request to card network (Visa/Mastercard)</li>
-                <li>Card network routes to issuing bank</li>
-                <li>I analyze transaction: Pull customer behavior profile, calculate fraud score based on 200+ features, compare to known fraud patterns</li>
-                <li>Return decision: Approve (score < 30), decline (score > 80), or send to manual review (score 30-80)</li>
-                <li>Bank responds to merchant: Approved or declined</li>
-                <li>Customer sees result at checkout</li>
-            </ol>
-
-            <p><strong>Total time: 40-70 milliseconds</strong> (imperceptible to customer)</p>
-
-            <h2 id="types">Fraud Types I Detect</h2>
-
-            <h3>Account Takeover (ATO)</h3>
-
-            <p>Fraudster gains access to customer's online banking credentials (via phishing, data breach, malware). They log in, change contact information, and initiate fraudulent transfers.</p>
-
-            <p><strong>Detection signals:</strong></p>
-            <ul>
-                <li>Login from new device/location without prior travel patterns</li>
-                <li>Immediate contact information changes after login</li>
-                <li>Large transfer to external account never used before</li>
-                <li>Rapid succession of actions (login → change email → add beneficiary → transfer) suggesting script/automation</li>
-            </ul>
-
-            <p><strong>Response:</strong> Block sensitive actions, require step-up authentication (SMS code, phone verification), alert fraud team</p>
-
-            <h3>Card-Not-Present (CNP) Fraud</h3>
-
-            <p>Fraudster uses stolen card details for online purchases where physical card isn't required. This accounts for 73% of card fraud losses (Nilson Report 2024).</p>
-
-            <p><strong>Detection signals:</strong></p>
-            <ul>
-                <li>First-time transaction at merchant outside customer's typical behavior</li>
-                <li>Shipping address different from billing address (especially if shipping to freight forwarder)</li>
-                <li>Multiple failed authorization attempts before successful transaction (testing different CVV codes)</li>
-                <li>Purchase of high-resale-value items (electronics, gift cards)</li>
-            </ul>
-
-            <h3>Money Laundering</h3>
-
-            <p>Criminals move illicit funds through financial system to obscure origins. Traditional detection focuses on large transactions ($10,000+ requiring SAR filings), but sophisticated launderers use "structuring"—breaking large amounts into many small transactions below reporting thresholds.</p>
-
-            <p><strong>Detection patterns:</strong></p>
-            <ul>
-                <li>Frequent transactions just under $10,000 (e.g., $9,500, $9,800, $9,200)</li>
-                <li>Rapid movement of funds: Deposit → immediate transfer out to multiple accounts</li>
-                <li>Business account with transaction patterns inconsistent with stated business type (e.g., "landscaping company" receiving wire transfers from overseas)</li>
-                <li>Layering: Funds move through multiple accounts in complex patterns to obscure origin</li>
-            </ul>
-
-            <h2 id="integration">Integration with Existing Fraud Systems</h2>
-
-            <p>I integrate with your core banking system and fraud management platform:</p>
-
-            <p><strong>Real-time authorization integration:</strong></p>
-            <ul>
-                <li>API integration with your authorization system (FIS, Fiserv, Jack Henry)</li>
-                <li>I receive transaction details in real-time</li>
-                <li>I return fraud score and recommendation (approve/decline/review) within 50ms</li>
-                <li>Your system makes final decision based on my recommendation plus your risk tolerance settings</li>
-            </ul>
-
-            <p><strong>Fraud case management:</strong></p>
-            <ul>
-                <li>High-risk transactions are automatically routed to fraud analysts with context: customer behavior summary, fraud indicators detected, similar past cases</li>
-                <li>Analysts can approve, decline, or escalate</li>
-                <li>Analyst decisions feed back into my learning: "This was flagged as fraud but analyst approved → update model to reduce false positives for this pattern"</li>
-            </ul>
-
-            <h2 id="roi">Performance Metrics & ROI</h2>
+            <h2>Performance Metrics & ROI</h2>
 
             <p>For a mid-size bank processing 5 million transactions monthly:</p>
 
@@ -280,69 +892,260 @@
                 <li><strong>Retained revenue: $593 million/year</strong></li>
             </ul>
 
-            <h3>Total Annual Benefit</h3>
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">$901M</div>
+                <div class="stat-label">Total Annual Benefit</div>
+                <div class="stat-context">Fraud loss reduction ($28.8M) + operational savings ($280M) + customer retention ($593M) = $901.8 million annually. For a mid-size bank processing 5M transactions monthly, AI fraud detection delivers 180,200% ROI through 10x better fraud catch rates and 90% fewer false positives.</div>
+            </div>
 
-            <ul>
-                <li>Fraud loss reduction: $28.8 million</li>
-                <li>Operational cost savings: $280 million</li>
-                <li>Customer retention value: $593 million</li>
-            </ul>
-
-            <p><strong>Total: $901.8 million annually</strong></p>
-
-            <p><strong>Claire Enterprise Tier Cost: $500,000/year</strong></p>
-
-            <p><strong>ROI: 180,200%</strong></p>
-
-            <h2 id="conclusion">Conclusion: The Future of Fraud Detection</h2>
+            <h2>Conclusion: The Future of Fraud Detection</h2>
 
             <p>Rule-based fraud detection is fundamentally broken—generating more noise than signal, frustrating customers, and missing sophisticated fraud. AI fraud detection isn't a marginal improvement; it's a paradigm shift: 10x better fraud catch rates, 90% fewer false positives, and hundreds of millions in annual savings.</p>
 
             <p>The question isn't whether to adopt AI fraud detection—it's how quickly you can implement before fraud losses and customer churn erode your competitive position.</p>
 
-            <div class="cta-box">
-                <h3>Implement AI Fraud Detection</h3>
-                <p>See how I detect fraud in real-time with 99.6% accuracy while reducing false positives by 90%.</p>
-                <a href="/" class="cta-btn">Start Interactive Demo</a>
-            </div>
-
-            <h2 style="margin-top: 4rem;">Read Next</h2>
-            <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-                <a href="/finance/kyc-compliance.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">KYC Compliance →</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automate identity verification and compliance</p>
+            <h2 class="read-next">Continue Exploring Finance Compliance</h2>
+            <div class="cards">
+                <a href="/finance/transaction-monitoring.html" class="card">
+                    <h3>Transaction Monitoring</h3>
+                    <p>Real-time AML and sanctions screening with 85% fewer false positives.</p>
                 </a>
-                <a href="/finance/transaction-monitoring.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Transaction Monitoring →</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Real-time AML and sanctions screening</p>
+                <a href="/finance/kyc-compliance.html" class="card">
+                    <h3>KYC Compliance</h3>
+                    <p>Automated identity verification reducing onboarding from weeks to hours.</p>
+                </a>
+                <a href="/finance/regulatory-compliance.html" class="card">
+                    <h3>Regulatory Compliance</h3>
+                    <p>Automate BSA/AML and compliance reporting with 60% cost reduction.</p>
                 </a>
             </div>
         </article>
 
+        <!-- Enhanced Sidebar -->
         <aside>
             <div class="toc">
                 <h4>On This Page</h4>
                 <ul>
                     <li><a href="#problem">Rule-Based Detection Problems</a></li>
                     <li><a href="#how">How AI Detection Works</a></li>
-                    <li><a href="#types">Fraud Types Detected</a></li>
-                    <li><a href="#integration">System Integration</a></li>
-                    <li><a href="#roi">ROI Analysis</a></li>
+                    <li><a href="#roi">Performance & ROI</a></li>
                     <li><a href="#conclusion">Conclusion</a></li>
                 </ul>
             </div>
 
             <div class="related">
-                <h4>Related Topics</h4>
+                <h4>Related Capabilities</h4>
                 <ul>
-                    <li><a href="/finance/">← Finance Services Overview</a></li>
+                    <li><a href="/finance/">← Finance Overview</a></li>
                     <li><a href="/finance/kyc-compliance.html">KYC Compliance</a></li>
                     <li><a href="/finance/transaction-monitoring.html">Transaction Monitoring</a></li>
                     <li><a href="/finance/customer-onboarding.html">Customer Onboarding</a></li>
                     <li><a href="/finance/regulatory-compliance.html">Regulatory Compliance</a></li>
+                    <li><a href="/finance/cost-reduction.html">Cost Reduction</a></li>
                 </ul>
             </div>
         </aside>
     </main>
+
+    <!-- Footer with Shadow Content -->
+    <footer>
+        <div class="footer-shadow">
+            <h2>Real-Time Risk Orchestration: From Detection to Prevention</h2>
+            <p class="footer-shadow-intro">
+                Financial fraud detection has evolved from simple rule-based systems to sophisticated AI-powered behavioral analysis. The challenge banks face isn't detecting individual fraudulent transactions—it's detecting coordinated fraud rings, synthetic identities, and layered money laundering schemes while maintaining customer experience for legitimate transactions. This section explores the technical architecture of modern fraud detection, the regulatory framework around fraud prevention, and how Model Context Protocol (MCP) orchestration enables real-time fraud detection without centralizing sensitive transaction data.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Technical Analysis</button>
+
+            <div class="shadow-content" id="shadowContent">
+                <h3>Section 1: The Evolution of Fraud Detection Systems</h3>
+
+                <p>Traditional fraud detection systems operate on static rules: threshold-based alerts (transactions over $5,000), geographic anomalies (card used in different country), velocity checks (5+ transactions in 1 hour). These rules catch obvious fraud but generate 95-98% false positive rates because they can't distinguish between legitimate edge cases and actual fraud.</p>
+
+                <p>Machine learning fraud detection fundamentally changes the approach. Instead of rules, ML models learn behavioral baselines from historical data. A customer who regularly travels internationally and makes large purchases won't trigger false alerts. But a customer whose card suddenly appears in a foreign country with unusual purchase patterns (electronics, gift cards) triggers immediate investigation.</p>
+
+                <h4>The Behavioral Baseline Approach</h4>
+
+                <p>Every customer has a unique transaction fingerprint. Some customers make daily $5 coffee purchases and weekly $200 grocery runs. Others make infrequent large transactions (quarterly insurance premiums, annual vacations). Traditional rules treat all customers identically. ML models treat each customer individually.</p>
+
+                <p>When I analyze a transaction, I'm not asking "Is this transaction suspicious in general?" I'm asking "Is this transaction suspicious for this specific customer given their historical behavior?" This reduces false positives by 90% while improving fraud catch rates.</p>
+
+                <h3>Section 2: Synthetic Identity Fraud—The $6 Billion Problem</h3>
+
+                <p>Synthetic identity fraud is the fastest-growing financial crime in America. Fraudsters combine real Social Security Numbers (often from children or deceased individuals) with fake names, addresses, and dates of birth to create "synthetic identities." These identities pass KYC verification because the SSN is real. They build credit slowly (small purchases, on-time payments) to avoid suspicion. After 12-18 months, they "bust out"—max out all credit lines and disappear.</p>
+
+                <p><strong>Why traditional fraud detection fails:</strong></p>
+                <ul>
+                    <li>Each individual transaction looks normal (within credit limit, normal merchant types)</li>
+                    <li>Payment history is clean until bust-out occurs</li>
+                    <li>Identity verification passes because SSN is real</li>
+                    <li>By the time fraud is detected, the average loss is $15,000 per synthetic identity</li>
+                </ul>
+
+                <h4>AI Detection of Synthetic Identities</h4>
+
+                <p>I detect synthetic identities by analyzing patterns that humans can't see:</p>
+
+                <ul>
+                    <li><strong>SSN age mismatch:</strong> Applicant claims age 35 but SSN was issued 5 years ago</li>
+                    <li><strong>Lack of corroborating records:</strong> Name/address has no utility bills, employment history, or previous addresses in public records</li>
+                    <li><strong>Network analysis:</strong> Multiple applications with similar patterns (same bank, same timeframe, similar credit building behavior) suggest organized fraud ring</li>
+                    <li><strong>Credit building patterns:</strong> Account shows textbook bust-out pattern (12 months perfect payments → sudden max utilization → default)</li>
+                </ul>
+
+                <p>By flagging high-risk applications before account opening, synthetic identity fraud is prevented upfront rather than discovered after losses are realized.</p>
+
+                <h3>Section 3: MCP Orchestration for Fraud Detection</h3>
+
+                <p>Traditional fraud detection platforms centralize transaction data: every transaction is uploaded to the vendor's system for analysis. This creates security risk (vendor breach exposes all transaction history) and data retention concerns (vendors store transaction data indefinitely for "model training").</p>
+
+                <p>MCP orchestration implements fraud detection differently. When a transaction occurs:</p>
+
+                <ol>
+                    <li><strong>Transaction notification:</strong> Your authorization system notifies me of pending transaction (amount, merchant, card, customer ID)</li>
+                    <li><strong>Ephemeral session:</strong> I establish encrypted read-only connection to your customer database</li>
+                    <li><strong>Behavioral analysis:</strong> I query customer's historical transactions (last 90 days), calculate behavioral baseline, score current transaction for fraud risk</li>
+                    <li><strong>Decision return:</strong> I return fraud score + recommendation (approve/decline/review) to your authorization system</li>
+                    <li><strong>Session closure:</strong> Encrypted connection closes, all transaction data discarded from volatile memory, zero retention</li>
+                </ol>
+
+                <p>The entire process occurs in milliseconds. No customer data leaves your infrastructure. No transaction history is centralized in vendor databases. Audit logs remain in your systems showing fraud analysis was performed and what decision was made.</p>
+
+                <h4>Technical Advantages</h4>
+
+                <p><strong>1. Real-time analysis:</strong> Traditional batch processing may analyze transactions hours after they occur. Orchestration analyzes transactions before authorization completes—enabling blocking of high-risk transactions before they settle.</p>
+
+                <p><strong>2. Zero data retention:</strong> No customer transaction history is retained in orchestration layer. Only permanent records are audit logs in your authorization system.</p>
+
+                <p><strong>3. Regulatory compliance:</strong> When regulators ask "How do you detect fraud?" you demonstrate analysis occurs within your controlled infrastructure, not outsourced to third-party vendors with unclear data handling practices.</p>
+
+                <h3>Section 4: Network Analysis & Coordinated Fraud Detection</h3>
+
+                <p>Individual transaction analysis catches account takeovers and cardholder fraud. But sophisticated fraud operations involve coordinated attacks across multiple accounts:</p>
+
+                <p><strong>Card testing attacks:</strong> Fraudster has database of 10,000 stolen card numbers but doesn't know which are active. They test cards with $1 transactions at e-commerce merchant. Rule-based systems ignore these (amounts too small). I detect pattern: same merchant, hundreds of unique cards, short time window, same device fingerprint → flag merchant and all cards for investigation.</p>
+
+                <p><strong>Money mule networks:</strong> Fraudster opens 20 accounts using synthetic identities, receives fraudulent wire transfers, immediately withdraws cash. Individual accounts look normal. Network analysis reveals connections: all accounts opened same week, same bank branch, similar deposit patterns, rapid withdrawal cycles → flag entire network for investigation.</p>
+
+                <p>This is where orchestration excels. I can analyze patterns across thousands of accounts simultaneously without centralizing data—each ephemeral session queries specific customer records, aggregates patterns in-memory, and discards data after analysis completes.</p>
+
+                <h3>Section 5: The Customer Experience Advantage</h3>
+
+                <p>Fraud detection's dirty secret: most "fraud prevention" actually prevents legitimate transactions. When customers experience false declines, 32% switch to competitors within 90 days (Javelin Strategy 2024). This means aggressive fraud prevention can cost more in lost customers than it saves in prevented fraud.</p>
+
+                <p>AI fraud detection solves this paradox. By modeling each customer's unique behavior, I reduce false positives by 90%. A business traveler making international purchases doesn't trigger false alerts. A college student making first-time large purchase (textbooks) doesn't get declined. But an account takeover—where fraudster uses stolen credentials to make uncharacteristic purchases—triggers immediate investigation.</p>
+
+                <p>The result: better fraud detection and better customer experience simultaneously. This is the competitive advantage of orchestration-based fraud detection.</p>
+
+                <h3>Conclusion: Orchestration as Fraud Prevention Foundation</h3>
+
+                <p>The financial services industry is moving from reactive fraud detection (investigating fraud after it occurs) to proactive fraud prevention (blocking fraud before losses are realized). This requires real-time behavioral analysis, network pattern recognition, and synthetic identity detection—all without centralizing customer data in vendor platforms.</p>
+
+                <p>MCP orchestration makes this possible. Banks implementing orchestration-based fraud detection reduce fraud losses by 10x, cut false positives by 90%, and retain customers who would otherwise defect due to false declines. That's not incremental improvement—it's transformation.</p>
+            </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Finance Topics</h4>
+                <ul>
+                    <li><a href="/finance/kyc-compliance.html">KYC Compliance</a></li>
+                    <li><a href="/finance/customer-onboarding.html">Customer Onboarding</a></li>
+                    <li><a href="/finance/fraud-detection.html">Fraud Detection</a></li>
+                    <li><a href="/finance/transaction-monitoring.html">Transaction Monitoring</a></li>
+                    <li><a href="/finance/regulatory-compliance.html">Regulatory Compliance</a></li>
+                    <li><a href="/finance/cost-reduction.html">Cost Reduction</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/platform/mcp-protocol.html">MCP Protocol</a></li>
+                    <li><a href="/platform/reasoning-engine.html">Reasoning Engine</a></li>
+                    <li><a href="/platform/risk-orchestration.html">Risk Orchestration</a></li>
+                    <li><a href="/platform/security.html">Security Architecture</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/compliance-reports.html">Compliance Reports</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about/">About Claire</a></li>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Industry Switcher -->
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+    <!-- Claire Dock Component -->
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">
+            C
+        </div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">
+                    I'm Claire, your AI compliance orchestrator. Real-time fraud detection with 99.6% accuracy—detecting synthetic identity fraud, account takeovers, and coordinated fraud rings while reducing false positives by 90%. See how orchestration transforms fraud prevention.
+                </p>
+                <a href="/finance/kyc-compliance.html" class="dock-cta">Execute KYC Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDock() {
+            const panel = document.getElementById('dockPanel');
+            panel.classList.toggle('open');
+        }
+
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Technical Analysis'
+                : 'Read Full Technical Analysis';
+        }
+
+        // Close dock when clicking outside
+        document.addEventListener('click', function(event) {
+            const dock = document.querySelector('.claire-dock');
+            const panel = document.getElementById('dockPanel');
+            if (!dock.contains(event.target) && panel.classList.contains('open')) {
+                panel.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>

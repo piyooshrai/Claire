@@ -1,525 +1,1185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-industry="legal">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automated Timekeeping and Billing for Law Firms | Claire AI</title>
+    <title>Automated Timekeeping and Billing for Law Firms | Claire AI for Legal</title>
     <meta name="description" content="Automated legal timekeeping and billing: time tracking, billing rate enforcement, invoice generation, collections automation for law firms.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --text-secondary: #6b7280; --accent: #7c3aed; --border: #e9d5ff; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
-        nav a { color: var(--text-primary); text-decoration: none; }
-        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; }
-        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
-        article { max-width: 800px; }
-        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
-        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
-        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
-        p { margin-bottom: 1.5rem; }
-        strong { font-weight: 600; }
-        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
-        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.5rem; }
-        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
-        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
-        .cta-btn:hover { background: var(--accent); color: white; }
-        aside { position: sticky; top: 6rem; height: fit-content; }
-        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
-        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
-        .toc ul, .related ul { list-style: none; }
-        .toc li, .related li { margin-bottom: 0.75rem; }
-        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
-        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
+
+        /* Industry-specific color system */
+        :root {
+            --bg-primary: #faf5ff;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e1b4b;
+            --text-secondary: #6b7280;
+            --accent: #7c3aed;
+            --accent-light: #a78bfa;
+            --border: #e9d5ff;
+            --shadow: rgba(124, 58, 237, 0.1);
+        }
+
+        /* Breathing gradient background animation */
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%);
+            background-size: 200% 200%;
+            animation: breathe 15s ease infinite;
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        /* Breathing grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        /* Ensure content is above grid */
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Orchestrator Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Main content container */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 850px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Dramatic typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 4rem 0 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+
+        h3 {
+            font-size: 1.625rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Stat callout boxes */
+        .stat-callout {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .stat-context {
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Highlighted box */
+        .highlight-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box h4 {
+            color: var(--accent);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Conversation blocks */
+        blockquote {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        blockquote strong {
+            color: var(--accent);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* CTA box */
+        .cta-box {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Read Next cards */
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
+            margin-top: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 8rem;
+            height: fit-content;
+        }
+
+        .toc, .related {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .toc h4, .related h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .toc ul, .related ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li, .related li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a, .related a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc a:hover, .related a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer with shadow content */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+        }
+
+        .footer-shadow {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .industry-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .industry-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+        }
+
+        .dock-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .dock-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .dock-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px var(--shadow);
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .dock-panel.open {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dock-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dock-header h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .dock-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dock-body {
+            padding: 1.5rem;
+        }
+
+        .dock-message {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .dock-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .dock-cta:hover {
+            background: var(--accent-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .stat-value {
+                font-size: 3rem;
+            }
+
+            .footer-nav {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-<body>
-    <nav><a href="/">CLAIRE // LEGAL</a></nav>
+<body data-industry="legal">
+    <!-- Orchestrator Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">
+                CLAIRE <span>//</span> PARALEGAL ORCHESTRATOR
+            </div>
+            <div class="nav-links">
+                <a href="/legal/#case-experience">Case Experience</a>
+                <a href="/legal/#skillset">Skillset</a>
+                <a href="/legal/#privilege-security">Privilege & Security</a>
+                <a href="/legal/#billable-efficiency">Billable Efficiency</a>
+                <a href="/legal/intake-reasoning-demo.html" class="nav-cta">Execute Intake Demo</a>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <article>
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/legal/">Legal</a> / Billing & Timekeeping
+                <a href="/">Home</a> <span>/</span> <a href="/legal/">Legal</a> <span>/</span> Billing & Timekeeping Orchestration
             </div>
 
-            <h1>Automated Timekeeping and Billing for Law Firms</h1>
+            <h1>Automated Timekeeping & Billing: 24/7 Revenue Capture</h1>
 
-    <p>Law firms lose 10-15% of billable time due to inadequate time capture (Clio Legal Trends Report 2024). Attorneys forget to log time entries, underestimate hours worked, or write off time because they can't remember what they did three days ago. This revenue leakage compounds: a $2M firm loses $200K-$300K annually to poor timekeeping. For sole practitioners and small firms, this leakage can mean the difference between profitability and barely breaking even.</p>
+            <p class="intro">Law firms lose 10-15% of billable time due to inadequate time capture. Attorneys forget to log entries, underestimate hours, or write off time because they can't remember what they did three days ago. This revenue leakage compounds: a $2M firm loses $200K-$300K annually to poor timekeeping. For sole practitioners and small firms, this leakage means the difference between profitability and barely breaking even.</p>
 
-    <p>The problem isn't attorney laziness—it's that manual time entry interrupts workflow at the worst possible moments. You're drafting a critical motion, in flow state, making progress. Then you remember: "I need to log time from yesterday." You stop, open your practice management system, try to remember what you did, estimate duration, write a description, and assign it to the correct matter. By the time you return to the motion, you've lost your train of thought. That interruption cost you 15-20 minutes of productivity—plus the 5 minutes spent on time entry itself.</p>
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">$450K</div>
+                <div class="stat-label">Annual unbilled hours in typical 10-attorney firm</div>
+                <div class="stat-context">
+                    10% time leakage × 15,000 billable hours target = 1,500 unbilled hours annually. At $300/hour blended rate = $450,000 in lost revenue that walks out the door because time entry gets deferred until it's forgotten. This is pure profit loss, not from unpaid invoices but from failing to capture time that was worked.
+                </div>
+            </div>
 
-    <p>The solution isn't better discipline or more reminders. It's automation: passive time capture that runs in the background without requiring conscious effort, combined with intelligent prompting that suggests time entries at natural break points rather than interrupting focus work.</p>
+            <p>The problem isn't attorney laziness—it's that manual time entry interrupts workflow at the worst possible moments. You're drafting a critical motion, in flow state, making progress. Then you remember: "I need to log time from yesterday." You stop, open your practice management system, try to remember what you did, estimate duration, write a description, and assign it to the correct matter. By the time you return to the motion, you've lost your train of thought. That interruption costs 15-20 minutes of productivity—plus the 5 minutes spent on time entry itself.</p>
 
-    <h2 id="problem">The Time Capture Problem</h2>
+            <p>The solution isn't better discipline or more reminders. It's automation: passive time capture that runs in the background without requiring conscious effort, combined with intelligent prompting that suggests time entries at natural break points rather than interrupting focus work.</p>
 
-    <p>Manual time entry requires attorneys to stop work, recall what they just did, estimate duration, select the correct matter and activity code, and write a description. This interruption breaks flow and often gets deferred until end-of-day—when memory of specific tasks is hazy and accuracy suffers.</p>
+            <h2 id="passive-capture">Passive Time Capture: Email, Documents, Calendars</h2>
 
-    <p>Research shows that <strong>contemporary time entry</strong> (logging time immediately after completing a task) is 23% more accurate than <strong>reconstructed time entry</strong> (remembering and logging time hours or days later). But contemporary entry comes at a cost: constant workflow interruption and loss of focus.</p>
+            <p>I capture billable time automatically across all your workflow touchpoints without requiring manual data entry:</p>
 
-    <p>The typical attorney day involves:</p>
-    <ul>
-        <li>Reading and responding to 30-50 emails (10-15 of which are billable client communications)</li>
-        <li>Working on 5-8 different matters</li>
-        <li>Attending 2-4 meetings, calls, or court appearances</li>
-        <li>Drafting or reviewing 3-5 documents</li>
-        <li>Conducting legal research for 1-2 matters</li>
-    </ul>
+            <h3>Email Time Tracking</h3>
 
-    <p>Each of these activities requires a separate time entry. If you're manually logging time, that's 20-30 time entries per day—each requiring 2-3 minutes of administrative work. That's 40-90 minutes daily spent on time entry instead of billable work.</p>
+            <p>When you send an email related to a client matter, I automatically create a draft time entry. No interruption—I handle it silently in the background.</p>
 
-    <p>I solve this through passive monitoring and intelligent prompting:</p>
+            <blockquote>
+                <strong>Example:</strong><br>
+                You email opposing counsel: "Re: Smith v. Johnson - Discovery Extension Request"<br>
+                <strong>I create automatically:</strong> 0.2 hours | Email to opposing counsel re: discovery extension | Matter: Smith v. Johnson | Activity Code: Correspondence<br>
+                <strong>You approve in one click later.</strong>
+            </blockquote>
 
-    <h3>Email Time Tracking</h3>
+            <p>For email threads (multiple back-and-forth messages), I intelligently aggregate time rather than creating separate entries for each message. If you exchange 5 emails over 30 minutes negotiating a settlement term, I create one entry: "0.5 hours, Settlement negotiations via email with opposing counsel."</p>
 
-    <p>When you send an email related to a client matter (detected by email subject, recipient, or content analysis), I automatically create a draft time entry:</p>
+            <h3>Document Work Tracking</h3>
 
-    <p><strong>Example:</strong><br>
-    You email opposing counsel: "Re: Smith v. Johnson - Discovery Extension Request"<br>
-    <strong>I create:</strong> 0.2 hours | Email to opposing counsel re: discovery extension | Matter: Smith v. Johnson | Activity Code: Correspondence<br>
-    <strong>You approve in one click.</strong></p>
+            <p>When you work on a document in your document management system (iManage, NetDocuments, or network drive), I track time spent and create entries automatically:</p>
 
-    <p>For email threads (multiple back-and-forth messages), I intelligently aggregate time rather than creating separate entries for each message. If you exchange 5 emails over 30 minutes negotiating a settlement term, I create one entry: "0.5 hours, Settlement negotiations via email with opposing counsel."</p>
+            <blockquote>
+                <strong>Example:</strong><br>
+                You open "Motion for Summary Judgment - Smith v. Johnson.docx" at 10:00 AM<br>
+                You work on it until 11:20 AM (1 hour 20 minutes)<br>
+                <strong>I create:</strong> 1.3 hours | Draft motion for summary judgment | Matter: Smith v. Johnson | Activity Code: Pleadings<br>
+                <strong>You review and approve.</strong>
+            </blockquote>
 
-    <h3>Document Work Tracking</h3>
+            <p>I automatically assign activity codes based on document type and file location. A document in the "Pleadings" folder gets activity code "Pleadings." A document in "Discovery/Responses" gets activity code "Discovery." This eliminates tedious dropdown selection.</p>
 
-    <p>When you work on a document in your document management system (iManage, NetDocuments, or network drive integrated with our system), I track the time spent and create entries:</p>
+            <h3>Calendar-Based Entries</h3>
 
-    <p><strong>Example:</strong><br>
-    You open "Motion for Summary Judgment - Smith v. Johnson.docx" at 10:00 AM<br>
-    You work on it until 11:20 AM (1 hour 20 minutes)<br>
-    <strong>I create:</strong> 1.3 hours | Draft motion for summary judgment | Matter: Smith v. Johnson | Activity Code: Pleadings<br>
-    <strong>You review and approve.</strong></p>
+            <p>After a client meeting, court appearance, or deposition on your calendar, I prompt intelligently:</p>
 
-    <p>I automatically assign activity codes based on document type and file location. A document in the "Pleadings" folder gets activity code "Pleadings." A document in "Discovery/Responses" gets activity code "Discovery." This eliminates the tedious dropdown selection process.</p>
+            <blockquote>
+                <strong>Example:</strong><br>
+                Your calendar shows: "Smith Deposition, 9:00 AM - 12:00 PM"<br>
+                At 12:05 PM, I prompt: "Log time for Smith deposition (3 hours scheduled). Actual time spent?"<br>
+                <strong>You respond:</strong> "3.5 hours" (accounting for 30 min prep before, 15 min debrief after)<br>
+                <strong>I create:</strong> 3.5 hours | Attend deposition of plaintiff | Matter: Smith v. Johnson | Activity Code: Deposition
+            </blockquote>
 
-    <h3>Calendar-Based Entries</h3>
+            <p>This catches time that would otherwise be lost—the prep before and debrief after that attorneys typically don't log.</p>
 
-    <p>After a client meeting, court appearance, or deposition on your calendar, I prompt:</p>
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">2% time leakage</div>
+                <div class="stat-label">With passive capture vs 10% without</div>
+                <div class="stat-context">
+                    Passive automated capture reduces unbilled hours from 1,500 to 300 annually. That's 1,200 recovered hours × $300 = $360,000 in recovered revenue per year. Most firms only need one additional $360K-$450K in revenue annually to justify my cost 7-10x over.
+                </div>
+            </div>
 
-    <p><strong>Example:</strong><br>
-    Your calendar shows: "Smith Deposition, 9:00 AM - 12:00 PM"<br>
-    At 12:05 PM, I prompt: "Log time for Smith deposition (3 hours scheduled). Actual time spent?"<br>
-    <strong>You respond:</strong> "3.5 hours" (accounting for prep time before and debrief after)<br>
-    <strong>I create:</strong> 3.5 hours | Attend deposition of plaintiff | Matter: Smith v. Johnson | Activity Code: Deposition<br></p>
+            <h2 id="billing-automation">Automated Invoice Generation & Collections</h2>
 
-    <p>This catches time that would otherwise be lost—the 30 minutes before the deposition reviewing your outline, the 15 minutes after debriefing with co-counsel.</p>
+            <p>Manual invoice generation is time-consuming and error-prone. At month-end, paralegals spend hours pulling reports, verifying entries, calculating totals, and formatting invoices. For a 10-attorney firm, this is 20-30 hours monthly of paralegal time.</p>
 
-    <h3>Legal Research Tracking</h3>
+            <p>I generate invoices automatically on your billing schedule (monthly, milestone, upon completion):</p>
 
-    <p>When you conduct legal research using Westlaw, LexisNexis, or other platforms, I track your research session time:</p>
+            <h3>The Automated Workflow</h3>
 
-    <p><strong>Example:</strong><br>
-    You search Westlaw for cases on summary judgment standard in employment discrimination cases<br>
-    Research session: 45 minutes<br>
-    <strong>I create:</strong> 0.75 hours | Legal research re: summary judgment standard for discrimination claims | Matter: Smith v. Johnson | Activity Code: Legal Research<br></p>
+            <p><strong>Step 1: Pull Unbilled Time & Expenses</strong><br>
+            On your designated billing day, I query for:</p>
+            <ul>
+                <li>All time entries marked "billable" but not yet invoiced</li>
+                <li>All expenses entered but not yet billed (court filing fees, deposition costs, expert witness fees)</li>
+                <li>Matter billing status (hourly, flat fee, contingency, or hybrid)</li>
+            </ul>
 
-    <p>I detect which matter you're researching based on open documents, calendar appointments, or I simply ask: "Which matter is this research for?"</p>
+            <p><strong>Step 2: Apply Rate Tables & Calculations</strong><br>
+            For hourly matters, I apply attorney-specific billing rates (or client-specific negotiated rates if applicable), calculate subtotals by attorney and task category, add expenses with correct markup, calculate total fees.</p>
 
-    <h3>Intelligent Prompting at Natural Break Points</h3>
+            <p><strong>Step 3: Trust Retainer Draw-Down</strong><br>
+            If the client has a trust retainer, I apply the invoice amount against retainer balance, update the balance, and flag if retainer drops below threshold.</p>
 
-    <p>I don't interrupt focus work. Instead, I prompt for time approval at natural break points:</p>
-    <ul>
-        <li>After you close a document (not while actively editing)</li>
-        <li>After a calendar event ends</li>
-        <li>When you switch from one matter to another</li>
-        <li>At end of day (as a catch-all for any missed entries)</li>
-    </ul>
+            <p><strong>Step 4-6: Generate, Route for Approval, Send</strong><br>
+            I generate PDF invoices using your firm's template, send to responsible attorney for review, and upon approval, automatically email to client, upload to portal, and create accounts receivable record.</p>
 
-    <p>You review a list of suggested time entries, approve with one click, adjust any that need changes (duration or description), and continue working. Total time: 30-60 seconds instead of 40-90 minutes.</p>
+            <p><strong>Total time from "generate" to sent: 30-60 seconds per invoice</strong> (compared to 30-60 minutes manually).</p>
 
-    <h2 id="rates">Billing Rate Enforcement & Realization</h2>
+            <h3>Automated Collections Workflow</h3>
 
-    <p>Billing rate errors are surprisingly common in manual systems: associates billed at partner rates, partners doing paralegal work billed at partner rates (when it should be billed at paralegal rates), or custom client rates not applied correctly. These errors either cost the firm money (when caught and written down) or damage client relationships (when not caught and clients dispute invoices).</p>
+            <p>I send reminder emails at strategic intervals based on payment terms:</p>
+            <ul>
+                <li><strong>Day 0:</strong> Invoice sent with payment instructions</li>
+                <li><strong>Day 7:</strong> Friendly reminder with payment status</li>
+                <li><strong>Day 23:</strong> Courtesy reminder (one week before due date)</li>
+                <li><strong>Day 30:</strong> Due date notice</li>
+                <li><strong>Day 37:</strong> Overdue notice (7 days overdue)</li>
+                <li><strong>Day 45:</strong> Escalation to responsible attorney</li>
+                <li><strong>Day 60:</strong> Final notice before suspension or collections referral</li>
+            </ul>
+
+            <p>These reminders are automatically generated but customizable based on client relationships. Long-term clients with excellent payment history get fewer reminders with more lenient tone. New clients or those with past payment issues get more frequent, firmer reminders.</p>
+
+            <h2 id="realization">Rate Enforcement & Realization Rate Improvement</h2>
+
+            <p>Realization rate (amount collected ÷ amount billed) directly impacts firm profitability. Industry average: 85-90%. I improve realization through:</p>
+
+            <h3>Automatic Rate Application</h3>
+
+            <p>I enforce billing rate rules automatically based on configurable rules. No manual rate selection required. When you approve a time entry, I pull your role and apply correct rate (partner, senior associate, junior associate, paralegal).</p>
+
+            <p>For client-specific rate agreements ("Partner rate $450 not $500"), I automatically apply negotiated rates and track write-downs separately from attorney errors.</p>
+
+            <h3>Budget Alerts for Flat Fee Matters</h3>
+
+            <p>For alternative fee arrangements, I track time against budgeted hours:</p>
+
+            <blockquote>
+                <strong>Example:</strong><br>
+                Matter: Employment contract review<br>
+                Flat fee: $2,500 (estimated 10 hours)<br>
+                Hours logged to date: 8.5 hours<br>
+                <strong>Alert to partner:</strong> "Smith matter has consumed 85% of budgeted hours (8.5 of 10). Remaining budget: 1.5 hours."
+            </blockquote>
+
+            <p>This prevents scope creep from silently eroding profitability. Partner can complete work within budget, request additional fees, or accept reduced profitability with eyes open.</p>
+
+            <h3>Write-Down Prevention</h3>
+
+            <p>I flag time entries that exceed reasonable expectations before invoicing:</p>
+            <ul>
+                <li>"10 hours to draft simple complaint" — Comparable complaints average 3-4 hours. Flag for review.</li>
+                <li>"0.1 hours for client meeting" — Meeting was scheduled for 1 hour. Likely data entry error.</li>
+                <li>"5.5 hours legal research" on a $5,000 contract dispute — Research exceeds likely matter value. Consider write-down.</li>
+            </ul>
+
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">92% realization</div>
+                <div class="stat-label">With orchestration vs 87% industry average</div>
+                <div class="stat-context">
+                    5-point improvement × $2M in billings = $100,000 in additional collected revenue annually. This comes from better time descriptions, rate enforcement, and proactive write-down prevention. On a $2M-$5M firm, this is transformational—adds $100K-$250K annually.
+                </div>
+            </div>
+
+            <h2 id="roi">ROI: Complete Financial Picture</h2>
+
+            <p>Adding it all together for a 10-attorney firm:</p>
+
+            <h3>Direct Benefits</h3>
+            <ul>
+                <li>Recovered billable time (reduced leakage 10% → 2%): $360,000</li>
+                <li>Improved realization rates (87% → 92%): $100,000</li>
+                <li>Faster cash flow (31 days vs 40 days): $60,000 working capital improvement</li>
+                <li>Billing staff labor savings: $16,000</li>
+                <li>Attorney time freed from manual time entry: $300,000</li>
+            </ul>
+
+            <p><strong>Total Annual Benefit: $836,000</strong></p>
+
+            <p><strong>Claire Professional Tier Cost: $48,000/year</strong></p>
+
+            <p><strong>Net Benefit: $788,000</strong></p>
+
+            <p><strong>ROI: 1,642%</strong></p>
+
+            <h2 id="conclusion">Conclusion: Passive Capture is Revenue Multiplication</h2>
+
+            <p>The math is stark: law firms are bleeding hundreds of thousands of dollars annually through poor timekeeping and slow billing cycles. Automation captures this lost revenue passively—attorneys don't need to change behavior, just approve suggested entries at natural break points. This is the future of law firm economics.</p>
+
+            <div class="cta-box">
+                <h3>Interview Claire for Your Firm</h3>
+                <p>See how I automate time capture, billing, and collections while preserving attorney focus.</p>
+                <a href="/" class="cta-btn">Execute Timekeeping Demo</a>
+            </div>
+
+            <!-- Read Next Section -->
+            <div class="read-next">
+                <h2>Continue the Interview</h2>
+                <div class="cards">
+                    <a href="/legal/client-intake.html" class="card">
+                        <h3>Client Intake Orchestration</h3>
+                        <p>24/7 lead capture, qualification, and engagement automation from first contact.</p>
+                    </a>
+                    <a href="/legal/confidentiality-security.html" class="card">
+                        <h3>Privilege & Security</h3>
+                        <p>How I maintain attorney-client privilege through ephemeral data architecture.</p>
+                    </a>
+                    <a href="/legal/roi-calculator.html" class="card">
+                        <h3>ROI Calculator</h3>
+                        <p>Calculate your specific savings and ROI based on firm size and practice areas.</p>
+                    </a>
+                </div>
+            </div>
+        </article>
 
-    <p>I enforce billing rate rules automatically based on configurable rules:</p>
+        <!-- Enhanced Sidebar -->
+        <aside>
+            <div class="toc">
+                <h4>On This Page</h4>
+                <ul>
+                    <li><a href="#passive-capture">Passive Time Capture</a></li>
+                    <li><a href="#billing-automation">Invoice Generation</a></li>
+                    <li><a href="#realization">Rate Enforcement</a></li>
+                    <li><a href="#roi">ROI Analysis</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </div>
 
-    <h3>Standard Rate Tables</h3>
-
-    <p>You configure your firm's standard rate card:</p>
-    <ul>
-        <li>Partner: $500/hour</li>
-        <li>Senior Associate (5+ years): $350/hour</li>
-        <li>Junior Associate (0-4 years): $250/hour</li>
-        <li>Paralegal: $150/hour</li>
-        <li>Legal Assistant: $100/hour</li>
-    </ul>
-
-    <p>I automatically apply the correct rate based on who performed the work. When you approve a time entry, I pull your role from the practice management system and apply your rate. No manual rate selection required.</p>
-
-    <h3>Client-Specific Rate Agreements</h3>
-
-    <p>Many clients negotiate custom rates below standard: "We'll pay partner rate of $450 (not $500), senior associate $300 (not $350)." I store these client-specific rate agreements and automatically apply them when generating invoices.</p>
-
-    <p><strong>Example:</strong><br>
-    Partner works 5 hours on Matter ABC (standard rate: $500/hour = $2,500)<br>
-    Client ABC has negotiated rate: $450/hour<br>
-    <strong>Invoice shows:</strong> $2,250 (automatically adjusted)<br>
-    <strong>Firm tracks write-down:</strong> $250 attributed to rate discount (not attorney error)</p>
-
-    <p>This distinction matters for compensation and performance reviews. A $250 write-down due to negotiated client rates shouldn't count against the partner's realization metrics.</p>
-
-    <h3>Task-Based Billing & Budget Alerts</h3>
-
-    <p>For alternative fee arrangements (AFAs) and flat-fee matters, I track time against budgeted hours and alert when approaching limits:</p>
-
-    <p><strong>Example:</strong><br>
-    Matter: Employment contract review<br>
-    Flat fee: $2,500 (estimated 10 hours at $250/hour blended rate)<br>
-    Hours logged to date: 8.5 hours<br>
-    <strong>Alert to partner:</strong> "Smith Employment Contract matter has consumed 85% of budgeted hours (8.5 of 10 hours). Remaining budget: 1.5 hours."</p>
-
-    <p>This prevents scope creep from silently eroding profitability. The partner can either: (1) complete the work within budget, (2) request additional fees from the client for expanded scope, or (3) accept reduced profitability with eyes open.</p>
-
-    <h3>Write-Down Prevention & Quality Control</h3>
-
-    <p>I flag time entries that exceed reasonable expectations before invoicing, allowing attorneys to revise proactively:</p>
-
-    <p><strong>Example flags:</strong></p>
-    <ul>
-        <li>"10 hours to draft simple complaint" — Comparable complaints in your system average 3-4 hours. Flag for partner review.</li>
-        <li>"0.1 hours for client meeting" — Meeting on calendar was scheduled for 1 hour. Likely data entry error.</li>
-        <li>"5.5 hours legal research re: contract interpretation" on a $5,000 contract dispute — Research time exceeds likely matter value. Consider write-down.</li>
-    </ul>
-
-    <p>These flags appear during the monthly invoice review process, before clients see the bills. Partners can revise descriptions, adjust hours, or provide explanations ("Research required due to novel AI contract provisions—discussed with client who approved additional research time").</p>
-
-    <h3>Realization Rate Tracking</h3>
-
-    <p>I calculate realization rates at multiple levels:</p>
-    <ul>
-        <li><strong>Attorney-level:</strong> How much does each attorney bill vs. collect? (Partner A: 95% realization. Associate B: 78% realization due to frequent write-downs for inefficiency.)</li>
-        <li><strong>Matter-level:</strong> Which matters are profitable vs. loss-leaders? (Smith v. Johnson: 102% realization due to premium billing. Jones Estate: 65% realization due to scope creep.)</li>
-        <li><strong>Practice area-level:</strong> Which practice areas are most profitable? (Employment litigation: 92% realization. Estate planning: 88% realization.)</li>
-        <li><strong>Client-level:</strong> Which clients pay vs. dispute bills? (Client ABC: 98% realization, always pays promptly. Client XYZ: 75% realization, frequent disputes.)</li>
-    </ul>
-
-    <p>These analytics inform strategic decisions: which attorneys need training, which matters to decline, which practice areas to emphasize, which clients to fire.</p>
-
-    <h2 id="invoices">Automated Invoice Generation</h2>
-
-    <p>Manual invoice generation is a time-consuming, error-prone process. At month-end, paralegals or billing coordinators spend hours pulling reports, verifying time entries, calculating totals, formatting invoices, and routing for attorney approval. For a 10-attorney firm with 50 active matters, this process consumes 20-30 hours of staff time monthly.</p>
-
-    <p>I generate invoices automatically based on your billing cycle (monthly, milestone, upon completion):</p>
-
-    <h3>The Automated Workflow</h3>
-
-    <p><strong>Step 1: Pull Unbilled Time & Expenses</strong><br>
-    On the designated billing day (e.g., last day of month), I query your practice management system for:</p>
-    <ul>
-        <li>All time entries marked "billable" but not yet invoiced</li>
-        <li>All expenses entered but not yet billed (court filing fees, deposition costs, expert witness fees, travel expenses)</li>
-        <li>Matter billing status (is this an hourly matter, flat fee, contingency, or hybrid?)</li>
-    </ul>
-
-    <p><strong>Step 2: Apply Rate Tables & Calculations</strong><br>
-    For hourly matters:</p>
-    <ul>
-        <li>Apply attorney-specific billing rates (or client-specific negotiated rates if applicable)</li>
-        <li>Calculate subtotals by attorney and by task category</li>
-        <li>Add expenses at cost or with markup (per client agreement)</li>
-        <li>Calculate total fees</li>
-    </ul>
-
-    <p>For flat-fee matters:</p>
-    <ul>
-        <li>Check milestone completion status ("Has discovery been completed? Then bill Milestone 2: $5,000.")</li>
-        <li>Track internal time against budget (for profitability analysis, not client billing)</li>
-    </ul>
-
-    <p><strong>Step 3: Trust Retainer Draw-Down</strong><br>
-    If the client has a trust retainer on file:</p>
-    <ul>
-        <li>Apply invoice amount against retainer balance</li>
-        <li>Update retainer balance</li>
-        <li>If retainer drops below threshold (e.g., $5,000), flag for replenishment request</li>
-    </ul>
-
-    <p><strong>Step 4: Generate Formatted Invoice</strong><br>
-    Using your firm's template (letterhead, format, terms), I generate:</p>
-    <ul>
-        <li><strong>PDF invoices</strong> for standard clients (formatted for email or postal mail)</li>
-        <li><strong>LEDES format</strong> for corporate clients requiring standardized electronic billing</li>
-        <li><strong>Custom formats</strong> for clients with specific requirements (e.g., government agencies with specialized invoice requirements)</li>
-    </ul>
-
-    <p><strong>Step 5: Route for Attorney Approval</strong><br>
-    I send draft invoices to the responsible attorney for review:</p>
-    <ul>
-        <li>Attorney reviews time entries for accuracy</li>
-        <li>Attorney may adjust descriptions, write down hours, or add narrative explanations</li>
-        <li>Attorney approves (one click)</li>
-    </ul>
-
-    <p><strong>Step 6: Send to Client</strong><br>
-    Upon approval, I automatically:</p>
-    <ul>
-        <li>Email PDF invoice to client billing contact</li>
-        <li>Upload to client portal (if your firm uses one)</li>
-        <li>Create accounts receivable record in your accounting system</li>
-        <li>Mark all time entries and expenses as "billed" (preventing double-billing)</li>
-    </ul>
-
-    <p><strong>Total time from "generate" to sent: 30-60 seconds per invoice</strong> (compared to 30-60 minutes for manual invoicing).</p>
-
-    <h3>Invoice Customization & Narrative</h3>
-
-    <p>Invoices aren't just line items—they're communication tools that justify your fees. I support customization:</p>
-
-    <ul>
-        <li><strong>Narrative descriptions:</strong> "This month we completed discovery, including three depositions, review of 5,000 pages of documents, and drafting of summary judgment motion. We are well-positioned for favorable resolution."</li>
-        <li><strong>Value explanations:</strong> "The research we conducted identified a procedural defect in opposing counsel's motion, which resulted in dismissal and saved you an estimated $50,000 in expert witness costs."</li>
-        <li><strong>Phase-based summaries:</strong> Group time entries by litigation phase (Pleadings: $5,000, Discovery: $12,000, Motions: $8,000) rather than chronological listing.</li>
-    </ul>
-
-    <p>These narrative elements are templates you configure once and I auto-populate with matter-specific details.</p>
-
-    <h2 id="collections">Collections Automation</h2>
-
-    <p>Generating invoices is only half the battle—collecting payment is the other half. Law firms struggle with collections: clients forget to pay, dispute bills after the fact, or simply ignore invoices hoping the firm will write off small balances. The ABA reports that 15-20% of law firm accounts receivable are never collected, representing hundreds of thousands in lost revenue for mid-size firms.</p>
-
-    <p>I automate collections workflows to improve payment velocity and reduce write-offs:</p>
-
-    <h3>Automated Payment Reminders</h3>
-
-    <p>I send reminder emails at strategic intervals based on payment terms:</p>
-
-    <p><strong>Timeline (for standard 30-day net payment terms):</strong></p>
-    <ul>
-        <li><strong>Day 0:</strong> Invoice sent with payment instructions</li>
-        <li><strong>Day 7:</strong> Friendly reminder: "Your invoice for Matter XYZ was sent on [date]. Payment is due on [date]. Please contact us if you have questions."</li>
-        <li><strong>Day 23 (one week before due date):</strong> Courtesy reminder: "Your invoice for $X is due in 7 days. You can pay online using this link: [payment portal]."</li>
-        <li><strong>Day 30 (due date):</strong> Due date notice: "Your invoice for $X is due today. Please remit payment or contact us to arrange a payment plan."</li>
-        <li><strong>Day 37 (one week overdue):</strong> Overdue notice: "Your invoice for $X is now 7 days overdue. Please remit payment immediately. [Late fee notice if applicable per engagement letter.]"</li>
-        <li><strong>Day 45 (15 days overdue):</strong> Escalation to responsible attorney for personal follow-up</li>
-        <li><strong>Day 60 (30 days overdue):</strong> Final notice before suspension of services or referral to collections</li>
-    </ul>
-
-    <p>These reminders are automatically generated and sent, but you can customize tone, frequency, and escalation triggers based on client relationships. For example:</p>
-    <ul>
-        <li>Long-term clients with excellent payment history: Fewer reminders, more lenient tone</li>
-        <li>New clients or clients with past payment issues: More frequent reminders, firmer tone</li>
-        <li>Corporate clients with 60-day payment cycles: Adjusted timeline to match their A/P processes</li>
-    </ul>
-
-    <h3>Payment Processing & Tracking</h3>
-
-    <p>I integrate with legal payment processors (LawPay, LawPay, AffiniPay) to enable online payment:</p>
-
-    <p><strong>Features:</strong></p>
-    <ul>
-        <li><strong>Payment links in invoices:</strong> Every invoice includes a "Pay Online" button that takes clients directly to a secure payment portal</li>
-        <li><strong>Credit card & ACH processing:</strong> Clients can pay by credit card (with processing fees passed to client if allowed by state bar rules) or bank transfer (ACH)</li>
-        <li><strong>IOLTA compliance:</strong> For trust retainer payments, I ensure funds are routed to your IOLTA account, not operating account</li>
-        <li><strong>Automatic receipt generation:</strong> When payment is received, I generate a receipt and email it to the client</li>
-        <li><strong>Accounting system integration:</strong> I update your accounting system (QuickBooks, Xero) to mark invoices as paid and reconcile against bank deposits</li>
-    </ul>
-
-    <p><strong>Payment status tracking:</strong><br>
-    I monitor payment status in real-time:</p>
-    <ul>
-        <li>Paid in full → Mark invoice closed, update A/R balance, send receipt</li>
-        <li>Partial payment → Apply to oldest outstanding balance first (or per client instruction), update A/R, notify attorney if repeated partial payments indicate financial distress</li>
-        <li>Payment failed (e.g., credit card declined) → Immediately notify client and request alternative payment method</li>
-    </ul>
-
-    <h3>Accounts Receivable Aging Reports</h3>
-
-    <p>I generate A/R aging reports automatically (weekly or on-demand) showing:</p>
-
-    <ul>
-        <li><strong>Current (0-30 days):</strong> Invoices within payment terms</li>
-        <li><strong>31-60 days:</strong> Slightly overdue, requires follow-up</li>
-        <li><strong>61-90 days:</strong> Significantly overdue, at risk of write-off</li>
-        <li><strong>90+ days:</strong> Likely uncollectible without aggressive action</li>
-    </ul>
-
-    <p>For each aging category, I flag:</p>
-    <ul>
-        <li>Total dollar amount outstanding</li>
-        <li>Number of invoices</li>
-        <li>Clients with largest balances (prioritize collection efforts)</li>
-        <li>Trend analysis: Is A/R increasing or decreasing month-over-month?</li>
-    </ul>
-
-    <p><strong>Automated escalation:</strong><br>
-    Matters with invoices overdue >60 days are automatically flagged for partner review. Partner decides whether to:</p>
-    <ol>
-        <li>Suspend work until payment received (protect against further losses)</li>
-        <li>Arrange payment plan (preserve client relationship for good clients with temporary cash flow issues)</li>
-        <li>Refer to collections agency (for unresponsive clients or bad actors)</li>
-        <li>Write off as bad debt (for small balances not worth pursuing)</li>
-    </ol>
-
-    <h3>Payment Plans & Settlements</h3>
-
-    <p>For clients struggling with large invoices, I facilitate payment plans:</p>
-
-    <p><strong>Example:</strong><br>
-    Client owes $15,000 but can't pay in full. Partner negotiates: $5,000 upfront + $2,000/month for 5 months.<br>
-    I create payment plan schedule, send monthly invoices for installment amounts, track compliance, and alert partner if client misses a payment.</p>
-
-    <p>For disputed invoices, I facilitate settlements:<br>
-    Client disputes $5,000 of a $20,000 invoice. Partner negotiates settlement: Client pays $17,500 to close out matter.<br>
-    I process the adjusted invoice, mark original invoice as settled, and document the write-off reason (dispute settlement) for tax and management reporting purposes.</p>
-
-    <h2 id="roi">ROI: Recovered Billable Time & Faster Cash Flow</h2>
-
-    <p>The financial impact of automated timekeeping and billing goes beyond labor savings—it fundamentally improves both top-line revenue (through better time capture) and cash flow (through faster billing and collections).</p>
-
-    <h3>Recovered Billable Time</h3>
-
-    <p>For a 10-attorney firm with 15,000 annual billable hours target:</p>
-
-    <p><strong>Current State:</strong></p>
-    <ul>
-        <li>Target billable hours: 15,000 (1,500 hours per attorney)</li>
-        <li>Time leakage: 10% = 1,500 unbilled hours</li>
-        <li>Average billing rate: $300/hour (blended across partners, associates, paralegals)</li>
-        <li>Annual revenue loss: 1,500 hours × $300 = <strong>$450,000</strong></li>
-    </ul>
-
-    <p><strong>With Automated Time Capture:</strong></p>
-    <ul>
-        <li>Time leakage: 2% = 300 unbilled hours</li>
-        <li>Recovered hours: 1,200 hours</li>
-        <li>Recovered revenue: 1,200 hours × $300 = <strong>$360,000/year</strong></li>
-    </ul>
-
-    <h3>Administrative Time Savings</h3>
-
-    <p>Beyond recovered billable time, automation saves administrative time:</p>
-
-    <p><strong>Manual Process:</strong></p>
-    <ul>
-        <li>Attorneys spend 10-15 minutes/day on time entry = 2.5 hours/week per attorney</li>
-        <li>10 attorneys × 2.5 hours = 25 hours/week firm-wide</li>
-        <li>50 billable weeks/year = 1,250 hours annually</li>
-        <li>At $300/hour average rate = $375,000 opportunity cost (time spent on admin instead of billable work)</li>
-    </ul>
-
-    <p><strong>Automated Process:</strong></p>
-    <ul>
-        <li>Attorneys spend 2-3 minutes/day reviewing and approving suggested time entries = 0.5 hours/week per attorney</li>
-        <li>10 attorneys × 0.5 hours = 5 hours/week firm-wide</li>
-        <li>50 billable weeks/year = 250 hours annually</li>
-        <li>Time saved: 1,000 hours/year = $300,000 in reallocated attorney capacity</li>
-    </ul>
-
-    <p><strong>Billing staff savings:</strong></p>
-    <ul>
-        <li>Manual invoice generation: 20-30 hours/month for 50 active matters = $18,000-$27,000 annual cost (at $75/hour billing coordinator rate)</li>
-        <li>Automated invoice generation: 5-8 hours/month (attorney review only) = $4,500-$7,200 annual cost</li>
-        <li>Savings: $13,500-$19,800/year</li>
-    </ul>
-
-    <h3>Faster Cash Flow</h3>
-
-    <p>Accelerating billing and collections improves working capital:</p>
-
-    <p><strong>Manual Process:</strong></p>
-    <ul>
-        <li>Billing lag: 30-45 days from month-end to invoice sent</li>
-        <li>Payment terms: 30 days</li>
-        <li>Total days to payment: 60-75 days from work performed</li>
-        <li>Average outstanding A/R: $300,000-$400,000</li>
-    </ul>
-
-    <p><strong>Automated Process:</strong></p>
-    <ul>
-        <li>Billing lag: 1-3 days from month-end to invoice sent</li>
-        <li>Payment terms: 30 days</li>
-        <li>Automated reminders improve payment compliance (reduces actual payment time from 45 days to 35 days)</li>
-        <li>Total days to payment: 31-35 days from work performed</li>
-        <li>Average outstanding A/R: $150,000-$175,000</li>
-    </ul>
-
-    <p><strong>Working capital improvement:</strong> $150,000-$225,000 additional cash on hand (equivalent to eliminating a line of credit or improving investment returns)</p>
-
-    <h3>Improved Realization Rates</h3>
-
-    <p>Better time descriptions, proactive write-down prevention, and faster billing improve collection rates:</p>
-
-    <p><strong>Current realization rate:</strong> 85% (industry average)<br>
-    <strong>With Claire:</strong> 92% (7-point improvement)<br>
-    <strong>On $2M annual billings:</strong> 7% × $2M = <strong>$140,000 additional collected revenue</strong></p>
-
-    <h3>Total Annual Financial Impact</h3>
-
-    <p>Adding it all together for a 10-attorney firm:</p>
-    <ul>
-        <li>Recovered billable time (reduced leakage): $360,000</li>
-        <li>Reallocated attorney admin time to billable work: $300,000</li>
-        <li>Billing staff savings: $16,000</li>
-        <li>Improved realization rates: $140,000</li>
-        <li>Working capital improvement (cash flow): $187,500 (midpoint, one-time benefit)</li>
-    </ul>
-
-    <p><strong>Total Annual Benefit: $816,000+</strong></p>
-
-    <p><strong>Claire Professional Tier Cost: $48,000/year</strong></p>
-
-    <p><strong>Net Benefit: $768,000</strong></p>
-
-    <p><strong>ROI: 1,600%</strong></p>
-
-    <h2 id="conclusion">Conclusion: Time is Money—Especially When It's Recovered</h2>
-
-    <p>The math is stark: law firms are bleeding hundreds of thousands of dollars annually through poor timekeeping, delayed billing, and inadequate collections. Automation doesn't just save time—it fundamentally transforms law firm economics by:</p>
-
-    <ol>
-        <li>Capturing billable time that would otherwise be lost</li>
-        <li>Freeing attorneys from administrative drudgery to focus on billable work</li>
-        <li>Accelerating cash flow through faster billing and collections</li>
-        <li>Improving realization rates through better time descriptions and proactive quality control</li>
-    </ol>
-
-    <p>For most law firms, automated timekeeping and billing pays for itself within the first 30 days. The question isn't whether to automate—it's how quickly you can implement to stop the revenue leakage.</p>
-
-    <div class="cta-box">
-        <h3>Interview Claire for Your Firm</h3>
-        <p>See how I automate time capture, billing, and collections for your practice.</p>
-        <a href="/" class="cta-btn">Start Interactive Demo</a>
+            <div class="related">
+                <h4>Related Capabilities</h4>
+                <ul>
+                    <li><a href="/legal/">← Legal Services Overview</a></li>
+                    <li><a href="/legal/client-intake.html">Client Intake</a></li>
+                    <li><a href="/legal/confidentiality-security.html">Privilege & Security</a></li>
+                    <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer with Shadow Content -->
+    <footer>
+        <div class="footer-shadow">
+            <h2>Attorney-Client Privilege in the Age of AI Orchestration</h2>
+            <p class="footer-shadow-intro">
+                The #1 concern blocking law firm AI adoption: "If AI touches client communications, does privilege survive?" The answer requires understanding how AI orchestration differs fundamentally from traditional chatbot architectures—and why Claire's ephemeral data tunnels preserve privilege while legacy systems don't.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Technical Analysis</button>
+
+            <div class="shadow-content" id="shadowContent">
+                <h3>Section 1: The Privilege Problem with Traditional Legal Tech</h3>
+
+                <p>Attorney-client privilege protects confidential communications between attorney and client made for the purpose of obtaining legal advice. ABA Model Rule 1.6 requires lawyers to maintain confidentiality of "information relating to the representation of a client." Rule 1.1 requires "technology competence"—understanding how technology impacts confidentiality obligations.</p>
+
+                <p>Traditional legal technology operates on centralized data lake architectures. When a client submits information through a law firm's website chatbot or intake form, that data is typically stored in the vendor's database (often for 30-90 days minimum, sometimes indefinitely), used to train machine learning models (even if "anonymized," metadata can reveal privileged information), accessible to vendor's staff for "quality assurance" and technical troubleshooting, and subject to vendor's data breach risks, subpoenas, and government requests.</p>
+
+                <p>This creates privilege vulnerabilities. While the communication between client and attorney may be privileged, if a third party (the AI vendor) has access to that communication, privilege can be deemed waived. The "common interest" doctrine protects communications shared with third parties assisting legal work, but this requires careful structuring—and most legal chatbot vendors don't meet the standard.</p>
+
+                <h4>Case Law Creating Risk</h4>
+
+                <p>In <em>United States v. Kovel</em>, 296 F.2d 918 (2d Cir. 1961), courts established that privilege extends to communications with third parties (accountants, investigators) assisting attorneys—but only when their involvement is necessary for legal advice and confidentiality is maintained. If the third party has independent business purposes for accessing the data (like training AI models), privilege protection weakens.</p>
+
+                <p>More recently, courts have scrutinized technology vendors' access to privileged information. In several discovery disputes, judges have found privilege waived when law firms used technology platforms that retained copies of privileged documents or allowed vendor staff access "for system administration."</p>
+
+                <h3>Section 2: How AI Orchestration Differs—Ephemeral Data Tunnels</h3>
+
+                <p>Claire operates on a fundamentally different architecture: <strong>ephemeral data orchestration</strong> rather than centralized storage. Data never leaves your control. I operate as a processor working on data stored in your systems, not as a repository storing data in separate systems.</p>
+
+                <p><strong>Technical flow:</strong></p>
+                <ol>
+                    <li>Attorney requests time entry generation from document work</li>
+                    <li>Information is read from <em>your</em> document management system</li>
+                    <li>I receive a temporary access token granting read-only access to that specific session</li>
+                    <li>I generate the time entry and rate calculations</li>
+                    <li>Time entry is written back to <em>your</em> practice management system</li>
+                    <li>Session ends—access token expires, I retain <em>zero</em> client data</li>
+                </ol>
+
+                <p>The data never leaves your control. This architectural distinction isn't just technical—it's legal. Attorney-client privilege is most secure when no third party possesses the privileged information. By operating as an ephemeral processor rather than a data repository, I maintain the confidentiality necessary for privilege protection.</p>
+
+                <h3>Section 3: FHIR R4 Read-Only Access & Audit Trails</h3>
+
+                <p>I integrate with legal practice management systems using industry-standard protocols designed for sensitive data. My access is explicitly read-only for most operations:</p>
+
+                <ul>
+                    <li><strong>Read time entries and documents:</strong> Matter records, attorney assignments, document metadata</li>
+                    <li><strong>Read billing configuration:</strong> Rate tables, client-specific agreements, matter billing status</li>
+                    <li><strong>Write invoice records:</strong> Generated invoices uploaded to matter files</li>
+                    <li><strong>Write activity logs:</strong> Record of who accessed what and when</li>
+                </ul>
+
+                <p>Critically, I cannot delete or modify existing client data, access other clients' matters (scoped to specific session), export data in bulk, or retain data after session ends.</p>
+
+                <p>Every action I take is logged in your practice management system's audit trail with timestamp, which client record was accessed, what information was read/written, and session ID for correlation. This satisfies ABA ethics opinions requiring lawyers to maintain "reasonable efforts to prevent unauthorized access" and to maintain records of data access for privilege protection.</p>
+
+                <h3>Section 4: Compliance with ABA Model Rules & State Bar Requirements</h3>
+
+                <p>My architecture is designed to satisfy ABA Model Rules on technology competence and confidentiality. Rule 1.1 (Technology Competence) Comment 8 requires lawyers to "keep abreast of changes in the law and its practice, including the benefits and risks associated with relevant technology." Using AI with ephemeral data architecture demonstrates technology competence—you're using modern AI capabilities while maintaining confidentiality through architectural safeguards.</p>
+
+                <p>Rule 1.6 (Confidentiality of Information) Comment 18 addresses technology: "A lawyer must act competently to safeguard information relating to the representation of a client against unauthorized access by third parties and against inadvertent or unauthorized disclosure." Ephemeral access satisfies this—there's no unauthorized access because I never possess the data (it only processes data temporarily in your systems).</p>
+
+                <h3>Section 5: Business Associate Agreements & Data Processing Addenda</h3>
+
+                <p>When law firms use legal technology vendors, they should execute Business Associate Agreements (BAAs) or Data Processing Addenda (DPAs) specifying what data the vendor can access, how data will be protected, prohibition on using data for vendor's own purposes, data breach notification requirements, audit rights, and data return/destruction upon contract termination.</p>
+
+                <p>My BAA is simpler than traditional vendors because there's less to protect against: "Claire LLC does not store, retain, or have access to client data processed during orchestration sessions. All client data resides in Customer's designated practice management system. Claire's access is limited to ephemeral, session-based read operations via API tokens that expire upon session completion. Claire does not use Customer data for training, analytics, or any purpose beyond providing the contracted services during active sessions."</p>
+
+                <p>This "zero data retention" architecture eliminates most privacy risks that lengthy BAAs attempt to mitigate.</p>
+
+                <h3>Conclusion: Orchestration Preserves Privilege by Design</h3>
+
+                <p>The fundamental difference between AI orchestration and traditional legal technology is possession vs. processing. Traditional systems possess client data (store it, copy it, retain it). I process client data without possessing it—reading from your systems, generating outputs back to your systems, retaining nothing.</p>
+
+                <p>For law firms evaluating AI technology, the question isn't "Should we use AI?" but "What architecture protects privilege?" Orchestration-based AI like me represents the future of legal technology precisely because it solves the privilege problem that has blocked adoption.</p>
+
+                <p>When your firm faces privilege challenges or regulatory scrutiny, the ephemeral architecture provides strong legal protection: no centralized repository of privileged information, no vendor retention of sensitive data, no training on client materials, and complete audit trails showing exactly what was accessed when. This is the gold standard for AI in legal practice.</p>
+            </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Legal Capabilities</h4>
+                <ul>
+                    <li><a href="/legal/client-intake.html">Client Intake</a></li>
+                    <li><a href="/legal/case-management.html">Case Management</a></li>
+                    <li><a href="/legal/document-automation.html">Document Automation</a></li>
+                    <li><a href="/legal/billing-timekeeping.html">Billing & Timekeeping</a></li>
+                    <li><a href="/legal/confidentiality-security.html">Security & Compliance</a></li>
+                    <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compliance</h4>
+                <ul>
+                    <li><a href="/compliance/attorney-client-privilege.html">Attorney-Client Privilege</a></li>
+                    <li><a href="/compliance/aba-model-rules.html">ABA Model Rules</a></li>
+                    <li><a href="/compliance/state-bar-compliance.html">State Bar Compliance</a></li>
+                    <li><a href="/compliance/soc2.html">SOC 2 Type II</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Industry Switcher -->
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+    <!-- Claire Dock Component -->
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">
+            C
+        </div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">
+                    I'm Claire, your AI paralegal orchestrator. Want to see how I automate time capture and billing for your firm?
+                </p>
+                <a href="/legal/intake-reasoning-demo.html" class="dock-cta">Execute Live Timekeeping Demo</a>
+            </div>
+        </div>
     </div>
 
-    <h2 style="margin-top: 4rem;">Read Next</h2>
-    <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-        <a href="/legal/document-automation.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Document Automation →</h3>
-            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Generate contracts, pleadings, and briefs</p>
-        </a>
-        <a href="/legal/roi-calculator.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">ROI Calculator →</h3>
-            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Calculate your potential savings</p>
-        </a>
-    </div>
-</article>
+    <script>
+        function toggleDock() {
+            const panel = document.getElementById('dockPanel');
+            panel.classList.toggle('open');
+        }
 
-<aside>
-    <div class="toc">
-        <h4>On This Page</h4>
-        <ul>
-            <li><a href="#problem">Time Capture Problem</a></li>
-            <li><a href="#rates">Billing Rate Enforcement</a></li>
-            <li><a href="#invoices">Invoice Generation</a></li>
-            <li><a href="#collections">Collections Automation</a></li>
-            <li><a href="#roi">ROI Analysis</a></li>
-            <li><a href="#conclusion">Conclusion</a></li>
-        </ul>
-    </div>
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Technical Analysis'
+                : 'Read Full Technical Analysis';
+        }
 
-    <div class="related">
-        <h4>Related Topics</h4>
-        <ul>
-            <li><a href="/legal/">← Legal Services Overview</a></li>
-            <li><a href="/legal/client-intake.html">Client Intake</a></li>
-            <li><a href="/legal/document-automation.html">Document Automation</a></li>
-            <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
-            <li><a href="/legal/case-management.html">Case Management</a></li>
-        </ul>
-    </div>
-</aside>
-</main>
+        // Close dock when clicking outside
+        document.addEventListener('click', function(event) {
+            const dock = document.querySelector('.claire-dock');
+            const panel = document.getElementById('dockPanel');
+            if (!dock.contains(event.target) && panel.classList.contains('open')) {
+                panel.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>

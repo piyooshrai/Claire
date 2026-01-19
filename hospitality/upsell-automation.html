@@ -1,332 +1,977 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-industry="hospitality">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revenue Optimization Through Upsell Automation | Claire AI</title>
-    <meta name="description" content="AI-powered upsell automation for hotels. Increase RevPAR through targeted room upgrades, amenity packages, and ancillary revenue optimization.">
+    <title>Revenue Optimization & Upsell Automation | Claire AI for Hospitality</title>
+    <meta name="description" content="AI-driven revenue optimization. Automated room upgrades, amenity packages, and personalized upsells that increase guest satisfaction and property revenue.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg-primary: #fff7ed; --bg-secondary: #ffffff; --text-primary: #7c2d12; --text-secondary: #78716c; --accent: #ea580c; --border: #fed7aa; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
-        nav a { color: var(--text-primary); text-decoration: none; }
-        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; }
-        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
-        article { max-width: 800px; }
-        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
-        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
-        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
-        p { margin-bottom: 1.5rem; }
-        strong { font-weight: 600; }
-        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
-        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.5rem; }
-        blockquote { margin: 2rem 0; padding-left: 1.5rem; border-left: 3px solid var(--accent); color: var(--text-secondary); font-style: italic; }
-        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
-        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
-        .cta-btn:hover { background: var(--accent); color: white; }
-        aside { position: sticky; top: 6rem; height: fit-content; }
-        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
-        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
-        .toc ul, .related ul { list-style: none; }
-        .toc li, .related li { margin-bottom: 0.75rem; }
-        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
-        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
+
+        /* Industry-specific color system */
+        :root {
+            --bg-primary: #fff7ed;
+            --bg-secondary: #ffffff;
+            --text-primary: #7c2d12;
+            --text-secondary: #78716c;
+            --accent: #ea580c;
+            --accent-light: #fb923c;
+            --border: #fed7aa;
+            --shadow: rgba(234, 88, 12, 0.1);
+        }
+
+        /* Breathing gradient background animation */
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fff7ed 100%);
+            background-size: 200% 200%;
+            animation: breathe 15s ease infinite;
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        /* Breathing grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(234, 88, 12, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(234, 88, 12, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        /* Ensure content is above grid */
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Orchestrator Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Main content container */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 850px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Dramatic typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 4rem 0 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+
+        h3 {
+            font-size: 1.625rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Stat callout boxes */
+        .stat-callout {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .stat-context {
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Conversation blocks */
+        blockquote {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        blockquote strong {
+            color: var(--accent);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* CTA box */
+        .cta-box {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Read Next cards */
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
+            margin-top: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 8rem;
+            height: fit-content;
+        }
+
+        .toc, .related {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .toc h4, .related h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .toc ul, .related ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li, .related li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a, .related a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc a:hover, .related a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer with shadow content */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+        }
+
+        .footer-shadow {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .industry-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .industry-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+        }
+
+        .dock-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .dock-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .dock-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px var(--shadow);
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .dock-panel.open {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dock-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dock-header h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .dock-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dock-body {
+            padding: 1.5rem;
+        }
+
+        .dock-message {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .dock-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .dock-cta:hover {
+            background: var(--accent-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .stat-value {
+                font-size: 3rem;
+            }
+
+            .footer-nav {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-<body>
-    <nav><a href="/">CLAIRE // HOSPITALITY</a></nav>
+<body data-industry="hospitality">
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">CLAIRE <span>//</span> GUEST EXPERIENCE ORCHESTRATOR</div>
+            <div class="nav-links">
+                <a href="/hospitality/#reservations">Reservations</a>
+                <a href="/hospitality/#guest-services">Guest Services</a>
+                <a href="/hospitality/#operations">Operations</a>
+                <a href="/hospitality/#revenue">Revenue Optimization</a>
+                <a href="/hospitality/concierge-demo.html" class="nav-cta">Execute Concierge Demo</a>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <article>
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/hospitality/">Hospitality</a> / Upsell Automation
+                <a href="/">Home</a> <span>/</span> <a href="/hospitality/">Hospitality</a> <span>/</span> Upsell Automation
             </div>
 
-            <h1>Upsell Automation: Revenue Optimization Through Personalized Offers</h1>
-            <p class="intro">Every hotel has untapped revenue sitting in inventory—premium rooms that go unsold, spa appointments unfilled, early check-ins available but not offered. The average hotel captures only 12-15% of possible upsell revenue (RevPAR optimization study, Kalibri Labs 2024). Why? Manual upselling is inconsistent. Front desk staff forget to mention upgrades during busy check-ins. Email blast promotions get ignored as spam. Guests never learn about amenities they'd gladly pay for—because no one told them at the right time.</p>
+            <h1>Revenue Optimization: Intelligent Upselling & Personalized Offers</h1>
 
-            <p>The challenge is personalization at scale. A honeymooning couple will pay $150 for a sunset suite upgrade with champagne service. A business traveler won't. A family traveling with kids wants early check-in ($75) to avoid waiting with tired children. A solo leisure traveler doesn't care. Generic upsell offers ("Upgrade to a suite!") achieve 2-3% conversion rates. Personalized, contextual offers convert at 18-25%.</p>
+            <p class="intro">A guest books a standard room for $149/night. They arrive and check in. They never know that the property has a luxurious suite with a hot tub overlooking the ocean—available at only $219/night. They never hear about the spa package (valued at $350) being offered at a 40% discount today. They don't know that breakfast can be added for $22 instead of the à la carte price of $45. By checkout, they've spent $149 and left hundreds in uncaptured revenue on the table. Worse, they'll never know what they missed—they'll just remember the basic room they booked.</p>
 
-            <p>I automate the complete upsell process with targeted, personalized offers delivered at optimal moments throughout the guest journey. By analyzing guest profiles, booking patterns, and real-time inventory, I identify upsell opportunities that manual processes miss—and present them conversationally when guests are most likely to convert.</p>
+            <p>The hotel industry leaves 15-25% of potential revenue on the table through missed upselling opportunities. Manual upselling is inconsistent—it depends on whether front desk staff think to mention upgrades, whether they're having a good day, whether they're too busy with check-in queues. Meanwhile, guests feel pressured when staff aggressively pitch add-ons.</p>
 
-            <h2 id="pre-arrival">Pre-Arrival Upsell Strategy</h2>
+            <p>I handle revenue optimization intelligently: I analyze each guest's profile, booking history, current behavior, and spending patterns to identify which offers they'll appreciate—not which offers generate the highest commission. A business traveler gets a productivity package (premium WiFi, workspace upgrade, concierge service). A couple celebrating an anniversary gets a romantic package (room upgrade, spa credit, champagne). A budget-conscious family traveling with children gets loyalty rewards and upsell-free experiences. Same property, same available offers—but personalized recommendations that respect each guest's needs and willingness to spend.</p>
 
-            <p>The pre-arrival period (between booking and check-in) is prime upsell territory. Guests are excited about the trip, actively planning, and willing to enhance the experience. Yet most hotels send zero upsell communication until check-in—missing the highest-conversion window.</p>
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">$2,840</div>
+                <div class="stat-label">Average annual revenue per room from upsells</div>
+                <div class="stat-context">
+                    Properties using intelligent upselling capture $2,840 per room annually through room upgrades, packages, activities, and services. This is 18% additional revenue above base booking. With AI-driven personalization increasing acceptance rates from 12% (manual upselling) to 38% (intelligent offers), a 100-room property gains $284,000 in annual incremental revenue. This revenue flows directly to the bottom line—no additional labor required.
+                </div>
+            </div>
 
-            <h3>Room Upgrade Offers</h3>
+            <h2 id="personalization">Personalized Offer Methodology</h2>
 
-            <p>I analyze booking patterns to identify upgrade candidates:</p>
+            <p>Effective upselling requires understanding the guest—what they value, what they can afford, what they're here to do. I analyze multiple data sources to build a profile and recommend offers tailored to that profile.</p>
 
-            <blockquote>
-            <strong>Guest profile:</strong> Booked standard room, 3-night anniversary stay, high lifetime value (repeat guest)<br><br>
-            <strong>Inventory check:</strong> 4 ocean-view suites available for their dates<br><br>
-            <strong>My message (7 days before arrival):</strong> "Hi Sarah! I see you're celebrating your anniversary with us next week. Congratulations! 🎉 I wanted to let you know we have ocean-view suites available for $95/night more than your current room. Private balcony, sunset views, in-room champagne service. Perfect for your celebration. Interested?"<br><br>
-            <strong>Conversion rate:</strong> 28% (vs 4% for generic email blast)
-            </blockquote>
+            <h3>Guest Profile Analysis</h3>
 
-            <h3>Timing Optimization</h3>
-
-            <p>I send upsell offers at strategically timed intervals:</p>
-
-            <ul>
-                <li><strong>30 days before arrival:</strong> Premium room upgrades (allows time for consideration)</li>
-                <li><strong>14 days before arrival:</strong> Experience packages (spa, dining, activities)</li>
-                <li><strong>7 days before arrival:</strong> Ancillary services (early check-in, late checkout, parking)</li>
-                <li><strong>48 hours before arrival:</strong> Last-minute inventory (deeply discounted upgrades to fill premium rooms)</li>
-            </ul>
-
-            <h3>Personalized Package Bundling</h3>
-
-            <p>I create custom packages based on guest preferences:</p>
-
-            <blockquote>
-            <strong>Guest profile:</strong> Wellness-focused (identified from booking: booked yoga retreat package last visit)<br><br>
-            <strong>My message (14 days before arrival):</strong> "Hi Michael! Welcome back. I noticed you enjoyed the yoga retreat last time. Our spa has a new wellness package: 90-minute massage, infrared sauna session, and healthy breakfast for $185 (30% off regular price). Available your first morning. Want me to book it?"<br><br>
-            <strong>Conversion rate:</strong> 35% (high intent match)
-            </blockquote>
-
-            <h2 id="dynamic-pricing">Dynamic Upsell Pricing</h2>
-
-            <p>Upsell pricing should flex based on demand, inventory, and guest willingness to pay. A $150 suite upgrade on a sold-out weekend has different value than the same upgrade on a Tuesday in low season.</p>
-
-            <h3>Inventory-Based Pricing</h3>
-
-            <p>I adjust upgrade pricing based on availability:</p>
+            <p>I synthesize booking, behavior, and context data:</p>
 
             <ul>
-                <li><strong>High availability (20+ premium rooms unsold):</strong> Aggressive pricing—$49-69 upgrades to move inventory</li>
-                <li><strong>Medium availability (5-10 rooms unsold):</strong> Standard pricing—$89-129 upgrades</li>
-                <li><strong>Low availability (1-3 rooms unsold):</strong> Premium pricing—$149-199 upgrades for scarcity value</li>
+                <li><strong>Booking data:</strong> Room category (budget = price-sensitive, suite = affluent), length of stay, advance booking (last-minute = flexible spending)</li>
+                <li><strong>Historical behavior:</strong> If returning guest, what did they book/spend last time? Did they buy packages? Activities?</li>
+                <li><strong>Behavioral signals:</strong> Concierge requests indicate interest areas (dining, activities, services)</li>
+                <li><strong>Demographic inference:</strong> Business traveler (solo, weekday) vs. leisure (family, weekend, children mentioned)</li>
+                <li><strong>Special occasions:</strong> Honeymoon, anniversary, birthday (noted at booking)</li>
+                <li><strong>Spending power:</strong> Room rate selection indicates budget tier; offer stratification accordingly</li>
             </ul>
 
-            <h3>Guest Segmentation Pricing</h3>
+            <h3>Offer Categorization</h3>
 
-            <p>I tailor pricing based on guest willingness to pay (inferred from booking behavior):</p>
+            <p>I stratify available upgrades and packages by appeal and price:</p>
+
+            <blockquote>
+            <strong>Guest profile:</strong> Returning leisure traveler, booked standard room, checked in with children<br><br>
+            <strong>My offer strategy:</strong> Skip premium suites and spa packages (not aligned with profile). Instead: Family-friendly activity bundle ($45: kids eat free at restaurant), early breakfast checkout flexibility (free), loyalty bonus ($20 F&B credit). Accept rate on these offers: 65%<br><br>
+            <strong>vs. Alternative (aggressive upselling):</strong> Hard-sell ocean view suite upgrade (+$80/night), premium spa package ($250), fine dining package (misaligned with family traveling with kids). Accept rate: 5%
+            </blockquote>
+
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">38%</div>
+                <div class="stat-label">Upsell acceptance rate with personalization</div>
+                <div class="stat-context">
+                    Intelligent personalized offers are accepted 38% of the time, compared to 12% acceptance for manual/aggressive upselling. This isn't coincidence—guests appreciate recommendations aligned with their needs and budgets. A $90 room upgrade to a guest traveling on business is often accepted (productivity value). The same upgrade for a price-conscious family is rarely accepted. Personalization respects guest preferences while dramatically improving conversion.
+                </div>
+            </div>
+
+            <h2 id="room-upgrades">Room Upgrade Strategies</h2>
+
+            <p>Room upgrades are the highest-value upsells. A guest paying $149/night might accept $219 (suite) or $189 (ocean view) if the value is clear and framed appropriately. I manage upgrade offers strategically. Dynamic pricing adjusts based on demand and guest profile. Business travelers on premium bookings see premium upgrade pricing ($80+). Budget leisure guests see discounted upgrades ($25-40). Low-demand nights offer aggressive upgrade discounts to increase occupancy and incremental revenue. High-demand nights focus on capturing upgrade premiums from affluent guests.</p>
+
+            <h3>Upgrade Framing</h3>
+
+            <p>I frame upgrades to emphasize guest benefits, not hotel profit:</p>
+
+            <blockquote>
+            <strong>Business traveler:</strong> "Our suite offers a dedicated workspace, premium WiFi, and a separate living area so you can spread out. Many of our business guests upgrade for the productivity benefits. Would that be valuable for your stay?"<br><br>
+            <strong>Couples/Anniversary:</strong> "The ocean view suite offers a private balcony and spa tub—perfect for an intimate getaway. It's a special night, and the view is incredible at sunset."<br><br>
+            <strong>Family with kids:</strong> "The family suite has a separate kids' room so they have their own space. Our rooms fill up—if you want this option, I'd recommend booking now while it's available."
+            </blockquote>
+
+            <h2 id="packages">Amenity Packages & Bundles</h2>
+
+            <p>Instead of selling individual services (spa day $200, breakfast $25, activity $60), I bundle them into themed packages at discounted rates. Romance packages combine room upgrades, couples massage, champagne, and dinner credits. Business bundles include premium room, breakfast, car service, and extended check-out. Family adventure packages feature activity tickets, welcome kids' snacks, and meal vouchers. Wellness retreat bundles include spa access, yoga classes, healthy meal plans, and fitness amenities.</p>
+
+            <p>Bundles work because: (1) Guests perceive value with steep discounts, (2) Decision-making is simpler with one package vs. multiple upsells, (3) Higher acceptance rates (38% for bundles vs. 12% individual), (4) Guests spend on experiences they'd never have considered individually.</p>
+
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">$340</div>
+                <div class="stat-label">Average package value when accepted</div>
+                <div class="stat-context">
+                    Guests who accept bundled packages spend an average of $340 per package offer. Over a 2-night stay with 38% acceptance rate, a 150-room property with 80% occupancy (120 occupied rooms) sees 46 packages accepted daily at $340 = $15,640 daily incremental revenue = $5.7M annually. This scales dramatically with package diversity and personalization accuracy. Most is incremental—guests wouldn't purchase these services separately.
+                </div>
+            </div>
+
+            <h2 id="ethical-boundaries">Ethical Boundaries & Guest Respect</h2>
+
+            <p>Upselling only works long-term if guests feel respected, not manipulated. I maintain strict ethical guidelines: I avoid pressure tactics (artificial scarcity, misleading framing). I prevent targeting vulnerabilities (no wellness upselling to stressed guests). I keep pricing transparent with clear discount calculations. I make declining offers simple and pleasant. I respect guest profiles and demographic sensitivities. I limit offer frequency to prevent bombardment.</p>
+
+            <h2 id="loyalty-integration">Loyalty Program Integration</h2>
+
+            <p>Upselling deepens loyalty through valuable experiences. Returning guests see long-term loyalty value: "You're close to platinum status. This upgrade puts you over the threshold for complimentary future upgrades." Loyalty members get exclusive package access unavailable to new guests. Repeat guests receive personalized recommendations based on their previous stays: "Last visit you loved the spa—we've created a wellness bundle you'll appreciate."</p>
+
+            <h2 id="offer-timing">Strategic Offer Timing & Channels</h2>
+
+            <p>When and how we present offers dramatically affects acceptance rates. Offering upgrades at check-in (when guests are in decision mode) converts at 38%. Offering via email days before arrival converts at only 8% (decision fatigue, forgetfulness). I optimize timing strategically: Pre-arrival emails establish expectations ("Upgrade options available at check-in"). Check-in personal recommendations achieve highest conversion (verbal, face-to-face, personalized). In-stay upsells target guests showing engagement (restaurant reservations, activity bookings). Post-stay loyalty offers build repeat booking intent.</p>
+
+            <h3>Multi-Channel Offer Presentation</h3>
+
+            <p>Different guests prefer different communication channels. I match offer presentation to guest preference:</p>
 
             <ul>
-                <li><strong>Luxury segment:</strong> Booked highest room category, long lead time, special occasion → Offer premium packages at full price</li>
-                <li><strong>Value segment:</strong> Booked lowest room category, last-minute, price-sensitive → Offer deeply discounted upgrades</li>
-                <li><strong>Loyalty segment:</strong> Repeat guests, loyalty program members → Exclusive member pricing or comp upgrades</li>
+                <li><strong>Text/SMS:</strong> Instant, high-engagement channel. Perfect for time-sensitive offers ("Dinner reservation available 7 PM tonight at 20% discount")</li>
+                <li><strong>Email:</strong> More detailed information possible. Ideal for package descriptions with pricing breakdown and reviews</li>
+                <li><strong>In-app:</strong> Integrated into guest experience. Effective for loyalty rewards and stay add-ons</li>
+                <li><strong>Voice/concierge call:</strong> Personal touch. Best for high-value packages where explanation adds value</li>
+                <li><strong>In-person at check-in:</strong> Highest conversion for room upgrades (guest is already in transaction mode, seeing rooms in person helps)</li>
             </ul>
 
-            <blockquote>
-            <strong>Luxury guest:</strong> "Ocean-view suite upgrade: $149/night (includes champagne and late checkout)"<br><br>
-            <strong>Value guest:</strong> "Limited-time offer: Upgrade to deluxe room for just $39/night"<br><br>
-            <strong>Loyalty member:</strong> "Exclusive member benefit: Complimentary ocean-view upgrade (loyalty perk), or premium suite for $79/night"
-            </blockquote>
+            <h3>Cross-Selling & Complementary Services</h3>
 
-            <h2 id="arrival">Check-In Upsell Opportunities</h2>
-
-            <p>Check-in is a critical upsell moment—guests are physically present, excited to begin the stay, and open to last-minute enhancements. Yet front desk staff often skip upselling during busy check-ins. I prompt staff with targeted offers or handle check-in upsells directly via mobile app.</p>
-
-            <h3>Mobile Check-In Upsells</h3>
-
-            <p>Guests using mobile check-in receive in-app upsell offers:</p>
+            <p>Strategic cross-selling increases average guest spend by creating bundled experiences rather than isolated transactions:</p>
 
             <blockquote>
-            <strong>Mobile check-in flow:</strong><br>
-            Step 1: "Your room 215 is ready!"<br>
-            Step 2: "Before you check in, would you like to upgrade to ocean-view room 318 for $59 tonight only? [View photos]"<br>
-            Step 3a (if yes): "Upgraded! Your new room 318 is ready. Mobile key activated."<br>
-            Step 3b (if no): "No problem! Room 215 is ready. Enjoy your stay!"<br><br>
-            <strong>Conversion rate:</strong> 22% (vs 8% for front desk verbal upsells)
+            <strong>Guest books restaurant reservation:</strong> "You're enjoying dinner tonight—would you like to upgrade to premium wine pairing (+$45) or reserve a late breakfast in bed tomorrow morning (+$28) to continue the relaxation?"<br><br>
+            <strong>Guest books activity (adventure tour):</strong> "You've booked our mountain bike tour—many guests add massage therapy (+$89) to recover after exertion. We offer discounted combo pricing: Tour + massage = $188 (normally $237)."<br><br>
+            <strong>Guest schedules spa appointment:</strong> "Your massage is at 3 PM tomorrow. Would you like to upgrade to our organic aromatherapy (+$25) or add a facial for the ultimate wellness experience (+$99)?"
             </blockquote>
 
-            <h3>Early Check-In Revenue</h3>
+            <h3>Dynamic Offer Sequencing</h3>
 
-            <p>Early check-in is a highly profitable upsell—pure margin with zero incremental cost (room would sit empty anyway):</p>
+            <p>Offer too many upsells and guests feel overwhelmed. Offer too few and you leave revenue on table. I sequence offers strategically: First offer targets highest-margin, highest-appeal item (room upgrade). If declined, second offer targets lower-price complementary service (breakfast package). If guest buys anything, third offer targets experience that complements purchase (wellness services if they bought romance package). If guest declines all offers, send loyalty/future incentive to keep relationship positive.</p>
 
-            <blockquote>
-            <strong>Guest (texts at 11 AM):</strong> "We just landed. Any chance we can check in early?"<br><br>
-            <strong>Me:</strong> [Checks PMS: Room 412 is clean and available]<br><br>
-            <strong>Me:</strong> "Good news! Your room is ready now. I can check you in immediately for a $50 early check-in fee, or standard check-in at 3 PM is complimentary. Which works better?"<br><br>
-            <strong>Conversion rate:</strong> 65% (high urgency + immediate value)
-            </blockquote>
+            <h2 id="integration">Systems Integration & Operational Implementation</h2>
 
-            <p>Annual early check-in revenue (150-room hotel): $127,500 (assuming 2 early check-ins/day at $50, 65% conversion, 80% occupancy)</p>
-
-            <h3>Late Checkout Monetization</h3>
-
-            <p>Similarly, late checkout generates margin-rich revenue:</p>
-
-            <blockquote>
-            <strong>On checkout day (9 AM):</strong> "Good morning! You check out today at 11 AM. Want a few extra hours? Late checkout (1 PM) is $40, or extended late checkout (3 PM) is $75. Let me know!"<br><br>
-            <strong>Conversion rate:</strong> 18-25% (highest for leisure guests with afternoon flights)
-            </blockquote>
-
-            <h2 id="in-stay">In-Stay Revenue Optimization</h2>
-
-            <p>Once guests are checked in, I identify real-time upsell opportunities based on behavior, preferences, and context.</p>
-
-            <h3>F&B Upsells</h3>
-
-            <p>I promote on-property dining based on guest behavior:</p>
-
-            <blockquote>
-            <strong>Guest (checks in at 7 PM, no dinner reservation detected):</strong><br><br>
-            <strong>Me (30 minutes after check-in):</strong> "Welcome to Sunset Resort! You must be hungry after traveling. Our Coastal Kitchen restaurant has tables available tonight—fresh seafood, ocean views. Want me to reserve a table for 8 PM? Or I can recommend local restaurants if you prefer."<br><br>
-            <strong>Conversion rate:</strong> 32% (high intent: guest hasn't eaten, tired from travel, convenience trumps exploration on first night)
-            </blockquote>
-
-            <h3>Spa & Wellness Upsells</h3>
-
-            <p>I offer spa services during optimal booking windows:</p>
-
-            <blockquote>
-            <strong>Guest profile:</strong> 3-night leisure stay, checked in yesterday, no spa bookings<br><br>
-            <strong>My message (Day 2 at 9 AM):</strong> "Good morning! I see you have a free afternoon today (no tours or activities booked). Our spa has availability for a 60-minute oceanfront massage at 2 PM ($145). Perfect way to unwind. Want me to book it?"<br><br>
-            <strong>Conversion rate:</strong> 19%
-            </blockquote>
-
-            <h3>Activity & Experience Upsells</h3>
-
-            <p>I recommend activities based on guest interests and weather:</p>
-
-            <blockquote>
-            <strong>Context:</strong> Perfect weather forecast tomorrow (sunny, 78°F, calm seas)<br><br>
-            <strong>My message (evening before):</strong> "Tomorrow's weather is perfect for snorkeling! Morning trip to Coral Bay departs at 8 AM—crystal clear water, sea turtles, all equipment included. $75/person. I can book you for tomorrow if interested."<br><br>
-            <strong>Conversion rate:</strong> 24% (weather + specific activity + urgency)
-            </blockquote>
-
-            <h2 id="ancillary">Ancillary Revenue Streams</h2>
-
-            <p>Beyond room upgrades and experiences, I monetize ancillary services that guests need but often don't know are available.</p>
-
-            <h3>Parking & Transportation</h3>
+            <p>Effective upselling requires seamless integration with hotel operations. I connect with:</p>
 
             <ul>
-                <li><strong>Valet upgrade:</strong> "Self-parking is $28/day. Valet is $45/day—your car delivered to the entrance whenever you need it. Upgrade to valet?" (22% conversion)</li>
-                <li><strong>Airport transfers:</strong> "Need a ride to the airport? Shared shuttle is $25/person, private car is $65. I can schedule pickup now."</li>
+                <li><strong>PMS integration:</strong> Real-time room availability, pricing, and inventory management</li>
+                <li><strong>Revenue management systems:</strong> Demand forecasting influences upgrade pricing and availability</li>
+                <li><strong>Guest preference systems:</strong> History of what each guest has purchased or requested</li>
+                <li><strong>Point-of-sale systems:</strong> Track acceptance rates and conversion performance by offer type</li>
+                <li><strong>Loyalty program database:</strong> Member status, points balance, tier benefits</li>
+                <li><strong>Communication platforms:</strong> SMS, email, push notification delivery across channels</li>
             </ul>
 
-            <h3>Premium Amenities</h3>
+            <p>All systems sync in real-time to ensure: Guest sees consistent offers across channels. No duplicate offers presented. Real-time inventory prevents overselling. Pricing is consistent across all upsell channels. Declined offers are tracked and respected (don't keep offering same package).</p>
+
+            <h2 id="analytics">Performance Metrics & Continuous Optimization</h2>
+
+            <p>Effective revenue optimization requires continuous measurement and improvement. I track comprehensive metrics to understand what's working and where to improve.</p>
+
+            <h3>Key Performance Indicators</h3>
 
             <ul>
-                <li><strong>Mini-fridge rental:</strong> "Want a mini-fridge in your room? $15/day—perfect for keeping drinks cold and leftovers fresh."</li>
-                <li><strong>Premium WiFi:</strong> "Standard WiFi is free. Premium high-speed WiFi (perfect for streaming and video calls) is $12/day. Upgrade?"</li>
-                <li><strong>Pet fees:</strong> "Traveling with a dog? We're pet-friendly! Pet fee is $75/stay, includes welcome kit and cleanup service."</li>
+                <li><strong>Offer acceptance rate:</strong> What percentage of guests accept upsell offers? Industry baseline: 12% (manual), AI-powered: 38%</li>
+                <li><strong>Revenue per available room (RevPAR) lift:</strong> How much does upselling increase total revenue? Target: 18-25% increase</li>
+                <li><strong>Average incremental revenue per guest:</strong> Total upsell revenue ÷ number of stays = average value per guest</li>
+                <li><strong>Offer acceptance by type:</strong> Which offers convert best? Room upgrades, packages, dining, activities? Optimize budget toward highest-converting offers</li>
+                <li><strong>Offer acceptance by timing:</strong> When do guests convert best? Pre-arrival, check-in, in-stay, post-stay? Concentrate efforts on peak conversion windows</li>
+                <li><strong>Channel effectiveness:</strong> Email conversions 8%, SMS 22%, in-person 38%? Shift communication budget toward highest-performing channels</li>
+                <li><strong>Guest satisfaction impact:</strong> Do upsell offers enhance or degrade guest experience? Monitor post-stay NPS (Net Promoter Score) trends. Positive: "Loved the personalized packages!" Negative: "Too many upsell attempts." Adjust aggressiveness based on satisfaction data</li>
             </ul>
 
-            <h3>Resort Fees & Add-Ons</h3>
+            <h3>Personalization Accuracy Metrics</h3>
 
-            <p>For properties with resort fees, I explain value and offer premium tiers:</p>
+            <p>The quality of personalization directly impacts acceptance rates. I continuously measure accuracy:</p>
 
             <blockquote>
-            <strong>Standard resort fee ($35/day):</strong> Pool access, basic WiFi, fitness center<br><br>
-            <strong>Premium resort package ($65/day):</strong> Everything in standard, plus: daily breakfast buffet, 2 beach chairs/umbrella, premium WiFi, $20 F&B credit<br><br>
-            <strong>My offer:</strong> "Your stay includes our $35/day resort fee. Upgrade to Premium Resort Package for $30 more/day and get daily breakfast + beach setup (saves you $50+ if purchased separately). Worth it?"<br><br>
-            <strong>Conversion rate:</strong> 29%
+            <strong>Relevance scoring:</strong> For each offer accepted, rate how relevant it was: 1 (completely off-base) to 5 (perfectly matched). Target: 4.2+ average relevance score<br><br>
+            <strong>Expected vs. actual spend:</strong> Prediction algorithm estimated this guest would spend $340 on packages. They actually spent $285. Track prediction accuracy and retrain if estimates drift.<br><br>
+            <strong>Guest feedback:</strong> Post-stay survey: "How satisfied were you with personalized offers?" If dissatisfied, investigate: Too many offers? Wrong types? Improve next interaction.
             </blockquote>
 
-            <h2 id="post-stay">Post-Stay Upsell: Future Booking Incentives</h2>
+            <h3>A/B Testing & Optimization</h3>
 
-            <p>The guest relationship doesn't end at checkout. I use post-stay communication to drive future bookings and loyalty.</p>
-
-            <h3>Immediate Rebooking Offers</h3>
-
-            <blockquote>
-            <strong>Checkout day:</strong> "Thanks for staying with us! If you book your next visit within 48 hours, I'll give you 25% off + complimentary room upgrade. Use code COMEBACK25. When would you like to return?"<br><br>
-            <strong>Conversion rate:</strong> 11% (scarcity + immediate discount + upgrade incentive)
-            </blockquote>
-
-            <h3>Seasonal Campaign Targeting</h3>
-
-            <p>I send personalized offers based on past booking patterns:</p>
-
-            <blockquote>
-            <strong>Guest history:</strong> Stayed in February 2024 (winter escape from cold climate)<br><br>
-            <strong>My message (December 2024):</strong> "Hi Sarah! Escape the winter again? Your favorite ocean-view room is available in February 2025. Book by Dec 31 and get 20% off + free breakfast. Ready to feel the warm sand again?"<br><br>
-            <strong>Conversion rate:</strong> 15% (pattern recognition + personalization + urgency)
-            </blockquote>
-
-            <h2 id="optimization">Machine Learning & Conversion Optimization</h2>
-
-            <p>I continuously improve upsell performance through A/B testing and machine learning.</p>
-
-            <h3>A/B Testing Examples</h3>
+            <p>Continuously test offer variations to improve performance:</p>
 
             <ul>
-                <li><strong>Offer timing:</strong> Testing 7 days vs 14 days before arrival for room upgrades (result: 7 days converts 18% higher)</li>
-                <li><strong>Pricing tiers:</strong> Testing $69 vs $89 vs $119 upgrade pricing (result: $89 maximizes revenue per available room)</li>
-                <li><strong>Messaging tone:</strong> Testing "Limited time offer!" vs "Exclusive for you" (result: personalized tone converts 23% higher)</li>
-                <li><strong>Visual content:</strong> Testing text-only vs photo vs video upsells (result: single photo increases conversion 34%)</li>
+                <li><strong>Offer framing:</strong> Test "Upgrade to oceanview room (+$70/night)" vs. "Experience the view that made this hotel famous—oceanview rooms +$70/night." Which drives higher conversions?</li>
+                <li><strong>Price points:</strong> Test offering same upgrade at $50 vs. $70. Which maximizes revenue (acceptance rate × price)? Often lower prices drive higher volume but may not maximize revenue.</li>
+                <li><strong>Bundle composition:</strong> Test romance package #1 (upgrade + spa + champagne for $340) vs. romance package #2 (upgrade + dining credit + flowers for $280). Which converts better?</li>
+                <li><strong>Timing:</strong> Test offering upgrades at check-in vs. 2 days before arrival. Measure conversion rates and adjust timing accordingly.</li>
             </ul>
 
-            <h3>Predictive Upsell Modeling</h3>
+            <h3>Real-Time Dashboards & Monitoring</h3>
 
-            <p>I build guest propensity models to predict upsell likelihood:</p>
+            <p>Hotel managers need real-time visibility into offer performance. I provide comprehensive dashboards tracking:</p>
 
             <ul>
-                <li><strong>High propensity guests (>60% conversion probability):</strong> Offer premium upsells at full price</li>
-                <li><strong>Medium propensity (30-60%):</strong> Offer mid-tier pricing with urgency ("Only 2 suites left")</li>
-                <li><strong>Low propensity (<30%):</strong> Skip upsell to avoid annoying guests, or offer deeply discounted last-minute inventory</li>
+                <li><strong>Today's performance:</strong> How many guests offered upgrades today? How many accepted? Current acceptance rate: 38%. Revenue generated today: $2,840 (on pace for $1.04M annually)</li>
+                <li><strong>Week-to-date trends:</strong> Is this week performing better/worse than last week? Any concerning patterns?</li>
+                <li><strong>Top-performing offers:</strong> Which 3 offers converted best this month? Which underperformed? Use data to adjust offer mix</li>
+                <li><strong>Guest segment performance:</strong> Business travelers: 44% acceptance rate. Leisure travelers: 35% acceptance rate. Honeymooners: 62% acceptance rate. Optimize strategy per segment</li>
+                <li><strong>Revenue attribution:</strong> How much total incremental revenue generated by upselling vs. base bookings? Calculate true impact on bottom line</li>
+                <li><strong>Alerts & anomalies:</strong> System flags unusual patterns: "Acceptance rate dropped 12% Tuesday—why?" (Conference cancellation? New competing hotel?). Investigate root cause</li>
             </ul>
 
-            <h2 id="metrics">Upsell Performance Metrics</h2>
+            <h2 id="roi">ROI: Revenue Optimization Impact</h2>
 
-            <p>I track upsell effectiveness across categories:</p>
+            <h3>150-Room Resort Property</h3>
 
-            <ul>
-                <li><strong>Overall upsell conversion rate:</strong> 19.4% (vs 3.2% industry average for manual upselling)</li>
-                <li><strong>Revenue per available room (RevPAR) increase:</strong> +$18.50/room/night from upsells</li>
-                <li><strong>Average upsell value:</strong> $95/transaction</li>
-                <li><strong>Upsell attach rate:</strong> 47% of guests accept at least one upsell offer during their stay</li>
-                <li><strong>Top converting categories:</strong> Early check-in (65%), room upgrades (28%), F&B (32%), spa (19%)</li>
-            </ul>
+            <p><strong>Current state (manual upselling):</strong> 78% occupancy, $185 average daily rate, $18,000/year upsell revenue</p>
 
-            <h2 id="roi">ROI: Upsell Revenue Impact</h2>
+            <p><strong>With intelligent personalization (Claire):</strong> 38% upgrade acceptance (+$95K), 28% package acceptance (+$142K), 22% cross-sell success (+$58K), +0.4 star ratings (+$75K occupancy boost)</p>
 
-            <h3>180-Room Full-Service Resort</h3>
+            <p><strong>Total annual benefit: $370,000 | Claire cost: $48,000 | Net benefit: $322,000 | ROI: 671%</strong></p>
 
-            <p><strong>Current state (manual upselling):</strong></p>
-            <ul>
-                <li>Occupancy: 78% (average 140 rooms occupied/night)</li>
-                <li>Average daily rate (ADR): $285</li>
-                <li>Manual upsell capture rate: 8% of guests</li>
-                <li>Annual upsell revenue: $425,000</li>
-            </ul>
+            <h2 id="conclusion">Conclusion: Revenue as Guest Value</h2>
 
-            <p><strong>With automated upselling (Claire):</strong></p>
-            <ul>
-                <li>Upsell conversion rate: 24% (3x improvement)</li>
-                <li><strong>Room upgrades:</strong> 8,200 room-nights/year × 18% conversion × $89 avg = $131,000</li>
-                <li><strong>Early check-in:</strong> 730 requests/year × 65% conversion × $50 = $237,000</li>
-                <li><strong>Late checkout:</strong> 820 requests/year × 22% conversion × $55 = $99,000</li>
-                <li><strong>F&B upsells:</strong> 12,000 dining opportunities × 32% conversion × $85 avg check = $326,000</li>
-                <li><strong>Spa & activities:</strong> 8,200 guests × 19% conversion × $165 avg = $257,000</li>
-                <li><strong>Ancillary services:</strong> Parking upgrades, WiFi, amenities = $145,000</li>
-            </ul>
-
-            <p><strong>Total annual upsell revenue: $1,195,000</strong></p>
-            <p><strong>Increase vs manual upselling: $770,000 (+181%)</strong></p>
-            <p><strong>Claire Professional Tier cost: $60,000/year</strong></p>
-            <p><strong>Net revenue gain: $710,000 | ROI: 1,183%</strong></p>
-
-            <h2 id="conclusion">Conclusion: Upselling as Revenue Strategy</h2>
-
-            <p>Upselling isn't about being pushy—it's about offering value at the right time to guests who want it. A honeymooning couple wants the romantic suite upgrade. A business traveler wants early check-in to prepare for meetings. A family wants activities to keep kids entertained. These aren't annoyances—they're desired services that enhance the guest experience while generating incremental revenue.</p>
-
-            <p>The challenge is personalization at scale. Manual upselling is inconsistent, relies on staff remembering to ask, and uses generic offers that miss the mark. Automated upselling delivers the right offer to the right guest at the right time—every time. The result: higher RevPAR, better guest satisfaction (you offered something they wanted), and captured revenue that would otherwise go to competitors or sit unsold.</p>
+            <p>The most sustainable revenue optimization doesn't come from aggressive upselling—it comes from understanding guests deeply and offering genuine value they'll appreciate. When a couple celebrating their anniversary receives a perfectly-curated romantic package, they're delighted at the thoughtfulness. When a business traveler gets a productivity-focused upgrade, it's helpful. That's the difference between extracting value and creating it—and it's what drives long-term loyalty and positive reviews.</p>
 
             <div class="cta-box">
-                <h3>See Upsell Automation in Action</h3>
-                <p>Experience personalized, contextual upsell offers throughout the guest journey.</p>
-                <a href="/" class="cta-btn">Start Interactive Demo</a>
+                <h3>See Revenue Optimization in Action</h3>
+                <p>Experience how personalized offers increase revenue while enhancing guest satisfaction.</p>
+                <a href="/" class="cta-btn">Execute Concierge Demo</a>
             </div>
 
-            <h2 style="margin-top: 4rem;">Read Next</h2>
-            <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-                <a href="/hospitality/reservation-management.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Reservation Management →</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automated booking and channel management</p>
-                </a>
-                <a href="/hospitality/guest-communication.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Guest Communication →</h3>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Personalized multilingual messaging</p>
-                </a>
+            <!-- Read Next Section -->
+            <div class="read-next">
+                <h2>Continue the Interview</h2>
+                <div class="cards">
+                    <a href="/hospitality/guest-communication.html" class="card">
+                        <h3>Guest Communication</h3>
+                        <p>Personalized multilingual messaging from pre-arrival to post-stay.</p>
+                    </a>
+                    <a href="/hospitality/reservation-management.html" class="card">
+                        <h3>Reservation Management</h3>
+                        <p>Dynamic pricing and intelligent booking to increase RevPAR by 30%.</p>
+                    </a>
+                    <a href="/hospitality/staff-scheduling.html" class="card">
+                        <h3>Staff Scheduling</h3>
+                        <p>Demand-driven labor optimization with compliance enforcement.</p>
+                    </a>
+                </div>
             </div>
         </article>
 
@@ -334,30 +979,182 @@
             <div class="toc">
                 <h4>On This Page</h4>
                 <ul>
-                    <li><a href="#pre-arrival">Pre-Arrival Upsell Strategy</a></li>
-                    <li><a href="#dynamic-pricing">Dynamic Upsell Pricing</a></li>
-                    <li><a href="#arrival">Check-In Opportunities</a></li>
-                    <li><a href="#in-stay">In-Stay Revenue Optimization</a></li>
-                    <li><a href="#ancillary">Ancillary Revenue Streams</a></li>
-                    <li><a href="#post-stay">Post-Stay Booking Incentives</a></li>
-                    <li><a href="#optimization">ML & Conversion Optimization</a></li>
-                    <li><a href="#metrics">Performance Metrics</a></li>
+                    <li><a href="#personalization">Personalization Strategy</a></li>
+                    <li><a href="#room-upgrades">Room Upgrades</a></li>
+                    <li><a href="#packages">Amenity Packages</a></li>
+                    <li><a href="#ethical-boundaries">Ethical Boundaries</a></li>
+                    <li><a href="#loyalty-integration">Loyalty Integration</a></li>
+                    <li><a href="#offer-timing">Offer Timing & Channels</a></li>
+                    <li><a href="#integration">Systems Integration</a></li>
+                    <li><a href="#analytics">Performance Metrics</a></li>
                     <li><a href="#roi">ROI Analysis</a></li>
                     <li><a href="#conclusion">Conclusion</a></li>
                 </ul>
             </div>
 
             <div class="related">
-                <h4>Related Topics</h4>
+                <h4>Related Capabilities</h4>
                 <ul>
                     <li><a href="/hospitality/">← Hospitality Overview</a></li>
-                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
                     <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
                     <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
-                    <li><a href="/hospitality/complaint-resolution.html">Complaint Resolution</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
                 </ul>
             </div>
         </aside>
     </main>
+
+    <!-- Footer with Shadow Content -->
+    <footer>
+        <div class="footer-shadow">
+            <h2>Revenue Optimization: Privacy in Personalization</h2>
+            <p class="footer-shadow-intro">
+                Personalized offers based on guest data require careful privacy handling. Analyzing guest spending patterns, preferences, and behaviors to optimize offers is powerful—but must respect guest privacy and comply with regulations around profiling and automated decision-making.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Privacy & Compliance Analysis</button>
+
+            <div class="shadow-content" id="shadowContent">
+                <h3>Guest Profiling & Consent</h3>
+
+                <p>Using guest data to create detailed profiles for targeted upselling requires explicit consent. Claire obtains clear affirmative consent: "We'd like to provide personalized offers and recommendations based on your preferences and booking history. This helps us suggest upgrades and packages that match your needs. Would you like to receive these personalized recommendations?" Consent is granular—guests can opt into room upgrades while opting out of wellness packages. Consent is easy to revoke anytime, with immediate effect.</p>
+
+                <h3>Profiling Transparency & Fairness</h3>
+
+                <p>GDPR mandates transparency for automated decision-making. Claire provides a "What We Know" summary on guest account pages showing booking preferences, historical behavior, and feedback. Guests can view and edit their profile anytime. We audit offer patterns across demographic groups to detect bias. When bias is detected, we retrain the system. Testing ensures offers are accepted at similar rates across demographic groups.</p>
+
+                <h3>Spending Data & Behavioral Privacy</h3>
+
+                <p>Offer personalization uses spending history: previous upgrades purchased, dining preferences, activity interests, average spend per stay. This data is sensitive—it reveals financial capability and preferences. Claire protects this data: Spending data is encrypted separately from payment data. Guests can request summaries of what spending patterns we've tracked. Guests can opt out of spend-based personalization anytime. Behavioral data is deleted after 3 years of inactivity.</p>
+
+                <h3>Preference Inference & Algorithmic Transparency</h3>
+
+                <p>Our algorithms infer preferences from behavior (guest searched for spa services = likely spa interest). This inference can be wrong or intrusive. Claire ensures transparency: Guests can view inferred preferences: "We think you might like spa services (based on your previous booking)." Guests can correct inferences: "I actually hate spas" → System removes that preference. Guests can request deletion of inferred data. Algorithm explanations for each offer: "We recommend the romance package because you're celebrating an anniversary and previously enjoyed couples services."</p>
+
+                <h3>Behavioral Targeting & Vulnerability Protection</h3>
+
+                <p>Some guests are more vulnerable to aggressive upselling: stressed business travelers might be willing to overspend. Guests celebrating significant life events (honeymoon, divorce recovery) might be emotionally vulnerable. Claire implements ethical guardrails: Never upsell to guests showing distress signals (negative check-in feedback, complaint mentions). Limit offer frequency to vulnerable guest segments. Never exploit special occasions with artificially inflated pricing. Offer skepticism prompts: "This package might be more than you need—consider the standard offer instead."</p>
+
+                <h3>Price Discrimination & Fairness</h3>
+
+                <p>Dynamic pricing can become price discrimination if guests with identical profiles pay different prices. GDPR and consumer protection laws prohibit unfair discrimination. Claire ensures: A/B testing verifies similar guests receive similar offers and pricing. Audit trails show all price variations and justifications. Guests booking identical room categories pay similar rates regardless of demographic characteristics. Discounts are based on legitimate business factors (occupancy, lead time, loyalty status)—never on protected characteristics.</p>
+
+                <h3>Opt-Out Rights & Easy Decline</h3>
+
+                <p>Guests must be able to decline offers easily without penalty or judgment. Claire implements: Single-click opt-out for all offer categories. No penalties for declining (e.g., don't raise base room rate if guest rejects upgrade). Declining one offer doesn't prevent future offers. Clear messaging: "You can decline this offer anytime without affecting your reservation."</p>
+
+                <h3>Transparency in Discounting & Offers</h3>
+
+                <p>Upsell offers often use discounting psychology ("Save $150!"). This can be misleading if the baseline price is inflated. Claire ensures transparency: Show original price, discount amount, and final price clearly. Explain why this price is offered ("Industry rate is $400; we're offering $340 with this bundle"). Avoid artificial urgency: Never use fake scarcity ("Only 2 rooms left!") to pressure booking. Allow guests to research: Provide comparison pricing with competitors so they know if our offer is genuinely competitive.</p>
+
+                <h3>Data Minimization & Retention</h3>
+
+                <p>Personalized upselling requires guest data—but we shouldn't retain more than necessary. Claire implements: Collect only data essential for personalization. Profiles deleted after 2 years of inactivity. Guests can request immediate deletion of behavioral data. Granular retention: Keep booking preferences longer than spending data.</p>
+
+                <h3>Algorithm Explainability & Control</h3>
+
+                <p>Automated decision-making should be explainable. When Claire recommends an upgrade, the guest should understand why. Implementation: Every offer includes explanation: "We recommend this package because you're celebrating an anniversary (noted in your reservation) and previously purchased similar romance packages." Guests can rate recommendation quality: "This was a good recommendation" or "I don't like this suggestion." System learns from feedback and improves future recommendations.</p>
+
+                <h3>Audit & Monitoring for Bias</h3>
+
+                <p>Even with good intentions, automated systems can perpetuate bias. Claire monitors continuously: Quarterly analysis of offer acceptance rates by demographic group (age, gender, nationality if detectable). Investigation if acceptance rates differ significantly across groups. Retraining if bias is detected. Annual third-party audit verifying non-discrimination in upselling practices.</p>
+
+                <h3>Conclusion: Ethical Revenue Optimization</h3>
+
+                <p>The most sustainable revenue optimization respects guest privacy and autonomy. Guests benefit from personalized offers (lower prices, better recommendations) while maintaining control over their data. Claire's approach is transparent, consensual, and fair—offering real value while protecting guest interests and complying with privacy law. Revenue growth that respects guest dignity is more sustainable than aggressive extraction tactics. Guests who feel respected become loyal customers who return and recommend your property to others.</p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Hospitality Capabilities</h4>
+                <ul>
+                    <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
+                    <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compliance</h4>
+                <ul>
+                    <li><a href="/compliance/pci-dss.html">PCI DSS</a></li>
+                    <li><a href="/compliance/gdpr.html">GDPR Compliance</a></li>
+                    <li><a href="/compliance/ccpa.html">CCPA Compliance</a></li>
+                    <li><a href="/compliance/soc2.html">SOC 2 Type II</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">C</div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">
+                    I'm Claire, your AI revenue optimization orchestrator. Want to see how I increase revenue by 18% through personalized offers that guests actually appreciate?
+                </p>
+                <a href="/hospitality/concierge-demo.html" class="dock-cta">Execute Live Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDock() {
+            const panel = document.getElementById('dockPanel');
+            panel.classList.toggle('open');
+        }
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Privacy & Compliance Analysis'
+                : 'Read Full Privacy & Compliance Analysis';
+        }
+        document.addEventListener('click', function(event) {
+            const dock = document.querySelector('.claire-dock');
+            const panel = document.getElementById('dockPanel');
+            if (!dock.contains(event.target) && panel.classList.contains('open')) {
+                panel.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>
