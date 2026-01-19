@@ -274,6 +274,30 @@
         async function startConversation() {
             await pause(1000);
 
+            // Check if returning visitor
+            const existingName = sessionStorage.getItem('userName');
+            const existingEmail = sessionStorage.getItem('userEmail');
+
+            if (existingName) {
+                // Returning visitor flow
+                userName = existingName;
+                userEmail = existingEmail || '';
+                userLocation = sessionStorage.getItem('userLocation') || '';
+
+                const msg1 = addMessage('');
+                await type(msg1, `Welcome back, ${userName}!`);
+
+                await pause(1200);
+
+                const msg2 = addMessage('');
+                await type(msg2, 'Which industry would you like to explore today?');
+
+                await pause(500);
+                showIndustryButtons();
+                return;
+            }
+
+            // New visitor flow
             const msg1 = addMessage('');
             await type(msg1, 'I am Claire.');
 
