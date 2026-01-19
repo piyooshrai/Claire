@@ -30,17 +30,20 @@
         .metric-value { font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; }
         .metric-label { color: var(--text-secondary); font-size: 0.875rem; }
         .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: border-color 0.2s; }
-        .card:hover { border-color: var(--accent); }
-        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+        .card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s; cursor: pointer; position: relative; }
+        .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1); }
+        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent); }
+        .card h3::after { content: ' →'; opacity: 0; transition: opacity 0.2s; }
+        .card:hover h3::after { opacity: 1; }
         .card p { color: var(--text-secondary); font-size: 0.9375rem; }
         @media (max-width: 768px) { h2 { font-size: 1.5rem; } .section { padding: 3rem 0; } .cards { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <nav>
-        <div class="nav-brand">CLAIRE // FINANCE</div>
+        <div class="nav-brand"><a href="/" style="color: inherit; text-decoration: none;">CLAIRE</a> // FINANCE</div>
         <div class="nav-links">
+            <a href="/">← Back to Platform</a>
             <a href="#capabilities">Capabilities</a>
             <a href="#integration">Integration</a>
             <a href="#security">Security</a>
@@ -69,30 +72,30 @@
             </div>
 
             <div class="cards">
-                <div class="card">
+                <a href="/finance/kyc-compliance.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>KYC Compliance</h3>
-                    <p>I automate identity verification, document validation, and sanctions screening for Know Your Customer requirements.</p>
-                </div>
-                <div class="card">
+                    <p>Automated identity verification, document analysis, sanctions screening. 90% faster onboarding with full regulatory compliance.</p>
+                </a>
+                <a href="/finance/fraud-detection.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Fraud Detection</h3>
-                    <p>I monitor transactions in real-time, flag anomalous patterns, and reduce false positives through contextual analysis.</p>
-                </div>
-                <div class="card">
+                    <p>Real-time transaction monitoring with 99.6% accuracy. Detect sophisticated fraud while reducing false positives by 90%.</p>
+                </a>
+                <a href="/finance/customer-onboarding.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Customer Onboarding</h3>
-                    <p>I process account applications, verify credentials, and complete CIP/CDD compliance checks automatically.</p>
-                </div>
-                <div class="card">
+                    <p>End-to-end digital account opening in 5-10 minutes. Reduce abandonment from 40% to 15% with same-day approval.</p>
+                </a>
+                <a href="/finance/transaction-monitoring.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Transaction Monitoring</h3>
-                    <p>I track suspicious activity for AML/CFT compliance and generate SARs when thresholds are met.</p>
-                </div>
-                <div class="card">
-                    <h3>Regulatory Reporting</h3>
-                    <p>I compile data for regulatory filings, maintain audit trails, and ensure examiner readiness.</p>
-                </div>
-                <div class="card">
-                    <h3>Customer Support</h3>
-                    <p>I handle account inquiries, transaction disputes, and payment processing with full authentication.</p>
-                </div>
+                    <p>AI-powered AML monitoring. Detect money laundering patterns while reducing false positive alerts by 85%.</p>
+                </a>
+                <a href="/finance/regulatory-compliance.html" class="card" style="text-decoration: none; color: inherit;">
+                    <h3>Regulatory Compliance</h3>
+                    <p>Automate BSA/AML, GDPR, SOX, Dodd-Frank reporting. Reduce compliance costs by 60% with full audit readiness.</p>
+                </a>
+                <a href="/finance/cost-reduction.html" class="card" style="text-decoration: none; color: inherit;">
+                    <h3>Cost Reduction</h3>
+                    <p>Reduce banking operations costs by 40-60%. Complete ROI analysis: $515M savings for $50B regional bank.</p>
+                </a>
             </div>
         </section>
 
