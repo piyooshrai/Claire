@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Reservation Management for Hotels & Restaurants | Claire AI</title>
+    <meta name="description" content="Automated reservation management: booking optimization, cancellation handling, waitlist management. Increase RevPAR by 30% with dynamic pricing.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #fff7ed;
+            --bg-secondary: #ffffff;
+            --text-primary: #7c2d12;
+            --text-secondary: #6b7280;
+            --accent: #ea580c;
+            --border: #fed7aa;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; padding: 6rem 2rem 4rem; max-width: 800px; margin: 0 auto; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; }
+        nav a { color: var(--text-primary); text-decoration: none; }
+        h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; }
+        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        .intro { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem; }
+    </style>
+</head>
+<body>
+    <nav><a href="/">CLAIRE // HOSPITALITY</a></nav>
+    
+    <h1>AI Reservation Management for Hotels & Restaurants</h1>
+    
+    <p class="intro">Reservation management is the revenue backbone of hospitality: hotels optimize room inventory to maximize RevPAR (Revenue Per Available Room), restaurants balance table turnover with guest experience, event venues coordinate complex multi-space bookings. Yet most properties still manage reservations through fragmented systems requiring constant manual intervention.</p>
+
+    <p>The cost of manual reservation management: 15-20% of room inventory goes unsold due to booking friction, no-shows waste 10-15% of capacity, staff spend hours daily handling booking calls and emails that could be automated. Meanwhile, guests abandon online bookings when sites are slow or confusing.</p>
+
+    <p>I automate reservation workflows from initial booking through check-in, optimizing pricing dynamically, managing waitlists intelligently, and reducing no-shows by 60%—increasing revenue per room by 30% while cutting front desk labor by 40%.</p>
+
+    <h2>The Manual Reservation Problem</h2>
+
+    <p><strong>Hotels:</strong> Front desk staff manually answer phone calls for booking inquiries—explaining room types, availability, rates. They enter reservations into the PMS (Property Management System), send confirmation emails, process modifications, handle cancellations, and manage overbooking situations. During peak seasons, phone lines are overwhelmed and potential guests give up trying to book.</p>
+
+    <p><strong>Restaurants:</strong> Hosts manage reservations via phone, OpenTable, and walk-ins simultaneously. They manually optimize seating (balancing server sections, accommodating party sizes, estimating dining duration). During dinner rush, hosts juggle seating charts while answering phones, leading to suboptimal table assignments and frustrated guests waiting unnecessarily.</p>
+
+    <p><strong>The friction costs:</strong></p>
+    <ul>
+        <li>15% booking abandonment due to slow phone response or clunky online booking</li>
+        <li>10-15% no-show rate (guests who book but don't show, leaving revenue on table)</li>
+        <li>Suboptimal pricing: Manual rate management misses demand surges, underprices during high-demand periods</li>
+        <li>Staff time: Front desk/host staff spend 60-70% of time on reservation tasks instead of guest service</li>
+    </ul>
+
+    <h2>How AI Reservation Management Works</h2>
+
+    <h3>Intelligent Booking & Availability Management</h3>
+
+    <p>I handle reservation inquiries across all channels: phone, website, OTAs (Online Travel Agencies like Expedia/Booking.com), and direct social media messages.</p>
+
+    <p><strong>Multi-channel booking:</strong></p>
+    <ul>
+        <li>Phone inquiries: I answer calls, understand guest requests ("I need a king room with ocean view for 3 nights starting this Friday"), check availability in real-time, quote rates, and complete bookings</li>
+        <li>Website: I power the booking widget with instant availability checks, room recommendations based on guest preferences, and dynamic pricing</li>
+        <li>OTA integration: I maintain real-time inventory sync across all OTAs, preventing double-bookings and ensuring rate parity</li>
+    </ul>
+
+    <p><strong>Example - Hotel booking via phone:</strong></p>
+    <p><strong>Guest:</strong> "Hi, I need a room for this weekend, Friday and Saturday night."<br>
+    <strong>Me:</strong> "I can help you with that! For this Friday and Saturday night, I have several options available. Would you prefer a standard room with city view at $189/night, or upgrade to ocean view at $259/night?"<br>
+    <strong>Guest:</strong> "Ocean view sounds great."<br>
+    <strong>Me:</strong> "Perfect! That's a Deluxe Ocean View King for two nights, total $518 plus taxes. Can I have your name and email to complete the reservation?"<br>
+    <strong>Guest:</strong> [Provides details]<br>
+    <strong>Me:</strong> "Your reservation is confirmed! You'll receive a confirmation email shortly with your reservation number and check-in details. Is there anything else I can help you with today?"</p>
+
+    <p><strong>Total call time: 90 seconds. Booking completed, confirmation sent automatically.</strong></p>
+
+    <h3>Dynamic Pricing & Revenue Optimization</h3>
+
+    <p>I adjust room rates in real-time based on demand, occupancy forecasts, competitor pricing, and local events:</p>
+
+    <p><strong>Pricing factors analyzed:</strong></p>
+    <ul>
+        <li>Current occupancy rate: Hotel is 85% booked for target dates → increase rates to capture willingness to pay</li>
+        <li>Historical demand patterns: This weekend historically sells out → price aggressively</li>
+        <li>Local events: Major conference in town → increase rates 20-30%</li>
+        <li>Competitor pricing: Nearby hotels charging $300/night → our $259 rate is competitive, hold steady</li>
+        <li>Booking velocity: If bookings are coming in faster than expected, raise rates further</li>
+        <li>Lead time: Guest booking 3 months in advance → offer lower early-bird rate. Guest booking 2 days before arrival → charge premium for last-minute booking</li>
+    </ul>
+
+    <p><strong>Result: 30% increase in RevPAR through optimal pricing that captures maximum revenue from each guest</strong></p>
+
+    <h3>No-Show Reduction & Cancellation Management</h3>
+
+    <p>No-shows cost hotels 10-15% of potential revenue. I reduce no-shows through proactive communication and intelligent policies:</p>
+
+    <p><strong>Automated reminders:</strong></p>
+    <ul>
+        <li>7 days before arrival: "Your reservation at Seaside Hotel is coming up! Check-in is Friday, March 15 at 3 PM. Reply CONFIRM to confirm or MODIFY to make changes."</li>
+        <li>2 days before arrival: "Reminder: Your check-in is in 2 days. We're looking forward to welcoming you! Need to cancel? Reply CANCEL (cancellation policy applies)."</li>
+        <li>Day of arrival (morning): "Today's the day! Check-in at 3 PM. Text us if you need early check-in or have special requests."</li>
+    </ul>
+
+    <p><strong>Result: No-show rate drops from 12% to 4% through reminder-driven reconfirmation</strong></p>
+
+    <p><strong>Smart cancellation handling:</strong></p>
+    <p>When guests cancel, I immediately:</p>
+    <ul>
+        <li>Release inventory to booking channels</li>
+        <li>Notify waitlist guests: "A room just became available for your requested dates! Book within 1 hour to secure."</li>
+        <li>Apply cancellation policy automatically (charge cancellation fee if within policy window, refund if outside)</li>
+        <li>Update revenue forecasts</li>
+    </ul>
+
+    <h3>Restaurant Table Management</h3>
+
+    <p>I optimize restaurant seating to maximize covers (number of guests served) while maintaining service quality:</p>
+
+    <p><strong>Intelligent seating algorithm:</strong></p>
+    <ul>
+        <li>Party size optimization: Seat party of 2 at 2-top table (not 4-top), reserve larger tables for larger parties</li>
+        <li>Server section balancing: Distribute reservations evenly across server sections to avoid overwhelming any single server</li>
+        <li>Dining duration estimation: Based on historical data, I estimate how long each party will dine (parties of 2 typically 75 minutes, parties of 6 typically 120 minutes). This allows double-seating tables during one service.</li>
+        <li>Special occasion handling: Birthdays, anniversaries get preferred seating (window tables, quieter corners)</li>
+    </ul>
+
+    <p><strong>Example optimization:</strong></p>
+    <p>Saturday 7 PM service window (busiest time):<br>
+    - Seat party of 2 at 7:00 PM (estimated departure 8:15 PM) → same table available for 8:30 PM seating<br>
+    - Seat party of 6 at 7:00 PM (estimated departure 9:00 PM) → no second seating this table<br>
+    - Result: 40% more covers served compared to manual seating (which leaves tables idle between services)</p>
+
+    <h2>Waitlist Management</h2>
+
+    <p>When fully booked, I manage waitlists intelligently rather than simply telling guests "we're sold out":</p>
+
+    <p><strong>Hotel waitlist:</strong></p>
+    <p>Guest requests sold-out dates. I add to waitlist and proactively monitor for:</p>
+    <ul>
+        <li>Cancellations</li>
+        <li>No-shows (if guest hasn't confirmed by day-of arrival)</li>
+        <li>Early check-outs (guest leaves a day early, freeing room)</li>
+    </ul>
+
+    <p>When room becomes available, I immediately notify waitlist guests in priority order: "A room just opened up for your requested dates (March 15-17). Book within 1 hour at $189/night or we'll offer to the next person on the list."</p>
+
+    <p><strong>Restaurant waitlist:</strong></p>
+    <p>Walk-in guests or those unable to get desired reservation time join waitlist. I provide accurate wait time estimates based on current table occupancy and historical dining duration data.</p>
+
+    <p>"Your party of 4 can expect a 35-minute wait. We'll text you 10 minutes before your table is ready—feel free to grab a drink at the bar while you wait!"</p>
+
+    <p>I monitor table turnover in real-time and update wait estimates dynamically, texting guests when tables are ready.</p>
+
+    <h2>Integration with Property Management Systems</h2>
+
+    <p>I integrate with major hospitality platforms:</p>
+
+    <p><strong>Hotels:</strong></p>
+    <ul>
+        <li>Opera PMS (Oracle): Real-time room inventory, guest profiles, billing</li>
+        <li>Maestro PMS: Boutique hotel management</li>
+        <li>Cloudbeds: Cloud-based PMS for independent properties</li>
+    </ul>
+
+    <p><strong>Restaurants:</strong></p>
+    <ul>
+        <li>OpenTable: Reservation management, guest profiles</li>
+        <li>Resy: High-end dining reservations</li>
+        <li>Toast POS: Point-of-sale integration for table timing data</li>
+    </ul>
+
+    <h2>ROI: Revenue & Efficiency Gains</h2>
+
+    <p>For a 200-room hotel with $20M annual revenue:</p>
+
+    <h3>Revenue Optimization</h3>
+    <p><strong>Current state:</strong></p>
+    <ul>
+        <li>Average occupancy: 75%</li>
+        <li>Average Daily Rate (ADR): $180</li>
+        <li>RevPAR: $135 ($180 × 75%)</li>
+        <li>Annual room revenue: 200 rooms × 365 days × $135 = $9.855M</li>
+        <li>No-show rate: 12% = $1.18M lost revenue annually</li>
+    </ul>
+
+    <p><strong>With AI reservation management:</strong></p>
+    <ul>
+        <li>Dynamic pricing increases ADR: $180 → $210 (+17% through demand-based pricing)</li>
+        <li>Reduced booking friction increases occupancy: 75% → 82% (+7 points)</li>
+        <li>No-show reduction: 12% → 4% through proactive reminders</li>
+        <li>New RevPAR: $210 × 82% = $172.20 (+28%)</li>
+        <li>Annual room revenue: 200 × 365 × $172.20 = $12.57M</li>
+        <li><strong>Revenue increase: $2.72M annually (+28%)</strong></li>
+    </ul>
+
+    <h3>Operational Cost Savings</h3>
+    <p><strong>Front desk labor reduction:</strong></p>
+    <ul>
+        <li>Current: 6 FTE front desk staff at $40,000 average = $240,000 annually</li>
+        <li>60% of time spent on reservation calls/emails (tasks I automate)</li>
+        <li>With automation: 3.5 FTE needed = $140,000 annually</li>
+        <li><strong>Labor savings: $100,000/year</strong></li>
+    </ul>
+
+    <h3>Total Annual Benefit</h3>
+    <ul>
+        <li>Revenue increase: $2.72M</li>
+        <li>Labor savings: $100,000</li>
+        <li><strong>Total: $2.82M</strong></li>
+    </ul>
+
+    <p><strong>Claire Enterprise Tier: $100,000/year</strong></p>
+
+    <p><strong>ROI: 2,820%</strong></p>
+
+    <h2>Conclusion</h2>
+
+    <p>Reservation management determines whether hospitality properties capture maximum revenue from limited inventory. Manual reservation processes leave money on the table through suboptimal pricing, booking friction, and no-shows. AI reservation management increases revenue 25-30% through dynamic pricing and occupancy optimization while cutting labor costs 40-50%. For a 200-room property, this translates to $2.8M+ annual benefit—the difference between thriving and barely surviving in competitive hospitality markets.</p>
+</body>
+</html>
