@@ -34,6 +34,41 @@
             color: var(--text-primary);
             font-size: 1.0625rem;
             line-height: 1.8;
+            position: relative;
+        }
+
+        /* Breathing grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        /* Ensure content is above grid */
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
         }
 
         /* Orchestrator Navigation */
