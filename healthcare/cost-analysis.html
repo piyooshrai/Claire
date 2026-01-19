@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-industry="healthcare">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,103 +30,220 @@
     </script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* Healthcare color system */
         :root {
-            --bg-primary: #f8fafc;
+            --bg-primary: #eff6ff;
             --bg-secondary: #ffffff;
             --text-primary: #0f172a;
             --text-secondary: #64748b;
             --accent: #2563eb;
-            --border: #e2e8f0;
-            --success: #059669;
-            --warning: #dc2626;
+            --accent-light: #60a5fa;
+            --border: #dbeafe;
+            --shadow: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Breathing gradient background animation */
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
-            background: var(--bg-primary);
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #eff6ff 100%);
+            background-size: 200% 200%;
+            animation: breathe 15s ease infinite;
             color: var(--text-primary);
             font-size: 1.0625rem;
             line-height: 1.8;
+            position: relative;
         }
 
+        /* Breathing grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        /* Ensure content is above grid */
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Orchestrator Navigation */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: var(--bg-secondary);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
-            padding: 1.5rem 2rem;
-            z-index: 100;
-            font-weight: 600;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
             font-size: 1.125rem;
             letter-spacing: 0.05em;
-        }
-
-        nav a {
             color: var(--text-primary);
-            text-decoration: none;
         }
 
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Main content container */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 850px;
+        }
+
+        /* Breadcrumb */
         .breadcrumb {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             color: var(--text-secondary);
             font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .breadcrumb a {
             color: var(--accent);
             text-decoration: none;
+            transition: color 0.2s;
         }
 
         .breadcrumb a:hover {
-            text-decoration: underline;
+            color: var(--accent-light);
         }
 
-        main {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 6rem 2rem 4rem;
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 4rem;
-        }
-
-        article {
-            max-width: 800px;
-        }
-
+        /* Dramatic typography */
         h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            line-height: 1.2;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
             margin-bottom: 2rem;
-            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
         }
 
         h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            line-height: 1.3;
-            margin: 3rem 0 1.5rem;
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 4rem 0 1.5rem;
             color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.625rem;
             font-weight: 600;
-            margin: 2rem 0 1rem;
-            color: var(--text-primary);
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
         }
 
         p {
             margin-bottom: 1.5rem;
+            line-height: 1.8;
         }
 
         strong {
@@ -134,48 +251,55 @@
             color: var(--text-primary);
         }
 
-        .intro {
-            font-size: 1.25rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-        }
-
-        .cost-comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .cost-card {
+        /* Stat callout boxes */
+        .stat-callout {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
             padding: 2.5rem;
-            border: 2px solid var(--border);
-            background: var(--bg-secondary);
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
         }
 
-        .cost-card.ai {
-            border-color: var(--success);
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .stat-context {
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Cost cards */
+        .cost-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            margin: 2rem 0;
         }
 
         .cost-card h3 {
             margin-top: 0;
-            color: var(--text-primary);
+            color: var(--accent);
         }
 
         .cost-total {
             font-size: 3rem;
-            font-weight: 600;
+            font-weight: 800;
             margin: 1.5rem 0;
             line-height: 1;
-        }
-
-        .cost-card.human .cost-total {
-            color: var(--warning);
-        }
-
-        .cost-card.ai .cost-total {
-            color: var(--success);
         }
 
         .cost-breakdown {
@@ -197,10 +321,12 @@
         }
 
         .calculator {
-            margin: 3rem 0;
-            padding: 3rem;
-            border: 2px solid var(--accent);
             background: var(--bg-secondary);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .calculator h3 {
@@ -227,19 +353,21 @@
             font-size: 1rem;
             font-family: inherit;
             color: var(--text-primary);
+            border-radius: 6px;
         }
 
         .calculator-result {
             padding: 2rem;
             background: #ecfdf5;
-            border-left: 4px solid var(--success);
+            border-left: 4px solid #059669;
             margin-top: 2rem;
+            border-radius: 6px;
         }
 
         .result-value {
             font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--success);
+            font-weight: 700;
+            color: #059669;
             margin-bottom: 0.5rem;
         }
 
@@ -253,6 +381,8 @@
             border-collapse: collapse;
             margin: 2rem 0;
             border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .comparison-table th,
@@ -263,13 +393,13 @@
         }
 
         .comparison-table th {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             font-weight: 600;
             color: var(--text-primary);
         }
 
         .comparison-table td {
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
         }
 
         .highlight-box {
@@ -277,6 +407,7 @@
             border-left: 4px solid var(--accent);
             padding: 1.5rem;
             margin: 2rem 0;
+            border-radius: 6px;
         }
 
         .stat-grid {
@@ -290,53 +421,110 @@
             padding: 2rem;
             border: 1px solid var(--border);
             background: var(--bg-secondary);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
-        .stat-value {
+        .stat-card .stat-value {
             font-size: 2.5rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--accent);
             line-height: 1;
             margin-bottom: 0.5rem;
         }
 
-        .stat-label {
+        .stat-card .stat-label {
             color: var(--text-secondary);
             font-size: 0.875rem;
+            line-height: 1.5;
         }
 
-        .cta-box {
-            margin: 4rem 0;
-            padding: 3rem;
-            border: 1px solid var(--accent);
+        /* Example boxes */
+        .example-box {
             background: var(--bg-secondary);
-            text-align: center;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
-        .cta-box h3 {
+        .example-box strong {
+            color: var(--accent);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* Read Next cards */
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
             margin-top: 0;
         }
 
-        .cta-btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 1.5rem 2rem;
-            border: 1px solid var(--accent);
-            background: transparent;
-            color: var(--accent);
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 600;
+            color: inherit;
             transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
-        .cta-btn:hover {
-            background: var(--accent);
-            color: white;
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
         }
 
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Sidebar */
         aside {
             position: sticky;
-            top: 6rem;
+            top: 8rem;
             height: fit-content;
         }
 
@@ -345,19 +533,22 @@
             border: 1px solid var(--border);
             padding: 1.5rem;
             margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
 
         .toc h4, .related h4 {
             font-size: 0.875rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            color: var(--accent);
         }
 
         .toc ul, .related ul {
             list-style: none;
+            margin: 0;
         }
 
         .toc li, .related li {
@@ -369,24 +560,301 @@
             text-decoration: none;
             font-size: 0.9375rem;
             transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
         }
 
         .toc a:hover, .related a:hover {
             color: var(--accent);
         }
 
-        ul, ol {
+        /* Footer with shadow content */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+        }
+
+        .footer-shadow {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .shadow-content blockquote {
+            background: #f1f5f9;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+            line-height: 1.8;
+        }
+
+        .shadow-content ul {
             margin-left: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        li {
+        .shadow-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .shadow-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-column li {
             margin-bottom: 0.5rem;
         }
 
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .industry-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .industry-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+        }
+
+        .dock-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .dock-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .dock-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px var(--shadow);
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .dock-panel.open {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dock-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dock-header h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .dock-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dock-body {
+            padding: 1.5rem;
+        }
+
+        .dock-message {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .dock-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .dock-cta:hover {
+            background: var(--accent-light);
+        }
+
+        /* Responsive */
         @media (max-width: 1024px) {
             main {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             aside {
@@ -394,8 +862,16 @@
                 top: 0;
             }
 
-            .cost-comparison {
-                grid-template-columns: 1fr;
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
             }
         }
 
@@ -405,28 +881,40 @@
             }
 
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.75rem;
             }
 
-            main {
-                padding: 5rem 1.5rem 2rem;
+            .stat-value {
+                font-size: 3rem;
             }
 
-            .stat-grid {
+            .footer-nav {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-<body>
+<body data-industry="healthcare">
+    <!-- Orchestrator Navigation -->
     <nav>
-        <a href="/">CLAIRE // HEALTHCARE</a>
+        <div class="nav-container">
+            <div class="nav-brand">
+                CLAIRE <span>//</span> CLINICAL ORCHESTRATOR
+            </div>
+            <div class="nav-links">
+                <a href="/healthcare/#work-history">Work History</a>
+                <a href="/healthcare/#technical-stack">Technical Stack</a>
+                <a href="/healthcare/#security-clearance">Security Clearance</a>
+                <a href="/healthcare/cost-analysis.html">Cost Analysis</a>
+                <a href="/healthcare/voice-triage-demo.html" class="nav-cta">Execute Voice Triage Demo</a>
+            </div>
+        </div>
     </nav>
 
     <main>
         <article>
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/#capabilities">Healthcare</a> / Cost Analysis
+                <a href="/">Home</a> <span>/</span> <a href="/healthcare/">Healthcare</a> <span>/</span> Cost Analysis
             </div>
 
             <h1>AI vs Human Receptionist: True Cost Comparison for Medical Practices</h1>
@@ -437,13 +925,22 @@
 
             <p>The question isn't whether to use AI for administrative functions. The question is: <strong>What is the true total cost of ownership for human receptionists versus AI assistants?</strong> Let's break down the numbers with full transparency—salary, benefits, training, turnover, opportunity costs, and long-term scalability.</p>
 
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">$58,420</div>
+                <div class="stat-label">Human receptionist total cost (annually)</div>
+                <div class="stat-context">
+                    Full-time medical receptionist in a 10-provider practice: $37,440 base salary + $8,500 health insurance + $2,864 payroll taxes + $2,160 PTO + $1,123 retirement + $750 workers comp + $4,680 training + $903 recruitment. This assumes zero turnover.
+                </div>
+            </div>
+
             <h2>The Full Cost of a Human Medical Receptionist</h2>
 
             <p>When practice managers evaluate receptionist costs, they typically focus on hourly wage or annual salary. But total cost of ownership includes much more:</p>
 
-            <div class="cost-card human">
+            <div class="cost-card">
                 <h3>Human Receptionist (Full-Time)</h3>
-                <div class="cost-total">$58,420</div>
+                <div class="cost-total" style="color: var(--accent);">$58,420</div>
                 <div style="color: var(--text-secondary); margin-bottom: 2rem;">Total Annual Cost (10-Provider Practice)</div>
 
                 <ul class="cost-breakdown">
@@ -486,7 +983,16 @@
 
             <h3>The Hidden Cost: Turnover</h3>
 
-            <p>According to the Bureau of Labor Statistics, the median tenure for administrative support workers in healthcare is 3.1 years. Turnover rate: approximately 32% annually. When a receptionist leaves, you incur:</p>
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">32%</div>
+                <div class="stat-label">Average annual receptionist turnover rate</div>
+                <div class="stat-context">
+                    According to the Bureau of Labor Statistics, medical administrative staff turnover averages 32% annually—one of the highest rates in healthcare. When a receptionist leaves, replacement cost per departure: $15,000-$25,000. At 32% turnover, this adds $5,000-$8,000 annually to true cost of ownership.
+                </div>
+            </div>
+
+            <p>When a receptionist leaves, you incur:</p>
 
             <ul>
                 <li><strong>Lost productivity:</strong> 2-4 weeks between departure and new hire start date. Existing staff cover duties (poorly), or you pay overtime to remaining team members.</li>
@@ -494,8 +1000,6 @@
                 <li><strong>Training costs:</strong> 3-6 months for full proficiency. New hire operates at 30-50% productivity during training while earning full salary.</li>
                 <li><strong>Knowledge loss:</strong> Departing staff take institutional knowledge with them—which patients need special handling, which insurance plans are problematic, which providers have scheduling quirks.</li>
             </ul>
-
-            <p>Estimated turnover cost per departure: <strong>$15,000-$25,000</strong> (per SHRM studies on replacement cost as % of annual salary). At a 32% turnover rate, add $5,000-$8,000 annually to the true cost.</p>
 
             <p><strong>Revised total annual cost with turnover:</strong> $63,420-$66,420 per receptionist.</p>
 
@@ -517,9 +1021,9 @@
 
             <h2>The Full Cost of Claire AI</h2>
 
-            <div class="cost-card ai">
+            <div class="cost-card">
                 <h3>Claire AI (Professional Tier)</h3>
-                <div class="cost-total">$48,000</div>
+                <div class="cost-total" style="color: var(--accent);">$48,000</div>
                 <div style="color: var(--text-secondary); margin-bottom: 2rem;">Total Annual Cost (All-Inclusive)</div>
 
                 <ul class="cost-breakdown">
@@ -595,7 +1099,7 @@
                     </select>
                 </div>
 
-                <button class="cta-btn" onclick="calculateROI()" style="margin-top: 1rem; display: block; width: 100%;">Calculate My Savings</button>
+                <button class="cta-btn" onclick="calculateROI()" style="margin-top: 1rem; display: block; width: 100%; padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Calculate My Savings</button>
 
                 <div class="calculator-result" id="result" style="display: none;">
                     <div class="result-value" id="savings">$0</div>
@@ -759,6 +1263,15 @@
 
             <h2>The Bottom Line: ROI Math</h2>
 
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">4.2 months</div>
+                <div class="stat-label">ROI break-even period for AI automation</div>
+                <div class="stat-context">
+                    For a typical 10-provider practice deploying Claire: $47,130 annual savings (reduced from $190,260 to $143,130). ROI: 98%. 3-year net benefit: $141,390. This assumes conservative math not accounting for no-show reduction ($50K-$120K/year) or value-based reimbursement improvements.
+                </div>
+            </div>
+
             <p>For a typical 10-provider practice:</p>
 
             <p><strong>Current State (3 FTE Receptionists):</strong><br>
@@ -777,13 +1290,27 @@
 
             <p>This is conservative math. It doesn't account for revenue gains from reduced no-shows (worth $50K-$120K/year for most practices) or improved patient satisfaction scores (which impact value-based reimbursement).</p>
 
-            <div class="cta-box">
-                <h3>See My Work in Action</h3>
-                <p>I handle appointment scheduling, insurance verification, and patient communication 24/7. No benefits, no turnover, no hiring headaches. Let's discuss how I fit into your practice's operational model.</p>
-                <a href="/" class="cta-btn">Start Interactive Demo</a>
+            <!-- Read Next Section -->
+            <div class="read-next">
+                <h2>Continue Exploring Healthcare AI</h2>
+                <div class="cards">
+                    <a href="/healthcare/phone-tree-alternative.html" class="card">
+                        <h3>Conversational AI vs Phone Trees</h3>
+                        <p>Why traditional intent-matching chatbots fail healthcare. How reasoning engines enable 94.2% conversation completion vs 33% industry average.</p>
+                    </a>
+                    <a href="/healthcare/insurance-verification.html" class="card">
+                        <h3>Insurance Verification Automation</h3>
+                        <p>Real-time eligibility verification with X12 EDI 270/271 transactions. Reduce claim denials by 40% and improve collections.</p>
+                    </a>
+                    <a href="/healthcare/ehr-integration.html" class="card">
+                        <h3>EHR Integration Standards</h3>
+                        <p>How AI virtual assistants integrate with Epic, Cerner, Athenahealth using FHIR R4 APIs and secure data access patterns.</p>
+                    </a>
+                </div>
             </div>
         </article>
 
+        <!-- Enhanced Sidebar -->
         <aside>
             <div class="toc">
                 <h4>On This Page</h4>
@@ -798,15 +1325,266 @@
             </div>
 
             <div class="related">
-                <h4>Related Topics</h4>
+                <h4>Related Capabilities</h4>
                 <ul>
-                    <li><a href="/healthcare/insurance-verification.html">Insurance Verification ROI</a></li>
-                    <li><a href="/healthcare/phone-tree-alternative.html">Conversational AI vs Phone Trees</a></li>
-                    <li><a href="/healthcare/ehr-integration.html">EHR Integration Guide</a></li>
+                    <li><a href="/healthcare/">← Healthcare Overview</a></li>
+                    <li><a href="/healthcare/phone-tree-alternative.html">Conversational AI</a></li>
+                    <li><a href="/healthcare/insurance-verification.html">Insurance Verification</a></li>
+                    <li><a href="/healthcare/ehr-integration.html">EHR Integration</a></li>
                     <li><a href="/healthcare/hipaa-compliance.html">HIPAA Compliance</a></li>
+                    <li><a href="/healthcare/mcp-security.html">MCP Security</a></li>
                 </ul>
             </div>
         </aside>
     </main>
+
+    <!-- Footer with Shadow Content -->
+    <footer>
+        <div class="footer-shadow">
+            <h2>Ephemeral Data Tunnels: Why Claire Never 'Remembers' Your PHI</h2>
+            <p class="footer-shadow-intro">
+                The #1 concern blocking healthcare AI adoption: "If AI touches patient data, where does it go?" The answer requires understanding how AI orchestration differs fundamentally from traditional chatbot architectures—and why Claire's ephemeral data tunnels ensure PHI never leaves your EHR while legacy systems centralize patient records in vendor databases.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Technical Analysis</button>
+
+            <div class="shadow-content" id="shadowContent">
+                <h3>Section 1: The HIPAA "Minimum Necessary" Standard and Traditional EHR Integration Over-Retention</h3>
+
+                <p>HIPAA's Privacy Rule requires covered entities to limit PHI access to the "minimum necessary" to accomplish the intended purpose (45 CFR §164.502(b)). This principle extends to third-party vendors: when a medical practice grants an AI vendor access to patient data, that vendor should access only what's needed for the specific task, retain it for the minimum required duration, and protect it with appropriate safeguards.</p>
+
+                <p>Traditional healthcare chatbots violate this principle architecturally. When you deploy a conventional AI assistant, here's what typically happens:</p>
+
+                <ul>
+                    <li><strong>Data upload:</strong> Patient information (demographics, appointment history, insurance details, sometimes clinical summaries) is uploaded from your EHR to the AI vendor's servers.</li>
+                    <li><strong>Central processing:</strong> The AI model processes requests on the vendor's infrastructure, creating a secondary repository of PHI outside your security perimeter.</li>
+                    <li><strong>Retention for training:</strong> Even with "enterprise" contracts that prohibit training on your data, the technical architecture still centralizes your information. The vendor promises not to use it for model improvement, but you're trusting policy over architecture.</li>
+                    <li><strong>Persistent storage:</strong> Many vendors retain conversation logs, patient identifiers, and interaction data for 30-90 days (or indefinitely) for "quality assurance" and "debugging."</li>
+                </ul>
+
+                <p>This over-retention creates three HIPAA compliance risks:</p>
+
+                <p><strong>1. Expanded Breach Surface:</strong> Every additional system that stores PHI is a potential breach point. The 2023 HHS Office for Civil Rights (OCR) breach report showed that business associate breaches now account for 42% of all healthcare data breaches. When your AI vendor creates a central PHI database, you've added a high-value target for attackers.</p>
+
+                <p><strong>2. Minimum Necessary Violation:</strong> If an AI chatbot uploads a patient's full medical record to process a simple appointment scheduling request, it's accessing more PHI than necessary. HIPAA allows such access only when required for treatment, payment, or healthcare operations—and only the minimum amount needed.</p>
+
+                <p><strong>3. Subcontractor Risk:</strong> Most AI vendors use cloud infrastructure (AWS, Azure, Google Cloud) and subcontractors for operations. Under HIPAA's Omnibus Rule, business associates must ensure their subcontractors also sign Business Associate Agreements and maintain HIPAA compliance. Each additional layer increases the compliance burden and risk exposure.</p>
+
+                <h3>Section 2: MCP Protocol Architecture—Read-Only Data Tunnels That Close After Each Conversation</h3>
+
+                <p>I operate on a fundamentally different architecture: <strong>Model Context Protocol (MCP)</strong>, which implements ephemeral data access instead of persistent storage. Here's how it works:</p>
+
+                <h4>The MCP Workflow</h4>
+
+                <p>When a patient calls your practice to schedule an appointment:</p>
+
+                <ol>
+                    <li><strong>Session initiation:</strong> I establish a unique session ID for this conversation. The session is ephemeral—it exists only while we're actively communicating.</li>
+                    <li><strong>Encrypted tunnel creation:</strong> I open a TLS 1.3 encrypted connection to your EHR using pre-authorized FHIR API credentials. This is a read-only connection scoped to specific resources (Patient, Appointment, Schedule). I cannot modify clinical data or access resources outside my authorization scope.</li>
+                    <li><strong>Just-in-time data retrieval:</strong> I query only the resources needed for this specific task. If the patient is scheduling an appointment, I read their demographic information, existing appointments, and provider availability. I don't preemptively pull their medication list, lab results, or diagnosis history.</li>
+                    <li><strong>Local reasoning:</strong> I process the patient's request using my reasoning engine. The conversation happens in real-time, but I'm not uploading PHI to a central training database. I'm reasoning over data that stays in your EHR.</li>
+                    <li><strong>Transaction execution:</strong> If the patient confirms an appointment, I write that single transaction back to your EHR via FHIR API. The write is atomic and auditable.</li>
+                    <li><strong>Tunnel closure:</strong> When the conversation ends, I close the MCP tunnel. The session ID expires. I retain <em>zero</em> PHI. The only record is the audit log in your EHR showing which resources I accessed, when, and for what purpose.</li>
+                </ol>
+
+                <p>Contrast this with traditional chatbots that upload the entire conversation—patient identifiers, appointment details, insurance information, conversation transcript—to a central server. Even if the vendor promises not to use the data for training, you've still created a persistent PHI repository outside your control.</p>
+
+                <h4>Technical Guarantees of MCP</h4>
+
+                <p>MCP architecture provides several technical guarantees that traditional integrations cannot:</p>
+
+                <p><strong>1. Stateless Connections:</strong> Each MCP session is stateless from my perspective. I don't maintain a persistent database of patient interactions. If the same patient calls back an hour later, I establish a new tunnel, query their current state from your EHR, and proceed as if it's our first conversation. This is similar to how HTTPS works—each request is authenticated independently, and no session state persists on the server.</p>
+
+                <p><strong>2. Scoped Access Tokens:</strong> MCP uses OAuth 2.0 with SMART on FHIR scopes. Your EHR administrator defines exactly which resources I can access (read Patient, Appointment, Coverage; write Appointment) and which I cannot (no access to clinical notes, lab results, or imaging). These permissions are enforced at the API level—I can't access data outside my authorization scope even if I try.</p>
+
+                <p><strong>3. Time-Limited Sessions:</strong> MCP sessions automatically expire after 15 minutes of inactivity. This prevents orphaned connections from remaining open if a conversation is abandoned. When the session expires, the access token is revoked, and I lose all access to your EHR until a new session is initiated.</p>
+
+                <h3>Section 3: Zero-Knowledge Proof Concept—Claire Reasons Over PHI Without Storing It</h3>
+
+                <p>The MCP architecture implements a concept similar to "zero-knowledge proofs" in cryptography: I can prove I have access to patient data and can perform operations on it, without actually storing or retaining that data.</p>
+
+                <p>Here's an analogy: Traditional chatbots are like photocopying patient charts and mailing them to a remote office for processing. MCP is like allowing a trusted assistant to look at the charts in your office, take notes on what actions to perform, and then leave—taking no copies with them.</p>
+
+                <p>How I reason without retention:</p>
+
+                <p><strong>1. Session-Scoped Memory:</strong> During an active conversation, I maintain working memory of the conversation context. If the patient says "I need to reschedule," I remember which appointment they're referring to. But this memory exists only in volatile RAM during the session—it's never written to persistent storage.</p>
+
+                <p><strong>2. Aggregate Learning Without Identifiers:</strong> I do learn from interactions—but I learn patterns, not patient data. For example, if I observe that 30% of Monday morning calls are appointment rescheduling requests, I can optimize my conversational flow. But I don't need to store "John Doe called on January 15 to reschedule" to learn this pattern. De-identified aggregate analytics are sufficient.</p>
+
+                <p><strong>3. Reasoning Traces Without PHI:</strong> When my development team analyzes errors or improves my performance, they review reasoning traces that show <em>what</em> I did and <em>why</em>, but not the patient data itself. For example: "User requested appointment → System queried provider availability → System offered two time slots → User selected second option → Appointment booked." The trace shows my decision-making process without exposing patient identifiers or medical details.</p>
+
+                <h3>Section 4: Audit Trail Requirements (45 CFR §164.312) and Ephemeral Architecture Compliance</h3>
+
+                <p>HIPAA's Security Rule requires covered entities and business associates to "implement hardware, software, and/or procedural mechanisms that record and examine activity in information systems that contain or use electronic protected health information" (45 CFR §164.312(b)).</p>
+
+                <p>This is commonly interpreted as requiring audit logs showing who accessed PHI, when, and for what purpose. A common objection to ephemeral architectures is: "If you're not retaining data, how can you maintain audit trails?"</p>
+
+                <p>The answer: <strong>Audit logs don't need to contain PHI—they need to contain metadata about PHI access.</strong></p>
+
+                <p>Every MCP session generates comprehensive audit logs in your EHR system:</p>
+
+                <ul>
+                    <li><strong>Timestamp:</strong> When the access occurred (ISO 8601 format with timezone)</li>
+                    <li><strong>Accessor:</strong> Which service account accessed the data (e.g., "Claire_AI_Service")</li>
+                    <li><strong>Resources accessed:</strong> Which FHIR resources were queried (Patient/12345, Appointment/67890)</li>
+                    <li><strong>Actions performed:</strong> READ, WRITE, UPDATE, DELETE</li>
+                    <li><strong>Purpose:</strong> The business reason for access (e.g., "Patient-initiated appointment scheduling")</li>
+                    <li><strong>Session ID:</strong> A unique identifier linking related actions within a single conversation</li>
+                    <li><strong>Result:</strong> Success or failure of the operation</li>
+                </ul>
+
+                <p>These logs satisfy HIPAA audit requirements while containing zero PHI. They show <em>that</em> I accessed a patient record, but not the patient's name, diagnosis, or medical details. The PHI itself remains in your EHR, protected by your existing security controls and audit systems.</p>
+
+                <p>Contrast this with traditional vendors who maintain their own audit logs in their infrastructure. If a regulator or your compliance team wants to review access logs, you must request them from the vendor—adding friction and dependence. With MCP, all audit trails live in your EHR where you already monitor access for compliance.</p>
+
+                <h3>Section 5: Business Associate Agreements and Claire's Architecture Reduces Your HIPAA Liability Surface</h3>
+
+                <p>When a covered entity works with a business associate that will access PHI, HIPAA requires a Business Associate Agreement (BAA) specifying how the PHI will be protected, used, and disposed of.</p>
+
+                <p>Traditional AI vendors' BAAs are lengthy because they must address numerous risks:</p>
+
+                <ul>
+                    <li><strong>Data breach notification:</strong> If the vendor's database is breached, they must notify you within 60 days, and you must notify affected patients</li>
+                    <li><strong>Subcontractor management:</strong> The vendor must ensure all subcontractors (cloud providers, support vendors) also sign BAAs</li>
+                    <li><strong>Data use limitations:</strong> Specific prohibitions on using PHI for training, analytics, or any purpose beyond the contracted service</li>
+                    <li><strong>Data retention and destruction:</strong> Procedures for securely deleting PHI when the contract terminates</li>
+                    <li><strong>Audit rights:</strong> Your ability to audit the vendor's compliance practices</li>
+                </ul>
+
+                <p>My BAA is simpler because the architecture reduces liability exposure:</p>
+
+                <blockquote>
+                    "Claire LLC does not store, retain, or have access to patient data beyond the duration of ephemeral MCP sessions. All PHI resides in Customer's designated EHR system. Claire's access is limited to session-based read operations via FHIR API tokens that expire upon session termination. Claire does not use Customer data for training, analytics, or any purpose beyond providing the contracted services during active sessions."
+                </blockquote>
+
+                <p>This "zero data retention" architecture fundamentally changes the risk profile:</p>
+
+                <p><strong>1. No Central Database to Breach:</strong> If my infrastructure experiences a security incident, there's no patient database to compromise. The worst-case scenario is service disruption, not PHI exposure. This dramatically reduces your breach notification obligations and reputational risk.</p>
+
+                <p><strong>2. Simplified Subcontractor Management:</strong> While I use cloud infrastructure (AWS, Azure) for compute and reasoning, no PHI is stored in these environments. My cloud providers don't need access to your patient data, so the subcontractor BAA requirements are simplified. They're providing compute services, not data storage.</p>
+
+                <p><strong>3. Automatic Data Disposal:</strong> Because I don't retain PHI, there's no "data return or destruction upon termination" process. When our contract ends, you simply revoke my API credentials. I immediately lose access to your EHR. There's no data migration, no secure deletion ceremony, no lingering PHI in backup systems.</p>
+
+                <p><strong>4. Reduced Audit Burden:</strong> When your compliance team conducts HIPAA audits, they review my access through your existing EHR audit logs—the same system you already monitor for clinician and staff access. There's no separate vendor audit required, no log reconciliation between systems, no dependency on vendor responsiveness for compliance reporting.</p>
+
+                <h4>Real-World Liability Reduction</h4>
+
+                <p>Consider a scenario where a traditional AI vendor experiences a data breach. According to the Ponemon Institute's 2024 Cost of a Data Breach Report, the average healthcare data breach costs $10.93 million—the highest of any industry. Your organization, as the covered entity, bears ultimate responsibility for patient notification, credit monitoring services, regulatory fines, and litigation costs.</p>
+
+                <p>With MCP architecture, a security incident at my infrastructure cannot expose your patient data because I don't have it. The only assets at risk are my API credentials—which are revocable, time-limited, and scoped to read-only access. If credentials are compromised, you rotate them. Impact to patients: zero. Impact to your HIPAA liability: minimal (limited to the brief window of credential validity before rotation).</p>
+
+                <h3>Conclusion: Orchestration Preserves PHI Protection by Design</h3>
+
+                <p>The fundamental difference between AI orchestration and traditional healthcare technology is <strong>possession vs. processing</strong>. Traditional systems possess patient data (store it, copy it, retain it). I process patient data without possessing it—reading from your systems, reasoning in real-time, writing results back to your systems, retaining nothing.</p>
+
+                <p>This architectural distinction isn't just technical—it's regulatory. HIPAA's minimum necessary standard is easier to satisfy when data never leaves your infrastructure. Breach notification requirements are simpler when there's no secondary database to breach. Business Associate Agreements are shorter when the vendor doesn't take custody of PHI.</p>
+
+                <p>For healthcare organizations evaluating AI technology, the question isn't "Should we use AI?" but "What architecture protects our patients and limits our liability?" Orchestration-based AI like Claire represents the future of healthcare technology precisely because it solves the PHI retention problem that has blocked adoption of traditional chatbot systems.</p>
+
+                <p>Your patients' data belongs in your EHR, under your security controls, subject to your audit processes. My job is to reason over that data to help your team work more efficiently—not to centralize it in yet another vendor database. That's the ephemeral data tunnel guarantee.</p>
+            </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Healthcare Topics</h4>
+                <ul>
+                    <li><a href="/healthcare/phone-tree-alternative.html">Conversational AI</a></li>
+                    <li><a href="/healthcare/cost-analysis.html">Cost Analysis</a></li>
+                    <li><a href="/healthcare/ehr-integration.html">EHR Integration</a></li>
+                    <li><a href="/healthcare/hipaa-compliance.html">HIPAA Compliance</a></li>
+                    <li><a href="/healthcare/insurance-verification.html">Insurance Verification</a></li>
+                    <li><a href="/healthcare/mcp-security.html">MCP Security</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/platform/mcp-protocol.html">MCP Protocol</a></li>
+                    <li><a href="/platform/reasoning-engine.html">Reasoning Engine</a></li>
+                    <li><a href="/platform/voice-synthesis.html">Voice Synthesis</a></li>
+                    <li><a href="/platform/security.html">Security Architecture</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about/">About Claire</a></li>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Industry Switcher -->
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+    <!-- Claire Dock Component -->
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">
+            C
+        </div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">
+                    I'm Claire, your AI clinical orchestrator. I handle appointment scheduling, insurance verification, and patient intake—24/7 with zero turnover risk. See your ROI in 4.2 months.
+                </p>
+                <a href="/healthcare/voice-triage-demo.html" class="dock-cta">Execute Voice Triage Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDock() {
+            const panel = document.getElementById('dockPanel');
+            panel.classList.toggle('open');
+        }
+
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Technical Analysis'
+                : 'Read Full Technical Analysis';
+        }
+
+        // Close dock when clicking outside
+        document.addEventListener('click', function(event) {
+            const dock = document.querySelector('.claire-dock');
+            const panel = document.getElementById('dockPanel');
+            if (!dock.contains(event.target) && panel.classList.contains('open')) {
+                panel.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>
