@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claire AI for Hospitality | Digital Labor Platform for Hotels & Restaurants</title>
+    <meta name="description" content="Claire automates guest communication, reservation management, and concierge services for hotels and restaurants. PCI compliant, multilingual support.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #fff7ed;
+            --bg-secondary: #ffffff;
+            --text-primary: #7c2d12;
+            --text-secondary: #78716c;
+            --accent: #ea580c;
+            --border: #fed7aa;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; }
+        .nav-brand { font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
+        .nav-links { display: flex; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+        main { max-width: 1400px; margin: 0 auto; padding: 8rem 2rem 4rem; }
+        .section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+        .section-label { font-size: 0.875rem; color: var(--accent); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1.5rem; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0; }
+        .metric { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); }
+        .metric-value { font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; }
+        .metric-label { color: var(--text-secondary); font-size: 0.875rem; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: border-color 0.2s; }
+        .card:hover { border-color: var(--accent); }
+        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+        .card p { color: var(--text-secondary); font-size: 0.9375rem; }
+        @media (max-width: 768px) { h2 { font-size: 1.5rem; } .section { padding: 3rem 0; } .cards { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-brand">CLAIRE // HOSPITALITY</div>
+        <div class="nav-links">
+            <a href="#capabilities">Capabilities</a>
+            <a href="#integration">Integration</a>
+            <a href="#security">Security</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section" id="capabilities">
+            <div class="section-label">Current Role: Guest Experience Manager</div>
+            <h2>Elevating Guest Experience & Operational Efficiency</h2>
+            <p>I manage guest communications, reservations, and service requests with the attentiveness of a dedicated concierge team.</p>
+
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Guest Satisfaction Score</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">30%</div>
+                    <div class="metric-label">Higher RevPAR</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">50%</div>
+                    <div class="metric-label">Staff Time Savings</div>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Reservation Management</h3>
+                    <p>I handle bookings, modifications, and cancellations across all channels with real-time availability updates.</p>
+                </div>
+                <div class="card">
+                    <h3>Guest Communication</h3>
+                    <p>I send pre-arrival messages, check-in instructions, and in-stay service requests in the guest's language.</p>
+                </div>
+                <div class="card">
+                    <h3>Concierge Services</h3>
+                    <p>I provide local recommendations, book activities, and handle special requests 24/7.</p>
+                </div>
+                <div class="card">
+                    <h3>Complaint Resolution</h3>
+                    <p>I detect service issues early, escalate appropriately, and track resolution for reputation management.</p>
+                </div>
+                <div class="card">
+                    <h3>Upsell Automation</h3>
+                    <p>I offer room upgrades, amenity packages, and experiences at optimal times for maximum conversion.</p>
+                </div>
+                <div class="card">
+                    <h3>Staff Scheduling</h3>
+                    <p>I forecast demand, optimize shift coverage, and ensure labor compliance across properties.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="integration">
+            <div class="section-label">Technical Skillset</div>
+            <h2>Hotel & Restaurant PMS Integration</h2>
+            <p>I integrate with property management systems, reservation platforms, and payment processors.</p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Opera (Oracle)</h3>
+                    <p>Full PMS integration for reservations, guest profiles, and billing</p>
+                </div>
+                <div class="card">
+                    <h3>Maestro PMS</h3>
+                    <p>Independent hotel property management and channel management</p>
+                </div>
+                <div class="card">
+                    <h3>Toast POS</h3>
+                    <p>Restaurant point-of-sale, online ordering, and delivery integration</p>
+                </div>
+                <div class="card">
+                    <h3>OpenTable</h3>
+                    <p>Reservation management and table optimization for restaurants</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="security">
+            <div class="section-label">Security & Compliance</div>
+            <h2>PCI Compliance & Guest Data Protection</h2>
+            <p>I protect guest payment information and personal data with industry-standard security.</p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>PCI-DSS Compliant</h3>
+                    <p>Payment card industry standards for secure payment processing</p>
+                </div>
+                <div class="card">
+                    <h3>GDPR Compliant</h3>
+                    <p>European guest data privacy and consent management</p>
+                </div>
+                <div class="card">
+                    <h3>SOC 2 Type II</h3>
+                    <p>Third-party audited security controls for guest data</p>
+                </div>
+                <div class="card">
+                    <h3>Multilingual Support</h3>
+                    <p>20+ languages for global guest communication</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Interview Claire for Your Property</h2>
+            <p>I elevate guest experience while reducing labor costs—no language barriers, no shift gaps, just consistent service excellence 24/7.</p>
+        </section>
+    </main>
+</body>
+</html>

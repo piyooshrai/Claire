@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claire AI for Healthcare | Digital Labor Platform</title>
+    <meta name="description" content="Claire automates patient orchestration, insurance verification, and administrative workflows for healthcare practices. HIPAA compliant, FHIR-integrated, zero turnover.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent: #2563eb;
+            --border: #e2e8f0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            z-index: 100;
+        }
+        
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover { color: var(--accent); }
+        
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+        
+        .section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-label {
+            font-size: 0.875rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        h1, h2 {
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .metric {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            transition: border-color 0.2s;
+        }
+        
+        .card:hover { border-color: var(--accent); }
+        
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        
+        .card-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .card-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        
+        .card-list li::before {
+            content: '→ ';
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        
+        .link-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid var(--accent);
+            background: var(--bg-secondary);
+        }
+        
+        .link-box a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .link-box a:hover { text-decoration: underline; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            .section { padding: 3rem 0; }
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-brand">CLAIRE // HEALTHCARE</div>
+        <div class="nav-links">
+            <a href="#capabilities">Capabilities</a>
+            <a href="#integration">Integration</a>
+            <a href="#security">Security</a>
+            <a href="/healthcare/cost-analysis.html">ROI</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section" id="capabilities">
+            <div class="section-label">Current Role: Patient Orchestrator</div>
+            <h2>Handling the 'Administrative Front-Door'</h2>
+            <p>I manage the complete patient journey from first contact through post-visit follow-up. My reasoning engine handles the chaos of real-world healthcare interactions—from insurance changes to last-minute rescheduling—with the context awareness of a senior team member.</p>
+
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">60%</div>
+                    <div class="metric-label">Staff Reduction Potential</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">0s</div>
+                    <div class="metric-label">Average Wait Time</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">99.2%</div>
+                    <div class="metric-label">Appointment Confirmation Rate</div>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Patient Intake</h3>
+                    <p>I collect demographic information, medical history, and consent forms through natural conversation. No more clipboards or outdated patient portals.</p>
+                </div>
+                <div class="card">
+                    <h3>Insurance Verification</h3>
+                    <p>I verify eligibility in real-time with payer APIs, check prior authorizations, and estimate patient responsibility before appointments.</p>
+                </div>
+                <div class="card">
+                    <h3>Intelligent Scheduling</h3>
+                    <p>I understand provider preferences, appointment types, and patient needs to optimize scheduling. I handle conflicts and rescheduling autonomously.</p>
+                </div>
+                <div class="card">
+                    <h3>Prescription Refills</h3>
+                    <p>I process refill requests, check medication history in your EHR, and route to providers based on clinical protocols you define.</p>
+                </div>
+                <div class="card">
+                    <h3>Pre-Visit Preparation</h3>
+                    <p>I send appointment reminders, collect pre-visit questionnaires, and ensure all documentation is ready when patients arrive.</p>
+                </div>
+                <div class="card">
+                    <h3>Post-Visit Follow-Up</h3>
+                    <p>I schedule follow-ups, send care instructions, and coordinate referrals with external specialists—maintaining continuity of care.</p>
+                </div>
+            </div>
+
+            <div class="link-box">
+                <p>→ Learn how I automate insurance verification: <a href="/healthcare/insurance-verification.html">Insurance Verification Deep Dive</a></p>
+            </div>
+        </section>
+
+        <section class="section" id="integration">
+            <div class="section-label">Technical Skillset</div>
+            <h2>Integration Architecture</h2>
+            <p>I integrate with your existing healthcare infrastructure through industry-standard protocols. No rip-and-replace required. Implementation typically takes 2-4 weeks from contract signature to first patient interaction.</p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>EHR Integration</h3>
+                    <p>FHIR R4/R5 for modern systems, HL7 v2 for legacy platforms</p>
+                    <ul class="card-list">
+                        <li>Epic (Hyperspace, MyChart)</li>
+                        <li>Cerner (PowerChart)</li>
+                        <li>Athenahealth</li>
+                        <li>eClinicalWorks</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Payer APIs</h3>
+                    <p>Real-time eligibility verification via X12 EDI 270/271 transactions</p>
+                    <ul class="card-list">
+                        <li>Change Healthcare</li>
+                        <li>Availity</li>
+                        <li>Direct payer connections</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Telephony Integration</h3>
+                    <p>Voice and SMS communication channels</p>
+                    <ul class="card-list">
+                        <li>Twilio integration</li>
+                        <li>Existing phone system APIs</li>
+                        <li>SMS/MMS messaging</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Practice Management</h3>
+                    <p>Scheduling and billing system synchronization</p>
+                    <ul class="card-list">
+                        <li>Schedule optimization</li>
+                        <li>Revenue cycle management</li>
+                        <li>Patient payment processing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="link-box">
+                <p>→ Technical deep dive on EHR integration: <a href="/healthcare/ehr-integration.html">Epic and Cerner Integration Guide</a></p>
+            </div>
+        </section>
+
+        <section class="section" id="security">
+            <div class="section-label">Security & Compliance</div>
+            <h2>Model Context Protocol (MCP) Architecture</h2>
+            <p>I don't store or train on your patient data. Period. My architecture uses ephemeral connections to your EHR—I read what I need for the current conversation, reason through the task, and close the connection. No central database. No training data retention.</p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>HIPAA Compliant</h3>
+                    <p>BAA signed with all clients, full audit trail, SOC 2 Type II certified</p>
+                </div>
+                <div class="card">
+                    <h3>Zero Trust Architecture</h3>
+                    <p>Least-privilege access, encryption at rest (AES-256) and in transit (TLS 1.3)</p>
+                </div>
+                <div class="card">
+                    <h3>MCP Security</h3>
+                    <p>Ephemeral data access, no persistent PHI storage, session-based connections</p>
+                </div>
+                <div class="card">
+                    <h3>Full Audit Trail</h3>
+                    <p>Every data access logged with reasoning trace, 7-year retention for HIPAA</p>
+                </div>
+            </div>
+
+            <div class="link-box">
+                <p>→ Is your patient data used to train AI models? <a href="/healthcare/mcp-security.html">MCP Security Deep Dive</a></p>
+                <p style="margin-top: 1rem;">→ Complete HIPAA compliance documentation: <a href="/healthcare/hipaa-compliance.html">HIPAA Compliance Requirements</a></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Interview Claire for Your Team</h2>
+            <p>I don't require benefits, never call in sick, and work 24/7 without overtime. I'm a digital teammate, not a software implementation. Let's discuss how I can handle your administrative front-door.</p>
+        </section>
+    </main>
+</body>
+</html>
