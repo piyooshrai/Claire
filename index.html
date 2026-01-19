@@ -238,9 +238,9 @@
                     sessionStorage.setItem('userTimezone', data.timezone);
                 }
 
-                // Get weather data for conversational context
+                // Get weather data for conversational context - WAIT for it to complete
                 if (data.latitude && data.longitude) {
-                    fetchWeatherContext(data.latitude, data.longitude);
+                    await fetchWeatherContext(data.latitude, data.longitude);
                 }
 
                 if (data.region || data.city) {
@@ -303,13 +303,11 @@
 
             await pause(1500);
 
-            // Detect location in background
-            detectLocation().then(location => {
-                if (location) {
-                    userLocation = location;
-                    sessionStorage.setItem('userLocation', location);
-                }
-            });
+            // Detect location and WAIT for it to complete
+            userLocation = await detectLocation();
+            if (userLocation) {
+                sessionStorage.setItem('userLocation', userLocation);
+            }
 
             const msg2 = addMessage('');
             await type(msg2, 'What is your name?');
