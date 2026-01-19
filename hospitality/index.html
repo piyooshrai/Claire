@@ -30,17 +30,20 @@
         .metric-value { font-size: 2.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; }
         .metric-label { color: var(--text-secondary); font-size: 0.875rem; }
         .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: border-color 0.2s; }
-        .card:hover { border-color: var(--accent); }
-        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+        .card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s; cursor: pointer; position: relative; }
+        .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(234, 88, 12, 0.1); }
+        .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent); }
+        .card h3::after { content: ' →'; opacity: 0; transition: opacity 0.2s; }
+        .card:hover h3::after { opacity: 1; }
         .card p { color: var(--text-secondary); font-size: 0.9375rem; }
         @media (max-width: 768px) { h2 { font-size: 1.5rem; } .section { padding: 3rem 0; } .cards { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <nav>
-        <div class="nav-brand">CLAIRE // HOSPITALITY</div>
+        <div class="nav-brand"><a href="/" style="color: inherit; text-decoration: none;">CLAIRE</a> // HOSPITALITY</div>
         <div class="nav-links">
+            <a href="/">← Back to Platform</a>
             <a href="#capabilities">Capabilities</a>
             <a href="#integration">Integration</a>
             <a href="#security">Security</a>
@@ -69,30 +72,30 @@
             </div>
 
             <div class="cards">
-                <div class="card">
+                <a href="/hospitality/reservation-management.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Reservation Management</h3>
                     <p>I handle bookings, modifications, and cancellations across all channels with real-time availability updates.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/hospitality/guest-communication.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Guest Communication</h3>
                     <p>I send pre-arrival messages, check-in instructions, and in-stay service requests in the guest's language.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/hospitality/concierge-services.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Concierge Services</h3>
                     <p>I provide local recommendations, book activities, and handle special requests 24/7.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/hospitality/complaint-resolution.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Complaint Resolution</h3>
                     <p>I detect service issues early, escalate appropriately, and track resolution for reputation management.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/hospitality/upsell-automation.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Upsell Automation</h3>
                     <p>I offer room upgrades, amenity packages, and experiences at optimal times for maximum conversion.</p>
-                </div>
-                <div class="card">
+                </a>
+                <a href="/hospitality/staff-scheduling.html" class="card" style="text-decoration: none; color: inherit;">
                     <h3>Staff Scheduling</h3>
                     <p>I forecast demand, optimize shift coverage, and ensure labor compliance across properties.</p>
-                </div>
+                </a>
             </div>
         </section>
 

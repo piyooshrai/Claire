@@ -7,15 +7,44 @@
     <meta name="description" content="Attorney-client privilege protection with AI: ABA Model Rules compliance, confidentiality safeguards, work-product doctrine for law firms.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg-primary: #faf5ff; --text-primary: #1e1b4b; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; padding: 6rem 2rem 4rem; max-width: 800px; margin: 0 auto; }
-        h1 { font-size: 2.5rem; margin-bottom: 2rem; }
-        h2 { font-size: 2rem; margin: 3rem 0 1.5rem; }
+        :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --text-secondary: #6b7280; --accent: #7c3aed; --border: #e9d5ff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
+        nav a { color: var(--text-primary); text-decoration: none; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
+        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
         p { margin-bottom: 1.5rem; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
     </style>
 </head>
 <body>
-    <h1>Maintaining Attorney-Client Privilege with AI Assistants</h1>
+    <nav><a href="/">CLAIRE // LEGAL</a></nav>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/legal/">Legal</a> / Confidentiality & Security
+            </div>
+
+            <h1>Maintaining Attorney-Client Privilege with AI Assistants</h1>
 
     <p>Attorney-client privilege is the cornerstone of legal practice. ABA Model Rule 1.6 requires lawyers to protect client confidences: "A lawyer shall not reveal information relating to the representation of a client unless the client gives informed consent." This duty of confidentiality isn't optional—it's an ethical obligation that survives the representation, continues after the client's death, and extends to prospective clients even if they never hire you.</p>
 
@@ -25,7 +54,7 @@
 
     <p>Let me walk you through the legal framework for maintaining privilege when using AI, how I'm specifically designed to protect confidentiality, and what ethical obligations you must satisfy.</p>
 
-    <h2>ABA Model Rule 1.6: Confidentiality of Information</h2>
+    <h2 id="rule">ABA Model Rule 1.6: Confidentiality of Information</h2>
 
     <p>Rule 1.6 protects "information relating to the representation"—not just formal attorney-client communications, but all client-related information learned during representation. This includes facts shared in confidence, legal strategies, settlement positions, work product, fee arrangements, the identity of clients (in some circumstances), and even the fact that an attorney-client relationship exists.</p>
 
@@ -55,7 +84,7 @@
 
     <p>This isn't a one-time checkbox exercise—it's an ongoing duty of supervision and competence.</p>
 
-    <h2>How I Maintain Privilege</h2>
+    <h2 id="how">How I Maintain Privilege</h2>
 
     <p>I'm designed to function as an agent of the law firm, similar to a paralegal or legal assistant. Under agency principles, communications with me fall within the attorney-client privilege because I'm acting under attorney supervision to facilitate legal representation. Here's how the privilege protection works technically and legally:</p>
 
@@ -135,7 +164,7 @@
 
     <p>These controls satisfy the ABA Cybersecurity Handbook's recommendations for law firm technology vendors.</p>
 
-    <h2>Work Product Doctrine</h2>
+    <h2 id="workproduct">Work Product Doctrine</h2>
 
     <p>Federal Rule of Civil Procedure 26(b)(3) protects documents "prepared in anticipation of litigation or for trial by or for another party or its representative" from discovery. This work product doctrine shields legal strategy, mental impressions, and case analysis from opposing counsel.</p>
 
@@ -179,7 +208,7 @@
 
     <p>Even if an AI document is discoverable for some reason, the attorney's prompts, instructions, and revisions remain protected as opinion work product reflecting mental impressions.</p>
 
-    <h2>Ethical Duties: Competence & Supervision</h2>
+    <h2 id="ethics">Ethical Duties: Competence & Supervision</h2>
     <p>ABA Model Rule 1.1 requires competent representation, including "keep[ing] abreast of changes in the law and its practice, including the benefits and risks associated with relevant technology." Using AI tools competently means:</p>
 
     <ul>
@@ -189,7 +218,7 @@
         <li>Ensuring compliance with confidentiality obligations (our BAA documents these protections)</li>
     </ul>
 
-    <h2>State Bar Guidance</h2>
+    <h2 id="statebar">State Bar Guidance</h2>
 
     <p>Several state bars have issued ethics opinions on AI use in legal practice. While guidance varies by jurisdiction, common themes emerge: competence, supervision, confidentiality, and disclosure. Let me walk through the key opinions:</p>
 
@@ -251,7 +280,7 @@
         <li><strong>Accuracy:</strong> For legal research, I cite to primary sources you can verify. I don't hallucinate cases or statutes.</li>
     </ul>
 
-    <h2>Client Consent & Disclosure</h2>
+    <h2 id="consent">Client Consent & Disclosure</h2>
 
     <p>While not universally required across all jurisdictions, best practice is to disclose AI use in engagement letters. This informed consent approach aligns with ABA Model Rule 1.4 (communication with clients), avoids future disputes about AI use, and builds client trust by demonstrating transparency.</p>
 
@@ -316,7 +345,7 @@
         <li><strong>Provide competitive context:</strong> Explain that most major law firms now use AI tools, and declining to use AI may put them at a disadvantage (slower service, higher costs).</li>
     </ol>
 
-    <h2>Conclusion: Privilege Protection in the AI Era</h2>
+    <h2 id="conclusion">Conclusion: Privilege Protection in the AI Era</h2>
 
     <p>Attorney-client privilege isn't obsolete in the age of AI—but it requires careful implementation. The key principles:</p>
 
@@ -329,5 +358,51 @@
     </ol>
 
     <p>I'm designed with these principles in mind: ephemeral access, no training on your data, attorney supervision, and full transparency into how I work. The goal isn't just regulatory compliance—it's maintaining the trust that's essential to the attorney-client relationship.</p>
+
+    <div class="cta-box">
+        <h3>Interview Claire for Your Firm</h3>
+        <p>See how I maintain privilege while automating your legal workflows.</p>
+        <a href="/" class="cta-btn">Start Interactive Demo</a>
+    </div>
+
+    <h2 style="margin-top: 4rem;">Read Next</h2>
+    <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <a href="/legal/case-management.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Case Management →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automate matter organization and deadline tracking</p>
+        </a>
+        <a href="/legal/client-intake.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Client Intake →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">24/7 automated intake and engagement</p>
+        </a>
+    </div>
+</article>
+
+<aside>
+    <div class="toc">
+        <h4>On This Page</h4>
+        <ul>
+            <li><a href="#rule">ABA Model Rule 1.6</a></li>
+            <li><a href="#how">How I Maintain Privilege</a></li>
+            <li><a href="#workproduct">Work Product Doctrine</a></li>
+            <li><a href="#ethics">Ethical Duties</a></li>
+            <li><a href="#statebar">State Bar Guidance</a></li>
+            <li><a href="#consent">Client Consent</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </div>
+
+    <div class="related">
+        <h4>Related Topics</h4>
+        <ul>
+            <li><a href="/legal/">← Legal Services Overview</a></li>
+            <li><a href="/legal/case-management.html">Case Management</a></li>
+            <li><a href="/legal/client-intake.html">Client Intake</a></li>
+            <li><a href="/legal/document-automation.html">Document Automation</a></li>
+            <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+        </ul>
+    </div>
+</aside>
+</main>
 </body>
 </html>

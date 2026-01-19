@@ -9,22 +9,42 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --text-secondary: #6b7280; --accent: #7c3aed; --border: #e9d5ff; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
         nav a { color: var(--text-primary); text-decoration: none; }
-        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; }
-        h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
         h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
         p { margin-bottom: 1.5rem; }
-        ul { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        .intro { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem; }
-        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); text-align: center; }
-        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-weight: 600; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
     </style>
 </head>
 <body>
     <nav><a href="/">CLAIRE // LEGAL</a></nav>
+
     <main>
-        <h1>Automating Legal Client Intake: From First Contact to Engagement Letter</h1>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/legal/">Legal</a> / Client Intake
+            </div>
+
+            <h1>Automating Legal Client Intake: From First Contact to Engagement Letter</h1>
         <p class="intro">The client intake process is where law firms win or lose new business. A potential client calls your firm at 5:30 PM—excited to hire you, ready to pay a retainer—but gets voicemail because staff has gone home. That client calls three more firms before yours calls back the next morning. By then, they've already retained someone else. The ABA reports that law firms lose 40-60% of qualified leads due to slow intake response times. Every hour of delay in responding to a lead reduces conversion probability by 7% (Clio Legal Trends Report 2024).</p>
 
         <p>The math is brutal: if your firm receives 100 qualified leads per year and converts 40% due to slow response times, you're losing 60 potential clients annually. At an average matter value of $5,000-$10,000, that's $300,000-$600,000 in lost revenue—not because you weren't qualified to handle the work, but because you didn't answer the phone fast enough.</p>
@@ -33,7 +53,7 @@
 
         <p>I automate the complete intake process from initial contact through engagement, ensuring no lead falls through the cracks while maintaining the personal touch clients expect from a law firm. I'm available 24/7/365, respond in seconds, and handle the complete workflow from qualification through contract signing and retainer payment—often completing in 24-48 hours what traditionally takes 5-7 days.</p>
 
-        <h2>The Lead Qualification Challenge</h2>
+        <h2 id="qualification">The Lead Qualification Challenge</h2>
 
         <p>Not every inquiry is a good fit for your firm. Personal injury firms get calls about criminal defense. Estate planning attorneys field bankruptcy questions. Small firm solo practitioners receive calls for complex commercial litigation they're not equipped to handle. Taking on matters outside your expertise wastes everyone's time and creates malpractice risk.</p>
 
@@ -141,7 +161,7 @@
         [I immediately send SMS and email alert to partner with all collected information]
         </blockquote>
 
-        <h2>24/7 Availability & Immediate Response</h2>
+        <h2 id="availability">24/7 Availability & Immediate Response</h2>
 
         <p>Potential clients don't research legal services on your schedule—they do it on theirs. Often, that's nights and weekends when they finally have time to address the legal issue that's been stressing them. Traditional intake relies on human staff working 9-5, Monday-Friday. I'm available 24/7/365 across all channels:</p>
 
@@ -173,7 +193,7 @@
 
         <p>Your competitors who rely on Monday morning callbacks? That prospect already hired you before they even had a chance to respond.</p>
 
-        <h2>Automated Engagement & Retainer Collection</h2>
+        <h2 id="engagement">Automated Engagement & Retainer Collection</h2>
 
         <p>Once a prospect is qualified and wants to proceed, traditional intake requires multiple steps—each introducing delay and opportunities for the prospect to change their mind:</p>
 
@@ -267,7 +287,7 @@
 
         <p>This speed improves conversion rates by 45-60%. Prospects have fewer opportunities to change their mind, get cold feet, or hire a competitor. Speed = commitment.</p>
 
-        <h2>Integration with CRM & Practice Management</h2>
+        <h2 id="integration">Integration with CRM & Practice Management</h2>
         <p>I integrate with law firm CRM systems (Lawmatics, Lexicata, Clio Grow) and practice management platforms to ensure seamless data flow:</p>
 
         <ul>
@@ -277,7 +297,7 @@
             <li>Communication history maintained for conflict checking and client relationship management</li>
         </ul>
 
-        <h2>Compliance & Ethics</h2>
+        <h2 id="compliance">Compliance & Ethics</h2>
 
         <p>I maintain attorney-client privilege from first contact. All intake communications are protected, confidential, and logged for ethics compliance. The moment a prospect contacts your firm about representation, privilege attaches—even if they never become a client. I protect this privilege through:</p>
 
@@ -303,7 +323,7 @@
             <li><strong>Texas:</strong> Contingency fee agreements must be in writing and signed before representation begins. I ensure e-signature completion before any legal work commences.</li>
         </ul>
 
-        <h2>ROI: Recovered Revenue from Lost Leads</h2>
+        <h2 id="roi">ROI: Recovered Revenue from Lost Leads</h2>
 
         <p>The financial impact of automated intake is straightforward: convert more leads into paying clients.</p>
 
@@ -370,7 +390,7 @@
 
         <p><strong>ROI: 3,600%</strong></p>
 
-        <h2>Conclusion: The First Impression is Everything</h2>
+        <h2 id="conclusion">Conclusion: The First Impression is Everything</h2>
 
         <p>Client intake isn't just an administrative function—it's your firm's first impression, the moment that determines whether a prospect becomes a client or hires your competitor. Every hour of delay in responding to a lead is revenue walking out the door.</p>
 
@@ -383,6 +403,45 @@
             <p>See how I handle client intake, lead qualification, and engagement automation for your practice.</p>
             <a href="/" class="cta-btn">Start Interactive Demo</a>
         </div>
-    </main>
+
+        <h2 style="margin-top: 4rem;">Read Next</h2>
+        <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+            <a href="/legal/case-management.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Case Management →</h3>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automate matter organization and deadline tracking</p>
+            </a>
+            <a href="/legal/billing-timekeeping.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Billing & Timekeeping →</h3>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Capture billable time automatically</p>
+            </a>
+        </div>
+    </article>
+
+    <aside>
+        <div class="toc">
+            <h4>On This Page</h4>
+            <ul>
+                <li><a href="#qualification">Lead Qualification</a></li>
+                <li><a href="#availability">24/7 Availability</a></li>
+                <li><a href="#engagement">Automated Engagement</a></li>
+                <li><a href="#integration">CRM Integration</a></li>
+                <li><a href="#compliance">Compliance & Ethics</a></li>
+                <li><a href="#roi">ROI Analysis</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+
+        <div class="related">
+            <h4>Related Topics</h4>
+            <ul>
+                <li><a href="/legal/">← Legal Services Overview</a></li>
+                <li><a href="/legal/case-management.html">Case Management</a></li>
+                <li><a href="/legal/document-automation.html">Document Automation</a></li>
+                <li><a href="/legal/billing-timekeeping.html">Billing & Timekeeping</a></li>
+                <li><a href="/legal/confidentiality-security.html">Confidentiality & Security</a></li>
+            </ul>
+        </div>
+    </aside>
+</main>
 </body>
 </html>

@@ -15,20 +15,43 @@
             --accent: #059669;
             --border: #bbf7d0;
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; padding: 6rem 2rem 4rem; max-width: 800px; margin: 0 auto; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
         nav a { color: var(--text-primary); text-decoration: none; }
-        h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
         h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
         p { margin-bottom: 1.5rem; }
-        ul { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        .intro { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
     </style>
 </head>
 <body>
     <nav><a href="/">CLAIRE // FINANCE</a></nav>
-    
-    <h1>Automated Regulatory Compliance for Financial Institutions</h1>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/finance/">Finance</a> / Regulatory Compliance
+            </div>
+
+            <h1>Automated Regulatory Compliance for Financial Institutions</h1>
     
     <p class="intro">Financial institutions face an ever-expanding maze of regulatory requirements: BSA/AML compliance (Bank Secrecy Act / Anti-Money Laundering), GDPR (General Data Protection Regulation), SOX (Sarbanes-Oxley), Dodd-Frank stress testing, CFPB consumer protection rules, state-specific regulations, and hundreds of reporting obligations to federal and state regulators.</p>
 
@@ -36,7 +59,7 @@
 
     <p>I automate regulatory compliance workflows across BSA/AML, data privacy, consumer protection, and regulatory reporting—reducing compliance costs by 60% while improving audit readiness and reducing regulatory risk.</p>
 
-    <h2>The Regulatory Compliance Challenge</h2>
+    <h2 id="challenge">The Regulatory Compliance Challenge</h2>
 
     <p>Financial institutions must comply with multiple regulatory frameworks simultaneously:</p>
 
@@ -72,7 +95,7 @@
         <li><strong>State privacy laws:</strong> Virginia, Colorado, Connecticut, Utah all have GDPR-like laws</li>
     </ul>
 
-    <h2>How AI Automates Compliance</h2>
+    <h2 id="how">How AI Automates Compliance</h2>
 
     <p>I automate compliance across the complete regulatory lifecycle: policy management, transaction monitoring, audit trails, regulatory reporting, and examination preparation.</p>
 
@@ -143,7 +166,7 @@
 
     <p>Root cause analysis: Are minority applicants genuinely less creditworthy on average, or is there bias in underwriting? I analyze credit scores, debt-to-income ratios, and other objective factors to identify whether disparity is justified by credit risk or suggests discrimination.</p>
 
-    <h2>ROI: Compliance Cost Reduction</h2>
+    <h2 id="roi">ROI: Compliance Cost Reduction</h2>
 
     <p>For a regional bank ($50B assets, 10,000 employees):</p>
 
@@ -187,8 +210,51 @@
 
     <p><strong>ROI: 4,680%</strong></p>
 
-    <h2>Conclusion</h2>
+    <h2 id="conclusion">Conclusion</h2>
 
     <p>Regulatory compliance is the cost of doing business in financial services—but it doesn't have to be a crushing burden. AI compliance automation reduces costs by 60%, improves audit readiness, and most importantly, reduces regulatory risk through real-time monitoring that catches issues before they become violations. In an industry where a single compliance failure can result in $100M+ fines, AI compliance isn't optional—it's existential risk management.</p>
+
+    <div class="cta-box">
+        <h3>Automate Regulatory Compliance</h3>
+        <p>See how I reduce compliance costs by 60% while improving audit readiness and risk management.</p>
+        <a href="/" class="cta-btn">Start Interactive Demo</a>
+    </div>
+
+    <h2 style="margin-top: 4rem;">Read Next</h2>
+    <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <a href="/finance/kyc-compliance.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">KYC Compliance →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automate identity verification and compliance</p>
+        </a>
+        <a href="/finance/transaction-monitoring.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Transaction Monitoring →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Real-time AML and sanctions screening</p>
+        </a>
+    </div>
+</article>
+
+<aside>
+    <div class="toc">
+        <h4>On This Page</h4>
+        <ul>
+            <li><a href="#challenge">Compliance Challenge</a></li>
+            <li><a href="#how">How AI Automates</a></li>
+            <li><a href="#roi">ROI Analysis</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </div>
+
+    <div class="related">
+        <h4>Related Topics</h4>
+        <ul>
+            <li><a href="/finance/">← Finance Services Overview</a></li>
+            <li><a href="/finance/kyc-compliance.html">KYC Compliance</a></li>
+            <li><a href="/finance/transaction-monitoring.html">Transaction Monitoring</a></li>
+            <li><a href="/finance/fraud-detection.html">Fraud Detection</a></li>
+            <li><a href="/finance/cost-reduction.html">Cost Reduction</a></li>
+        </ul>
+    </div>
+</aside>
+</main>
 </body>
 </html>

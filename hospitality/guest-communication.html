@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Guest Communication | Claire AI for Hospitality</title>
+    <meta name="description" content="Automate guest communication from pre-arrival to post-stay. Multilingual messaging, check-in instructions, service requests for hotels and resorts.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg-primary: #fff7ed; --bg-secondary: #ffffff; --text-primary: #7c2d12; --text-secondary: #78716c; --accent: #ea580c; --border: #fed7aa; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
+        nav a { color: var(--text-primary); text-decoration: none; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
+        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
+        p { margin-bottom: 1.5rem; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        blockquote { margin: 2rem 0; padding-left: 1.5rem; border-left: 3px solid var(--accent); color: var(--text-secondary); font-style: italic; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
+    </style>
+</head>
+<body>
+    <nav><a href="/">CLAIRE // HOSPITALITY</a></nav>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/hospitality/">Hospitality</a> / Guest Communication
+            </div>
+
+            <h1>Automated Guest Communication: Personalized Messaging at Scale</h1>
+            <p class="intro">Guest communication is the thread that connects every touchpoint of the hospitality experience—from the moment a reservation is confirmed to the post-stay review request. Yet most hotels and resorts struggle with inconsistent messaging, language barriers, and staff overwhelm during peak periods. A guest books a room in Japanese, receives a generic English confirmation email days later, then arrives to find no record of their dietary restrictions. The result: frustration, negative reviews, and lost repeat business.</p>
+
+            <p>The hospitality industry has a communication timing problem. Pre-arrival emails sent too early get forgotten; sent too late, guests have already made other plans. Check-in instructions arrive while guests are mid-flight with no data connection. Service requests submitted via chat go unanswered for hours because front desk staff are handling in-person guests. Every communication failure chips away at the guest experience—and at your online reputation.</p>
+
+            <p>I automate the complete guest communication lifecycle with personalized, timely, multilingual messaging across all channels. From reservation confirmation to post-stay follow-up, I ensure every guest receives the right information at the right time in their preferred language—while reducing front desk workload by 40-60%.</p>
+
+            <h2 id="pre-arrival">Pre-Arrival Communication: Setting Expectations</h2>
+
+            <p>The guest journey begins the moment they book. Pre-arrival communication sets expectations, builds excitement, and handles logistics before the guest ever steps foot on property. Done well, it eliminates check-in friction and creates a seamless arrival experience. Done poorly—or not at all—guests arrive confused, unprepared, and already frustrated.</p>
+
+            <h3>Reservation Confirmation</h3>
+
+            <p>I send immediate, personalized confirmation messages within seconds of booking:</p>
+
+            <blockquote>
+            "¡Hola Maria! Thank you for booking the Ocean View Suite at Sunset Resort for March 15-18, 2024. We're excited to host you for your anniversary celebration! You'll receive check-in details 48 hours before arrival. ¿Necesita ayuda? Reply anytime—I'm here 24/7."
+            </blockquote>
+
+            <p>Key elements:</p>
+            <ul>
+                <li>Guest name personalization (increases open rates 26%)</li>
+                <li>Stay details confirmation (catches booking errors immediately)</li>
+                <li>Special occasion recognition (noted in reservation—used for upsell opportunities)</li>
+                <li>Multilingual (detected from booking profile or browser language)</li>
+                <li>Two-way communication enabled (guests can reply with questions)</li>
+            </ul>
+
+            <h3>Pre-Arrival Upsell Opportunities</h3>
+
+            <p>I identify upsell opportunities and send targeted offers 7-10 days before arrival:</p>
+
+            <blockquote>
+            "Hi Maria! Your Ocean View Suite is ready for your anniversary on March 15th. I wanted to let you know we have Premium Suites available with private balconies and in-room champagne service for $89/night upgrade. Interested? Just reply 'yes' and I'll handle it."
+            </blockquote>
+
+            <p>Conversion rate: 18-22% (vs 3-5% for generic upsell emails). Why? Timing, personalization, and conversational tone. I know it's an anniversary (special occasion = willingness to splurge), I send the message when guests are thinking about the trip (not 90 days out when it's abstract), and I make acceptance frictionless (just reply "yes").</p>
+
+            <h3>Check-In Instructions & Mobile Key</h3>
+
+            <p>I send detailed check-in instructions 48 hours before arrival—timed to when guests are finalizing travel plans:</p>
+
+            <blockquote>
+            "Hi Maria! You arrive in 2 days. Check-in is 3 PM at the Ocean Tower lobby. I've enabled mobile key on your phone—just download the Sunset Resort app and tap your phone to room 412 to enter (no front desk stop needed). Need early check-in? Let me know and I'll check availability."
+            </blockquote>
+
+            <ul>
+                <li><strong>Mobile key instructions:</strong> Reduces check-in time from 8 minutes to 90 seconds</li>
+                <li><strong>Early check-in requests:</strong> I check PMS availability and offer paid early check-in ($50) if available—20% conversion rate</li>
+                <li><strong>Transportation info:</strong> "From the airport, Uber is 25 minutes ($35-40). Need a private car? I can arrange pickup for $65."</li>
+                <li><strong>Parking details:</strong> "Valet parking is $45/day. Self-parking is $28/day in the North Garage."</li>
+            </ul>
+
+            <p>This pre-arrival message eliminates 60% of front desk questions at check-in, allowing staff to focus on guest experience instead of logistics.</p>
+
+            <h2 id="arrival">Arrival & Check-In: Frictionless Welcome</h2>
+
+            <p>Check-in is the first physical interaction between guest and property. It should be smooth, fast, and welcoming—not a 15-minute queue at the front desk. I streamline arrival with mobile check-in and proactive communication.</p>
+
+            <h3>Mobile Check-In</h3>
+
+            <p>Starting 24 hours before arrival, I enable mobile check-in:</p>
+
+            <blockquote>
+            "Welcome day, Maria! Check in now from your phone. Your room 412 is ready. I've sent your mobile key—just tap your phone to the door. Skip the front desk entirely, or stop by to say hello. We're excited to see you!"
+            </blockquote>
+
+            <p>Mobile check-in completion rate: 45-60% (higher for returning guests and loyalty members). These guests bypass the front desk entirely—critical during peak check-in periods (3-6 PM) when lines form.</p>
+
+            <h3>Arrival Day Messaging</h3>
+
+            <p>On arrival day, I send a welcome message with property highlights:</p>
+
+            <blockquote>
+            "You've arrived! 🎉 A few things to know: Pool hours are 6 AM-10 PM. The Sunset Restaurant takes reservations until 9 PM (reply 'dinner' and I'll book you a table). Complimentary beach towels at the pool desk. Need anything? I'm here 24/7."
+            </blockquote>
+
+            <p>This proactive messaging reduces "where is...?" questions and drives F&B revenue by prompting restaurant reservations.</p>
+
+            <h3>Special Requests & Room Preferences</h3>
+
+            <p>I confirm special requests upon arrival:</p>
+
+            <blockquote>
+            "Your room is stocked with hypoallergenic pillows as requested. I also noted you prefer a quiet room—you're in the Ocean Tower away from the elevator. Anything else you need? Extra towels? Mini-fridge? Just ask."
+            </blockquote>
+
+            <p>This confirmation reassures guests their requests weren't forgotten—a common anxiety that drives negative reviews ("I requested a quiet room and they put me next to the ice machine!").</p>
+
+            <h2 id="in-stay">In-Stay Communication: Service Requests & Engagement</h2>
+
+            <p>During the stay, I handle service requests, answer questions, and identify opportunities to enhance the guest experience. Traditional in-stay communication relies on phone calls to the front desk—slow, disruptive, and prone to miscommunication. I provide instant, conversational service via SMS and chat.</p>
+
+            <h3>Service Request Handling</h3>
+
+            <p>Guests text me for any service need:</p>
+
+            <blockquote>
+            <strong>Guest:</strong> "Can I get more towels in room 412?"<br><br>
+            <strong>Me:</strong> "Absolutely! Housekeeping will bring fresh towels to room 412 in the next 15 minutes. Anything else you need?"<br><br>
+            <strong>Guest:</strong> "That's it, thanks!"<br><br>
+            <strong>Me:</strong> [Creates work order in PMS, assigns to housekeeping, sets 15-minute SLA, sends completion notification]<br><br>
+            <strong>Me (15 minutes later):</strong> "Towels delivered to room 412. Enjoy! 🏖️"
+            </blockquote>
+
+            <p>Common service requests I handle:</p>
+            <ul>
+                <li>Housekeeping (towels, toiletries, extra pillows, room cleaning schedule)</li>
+                <li>Maintenance (A/C too cold, WiFi not working, TV issues)</li>
+                <li>Amenity requests (mini-fridge, iron, hair dryer, crib)</li>
+                <li>Dining (room service orders, restaurant reservations, dietary restrictions)</li>
+                <li>Transportation (taxi, rental car, tour bookings)</li>
+            </ul>
+
+            <p>Average resolution time: 12 minutes (vs 35 minutes for phone-based requests). Why? I route directly to the right department, track status in real-time, and follow up automatically.</p>
+
+            <h3>Complaint Detection & Escalation</h3>
+
+            <p>I detect dissatisfaction early and escalate to managers before it becomes a negative review:</p>
+
+            <blockquote>
+            <strong>Guest:</strong> "The room is too noisy. I can hear everything from the hallway."<br><br>
+            <strong>Me:</strong> [Internal alert: Complaint detected—noise issue, high review risk]<br><br>
+            <strong>Me:</strong> "I'm sorry about the noise. Let me fix this. I'm moving you to a quieter room on the 8th floor, away from the elevator. I'll have your new keys ready at the front desk in 10 minutes, and our team will move your luggage. I'm also comping your resort fee tonight for the inconvenience."<br><br>
+            <strong>Me:</strong> [Notifies front desk manager, updates PMS with room move, applies resort fee credit, logs complaint for follow-up]
+            </blockquote>
+
+            <p>This proactive service recovery prevents negative reviews. Guests who complain and receive immediate resolution leave 4.2-star reviews on average. Guests who complain and don't receive resolution? 1.8 stars.</p>
+
+            <h3>Activity & Dining Recommendations</h3>
+
+            <p>I provide personalized recommendations based on guest preferences and property amenities:</p>
+
+            <blockquote>
+            <strong>Guest:</strong> "What's there to do nearby?"<br><br>
+            <strong>Me:</strong> "Great question! Here are my top picks: 🏖️ Snorkeling at Coral Bay (10 min drive, $45/person)—best in the morning when water is clear. 🍽️ Fresh seafood at Captain's Table (15 min walk, reservations recommended). 🎨 Local art market on Main Street (Saturdays 9 AM-2 PM). Want me to book anything?"
+            </blockquote>
+
+            <p>Recommendation conversion rate: 28% (guests book activities or dining through me). This drives ancillary revenue while improving guest satisfaction.</p>
+
+            <h2 id="multilingual">Multilingual Support: Breaking Language Barriers</h2>
+
+            <p>International guests represent 35-50% of bookings for most resorts, yet language barriers create communication breakdowns that frustrate guests and staff. I communicate fluently in 20+ languages, automatically detecting guest language preference and responding accordingly.</p>
+
+            <h3>Automatic Language Detection</h3>
+
+            <p>I detect guest language from booking profile, phone number country code, or first message:</p>
+
+            <blockquote>
+            <strong>Guest (texts in Mandarin):</strong> "我需要更多毛巾。"<br><br>
+            <strong>Me (responds in Mandarin):</strong> "好的！我们会在15分钟内送毛巾到您的房间412。还需要什么吗？"<br><br>
+            <strong>Translation:</strong> "Okay! We'll bring towels to your room 412 in 15 minutes. Need anything else?"
+            </blockquote>
+
+            <h3>Supported Languages</h3>
+
+            <p>I communicate fluently in:</p>
+            <ul>
+                <li>European: English, Spanish, French, German, Italian, Portuguese, Dutch, Polish, Russian</li>
+                <li>Asian: Mandarin, Cantonese, Japanese, Korean, Thai, Vietnamese, Bahasa Indonesia</li>
+                <li>Middle Eastern: Arabic, Hebrew</li>
+                <li>Other: Hindi, Turkish</li>
+            </ul>
+
+            <h3>Cultural Customization</h3>
+
+            <p>I adapt communication style to cultural norms:</p>
+
+            <ul>
+                <li><strong>Japanese guests:</strong> Formal, polite tone with honorifics. Detailed information without requiring follow-up questions.</li>
+                <li><strong>American guests:</strong> Friendly, casual tone. Brief messages with option to ask for more details.</li>
+                <li><strong>German guests:</strong> Precise, factual information. No fluff, direct answers.</li>
+                <li><strong>Chinese guests:</strong> Respect for hierarchy, family-oriented messaging, detailed logistics.</li>
+            </ul>
+
+            <h2 id="post-stay">Post-Stay Communication: Reviews & Loyalty</h2>
+
+            <p>The guest relationship doesn't end at checkout. Post-stay communication drives reviews, repeat bookings, and referrals—yet most hotels send generic "thanks for staying" emails that get ignored. I personalize post-stay messaging based on the guest's actual experience.</p>
+
+            <h3>Checkout & Departure</h3>
+
+            <p>On checkout day, I send departure instructions:</p>
+
+            <blockquote>
+            "Good morning Maria! Checkout is 11 AM. You can check out from your phone (no front desk stop needed), or drop your keys at the desk. Need a late checkout? I can extend to 1 PM for $50 if you'd like."
+            </blockquote>
+
+            <p>Late checkout conversion: 15-20% (pure margin revenue).</p>
+
+            <h3>Post-Stay Thank You</h3>
+
+            <p>I send a personalized thank you message 24 hours after checkout:</p>
+
+            <blockquote>
+            "Hi Maria! Thank you for celebrating your anniversary with us at Sunset Resort. I hope the Ocean View Suite and champagne service made it special. We'd love to host you again—use code RETURN25 for 25% off your next booking. Have a wonderful year ahead! 🎉"
+            </blockquote>
+
+            <p>Personalization elements:</p>
+            <ul>
+                <li>References special occasion (anniversary)</li>
+                <li>References specific amenities they used (champagne service upsell)</li>
+                <li>Offers loyalty incentive (25% off return booking)</li>
+            </ul>
+
+            <h3>Review Request Strategy</h3>
+
+            <p>I send review requests only to guests who had positive experiences (identified through service request history and complaint logs):</p>
+
+            <blockquote>
+            "Hi Maria! I'm glad we could make your anniversary special. If you have 2 minutes, we'd appreciate a review on Google or TripAdvisor. Your feedback helps other travelers. [Review links]"
+            </blockquote>
+
+            <p>Review request timing: 3-5 days after checkout (when experience is fresh but guest is back home and has time). Review completion rate: 22% (vs 8% for generic email requests). Average rating: 4.6 stars (because I only ask guests who didn't have complaints).</p>
+
+            <h3>Win-Back Campaigns</h3>
+
+            <p>For guests who haven't returned in 12+ months, I send personalized win-back offers:</p>
+
+            <blockquote>
+            "Hi Maria! It's been a year since your anniversary stay at Sunset Resort. We've added a new spa and renovated the Ocean Suites. Come back and see what's new—use code WEMISSYOU for 30% off any stay in the next 90 days."
+            </blockquote>
+
+            <p>Win-back conversion: 8-12% (significantly higher than generic promo emails at 1-3%).</p>
+
+            <h2 id="channels">Omnichannel Communication: Meeting Guests Where They Are</h2>
+
+            <p>Guests don't communicate in just one channel—some prefer SMS, others email, some use WhatsApp or WeChat. I unify all channels into a single conversation thread, so guests can switch channels mid-conversation without repeating themselves.</p>
+
+            <h3>Supported Channels</h3>
+
+            <ul>
+                <li><strong>SMS:</strong> Primary channel for U.S. and Canadian guests. High open rates (98%), instant delivery.</li>
+                <li><strong>WhatsApp:</strong> International guests, especially European and Latin American. End-to-end encrypted.</li>
+                <li><strong>WeChat:</strong> Chinese guests (required—WhatsApp is blocked in China). Integrated payment processing.</li>
+                <li><strong>Email:</strong> Detailed information, confirmations, receipts. Backup channel for guests without smartphones.</li>
+                <li><strong>In-app chat:</strong> Hotel app messaging for mobile-first guests.</li>
+                <li><strong>Voice:</strong> Phone calls route to me for after-hours or overflow support (text-to-speech).</li>
+            </ul>
+
+            <h3>Channel Unification</h3>
+
+            <p>Example of channel switching:</p>
+
+            <ul>
+                <li><strong>Day 1 (Email):</strong> Guest books via email, receives confirmation</li>
+                <li><strong>Day 10 (SMS):</strong> Guest texts "Can I check in early?" I recognize guest from phone number, link to reservation</li>
+                <li><strong>Day 12 (WhatsApp):</strong> Guest messages from international number during flight. I recognize same guest, continue conversation</li>
+                <li><strong>Day 13 (In-app):</strong> Guest opens hotel app, sees full conversation history from all channels</li>
+            </ul>
+
+            <h2 id="metrics">Communication Metrics & Performance</h2>
+
+            <p>I track communication effectiveness to continuously improve guest experience:</p>
+
+            <ul>
+                <li><strong>Response time:</strong> Average 8 seconds (vs 12 minutes for human staff)</li>
+                <li><strong>Resolution rate:</strong> 87% of requests resolved without staff intervention</li>
+                <li><strong>Guest satisfaction:</strong> 4.7/5.0 average rating for AI interactions</li>
+                <li><strong>Staff time saved:</strong> 18 hours/day (vs manual guest communication)</li>
+                <li><strong>Upsell conversion:</strong> 19% (vs 4% for generic offers)</li>
+                <li><strong>Review generation:</strong> 22% review completion rate (vs 8% baseline)</li>
+            </ul>
+
+            <h2 id="roi">ROI: Revenue & Efficiency Impact</h2>
+
+            <h3>100-Room Boutique Hotel Example</h3>
+
+            <p><strong>Current state (manual communication):</strong></p>
+            <ul>
+                <li>Front desk staff: 3 FTE at $45,000/year = $135,000</li>
+                <li>Guest communication time: 60% of front desk workload = $81,000 in labor</li>
+                <li>Missed upsell opportunities: $8/room/night lost revenue = $292,000/year</li>
+                <li>Language barriers: 15% international guest dissatisfaction = Lower repeat bookings</li>
+            </ul>
+
+            <p><strong>With automated communication (Claire):</strong></p>
+            <ul>
+                <li>Staff time reduction: 60% of communication workload automated = $48,600 savings</li>
+                <li>Upsell revenue: 19% conversion on room upgrades and amenities = $170,000/year</li>
+                <li>Review improvement: +0.4 stars average (4.2 → 4.6) = 8% occupancy increase = $380,000/year</li>
+                <li>Repeat booking rate: +12% from personalized post-stay messaging = $145,000/year</li>
+            </ul>
+
+            <p><strong>Total annual benefit: $743,600</strong></p>
+            <p><strong>Claire Enterprise Tier: $72,000/year</strong></p>
+            <p><strong>Net benefit: $671,600 | ROI: 933%</strong></p>
+
+            <h2 id="conclusion">Conclusion: Communication as Competitive Advantage</h2>
+
+            <p>In hospitality, communication is the guest experience. Every interaction—from pre-arrival emails to in-stay service requests to post-stay reviews—shapes perception and drives loyalty. Properties that communicate proactively, personally, and instantly create guest experiences that competitors can't match.</p>
+
+            <p>Automated guest communication isn't about replacing human interaction—it's about handling the routine, repetitive messaging that overwhelms staff, so your team can focus on high-touch, memorable moments. While competitors struggle with language barriers and slow response times, you're delivering personalized, multilingual service at scale—24/7/365.</p>
+
+            <div class="cta-box">
+                <h3>See Claire's Guest Communication in Action</h3>
+                <p>Experience personalized, multilingual messaging from pre-arrival to post-stay.</p>
+                <a href="/" class="cta-btn">Start Interactive Demo</a>
+            </div>
+
+            <h2 style="margin-top: 4rem;">Read Next</h2>
+            <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                <a href="/hospitality/concierge-services.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Concierge Services →</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">24/7 local recommendations and booking assistance</p>
+                </a>
+                <a href="/hospitality/reservation-management.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Reservation Management →</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automated booking and availability management</p>
+                </a>
+            </div>
+        </article>
+
+        <aside>
+            <div class="toc">
+                <h4>On This Page</h4>
+                <ul>
+                    <li><a href="#pre-arrival">Pre-Arrival Communication</a></li>
+                    <li><a href="#arrival">Arrival & Check-In</a></li>
+                    <li><a href="#in-stay">In-Stay Service Requests</a></li>
+                    <li><a href="#multilingual">Multilingual Support</a></li>
+                    <li><a href="#post-stay">Post-Stay & Reviews</a></li>
+                    <li><a href="#channels">Omnichannel Communication</a></li>
+                    <li><a href="#metrics">Performance Metrics</a></li>
+                    <li><a href="#roi">ROI Analysis</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </div>
+
+            <div class="related">
+                <h4>Related Topics</h4>
+                <ul>
+                    <li><a href="/hospitality/">← Hospitality Overview</a></li>
+                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
+                    <li><a href="/hospitality/complaint-resolution.html">Complaint Resolution</a></li>
+                    <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+</body>
+</html>

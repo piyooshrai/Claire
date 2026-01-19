@@ -7,15 +7,44 @@
     <meta name="description" content="Automated legal timekeeping and billing: time tracking, billing rate enforcement, invoice generation, collections automation for law firms.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --accent: #7c3aed; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; padding: 6rem 2rem 4rem; max-width: 800px; margin: 0 auto; }
-        h1 { font-size: 2.5rem; margin-bottom: 2rem; }
-        h2 { font-size: 2rem; margin: 3rem 0 1.5rem; }
+        :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --text-secondary: #6b7280; --accent: #7c3aed; --border: #e9d5ff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
+        nav a { color: var(--text-primary); text-decoration: none; }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
+        article { max-width: 800px; }
+        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
+        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
         p { margin-bottom: 1.5rem; }
+        strong { font-weight: 600; }
+        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
+        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .cta-btn:hover { background: var(--accent); color: white; }
+        aside { position: sticky; top: 6rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+        .toc ul, .related ul { list-style: none; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
     </style>
 </head>
 <body>
-    <h1>Automated Timekeeping and Billing for Law Firms</h1>
+    <nav><a href="/">CLAIRE // LEGAL</a></nav>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/legal/">Legal</a> / Billing & Timekeeping
+            </div>
+
+            <h1>Automated Timekeeping and Billing for Law Firms</h1>
 
     <p>Law firms lose 10-15% of billable time due to inadequate time capture (Clio Legal Trends Report 2024). Attorneys forget to log time entries, underestimate hours worked, or write off time because they can't remember what they did three days ago. This revenue leakage compounds: a $2M firm loses $200K-$300K annually to poor timekeeping. For sole practitioners and small firms, this leakage can mean the difference between profitability and barely breaking even.</p>
 
@@ -23,7 +52,7 @@
 
     <p>The solution isn't better discipline or more reminders. It's automation: passive time capture that runs in the background without requiring conscious effort, combined with intelligent prompting that suggests time entries at natural break points rather than interrupting focus work.</p>
 
-    <h2>The Time Capture Problem</h2>
+    <h2 id="problem">The Time Capture Problem</h2>
 
     <p>Manual time entry requires attorneys to stop work, recall what they just did, estimate duration, select the correct matter and activity code, and write a description. This interruption breaks flow and often gets deferred until end-of-day—when memory of specific tasks is hazy and accuracy suffers.</p>
 
@@ -100,7 +129,7 @@
 
     <p>You review a list of suggested time entries, approve with one click, adjust any that need changes (duration or description), and continue working. Total time: 30-60 seconds instead of 40-90 minutes.</p>
 
-    <h2>Billing Rate Enforcement & Realization</h2>
+    <h2 id="rates">Billing Rate Enforcement & Realization</h2>
 
     <p>Billing rate errors are surprisingly common in manual systems: associates billed at partner rates, partners doing paralegal work billed at partner rates (when it should be billed at paralegal rates), or custom client rates not applied correctly. These errors either cost the firm money (when caught and written down) or damage client relationships (when not caught and clients dispute invoices).</p>
 
@@ -168,7 +197,7 @@
 
     <p>These analytics inform strategic decisions: which attorneys need training, which matters to decline, which practice areas to emphasize, which clients to fire.</p>
 
-    <h2>Automated Invoice Generation</h2>
+    <h2 id="invoices">Automated Invoice Generation</h2>
 
     <p>Manual invoice generation is a time-consuming, error-prone process. At month-end, paralegals or billing coordinators spend hours pulling reports, verifying time entries, calculating totals, formatting invoices, and routing for attorney approval. For a 10-attorney firm with 50 active matters, this process consumes 20-30 hours of staff time monthly.</p>
 
@@ -246,7 +275,7 @@
 
     <p>These narrative elements are templates you configure once and I auto-populate with matter-specific details.</p>
 
-    <h2>Collections Automation</h2>
+    <h2 id="collections">Collections Automation</h2>
 
     <p>Generating invoices is only half the battle—collecting payment is the other half. Law firms struggle with collections: clients forget to pay, dispute bills after the fact, or simply ignore invoices hoping the firm will write off small balances. The ABA reports that 15-20% of law firm accounts receivable are never collected, representing hundreds of thousands in lost revenue for mid-size firms.</p>
 
@@ -335,7 +364,7 @@
     Client disputes $5,000 of a $20,000 invoice. Partner negotiates settlement: Client pays $17,500 to close out matter.<br>
     I process the adjusted invoice, mark original invoice as settled, and document the write-off reason (dispute settlement) for tax and management reporting purposes.</p>
 
-    <h2>ROI: Recovered Billable Time & Faster Cash Flow</h2>
+    <h2 id="roi">ROI: Recovered Billable Time & Faster Cash Flow</h2>
 
     <p>The financial impact of automated timekeeping and billing goes beyond labor savings—it fundamentally improves both top-line revenue (through better time capture) and cash flow (through faster billing and collections).</p>
 
@@ -435,7 +464,7 @@
 
     <p><strong>ROI: 1,600%</strong></p>
 
-    <h2>Conclusion: Time is Money—Especially When It's Recovered</h2>
+    <h2 id="conclusion">Conclusion: Time is Money—Especially When It's Recovered</h2>
 
     <p>The math is stark: law firms are bleeding hundreds of thousands of dollars annually through poor timekeeping, delayed billing, and inadequate collections. Automation doesn't just save time—it fundamentally transforms law firm economics by:</p>
 
@@ -447,5 +476,50 @@
     </ol>
 
     <p>For most law firms, automated timekeeping and billing pays for itself within the first 30 days. The question isn't whether to automate—it's how quickly you can implement to stop the revenue leakage.</p>
+
+    <div class="cta-box">
+        <h3>Interview Claire for Your Firm</h3>
+        <p>See how I automate time capture, billing, and collections for your practice.</p>
+        <a href="/" class="cta-btn">Start Interactive Demo</a>
+    </div>
+
+    <h2 style="margin-top: 4rem;">Read Next</h2>
+    <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <a href="/legal/document-automation.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Document Automation →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Generate contracts, pleadings, and briefs</p>
+        </a>
+        <a href="/legal/roi-calculator.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">ROI Calculator →</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Calculate your potential savings</p>
+        </a>
+    </div>
+</article>
+
+<aside>
+    <div class="toc">
+        <h4>On This Page</h4>
+        <ul>
+            <li><a href="#problem">Time Capture Problem</a></li>
+            <li><a href="#rates">Billing Rate Enforcement</a></li>
+            <li><a href="#invoices">Invoice Generation</a></li>
+            <li><a href="#collections">Collections Automation</a></li>
+            <li><a href="#roi">ROI Analysis</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </div>
+
+    <div class="related">
+        <h4>Related Topics</h4>
+        <ul>
+            <li><a href="/legal/">← Legal Services Overview</a></li>
+            <li><a href="/legal/client-intake.html">Client Intake</a></li>
+            <li><a href="/legal/document-automation.html">Document Automation</a></li>
+            <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+            <li><a href="/legal/case-management.html">Case Management</a></li>
+        </ul>
+    </div>
+</aside>
+</main>
 </body>
 </html>
