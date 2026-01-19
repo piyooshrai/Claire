@@ -215,6 +215,17 @@
             }
         }
 
+        /* Shake animation for validation errors */
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
         @media (max-width: 768px) {
             .chat-box {
                 padding: 2rem 1.5rem;
@@ -471,9 +482,37 @@
             input.placeholder = 'Enter your name...';
             input.autocomplete = 'off';
 
+            let validationMessageShown = false;
+
             input.addEventListener('keypress', async (e) => {
-                if (e.key === 'Enter' && input.value.trim()) {
-                    userName = input.value.trim();
+                if (e.key === 'Enter') {
+                    const value = input.value.trim();
+
+                    // Validate name is not empty
+                    if (!value) {
+                        if (!validationMessageShown) {
+                            input.placeholder = 'Come on, I need to call you something...';
+                            input.classList.add('shake');
+                            setTimeout(() => input.classList.remove('shake'), 500);
+                            validationMessageShown = true;
+                        }
+                        return;
+                    }
+
+                    // Validate name is realistic (more than 1 char, contains vowels or common names)
+                    if (value.length < 2 || !/[aeiouAEIOU]/.test(value)) {
+                        input.disabled = true;
+                        const msg = addMessage('');
+                        await type(msg, `${value}... and how do you pronounce that exactly? Try again with your real name.`);
+                        await pause(1000);
+                        input.disabled = false;
+                        input.value = '';
+                        input.placeholder = 'Your actual name...';
+                        input.focus();
+                        return;
+                    }
+
+                    userName = value;
                     input.disabled = true;
 
                     const userMsg = addMessage(userName, 'user');
@@ -486,11 +525,11 @@
             inputContainer.appendChild(input);
             document.getElementById('chat-box').appendChild(inputContainer);
 
-            // Auto-scroll input to center
+            // Auto-scroll input to center with longer delay
             setTimeout(() => {
                 inputContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                input.focus();
-            }, 100);
+                setTimeout(() => input.focus(), 300);
+            }, 200);
         }
 
         async function respondToName() {
@@ -554,10 +593,10 @@
 
             document.getElementById('chat-box').appendChild(msgContainer);
 
-            // Auto-scroll buttons to center
+            // Auto-scroll buttons to center with longer delay
             setTimeout(() => {
                 msgContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
+            }, 200);
         }
 
         async function selectIndustry(industryName, path) {
@@ -594,9 +633,34 @@
             input.placeholder = 'Enter your email...';
             input.autocomplete = 'email';
 
+            let validationMessageShown = false;
+
             input.addEventListener('keypress', async (e) => {
-                if (e.key === 'Enter' && input.value.trim()) {
-                    userEmail = input.value.trim();
+                if (e.key === 'Enter') {
+                    const value = input.value.trim();
+
+                    // Validate email is not empty
+                    if (!value) {
+                        if (!validationMessageShown) {
+                            input.placeholder = 'I really need your email to personalize things...';
+                            input.classList.add('shake');
+                            setTimeout(() => input.classList.remove('shake'), 500);
+                            validationMessageShown = true;
+                        }
+                        return;
+                    }
+
+                    // Basic email validation
+                    if (!value.includes('@') || !value.includes('.')) {
+                        input.placeholder = 'That doesn\'t look like an email... try again';
+                        input.value = '';
+                        input.classList.add('shake');
+                        setTimeout(() => input.classList.remove('shake'), 500);
+                        validationMessageShown = true;
+                        return;
+                    }
+
+                    userEmail = value;
                     input.disabled = true;
 
                     const userMsg = addMessage(userEmail, 'user');
@@ -609,11 +673,11 @@
             inputContainer.appendChild(input);
             document.getElementById('chat-box').appendChild(inputContainer);
 
-            // Auto-scroll email input to center
+            // Auto-scroll email input to center with longer delay
             setTimeout(() => {
                 inputContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                input.focus();
-            }, 100);
+                setTimeout(() => input.focus(), 300);
+            }, 200);
         }
 
         async function finalizeAndRedirect(path) {
