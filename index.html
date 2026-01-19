@@ -215,6 +215,17 @@
             }
         }
 
+        /* Shake animation for validation errors */
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
         @media (max-width: 768px) {
             .chat-box {
                 padding: 2rem 1.5rem;
@@ -289,6 +300,70 @@
             }
         }
 
+        function getLocalizedGreeting(countryCode, region) {
+            // Map locations to culturally appropriate greetings
+            const greetings = {
+                'IN': 'Namaste',           // India
+                'JP': 'Konnichiwa',        // Japan
+                'CN': 'Nǐ hǎo',            // China
+                'KR': 'Annyeonghaseyo',    // South Korea
+                'ES': 'Hola',              // Spain
+                'MX': 'Hola',              // Mexico
+                'AR': 'Hola',              // Argentina
+                'CO': 'Hola',              // Colombia
+                'FR': 'Bonjour',           // France
+                'DE': 'Guten Tag',         // Germany
+                'IT': 'Ciao',              // Italy
+                'PT': 'Olá',               // Portugal
+                'BR': 'Olá',               // Brazil
+                'RU': 'Zdravstvuyte',      // Russia
+                'SA': 'Marhaba',           // Saudi Arabia
+                'AE': 'Marhaba',           // UAE
+                'IL': 'Shalom',            // Israel
+                'GR': 'Yassas',            // Greece
+                'TR': 'Merhaba',           // Turkey
+                'NL': 'Hallo',             // Netherlands
+                'SE': 'Hej',               // Sweden
+                'NO': 'Hei',               // Norway
+                'DK': 'Hej',               // Denmark
+                'FI': 'Hei',               // Finland
+                'PL': 'Cześć',             // Poland
+                'TH': 'Sawasdee',          // Thailand
+                'VN': 'Xin chào',          // Vietnam
+                'ID': 'Halo',              // Indonesia
+                'PH': 'Kumusta',           // Philippines
+                'ZA': 'Howzit',            // South Africa
+                'NG': 'Hello',             // Nigeria
+                'KE': 'Jambo'              // Kenya
+            };
+
+            // US regional greetings
+            if (countryCode === 'US') {
+                const southernStates = ['TX', 'LA', 'MS', 'AL', 'GA', 'FL', 'SC', 'NC', 'TN', 'AR', 'OK'];
+                if (southernStates.includes(region)) {
+                    return 'Hey there';
+                }
+                return 'Hello';
+            }
+
+            // UK variations
+            if (countryCode === 'GB') {
+                return 'Hello';
+            }
+
+            // Canada
+            if (countryCode === 'CA') {
+                return region === 'QC' ? 'Bonjour' : 'Hello';
+            }
+
+            // Australia/New Zealand
+            if (countryCode === 'AU' || countryCode === 'NZ') {
+                return 'G\'day';
+            }
+
+            return greetings[countryCode] || 'Hello';
+        }
+
         async function detectLocation() {
             try {
                 // Try IP-based geolocation first (using ipapi.co free API)
@@ -298,6 +373,14 @@
                 // Store timezone for time-based greetings
                 if (data.timezone) {
                     sessionStorage.setItem('userTimezone', data.timezone);
+                }
+
+                // Store country code and region for localized greeting
+                if (data.country_code) {
+                    sessionStorage.setItem('userCountryCode', data.country_code);
+                }
+                if (data.region_code) {
+                    sessionStorage.setItem('userRegionCode', data.region_code);
                 }
 
                 // Get weather data for conversational context - WAIT for it to complete
@@ -360,11 +443,6 @@
             }
 
             // New visitor flow
-            const msg1 = addMessage('');
-            await type(msg1, 'Hello, I am Claire.');
-
-            await pause(800);
-
             // Show typing indicator while detecting location
             showTypingIndicator();
 
@@ -376,6 +454,16 @@
 
             // Remove typing indicator
             removeTypingIndicator();
+
+            // Get localized greeting based on detected location
+            const countryCode = sessionStorage.getItem('userCountryCode') || '';
+            const regionCode = sessionStorage.getItem('userRegionCode') || '';
+            const greeting = getLocalizedGreeting(countryCode, regionCode);
+
+            const msg1 = addMessage('');
+            await type(msg1, `${greeting}, I am Claire.`);
+
+            await pause(800);
 
             const msg2 = addMessage('');
             await type(msg2, 'What is your name?');
@@ -394,9 +482,37 @@
             input.placeholder = 'Enter your name...';
             input.autocomplete = 'off';
 
+            let validationMessageShown = false;
+
             input.addEventListener('keypress', async (e) => {
-                if (e.key === 'Enter' && input.value.trim()) {
-                    userName = input.value.trim();
+                if (e.key === 'Enter') {
+                    const value = input.value.trim();
+
+                    // Validate name is not empty
+                    if (!value) {
+                        if (!validationMessageShown) {
+                            input.placeholder = 'Come on, I need to call you something...';
+                            input.classList.add('shake');
+                            setTimeout(() => input.classList.remove('shake'), 500);
+                            validationMessageShown = true;
+                        }
+                        return;
+                    }
+
+                    // Validate name is realistic (more than 1 char, contains vowels or common names)
+                    if (value.length < 2 || !/[aeiouAEIOU]/.test(value)) {
+                        input.disabled = true;
+                        const msg = addMessage('');
+                        await type(msg, `${value}... and how do you pronounce that exactly? Try again with your real name.`);
+                        await pause(1000);
+                        input.disabled = false;
+                        input.value = '';
+                        input.placeholder = 'Your actual name...';
+                        input.focus();
+                        return;
+                    }
+
+                    userName = value;
                     input.disabled = true;
 
                     const userMsg = addMessage(userName, 'user');
@@ -408,7 +524,12 @@
 
             inputContainer.appendChild(input);
             document.getElementById('chat-box').appendChild(inputContainer);
-            input.focus();
+
+            // Auto-scroll input to center with longer delay
+            setTimeout(() => {
+                inputContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => input.focus(), 300);
+            }, 200);
         }
 
         async function respondToName() {
@@ -471,6 +592,11 @@
             msgContainer.appendChild(btnContainer);
 
             document.getElementById('chat-box').appendChild(msgContainer);
+
+            // Auto-scroll buttons to center with longer delay
+            setTimeout(() => {
+                msgContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
         }
 
         async function selectIndustry(industryName, path) {
@@ -507,9 +633,34 @@
             input.placeholder = 'Enter your email...';
             input.autocomplete = 'email';
 
+            let validationMessageShown = false;
+
             input.addEventListener('keypress', async (e) => {
-                if (e.key === 'Enter' && input.value.trim()) {
-                    userEmail = input.value.trim();
+                if (e.key === 'Enter') {
+                    const value = input.value.trim();
+
+                    // Validate email is not empty
+                    if (!value) {
+                        if (!validationMessageShown) {
+                            input.placeholder = 'I really need your email to personalize things...';
+                            input.classList.add('shake');
+                            setTimeout(() => input.classList.remove('shake'), 500);
+                            validationMessageShown = true;
+                        }
+                        return;
+                    }
+
+                    // Basic email validation
+                    if (!value.includes('@') || !value.includes('.')) {
+                        input.placeholder = 'That doesn\'t look like an email... try again';
+                        input.value = '';
+                        input.classList.add('shake');
+                        setTimeout(() => input.classList.remove('shake'), 500);
+                        validationMessageShown = true;
+                        return;
+                    }
+
+                    userEmail = value;
                     input.disabled = true;
 
                     const userMsg = addMessage(userEmail, 'user');
@@ -521,7 +672,12 @@
 
             inputContainer.appendChild(input);
             document.getElementById('chat-box').appendChild(inputContainer);
-            input.focus();
+
+            // Auto-scroll email input to center with longer delay
+            setTimeout(() => {
+                inputContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => input.focus(), 300);
+            }, 200);
         }
 
         async function finalizeAndRedirect(path) {

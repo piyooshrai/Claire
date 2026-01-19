@@ -581,12 +581,15 @@ function addPersonalizationBar() {
     const bar = document.createElement('div');
     bar.id = 'personalization-bar';
     bar.style.cssText = `
-        background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-        padding: 0.5rem 2rem;
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        border-bottom: 1px solid var(--border);
+        background: linear-gradient(90deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.04) 100%);
+        padding: 0.75rem 2rem;
+        font-size: 0.9375rem;
+        color: var(--text-primary);
+        font-weight: 500;
+        border-bottom: 2px solid var(--accent);
         text-align: center;
+        position: relative;
+        z-index: 100;
     `;
 
     const { timeGreeting, weatherContext } = getConversationalGreeting();
