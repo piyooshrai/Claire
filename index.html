@@ -411,7 +411,17 @@
 
             await pause(800);
 
-            // Ask for email
+            // If returning visitor with existing email, skip to redirect
+            if (userEmail && userEmail.trim()) {
+                const msg = addMessage('');
+                await type(msg, `Excellent. Let's orchestrate your ${path.split('/')[1]} workflows, ${userName}.`);
+
+                await pause(1200);
+                window.location.href = path;
+                return;
+            }
+
+            // New visitor - ask for email
             const msg = addMessage('');
             await type(msg, `Perfect. May I have your email to personalize your experience?`);
 
