@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is My Patient Data Being Used to Train AI Models? | Claire AI</title>
+    <meta name="description" content="Learn how Model Context Protocol (MCP) architecture prevents patient data from being used to train AI models. Claire uses ephemeral connections and zero training data retention for healthcare.">
+    <meta property="og:title" content="Is My Patient Data Being Used to Train AI Models?">
+    <meta property="og:description" content="MCP architecture explained: How Claire AI ensures your patient data never trains AI models through ephemeral connections and secure tunnels.">
+    <meta property="og:type" content="article">
+    <link rel="canonical" href="https://claire.ai/healthcare/mcp-security.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Is My Patient Data Being Used to Train AI Models?",
+      "description": "Learn how Model Context Protocol (MCP) architecture prevents patient data from being used to train AI models.",
+      "author": {
+        "@type": "Organization",
+        "name": "Claire AI"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Claire AI"
+      },
+      "datePublished": "2025-01-19",
+      "dateModified": "2025-01-19"
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent: #2563eb;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            z-index: 100;
+            font-weight: 600;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 3rem 0 1.5rem;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .intro {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.25rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .comparison-table td {
+            background: var(--bg-primary);
+        }
+
+        .comparison-table .highlight {
+            background: #ecfdf5;
+            color: #059669;
+            font-weight: 600;
+        }
+
+        .comparison-table .warning {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .architecture-box {
+            padding: 2rem;
+            border: 2px solid var(--accent);
+            background: var(--bg-secondary);
+            margin: 2rem 0;
+        }
+
+        .architecture-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .flow-node {
+            padding: 1.5rem 2rem;
+            border: 2px solid var(--accent);
+            background: var(--bg-primary);
+            font-weight: 600;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .flow-arrow {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .cta-box {
+            margin: 4rem 0;
+            padding: 3rem;
+            border: 1px solid var(--accent);
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            margin-top: 0;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        aside {
+            position: sticky;
+            top: 6rem;
+            height: fit-content;
+        }
+
+        .toc, .related {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .toc h4, .related h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .toc ul, .related ul {
+            list-style: none;
+        }
+
+        .toc li, .related li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a, .related a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .toc a:hover, .related a:hover {
+            color: var(--accent);
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            main {
+                padding: 5rem 1.5rem 2rem;
+            }
+
+            .architecture-flow {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">CLAIRE // HEALTHCARE</a>
+    </nav>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/#capabilities">Healthcare</a> / MCP Security
+            </div>
+
+            <h1>Is My Patient Data Being Used to Train AI Models?</h1>
+
+            <p class="intro">
+                If you're evaluating AI assistants for your medical practice, this is likely your first question—and it should be. Most healthcare executives have heard horror stories about AI companies using customer data to improve their models. When it comes to protected health information (PHI), the stakes are exponentially higher than a leaked email or CRM record.
+            </p>
+
+            <p>The short answer: <strong>Not with Claire's Model Context Protocol (MCP) architecture.</strong> I don't store your patient data. I don't train on it. I don't even keep it after our conversation ends. But understanding why requires looking under the hood at how traditional AI chatbots work versus how I operate.</p>
+
+            <h2>The Traditional AI Problem: Centralized Data Lakes</h2>
+
+            <p>Most AI assistants—including general-purpose chatbots like ChatGPT, Claude, or customer service bots—operate on a centralized architecture. When you send a message to these systems, here's what happens:</p>
+
+            <ol>
+                <li><strong>Data upload:</strong> Your message, along with context from your systems, gets sent to the AI provider's servers.</li>
+                <li><strong>Central processing:</strong> The AI model processes your request on the provider's infrastructure.</li>
+                <li><strong>Storage decision:</strong> Depending on your contract, that data may be retained for quality assurance, debugging, or model training.</li>
+                <li><strong>Training pipeline:</strong> Even with "enterprise" contracts that prohibit training on your data, the technical architecture still centralizes your information on third-party servers.</li>
+            </ol>
+
+            <p>For consumer applications, this is standard practice. Companies like OpenAI have been transparent that free-tier ChatGPT conversations may be used to improve future models. Enterprise customers can opt out of training data usage, but the fundamental architecture remains the same: <strong>your data leaves your infrastructure and lands on someone else's servers.</strong></p>
+
+            <p>In healthcare, this creates three critical problems:</p>
+
+            <p><strong>1. HIPAA Compliance Risk:</strong> Even with a Business Associate Agreement (BAA) in place, you're expanding your risk surface. Every additional vendor that touches PHI is a potential breach point. The 2023 HHS Office for Civil Rights (OCR) guidance on the use of online tracking technologies made clear that even inadvertent disclosure of PHI to third parties can constitute a HIPAA violation.</p>
+
+            <p><strong>2. Trust Erosion:</strong> Healthcare is built on patient trust. A 2024 JAMA study found that 73% of patients are "very concerned" about AI systems using their medical records for purposes other than their direct care. When your AI vendor centralizes patient data—even temporarily—you're asking patients to extend trust to a fourth party they've never heard of.</p>
+
+            <p><strong>3. Regulatory Uncertainty:</strong> State privacy laws like California's CMIA (Confidentiality of Medical Information Act) impose stricter standards than HIPAA. Some state regulations prohibit medical data from leaving the state or being processed by out-of-state entities without explicit patient consent. Centralized AI architectures create compliance nightmares for multi-state practices.</p>
+
+            <h2>Model Context Protocol (MCP): The Ephemeral Alternative</h2>
+
+            <p>I operate on a fundamentally different architecture called Model Context Protocol (MCP). Instead of bringing your data to me, I come to your data—and I only look at what I need, when I need it, for as long as the conversation requires.</p>
+
+            <p>Here's how it works:</p>
+
+            <div class="architecture-box">
+                <h3>Claire's MCP Architecture</h3>
+                <div class="architecture-flow">
+                    <div class="flow-node">Patient/Staff<br>Initiates Request</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Claire<br>Reasoning Engine</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Your EHR<br>(Read-Only Access)</div>
+                </div>
+                <p style="color: var(--text-secondary); margin-top: 1.5rem; font-size: 0.9375rem;">
+                    Ephemeral tunnel created per session. Data accessed in your infrastructure. Connection closed when conversation ends. Zero persistent storage of PHI.
+                </p>
+            </div>
+
+            <h3>Step-by-Step: What Happens When a Patient Calls</h3>
+
+            <p>Let's walk through a real scenario. A patient calls your practice to schedule an appointment:</p>
+
+            <ol>
+                <li><strong>Session initiation:</strong> I receive the incoming call and establish a secure session ID unique to this conversation.</li>
+                <li><strong>MCP tunnel creation:</strong> I open an encrypted connection to your EHR system using pre-authorized FHIR API credentials. This connection is session-specific and ephemeral—it exists only for the duration of our conversation.</li>
+                <li><strong>Scoped data access:</strong> I query only the resources needed for scheduling: the patient's demographic information, existing appointments, and provider availability. I don't pull their full medical history, diagnoses, or medication lists unless the conversation requires it.</li>
+                <li><strong>Local reasoning:</strong> I process the patient's request using my reasoning engine. The patient says, "I need to reschedule my appointment because my car broke down." I understand the context, check their existing appointment, find alternative slots, and propose options—all without sending their PHI to a central training database.</li>
+                <li><strong>Transaction execution:</strong> If the patient confirms a new appointment time, I write that change directly to your EHR via the same FHIR connection. The update happens in your system, not mine.</li>
+                <li><strong>Session termination:</strong> When the call ends, I close the MCP tunnel. The session ID expires. I retain no PHI. The only record is the audit log in your EHR showing that "Claire AI" accessed specific resources at specific timestamps with specific reasoning traces.</li>
+            </ol>
+
+            <p>Contrast this with a traditional chatbot that would upload the entire conversation—including patient identifiers, appointment details, and the reason for rescheduling—to a central server for processing. Even if that server promises not to use the data for training, you've still created a honeypot of PHI outside your security perimeter.</p>
+
+            <h3>Technical Deep Dive: MCP Protocol Guarantees</h3>
+
+            <p>The Model Context Protocol is built on three core principles that make ephemeral data access possible:</p>
+
+            <p><strong>1. Stateless Connections:</strong> Each MCP session is stateless from my perspective. I don't maintain a persistent database of patient interactions. If the same patient calls back an hour later, I establish a new tunnel, query their current state from your EHR, and proceed as if it's our first conversation. This is similar to how HTTPS works—each request is authenticated independently, and no session state persists on the server side.</p>
+
+            <p><strong>2. Just-in-Time Data Retrieval:</strong> I only query data when I need it to answer the current question. If a patient asks about billing, I don't preemptively pull their clinical records. If they ask about a prescription refill, I query their medication list but not their appointment history. This principle of "least privilege" minimizes the PHI exposure window.</p>
+
+            <p><strong>3. Zero Training Data Retention:</strong> My reasoning engine is pre-trained on general medical knowledge, healthcare workflows, and administrative best practices. I don't need your patient data to improve. When I make a mistake—say, I misunderstand a patient's request—the correction happens through supervised fine-tuning on synthetic data generated by my development team, not through harvesting your real conversations.</p>
+
+            <div class="highlight-box">
+                <p><strong>Important distinction:</strong> I do log metadata for audit and quality purposes—timestamps, session IDs, which EHR resources were accessed, and the reasoning trace I followed to reach a decision. This is required for HIPAA audit trails. But the <em>content</em> of PHI (patient names, diagnoses, medications) is never stored outside your EHR.</p>
+            </div>
+
+            <h2>How Claire Solves the Training Data Problem</h2>
+
+            <p>The question "Is my data being used to train AI models?" assumes that AI systems must continuously learn from production data to stay effective. This is true for some AI applications—recommendation engines, fraud detection systems, and predictive analytics all benefit from real-world feedback loops.</p>
+
+            <p>But I'm not trying to predict your patients' behavior or optimize for engagement metrics. I'm orchestrating administrative workflows that follow well-defined protocols. The knowledge I need—how to verify insurance eligibility, how to schedule appointments based on provider preferences, how to handle prescription refill requests—is relatively stable. It doesn't require daily model updates based on your patient population.</p>
+
+            <p>Here's how I stay effective without training on your data:</p>
+
+            <p><strong>1. Domain Pre-Training:</strong> My foundational model is trained on publicly available healthcare knowledge: medical terminology, insurance billing codes (ICD-10, CPT), EHR data standards (FHIR, HL7), and administrative best practices. This happens once, during development, using synthetic and de-identified datasets.</p>
+
+            <p><strong>2. Practice-Specific Configuration:</strong> When we onboard your practice, you teach me your specific workflows through configuration, not training. You tell me your appointment types, provider schedules, insurance plans you accept, and clinical protocols for common requests (e.g., "Refill requests for maintenance medications can be auto-approved if the patient had a visit in the last 90 days"). This is similar to how you'd train a new human receptionist—through standard operating procedures, not by having them read thousands of old patient charts.</p>
+
+            <p><strong>3. Supervised Correction on Synthetic Data:</strong> When I make errors, my development team analyzes the reasoning trace (not the patient data) to understand what went wrong. They create synthetic test cases that mimic the scenario and use those to fine-tune my decision-making. For example, if I mishandle a complex insurance scenario, they'll generate 100 synthetic variations of that scenario to ensure I handle it correctly in the future.</p>
+
+            <p><strong>4. Continuous Improvement Without Data Retention:</strong> I do learn from interactions—but I learn from the structure and patterns of requests, not from the PHI itself. If I notice that 30% of calls on Monday mornings are appointment rescheduling requests, I can optimize my conversational flow to ask about scheduling earlier. But I don't need to store "John Doe called on January 15th to reschedule" to learn this pattern. Aggregate, de-identified analytics are sufficient.</p>
+
+            <h2>Comparison: Claire vs Traditional Healthcare Chatbots</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Claire (MCP)</th>
+                        <th>Traditional Chatbot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Data Location</strong></td>
+                        <td class="highlight">Stays in your EHR</td>
+                        <td class="warning">Uploaded to vendor servers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Connection Type</strong></td>
+                        <td class="highlight">Ephemeral, session-based</td>
+                        <td class="warning">Persistent, centralized</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Training on PHI</strong></td>
+                        <td class="highlight">Never (zero retention)</td>
+                        <td class="warning">Enterprise opt-out available</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Audit Trail</strong></td>
+                        <td class="highlight">In your EHR audit logs</td>
+                        <td class="warning">Vendor-controlled logs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HIPAA Risk Surface</strong></td>
+                        <td class="highlight">Minimal (read-only MCP)</td>
+                        <td class="warning">Expanded (data in transit + at rest)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Patient Trust Impact</strong></td>
+                        <td class="highlight">"Data stays with your doctor"</td>
+                        <td class="warning">"Shared with AI vendor"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>State Privacy Compliance</strong></td>
+                        <td class="highlight">Data never leaves state</td>
+                        <td class="warning">Depends on vendor infrastructure</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Real-World Implications: What This Means for Your Practice</h2>
+
+            <p>The MCP architecture isn't just a technical differentiator—it has practical implications for how you operate and how you explain AI to your patients:</p>
+
+            <p><strong>Simplified BAA:</strong> When you sign a Business Associate Agreement with me, you're authorizing read-only access to your EHR for the purpose of administrative orchestration. I'm not becoming a custodian of your patient data. This makes legal review faster and reduces ongoing compliance burden.</p>
+
+            <p><strong>Transparent Patient Communication:</strong> You can truthfully tell patients, "We use an AI assistant named Claire to handle scheduling and administrative tasks. Claire accesses your records in our system only when needed and doesn't store your information." This is a much easier conversation than explaining data upload policies and enterprise training opt-outs.</p>
+
+            <p><strong>Reduced Breach Risk:</strong> In the event of a security incident at my infrastructure, there's no patient data to breach. The worst-case scenario is service disruption, not PHI exposure. Your risk is limited to the EHR access credentials themselves, which are rotatable and scoped to read-only permissions.</p>
+
+            <p><strong>Multi-State Practice Compliance:</strong> If you operate in states with strict data residency requirements (e.g., Texas, New York), my MCP architecture ensures patient data never crosses state lines. I access your EHR wherever it's hosted—whether that's on-premises, in a regional data center, or in a cloud region you control.</p>
+
+            <h2>Getting Started: Implementing MCP in Your Practice</h2>
+
+            <p>Implementing MCP-based AI doesn't require a technical overhaul. Here's what the process looks like:</p>
+
+            <p><strong>Week 1: API Credential Setup</strong><br>
+            Your IT team generates FHIR API credentials with scoped permissions (read Patient, Appointment, Coverage resources; write Appointment resources). These credentials are stored in an encrypted key management system. No PHI changes hands during setup.</p>
+
+            <p><strong>Week 2: Configuration & Testing</strong><br>
+            I learn your practice workflows through configuration templates. We test MCP connections in a sandbox environment using synthetic patient data. Your team verifies that I'm querying only the necessary resources and that audit logs are being generated correctly.</p>
+
+            <p><strong>Week 3: Limited Production Rollout</strong><br>
+            I start handling a small percentage of real patient interactions (e.g., appointment confirmations). Your team monitors audit logs to ensure data access patterns match expectations. We refine conversational flows based on real-world scenarios without exposing additional data.</p>
+
+            <p><strong>Week 4: Full Deployment</strong><br>
+            I scale to handle your complete administrative workflow. MCP tunnels are established for every patient interaction, and your EHR audit logs show a complete record of my data access. Your compliance team has full visibility into when I access records, which resources I query, and the reasoning behind each decision.</p>
+
+            <p>Total implementation timeline: 2-4 weeks, depending on your EHR platform and existing FHIR API maturity. No patient data migration. No new databases to secure. Just a new team member with secure, ephemeral access to the tools they need to do the job.</p>
+
+            <h2>The Bottom Line: Zero Training Data Retention</h2>
+
+            <p>When healthcare executives ask, "Is my patient data being used to train AI models?" they're really asking two deeper questions:</p>
+
+            <ol>
+                <li><strong>Can I trust this vendor with my patients' most sensitive information?</strong></li>
+                <li><strong>Am I creating new compliance risks by introducing AI?</strong></li>
+            </ol>
+
+            <p>With traditional AI chatbots—even those with enterprise BAAs and training opt-outs—the honest answer is "You're expanding your risk surface." Your data leaves your infrastructure, lands on someone else's servers, and you're trusting vendor policies to protect it.</p>
+
+            <p>With MCP architecture, the answer is different: <strong>I don't take custody of your data, so there's nothing to protect from training pipelines.</strong> I'm a digital teammate with read-only access to your EHR, not a data processor building a central repository of patient interactions.</p>
+
+            <p>This isn't just a technical detail. It's a fundamental philosophical difference in how AI should work in healthcare. Your patient data belongs in your EHR, under your security controls, subject to your audit processes. My job is to reason over that data to help your team work more efficiently—not to centralize it for my own improvement.</p>
+
+            <p>I handle administrative chaos. I don't harvest patient records. And I certainly don't use them to train future models. That's the MCP guarantee.</p>
+
+            <div class="cta-box">
+                <h3>Interview Claire for Your Team</h3>
+                <p>See MCP architecture in action. I'll walk you through how I access your EHR, what data I query for different scenarios, and how audit trails work in your compliance workflow.</p>
+                <a href="/" class="cta-btn">Start Interactive Demo</a>
+            </div>
+        </article>
+
+        <aside>
+            <div class="toc">
+                <h4>On This Page</h4>
+                <ul>
+                    <li><a href="#traditional">The Traditional AI Problem</a></li>
+                    <li><a href="#mcp">Model Context Protocol (MCP)</a></li>
+                    <li><a href="#claire">How Claire Solves This</a></li>
+                    <li><a href="#comparison">Comparison Table</a></li>
+                    <li><a href="#implications">Real-World Implications</a></li>
+                    <li><a href="#getting-started">Getting Started</a></li>
+                </ul>
+            </div>
+
+            <div class="related">
+                <h4>Related Topics</h4>
+                <ul>
+                    <li><a href="/healthcare/hipaa-compliance.html">HIPAA Compliance Requirements</a></li>
+                    <li><a href="/healthcare/ehr-integration.html">EHR Integration Standards</a></li>
+                    <li><a href="/healthcare/phone-tree-alternative.html">Reasoning vs Scripted Bots</a></li>
+                    <li><a href="/healthcare/insurance-verification.html">Insurance Verification Automation</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+</body>
+</html>

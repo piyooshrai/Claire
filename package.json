@@ -1,0 +1,20 @@
+{
+  "name": "claire-website",
+  "version": "1.0.0",
+  "description": "Claire AI - Digital Labor Platform for Healthcare",
+  "scripts": {
+    "dev": "npx http-server public -p 3000 -c-1",
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx http-server public -p 3000"
+  },
+  "keywords": [
+    "healthcare",
+    "ai",
+    "virtual-assistant",
+    "medical-practice",
+    "digital-labor"
+  ],
+  "author": "Claire AI",
+  "license": "UNLICENSED",
+  "private": true
+}
