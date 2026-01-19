@@ -289,6 +289,70 @@
             }
         }
 
+        function getLocalizedGreeting(countryCode, region) {
+            // Map locations to culturally appropriate greetings
+            const greetings = {
+                'IN': 'Namaste',           // India
+                'JP': 'Konnichiwa',        // Japan
+                'CN': 'Nǐ hǎo',            // China
+                'KR': 'Annyeonghaseyo',    // South Korea
+                'ES': 'Hola',              // Spain
+                'MX': 'Hola',              // Mexico
+                'AR': 'Hola',              // Argentina
+                'CO': 'Hola',              // Colombia
+                'FR': 'Bonjour',           // France
+                'DE': 'Guten Tag',         // Germany
+                'IT': 'Ciao',              // Italy
+                'PT': 'Olá',               // Portugal
+                'BR': 'Olá',               // Brazil
+                'RU': 'Zdravstvuyte',      // Russia
+                'SA': 'Marhaba',           // Saudi Arabia
+                'AE': 'Marhaba',           // UAE
+                'IL': 'Shalom',            // Israel
+                'GR': 'Yassas',            // Greece
+                'TR': 'Merhaba',           // Turkey
+                'NL': 'Hallo',             // Netherlands
+                'SE': 'Hej',               // Sweden
+                'NO': 'Hei',               // Norway
+                'DK': 'Hej',               // Denmark
+                'FI': 'Hei',               // Finland
+                'PL': 'Cześć',             // Poland
+                'TH': 'Sawasdee',          // Thailand
+                'VN': 'Xin chào',          // Vietnam
+                'ID': 'Halo',              // Indonesia
+                'PH': 'Kumusta',           // Philippines
+                'ZA': 'Howzit',            // South Africa
+                'NG': 'Hello',             // Nigeria
+                'KE': 'Jambo'              // Kenya
+            };
+
+            // US regional greetings
+            if (countryCode === 'US') {
+                const southernStates = ['TX', 'LA', 'MS', 'AL', 'GA', 'FL', 'SC', 'NC', 'TN', 'AR', 'OK'];
+                if (southernStates.includes(region)) {
+                    return 'Hey there';
+                }
+                return 'Hello';
+            }
+
+            // UK variations
+            if (countryCode === 'GB') {
+                return 'Hello';
+            }
+
+            // Canada
+            if (countryCode === 'CA') {
+                return region === 'QC' ? 'Bonjour' : 'Hello';
+            }
+
+            // Australia/New Zealand
+            if (countryCode === 'AU' || countryCode === 'NZ') {
+                return 'G\'day';
+            }
+
+            return greetings[countryCode] || 'Hello';
+        }
+
         async function detectLocation() {
             try {
                 // Try IP-based geolocation first (using ipapi.co free API)
@@ -298,6 +362,14 @@
                 // Store timezone for time-based greetings
                 if (data.timezone) {
                     sessionStorage.setItem('userTimezone', data.timezone);
+                }
+
+                // Store country code and region for localized greeting
+                if (data.country_code) {
+                    sessionStorage.setItem('userCountryCode', data.country_code);
+                }
+                if (data.region_code) {
+                    sessionStorage.setItem('userRegionCode', data.region_code);
                 }
 
                 // Get weather data for conversational context - WAIT for it to complete
@@ -360,11 +432,6 @@
             }
 
             // New visitor flow
-            const msg1 = addMessage('');
-            await type(msg1, 'Hello, I am Claire.');
-
-            await pause(800);
-
             // Show typing indicator while detecting location
             showTypingIndicator();
 
@@ -376,6 +443,16 @@
 
             // Remove typing indicator
             removeTypingIndicator();
+
+            // Get localized greeting based on detected location
+            const countryCode = sessionStorage.getItem('userCountryCode') || '';
+            const regionCode = sessionStorage.getItem('userRegionCode') || '';
+            const greeting = getLocalizedGreeting(countryCode, regionCode);
+
+            const msg1 = addMessage('');
+            await type(msg1, `${greeting}, I am Claire.`);
+
+            await pause(800);
 
             const msg2 = addMessage('');
             await type(msg2, 'What is your name?');
