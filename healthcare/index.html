@@ -352,8 +352,8 @@ function personalizeContent() {
         let text = p.innerHTML;
 
         // Pattern 1: "I manage..." → "Alex, I manage..."
-        if (text.startsWith('I manage')) {
-            text = `${userData.name}, ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+        if (text.startsWith('I manage') || text.startsWith('I handle') || text.startsWith('I don\'t')) {
+            text = `${userData.name}, ${text}`;
         }
 
         // Pattern 2: "When you..." → "When you, Alex,..."
@@ -364,7 +364,7 @@ function personalizeContent() {
 
         // Pattern 3: "You'll notice..." → "Alex, you'll notice..."
         else if (text.match(/^You'(ll|re) /)) {
-            text = `${userData.name}, ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+            text = `${userData.name}, you${text.slice(3)}`;
         }
 
         // Pattern 4: Mid-sentence injection for key phrases
