@@ -1,519 +1,366 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-industry="legal">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Legal Document Automation | Claire AI</title>
+    <title>AI Document Automation for Law Firms | Claire AI</title>
     <meta name="description" content="AI document automation for law firms: contracts, briefs, pleadings. Template generation, clause libraries, precedent search for legal practice.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --text-secondary: #6b7280; --accent: #7c3aed; --border: #e9d5ff; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 100; font-weight: 600; font-size: 1.125rem; letter-spacing: 0.05em; }
-        nav a { color: var(--text-primary); text-decoration: none; }
-        .breadcrumb { margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.875rem; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; }
-        main { max-width: 1400px; margin: 0 auto; padding: 6rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; }
-        article { max-width: 800px; }
-        h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 2rem; }
-        h2 { font-size: 2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
-        h3 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 1rem; }
-        p { margin-bottom: 1.5rem; }
-        strong { font-weight: 600; }
-        .intro { font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 3rem; }
+        :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --text-secondary: #6b7280; --accent: #7c3aed; --accent-light: #a78bfa; --border: #e9d5ff; --shadow: rgba(124, 58, 237, 0.1); }
+        @keyframes breathe { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); background-size: 200% 200%; animation: breathe 15s ease infinite; color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; position: relative; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px); background-size: 50px 50px; animation: gridBreathe 8s ease-in-out infinite; pointer-events: none; z-index: 1; }
+        @keyframes gridBreathe { 0%, 100% { opacity: 0.4; background-size: 50px 50px; } 50% { opacity: 0.2; background-size: 60px 60px; } }
+        nav, main, footer { position: relative; z-index: 2; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 1rem 2rem; z-index: 1000; box-shadow: 0 2px 10px var(--shadow); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-weight: 700; font-size: 1.125rem; letter-spacing: 0.05em; color: var(--text-primary); }
+        .nav-brand span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.9375rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-cta { padding: 0.75rem 1.5rem; background: var(--accent); color: white !important; border-radius: 6px; font-weight: 600; transition: all 0.2s; }
+        .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 12px var(--shadow); }
+        main { max-width: 1400px; margin: 0 auto; padding: 8rem 2rem 4rem; display: grid; grid-template-columns: 1fr 320px; gap: 4rem; }
+        article { max-width: 850px; }
+        .breadcrumb { margin-bottom: 3rem; color: var(--text-secondary); font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--accent-light); }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 2rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .intro { font-size: 1.375rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 4rem; font-weight: 400; }
+        h2 { font-size: 2.25rem; font-weight: 700; margin: 4rem 0 1.5rem; color: var(--text-primary); position: relative; padding-bottom: 1rem; }
+        h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent) 0%, transparent 100%); }
+        h3 { font-size: 1.625rem; font-weight: 600; margin: 2.5rem 0 1rem; color: var(--accent); }
+        p { margin-bottom: 1.5rem; line-height: 1.8; }
+        strong { font-weight: 600; color: var(--text-primary); }
+        .stat-callout { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; padding: 2.5rem; margin: 3rem 0; border-radius: 12px; box-shadow: 0 8px 24px var(--shadow); }
+        .stat-value { font-size: 4rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 1.125rem; opacity: 0.95; font-weight: 500; }
+        .stat-context { margin-top: 1rem; font-size: 0.9375rem; opacity: 0.9; line-height: 1.6; }
+        .highlight-box { background: var(--bg-secondary); border-left: 4px solid var(--accent); padding: 2rem; margin: 2.5rem 0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .highlight-box h4 { color: var(--accent); font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
         ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.5rem; }
-        .cta-box { margin: 4rem 0; padding: 3rem; border: 1px solid var(--accent); background: var(--bg-secondary); text-align: center; }
-        .cta-btn { display: inline-block; margin-top: 1.5rem; padding: 1.5rem 2rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; font-weight: 600; transition: all 0.2s; }
-        .cta-btn:hover { background: var(--accent); color: white; }
-        aside { position: sticky; top: 6rem; height: fit-content; }
-        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
-        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
-        .toc ul, .related ul { list-style: none; }
+        li { margin-bottom: 0.75rem; line-height: 1.7; }
+        .cta-box { margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; text-align: center; border-radius: 12px; box-shadow: 0 8px 24px var(--shadow); }
+        .cta-box h3 { color: white; font-size: 2rem; margin-bottom: 1rem; }
+        .cta-box p { font-size: 1.125rem; opacity: 0.95; margin-bottom: 1.5rem; }
+        .cta-btn { display: inline-block; padding: 1.25rem 2.5rem; background: white; color: var(--accent); text-decoration: none; font-weight: 700; border-radius: 8px; transition: all 0.2s; font-size: 1.125rem; }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
+        .read-next { margin-top: 4rem; }
+        .read-next h2 { margin-top: 0; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .card { padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
+        .card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 24px var(--shadow); }
+        .card h3 { font-size: 1.25rem; color: var(--accent); margin-bottom: 0.75rem; }
+        .card h3::after { content: ' →'; opacity: 0; transition: opacity 0.2s; }
+        .card:hover h3::after { opacity: 1; }
+        .card p { font-size: 0.9375rem; color: var(--text-secondary); margin: 0; }
+        aside { position: sticky; top: 8rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--accent); }
+        .toc ul, .related ul { list-style: none; margin: 0; }
         .toc li, .related li { margin-bottom: 0.75rem; }
-        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; }
-        @media (max-width: 1024px) { main { grid-template-columns: 1fr; } aside { position: relative; top: 0; } }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; display: block; padding: 0.25rem 0; }
+        .toc a:hover, .related a:hover { color: var(--accent); }
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border); margin-top: 8rem; }
+        .footer-shadow { max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; }
+        .footer-shadow h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .footer-shadow-intro { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.7; }
+        .shadow-toggle { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-bottom: 2rem; }
+        .shadow-toggle:hover { background: var(--accent-light); transform: translateY(-2px); }
+        .shadow-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .shadow-content.expanded { max-height: 10000px; }
+        .shadow-content h3 { font-size: 1.75rem; margin-top: 3rem; margin-bottom: 1rem; }
+        .shadow-content h4 { font-size: 1.375rem; margin-top: 2rem; margin-bottom: 0.75rem; color: var(--accent); }
+        .footer-nav { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; border-top: 1px solid var(--border); }
+        .footer-column h4 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--accent); }
+        .footer-column ul { list-style: none; margin: 0; }
+        .footer-column li { margin-bottom: 0.5rem; }
+        .footer-column a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
+        .footer-column a:hover { color: var(--accent); }
+        .footer-industries { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; border-top: 1px solid var(--border); }
+        .footer-industries p { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .industry-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+        .industry-links a { color: var(--accent); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .industry-links a:hover { color: var(--accent-light); }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem; }
+        .claire-dock { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; }
+        .dock-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px var(--shadow); transition: all 0.3s; }
+        .dock-avatar:hover { transform: scale(1.1); box-shadow: 0 12px 32px var(--shadow); }
+        .dock-panel { position: absolute; bottom: 80px; right: 0; width: 320px; background: white; border-radius: 12px; box-shadow: 0 12px 48px var(--shadow); display: none; border: 1px solid var(--border); }
+        .dock-panel.open { display: block; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .dock-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .dock-header h4 { font-size: 1.125rem; font-weight: 700; color: var(--accent); }
+        .dock-close { background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+        .dock-body { padding: 1.5rem; }
+        .dock-message { font-size: 0.9375rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1rem; }
+        .dock-cta { display: block; width: 100%; padding: 1rem; background: var(--accent); color: white; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.2s; }
+        .dock-cta:hover { background: var(--accent-light); }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; gap: 2rem; } aside { position: relative; top: 0; } h1 { font-size: 2.5rem; } .nav-links { gap: 1rem; } .nav-links a:not(.nav-cta) { display: none; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.75rem; } .stat-value { font-size: 3rem; } .footer-nav { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body>
-    <nav><a href="/">CLAIRE // LEGAL</a></nav>
+<body data-industry="legal">
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">CLAIRE <span>//</span> PARALEGAL ORCHESTRATOR</div>
+            <div class="nav-links">
+                <a href="/legal/#case-experience">Case Experience</a>
+                <a href="/legal/#skillset">Skillset</a>
+                <a href="/legal/#privilege-security">Privilege & Security</a>
+                <a href="/legal/#billable-efficiency">Billable Efficiency</a>
+                <a href="/legal/intake-reasoning-demo.html" class="nav-cta">Execute Intake Demo</a>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <article>
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/legal/">Legal</a> / Document Automation
+                <a href="/">Home</a> <span>/</span> <a href="/legal/">Legal</a> <span>/</span> Document Automation Orchestration
             </div>
 
-            <h1>AI Document Automation for Law Firms: Contracts, Briefs, and Pleadings</h1>
-        <p class="intro">Attorneys spend 48% of their time on document preparation—drafting contracts, pleadings, briefs, discovery responses, and transactional documents (ABA Legal Technology Survey 2024). Much of this work is repetitive: pulling clauses from past documents, adapting templates to new facts, cite-checking, and formatting. This is billable time, but it's not the high-value strategic work that justifies premium rates or differentiates your firm from competitors.</p>
+            <h1>Document Automation Orchestration: Contracts, Pleadings & Briefs</h1>
 
-        <p>The problem compounds in litigation practice: associates spend hours drafting routine motions that follow predictable patterns. A motion to compel discovery follows the same structure every time—meet-and-confer certification, summary of discovery dispute, legal standard, argument, conclusion. The facts change, but the framework stays constant. Yet associates still spend 3-5 hours drafting each motion from scratch, reinventing the wheel instead of building on past work.</p>
+            <p class="intro">Attorneys spend 48% of their time on document preparation—drafting contracts, pleadings, briefs, discovery responses, and transactional documents (ABA Legal Technology Survey 2024). Much of this work is repetitive: pulling clauses from past documents, adapting templates to new facts, cite-checking, and formatting. This is billable time, but it's not the high-value strategic work that justifies premium rates or differentiates your firm from competitors.</p>
 
-        <p>Transactional practice faces similar inefficiencies: contracts are assembled from clause libraries, with attorneys copying and pasting provisions from past deals. A commercial lease might pull the rent escalation clause from Deal A, the maintenance obligations from Deal B, and the default provisions from Deal C. This manual cut-and-paste approach is error-prone—attorneys forget to update party names, leave in irrelevant provisions from previous deals, or introduce inconsistencies between related clauses.</p>
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">48%</div>
+                <div class="stat-label">Of attorney time spent on document preparation</div>
+                <div class="stat-context">
+                    The ABA Legal Technology Survey 2024 found nearly half of attorney hours are spent on document drafting, template customization, and formatting. This mechanical work doesn't require legal expertise and represents inefficient allocation of expensive attorney resources.
+                </div>
+            </div>
 
-        <p>I automate document generation while maintaining attorney oversight and customization. This isn't about replacing legal judgment—it's about eliminating the mechanical work so attorneys can focus on strategy, argumentation, and client counseling. Think of me as the paralegal who does the first draft, freeing you to add the legal expertise and persuasive force that justifies your fees.</p>
+            <p>I automate document generation while maintaining attorney oversight and customization. This isn't about replacing legal judgment—it's about eliminating the mechanical work so attorneys can focus on strategy, argumentation, and client counseling. Think of me as the paralegal who does the first draft, freeing you to add the legal expertise and persuasive force that justifies your fees.</p>
 
-        <h2 id="templates">Template-Based Document Generation</h2>
+            <h2 id="templates">Template-Based Document Generation</h2>
 
-        <p>Most legal documents start from templates—your firm has developed and refined these over years of practice. The challenge is customizing templates efficiently without introducing errors. Manual customization involves:</p>
+            <p>Most legal documents start from templates—your firm has developed and refined these over years of practice. The challenge is customizing templates efficiently without introducing errors.</p>
 
-        <ol>
-            <li>Finding the right template (searching network drives or document management systems)</li>
-            <li>Opening the template and "Save As" with new filename</li>
-            <li>Find-and-replace party names (hope you catch all instances)</li>
-            <li>Manually updating dates, amounts, and matter-specific details</li>
-            <li>Selecting appropriate optional clauses (delete irrelevant provisions)</li>
-            <li>Formatting cleanup (fixing broken cross-references, updating table of contents)</li>
-        </ol>
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">85-90%</div>
+                <div class="stat-label">Document completion via AI first draft</div>
+                <div class="stat-context">
+                    My generated documents require minimal attorney review and editing (10-15% of time compared to starting from scratch). For routine documents like engagement letters, discovery responses, and standard contracts, AI-generated first drafts are 80-90% complete, requiring only minor customizations or legal refinements.
+                </div>
+            </div>
 
-        <p>This process takes 15-30 minutes for simple documents, 1-2 hours for complex contracts. And it's error-prone: attorneys miss instances of old party names, forget to delete inapplicable provisions, or introduce formatting issues.</p>
+            <p>I work with your existing document templates and automate the customization process:</p>
 
-        <p>I work with your existing document templates (engagement letters, contracts, pleadings, discovery requests) and automate the customization process:</p>
+            <h3>Smart Merge Fields</h3>
+            <p>I populate templates with client and matter-specific information from your practice management system automatically. Client name, opposing party, court name, case number, attorney name—all updated automatically with zero find-and-replace errors.</p>
 
-        <h3>Smart Merge Fields</h3>
+            <h3>Conditional Logic</h3>
+            <p>Templates can include conditional clauses that appear or disappear based on matter characteristics. Commercial lease template? I include triple-net or gross lease provisions based on your specifications. Employment contract? I add equity compensation for executives but exclude it for standard employees.</p>
 
-        <p>I populate templates with client and matter-specific information from your practice management system automatically:</p>
-
-        <p><strong>Example:</strong><br>
-        Template contains merge fields: <code>{{client_name}}</code>, <code>{{opposing_party}}</code>, <code>{{court_name}}</code>, <code>{{case_number}}</code>, <code>{{attorney_name}}</code></p>
-
-        <p>When you request: "Generate complaint for Smith v. Johnson matter"<br>
-        I query your practice management system and populate:<br>
-        - Client name: "Jane Smith"<br>
-        - Opposing party: "Acme Corporation and John Johnson"<br>
-        - Court: "United States District Court for the Northern District of California"<br>
-        - Case number: "Case No. 3:24-cv-12345"<br>
-        - Attorney: "Sarah Williams, Esq., State Bar No. 234567"</p>
-
-        <p>All instances updated automatically. No find-and-replace errors. No missed party names buried in footnotes or exhibits.</p>
-
-        <h3>Conditional Logic</h3>
-
-        <p>Templates can include conditional clauses that appear or disappear based on matter characteristics:</p>
-
-        <p><strong>Example 1 - Commercial Lease:</strong><br>
-        Template includes conditional blocks:<br>
-        - If lease_type == "triple net" → Include clauses requiring tenant to pay property taxes, insurance, and maintenance<br>
-        - If lease_type == "gross" → Include clauses where landlord covers operating expenses<br>
-        - If property_type == "retail" → Include clauses on signage, hours of operation, exclusive use<br>
-        - If property_type == "office" → Include clauses on parking allocations, common area usage</p>
-
-        <p>You specify: "Commercial lease, triple-net, retail space"<br>
-        I generate: Lease with triple-net provisions and retail-specific clauses, excluding irrelevant office or gross lease provisions</p>
-
-        <p><strong>Example 2 - Employment Contract:</strong><br>
-        - If position == "executive" → Include equity compensation, change-of-control provisions, severance multiplier<br>
-        - If position == "standard employee" → Exclude equity provisions, include standard severance<br>
-        - If remote_work == true → Include remote work policy, equipment provisions, home office stipend<br>
-        - If jurisdiction == "California" → Include CA-specific provisions (wage statement requirements, PAGA waivers)</p>
-
-        <h3>Clause Libraries</h3>
-
-        <p>I maintain your firm's clause library and insert appropriate clauses based on document type and client preferences:</p>
-
-        <p>Your clause library might include:</p>
-        <ul>
-            <li><strong>Indemnification:</strong> Unilateral (one party indemnifies), mutual (both parties indemnify), capped (limited to contract value), uncapped</li>
-            <li><strong>Limitation of Liability:</strong> Direct damages only, consequential damages excluded, liability cap at contract value or specific dollar amount</li>
-            <li><strong>Arbitration:</strong> AAA rules, JAMS rules, specific arbitrator selection, cost-sharing provisions</li>
-            <li><strong>Governing Law & Venue:</strong> Specific state law, federal vs state court, jurisdiction selection</li>
-            <li><strong>Force Majeure:</strong> Standard force majeure events, pandemic-specific provisions (post-COVID addition), notice requirements</li>
-        </ul>
-
-        <p>When drafting a contract, you specify: "Use standard indemnification, mutual. Limit liability to contract value. Include arbitration with AAA rules. New York governing law."</p>
-
-        <p>I pull those specific clause versions from your library, ensure consistency across related provisions (if arbitration is required, I remove any jury trial waiver clauses), and generate a complete draft.</p>
-
-        <h3>Version Control & Template Updates</h3>
-
-        <p>As your templates evolve (new case law, updated statutes, refined language), I track versions:</p>
-
-        <ul>
-            <li>You update the master template (e.g., add new California consumer privacy provisions to engagement letters)</li>
-            <li>I apply the update to all future documents generated from that template</li>
-            <li>I flag existing matters using old template versions: "Smith engagement letter uses template v.3.1, current template is v.4.2. Recommend updating if matter is still active."</li>
-        </ul>
-
-        <p>This prevents the common problem where associates use outdated templates saved on local drives instead of current firm-approved versions.</p>
-
-        <h2 id="pleadings">Intelligent Pleading Generation</h2>
-
-        <p>For litigation practice, I generate first drafts of standard pleadings based on case facts and your firm's preferred approaches. This isn't boilerplate generation—I adapt to specific case circumstances while following proven templates.</p>
-
-        <h3>Complaints</h3>
-
-        <p>I draft complaints based on cause of action, pulling relevant allegations from intake information and inserting jurisdiction-appropriate elements:</p>
-
-        <p><strong>Example - Breach of Contract:</strong></p>
-        <p>Input from intake: "Client: ABC Corp. Defendant: XYZ Suppliers. Contract dated June 1, 2023 for delivery of 10,000 units of Product A by December 31, 2023. Contract price: $500,000. Defendant delivered only 6,000 units, three weeks late. Client suffered $200,000 in lost profits due to inability to fulfill customer orders."</p>
-
-        <p>I generate complaint including:</p>
-        <ol>
-            <li><strong>Jurisdiction & Venue:</strong> Federal court (diversity jurisdiction if parties in different states, amount in controversy exceeds $75K) or state court</li>
-            <li><strong>Parties:</strong> Detailed descriptions of plaintiff and defendant, including corporate structure, principal place of business</li>
-            <li><strong>Factual Allegations:</strong> Contract formation, performance obligations, breach, damages calculation, causation</li>
-            <li><strong>Causes of Action:</strong> Breach of contract, with elements (contract formation, plaintiff performance, defendant breach, damages)</li>
-            <li><strong>Prayer for Relief:</strong> Compensatory damages ($500,000 contract value + $200,000 consequential damages), interest, attorneys' fees (if contract provides), costs</li>
-        </ol>
-
-        <p><strong>Example - Employment Discrimination:</strong></p>
-        <p>Input: "Client: Jane Smith. Employer: Acme Corp. Terminated on March 15, 2024. Client is 58 years old, replaced by 32-year-old. Performance reviews were 'exceeds expectations' for five consecutive years. Termination reason stated as 'performance issues' but no documentation or warnings. Client believes termination was age discrimination."</p>
-
-        <p>I generate complaint including:</p>
-        <ol>
-            <li>EEOC right-to-sue letter verification (required before filing)</li>
-            <li>Factual allegations: Hire date, job responsibilities, performance history, age, termination circumstances, replacement's age</li>
-            <li>Prima facie case elements: Plaintiff in protected class (over 40), qualified for position, adverse employment action, replaced by younger worker</li>
-            <li>Federal claims: ADEA (Age Discrimination in Employment Act), Title VII if applicable</li>
-            <li>State law claims: California FEHA (Fair Employment and Housing Act) or equivalent state statute</li>
-            <li>Damages: Back pay, front pay, emotional distress, punitive damages, attorneys' fees</li>
-        </ol>
-
-        <h3>Answers & Affirmative Defenses</h3>
-
-        <p>I analyze the complaint and generate answers with appropriate responses:</p>
-
-        <p><strong>Process:</strong></p>
-        <ol>
-            <li>You provide the complaint and general defense strategy</li>
-            <li>I read each numbered paragraph of the complaint</li>
-            <li>I draft paragraph-by-paragraph responses: Admit (for undisputed facts like corporate identity), Deny (for disputed factual allegations), Deny on information and belief (for allegations outside defendant's personal knowledge), Admit in part and deny in part (with specific explanations)</li>
-            <li>I draft affirmative defenses based on case type: Statute of limitations, failure to state a claim, contributory/comparative negligence, assumption of risk, contractual limitations, etc.</li>
-        </ol>
-
-        <p><strong>Example affirmative defenses - Contract case:</strong></p>
-        <ul>
-            <li>Statute of frauds (if contract isn't in writing)</li>
-            <li>Failure of consideration</li>
-            <li>Plaintiff's material breach excused defendant's performance</li>
-            <li>Force majeure (if applicable)</li>
-            <li>Contractual limitation of damages provision</li>
-        </ul>
-
-        <h3>Discovery Requests</h3>
-
-        <p>I generate interrogatories, requests for production, and requests for admission tailored to case type:</p>
-
-        <p><strong>Example - Personal Injury Case (Interrogatories to Defendant):</strong></p>
-        <ol>
-            <li>State your full name, address, and relationship to the incident</li>
-            <li>Describe in detail what you were doing immediately before the incident</li>
-            <li>Identify all witnesses to the incident</li>
-            <li>Describe all injuries you claim to have sustained (if counterclaim)</li>
-            <li>Identify all medical providers you've seen regarding this incident</li>
-            <li>State the amount of all medical bills incurred</li>
-            <li>Identify all insurance policies that may cover this incident</li>
-        </ol>
-
-        <p><strong>Example - Employment Discrimination (Requests for Production to Employer):</strong></p>
-        <ol>
-            <li>Plaintiff's complete personnel file</li>
-            <li>All performance reviews, evaluations, and disciplinary records for plaintiff</li>
-            <li>All documents relating to plaintiff's termination decision</li>
-            <li>All communications between company employees regarding plaintiff</li>
-            <li>Company's anti-discrimination policies in effect during plaintiff's employment</li>
-            <li>Statistical data showing age distribution of terminated employees in past 5 years</li>
-            <li>Personnel files for plaintiff's replacement and comparator employees</li>
-        </ol>
-
-        <p>I customize these based on specific case facts—if plaintiff alleges specific discriminatory statements, I add requests for documents reflecting those statements.</p>
-
-        <h3>Motions</h3>
-
-        <p>I draft motions to dismiss, motions for summary judgment, and procedural motions using your argument templates:</p>
-
-        <p><strong>Motion to Dismiss (12(b)(6) - Failure to State a Claim):</strong></p>
-        <ol>
-            <li>Introduction: Overview of why complaint fails to state claim</li>
-            <li>Statement of Facts: Facts alleged in complaint (accepted as true for motion to dismiss)</li>
-            <li>Legal Standard: Twombly/Iqbal plausibility standard, what plaintiff must allege to survive motion</li>
-            <li>Argument: Element-by-element analysis showing plaintiff failed to plausibly allege required elements</li>
-            <li>Conclusion: Request for dismissal with prejudice or without prejudice</li>
-        </ol>
-
-        <p>Output is a formatted Word document ready for attorney review and editing—not a finished product, but an 80% complete first draft that saves 2-4 hours of associate time. You add case-specific legal analysis, strengthen arguments, and refine language.</p>
-
-        <h2 id="review">Contract Review & Redlining</h2>
-
-        <p>For transactional practice, contract review is a time-intensive process: reading every provision, comparing to client's standard positions, identifying risks, and proposing revisions. A 50-page commercial agreement can take an associate 3-5 hours to review thoroughly. I accelerate this process while maintaining thoroughness.</p>
-
-        <h3>Clause-by-Clause Comparison</h3>
-
-        <p>I compare incoming contracts to your standard forms (or client's standard forms), highlighting deviations:</p>
-
-        <p><strong>Example - Reviewing Vendor Agreement:</strong></p>
-
-        <p>Client receives vendor's form contract. You upload the contract and specify: "Compare to our Standard Vendor Agreement template."</p>
-
-        <p>I generate comparison report:</p>
-
-        <table style="width: 100%; border-collapse: collapse; margin: 2rem 0;">
-            <tr style="background: var(--bg-secondary); border-bottom: 1px solid var(--border);">
-                <th style="padding: 0.75rem; text-align: left;">Provision</th>
-                <th style="padding: 0.75rem; text-align: left;">Your Standard</th>
-                <th style="padding: 0.75rem; text-align: left;">Vendor's Form</th>
-                <th style="padding: 0.75rem; text-align: left;">Risk Level</th>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border);">
-                <td style="padding: 0.75rem;">Indemnification</td>
-                <td style="padding: 0.75rem;">Mutual indemnification</td>
-                <td style="padding: 0.75rem;">Unilateral (client indemnifies vendor only)</td>
-                <td style="padding: 0.75rem; color: #dc2626;">High Risk</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border);">
-                <td style="padding: 0.75rem;">Liability Cap</td>
-                <td style="padding: 0.75rem;">Liability capped at contract value</td>
-                <td style="padding: 0.75rem;">Unlimited liability</td>
-                <td style="padding: 0.75rem; color: #dc2626;">High Risk</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border);">
-                <td style="padding: 0.75rem;">Governing Law</td>
-                <td style="padding: 0.75rem;">Delaware law</td>
-                <td style="padding: 0.75rem;">California law</td>
-                <td style="padding: 0.75rem; color: #f59e0b;">Medium Risk</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border);">
-                <td style="padding: 0.75rem;">Payment Terms</td>
-                <td style="padding: 0.75rem;">Net 30</td>
-                <td style="padding: 0.75rem;">Net 15</td>
-                <td style="padding: 0.75rem; color: #10b981;">Low Risk</td>
-            </tr>
-        </table>
-
-        <p>High-risk deviations are flagged for immediate attorney attention. Medium and low risks are noted but may be acceptable depending on deal context.</p>
-
-        <h3>Risk Identification & Flagging</h3>
-
-        <p>I identify high-risk provisions and alert the reviewing attorney:</p>
-
-        <p><strong>High-Risk Provisions:</strong></p>
-        <ul>
-            <li><strong>Unlimited liability:</strong> No cap on damages</li>
-            <li><strong>Unilateral termination rights:</strong> Other party can terminate without cause, but you cannot</li>
-            <li><strong>Automatic renewal:</strong> Contract auto-renews unless you provide 90-day notice (easy to miss)</li>
-            <li><strong>Broad IP assignment:</strong> All work product becomes other party's property, including pre-existing IP</li>
-            <li><strong>Personal guarantees:</strong> Individual principals must guarantee corporate obligations</li>
-            <li><strong>Unfavorable venue:</strong> Disputes must be litigated in other party's home jurisdiction</li>
-            <li><strong>Waiver of jury trial:</strong> May limit damages recovery in some jurisdictions</li>
-            <li><strong>Confidentiality without time limit:</strong> Perpetual confidentiality obligations</li>
-        </ul>
-
-        <p>For each high-risk provision, I provide:</p>
-        <ol>
-            <li>Location in contract (page and section number)</li>
-            <li>Exact language</li>
-            <li>Risk explanation: Why this is problematic</li>
-            <li>Suggested revision: Standard language that would be acceptable</li>
-        </ol>
-
-        <h3>Automated Redline Generation</h3>
-
-        <p>I generate proposed redlines to bring incoming contracts in line with your standard positions:</p>
-
-        <p><strong>Example - Indemnification Clause:</strong></p>
-
-        <p><strong>Vendor's original language:</strong><br>
-        <span style="text-decoration: line-through; color: #dc2626;">"Client shall indemnify, defend, and hold harmless Vendor from any and all claims, damages, liabilities, costs, and expenses arising out of or relating to Client's use of the Services."</span></p>
-
-        <p><strong>My proposed revision:</strong><br>
-        <span style="color: #10b981;">"Each party shall indemnify, defend, and hold harmless the other party from any and all claims, damages, liabilities, costs, and expenses arising out of or relating to such party's breach of this Agreement or gross negligence or willful misconduct. Each party's liability under this Section shall be capped at the total fees paid under this Agreement in the twelve months preceding the claim."</span></p>
-
-        <p>Attorney reviews the suggested redline, accepts it, modifies it, or provides alternative language based on negotiation strategy.</p>
-
-        <h3>Missing Provisions Report</h3>
-
-        <p>I identify provisions that should be present but are missing:</p>
-
-        <p><strong>Example:</strong><br>
-        Vendor agreement is missing:<br>
-        - Force majeure clause (to excuse performance during unforeseeable events)<br>
-        - Data security provisions (for vendors handling sensitive data)<br>
-        - Insurance requirements (vendor should carry E&O insurance)<br>
-        - Audit rights (client should be able to audit vendor's compliance)</p>
-
-        <p>I suggest adding these provisions and provide template language for each.</p>
-
-        <h2 id="precedent">Precedent Search & Research Integration</h2>
-        <p>I search your firm's document repository for relevant precedents:</p>
-
-        <ul>
-            <li>Attorney asks: "Find motions to dismiss we've filed in copyright cases in the Ninth Circuit."</li>
-            <li>I return: 12 documents matching those criteria, ranked by similarity to current matter.</li>
-            <li>Attorney selects the most relevant precedent, and I adapt it to the current case (updating facts, parties, citations).</li>
-        </ul>
-
-        <p>This eliminates the "I know we drafted something like this before, but I can't find it" problem that leads to duplicated work.</p>
-
-        <h2 id="citing">Cite Checking & Formatting</h2>
-        <p>I handle mechanical cite-checking and formatting tasks:</p>
-
-        <ul>
-            <li><strong>Bluebook Compliance:</strong> I format citations according to Bluebook (or California Style Manual, ALWD) rules—case names, reporters, pinpoint citations, subsequent history.</li>
-            <li><strong>Shepardizing:</strong> I flag citations to overruled cases or distinguish cases with negative subsequent history.</li>
-            <li><strong>Table of Authorities:</strong> I generate tables of authorities for briefs and memoranda.</li>
-        </ul>
-
-        <p>These tasks consume hours of paralegal and associate time. Automation reduces this to minutes.</p>
-
-        <h2 id="roi">Time Savings & ROI</h2>
-
-        <p>Document automation delivers immediate, measurable time savings that flow directly to the bottom line. Let me break down the financial impact for a typical 10-attorney litigation firm:</p>
-
-        <h3>Litigation Firm Document Volumes</h3>
-
-        <p>Typical monthly document production:</p>
-        <ul>
-            <li>Pleadings (complaints, answers, motions): 15-20 per month</li>
-            <li>Discovery requests (interrogatories, RFPs): 10-15 sets per month</li>
-            <li>Discovery responses: 10-15 sets per month</li>
-            <li>Correspondence to opposing counsel: 50-75 letters per month</li>
-            <li>Client communications: 100+ emails/letters per month</li>
-        </ul>
-
-        <h3>Time Savings Per Document Type</h3>
-
-        <p><strong>Pleading Drafting:</strong></p>
-        <ul>
-            <li>Manual process: 3-5 hours per pleading (associate time)</li>
-            <li>With AI first draft: 30-60 minutes (attorney review and customization)</li>
-            <li>Time saved: 2.5-4 hours per pleading</li>
-            <li>At associate rate of $250/hour: $625-$1,000 savings per pleading</li>
-            <li>Monthly volume: 15-20 pleadings</li>
-            <li><strong>Monthly savings: $9,375-$20,000</strong></li>
-        </ul>
-
-        <p><strong>Discovery Drafting:</strong></p>
-        <ul>
-            <li>Manual process: 4-6 hours per discovery set</li>
-            <li>With AI generation: 1-1.5 hours (attorney customization)</li>
-            <li>Time saved: 3-4.5 hours per set</li>
-            <li>At associate rate of $250/hour: $750-$1,125 savings per set</li>
-            <li>Monthly volume: 10-15 sets</li>
-            <li><strong>Monthly savings: $7,500-$16,875</strong></li>
-        </ul>
-
-        <p><strong>Contract Review (for transactional practice):</strong></p>
-        <ul>
-            <li>Manual process: 2-4 hours per contract (attorney time)</li>
-            <li>With AI-assisted review: 45-90 minutes (attorney review of AI analysis and proposed redlines)</li>
-            <li>Time saved: 1.25-2.5 hours per contract</li>
-            <li>At attorney rate of $300/hour: $375-$750 savings per contract</li>
-            <li>Monthly volume: 20-30 contracts (for transactional practice)</li>
-            <li><strong>Monthly savings: $7,500-$22,500</strong></li>
-        </ul>
-
-        <p><strong>Correspondence & Client Communications:</strong></p>
-        <ul>
-            <li>Manual drafting: 20-30 minutes per letter</li>
-            <li>With AI template generation: 5-10 minutes (attorney review and send)</li>
-            <li>Time saved: 15-20 minutes per letter</li>
-            <li>At attorney rate of $300/hour: $75-$100 savings per letter</li>
-            <li>Monthly volume: 50-75 letters</li>
-            <li><strong>Monthly savings: $3,750-$7,500</strong></li>
-        </ul>
-
-        <h3>Annual Time Savings for 10-Attorney Firm</h3>
-
-        <p>Conservative estimate (litigation focus):</p>
-        <ul>
-            <li>Pleadings: $9,375/month × 12 = $112,500/year</li>
-            <li>Discovery: $7,500/month × 12 = $90,000/year</li>
-            <li>Correspondence: $3,750/month × 12 = $45,000/year</li>
-        </ul>
-
-        <p><strong>Total annual savings: $247,500</strong></p>
-
-        <p>More aggressive estimate (transactional focus or higher volumes):</p>
-        <ul>
-            <li>Pleadings/Documents: $20,000/month × 12 = $240,000/year</li>
-            <li>Contract review: $15,000/month × 12 = $180,000/year</li>
-            <li>Correspondence: $7,500/month × 12 = $90,000/year</li>
-        </ul>
-
-        <p><strong>Total annual savings: $510,000</strong></p>
-
-        <h3>How Saved Time Translates to Revenue</h3>
-
-        <p>Saved time has three potential uses:</p>
-
-        <ol>
-            <li><strong>Additional billable work:</strong> Associates freed from document drudgery can take on additional matters or work more hours on existing matters. If 250 hours of associate time are saved monthly (conservative estimate based on above), that's 3,000 hours annually. At $250/hour billing rate and 85% realization rate, that's <strong>$637,500 in additional billable revenue capacity</strong>.</li>
-
-            <li><strong>Improved work quality:</strong> Associates spend saved time on higher-value work like case strategy, legal research, and client counseling. This improves case outcomes, client satisfaction, and reduces malpractice risk (harder to quantify but significant).</li>
-
-            <li><strong>Reduced staffing needs:</strong> Firms can handle same workload with fewer associates or delay hiring as firm grows. One fewer associate = $180,000-$250,000 annual cost savings (salary, benefits, overhead).</li>
-        </ol>
-
-        <h3>ROI Calculation</h3>
-
-        <p><strong>Annual cost (Claire Professional Tier): $48,000</strong></p>
-
-        <p><strong>Annual benefit:</strong></p>
-        <ul>
-            <li>Direct time savings: $247,500-$510,000</li>
-            <li>Additional billable capacity: $637,500 (if reallocated to billable work)</li>
-            <li>OR staffing savings: $200,000 (if used to reduce headcount needs)</li>
-        </ul>
-
-        <p><strong>Conservative ROI: ($247,500 ÷ $48,000) × 100 = 516%</strong></p>
-        <p><strong>Aggressive ROI: ($510,000 ÷ $48,000) × 100 = 1,063%</strong></p>
-
-        <h2 id="conclusion">Conclusion: Automation as Competitive Advantage</h2>
-
-        <p>Document automation isn't about replacing attorneys—it's about amplifying their impact. The firms that adopt AI-powered automation first gain three competitive advantages:</p>
-
-        <ol>
-            <li><strong>Cost advantage:</strong> Lower cost structure allows competitive pricing while maintaining margins</li>
-            <li><strong>Speed advantage:</strong> Faster document turnaround wins time-sensitive matters and improves client satisfaction</li>
-            <li><strong>Quality advantage:</strong> Attorneys freed from mechanical work focus on strategy and creative problem-solving, delivering better outcomes</li>
-        </ol>
-
-        <p>The question isn't whether to automate—it's how quickly you can implement before competitors capture the advantage.</p>
-
-        <div class="cta-box">
-            <h3>Interview Claire for Your Firm</h3>
-            <p>See how I automate contracts, pleadings, and briefs for your practice areas.</p>
-            <a href="/" class="cta-btn">Start Interactive Demo</a>
+            <h3>Clause Libraries</h3>
+            <p>I maintain your firm's clause library and insert appropriate clauses based on document type and client preferences. Indemnification language, limitation of liability provisions, arbitration clauses, governing law specifications—I pull the exact versions your firm prefers and ensure consistency across related provisions.</p>
+
+            <h3>Version Control & Template Updates</h3>
+            <p>As your templates evolve (new case law, updated statutes, refined language), I track versions and apply updates to future documents. This prevents the common problem where associates use outdated templates saved on local drives instead of current firm-approved versions.</p>
+
+            <h2 id="pleadings">Intelligent Pleading Generation</h2>
+
+            <p>For litigation practice, I generate first drafts of standard pleadings based on case facts and your firm's preferred approaches. This isn't boilerplate generation—I adapt to specific case circumstances while following proven templates.</p>
+
+            <h3>Complaints</h3>
+            <p>I draft complaints based on cause of action, pulling relevant allegations from intake information and inserting jurisdiction-appropriate elements. Breach of contract? I draft jurisdiction & venue analysis, detailed descriptions of plaintiff and defendant, factual allegations showing contract formation and breach, and prayer for relief with appropriate damages calculations.</p>
+
+            <h3>Answers & Affirmative Defenses</h3>
+            <p>I analyze the complaint and generate answers with appropriate responses: Admit for undisputed facts, Deny for disputed allegations, Deny on information and belief for allegations outside defendant's knowledge. I draft affirmative defenses based on case type: statute of limitations, failure to state a claim, contributory negligence, assumption of risk, contractual limitations.</p>
+
+            <h3>Discovery Requests</h3>
+            <p>I generate interrogatories, requests for production, and requests for admission tailored to case type—personal injury discovery differs from employment discrimination which differs from contract disputes. I customize based on specific case facts and identify relevant document classes.</p>
+
+            <h3>Motions</h3>
+            <p>I draft motions to dismiss, motions for summary judgment, and procedural motions using your argument templates. The output is a formatted Word document ready for attorney review and editing—not a finished product, but an 80% complete first draft that saves 2-4 hours of associate time.</p>
+
+            <h2 id="review">Contract Review & Redlining</h2>
+
+            <p>For transactional practice, contract review is time-intensive. A 50-page commercial agreement can take an associate 3-5 hours to review thoroughly. I accelerate this process while maintaining thoroughness.</p>
+
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">60-80%</div>
+                <div class="stat-label">Time savings on contract review</div>
+                <div class="stat-context">
+                    My clause-by-clause comparison and risk identification reduces contract review time from 3-5 hours to 45 minutes to 1.5 hours. I identify high-risk provisions, compare to your standard positions, and generate proposed redlines—allowing attorneys to focus on negotiation strategy and deal economics rather than mechanical review work.
+                </div>
+            </div>
+
+            <h3>Clause-by-Clause Comparison</h3>
+            <p>I compare incoming contracts to your standard forms, highlighting deviations and flagging risks. High-risk provisions like unlimited liability, unilateral termination rights, automatic renewal clauses, and broad IP assignments are immediately identified with suggested revisions.</p>
+
+            <h3>Risk Identification & Flagging</h3>
+            <p>I flag high-risk provisions and alert the reviewing attorney with location, exact language, risk explanation, and suggested revision. Each high-risk provision receives specific attention with defensible alternative language from your clause library.</p>
+
+            <h3>Automated Redline Generation</h3>
+            <p>I generate proposed redlines to bring incoming contracts in line with your standard positions, showing original language and my proposed revision. Attorneys review, accept, modify, or provide alternative language based on negotiation strategy.</p>
+
+            <h2 id="precedent">Precedent Search & Integration</h2>
+            <p>I search your firm's document repository for relevant precedents. "Find motions to dismiss we've filed in copyright cases in the Ninth Circuit." I return the 12 most similar documents ranked by relevance, and adapt the most relevant precedent to your current case by updating facts, parties, and citations.</p>
+
+            <h2 id="citing">Cite Checking & Formatting</h2>
+            <p>I handle mechanical cite-checking and formatting tasks: Bluebook compliance, case citation formatting with reporters and pinpoint citations, Shepardizing to flag overruled cases with negative subsequent history, and table of authorities generation for briefs. These tasks consume hours of paralegal and associate time; automation reduces this to minutes.</p>
+
+            <h2 id="roi">Time Savings & ROI</h2>
+
+            <p><strong>Document automation delivers immediate, measurable time savings:</strong></p>
+
+            <p><strong>Pleading Drafting:</strong> Manual = 3-5 hours per pleading. With AI first draft = 30-60 minutes. Time saved = 2.5-4 hours per pleading at $250-$300/hour = $625-$1,200 savings per pleading. Monthly volume = 15-20 pleadings = $9,375-$20,000/month savings.</p>
+
+            <p><strong>Discovery Drafting:</strong> Manual = 4-6 hours per discovery set. With AI = 1-1.5 hours. Time saved = 3-4.5 hours per set at $250/hour = $750-$1,125 per set. Monthly volume = 10-15 sets = $7,500-$16,875/month savings.</p>
+
+            <p><strong>Contract Review:</strong> Manual = 2-4 hours per contract. With AI-assisted = 45-90 minutes. Time saved = 1.25-2.5 hours at $300/hour = $375-$750 per contract. Monthly volume = 20-30 contracts = $7,500-$22,500/month savings.</p>
+
+            <p><strong>Total annual benefit (conservative):</strong> $247,500-$510,000 in direct time savings<br>
+            <strong>Additional billable capacity benefit:</strong> $637,500/year if reallocated to billable work<br>
+            <strong>ROI: 516%-1,063%</strong></p>
+
+            <div class="cta-box">
+                <h3>Interview Claire for Your Firm</h3>
+                <p>See how I automate document generation and contract review for your practice areas.</p>
+                <a href="/" class="cta-btn">Start Interactive Demo</a>
+            </div>
+
+            <!-- Read Next Section -->
+            <div class="read-next">
+                <h2>Continue the Interview</h2>
+                <div class="cards">
+                    <a href="/legal/case-management.html" class="card">
+                        <h3>Case Management</h3>
+                        <p>Automate matter organization and deadline tracking.</p>
+                    </a>
+                    <a href="/legal/billing-timekeeping.html" class="card">
+                        <h3>Billing & Timekeeping</h3>
+                        <p>Capture billable time automatically as work happens.</p>
+                    </a>
+                    <a href="/legal/roi-calculator.html" class="card">
+                        <h3>ROI Calculator</h3>
+                        <p>Calculate your potential savings and ROI.</p>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <aside>
+            <div class="toc">
+                <h4>On This Page</h4>
+                <ul>
+                    <li><a href="#templates">Template Generation</a></li>
+                    <li><a href="#pleadings">Pleading Generation</a></li>
+                    <li><a href="#review">Contract Review</a></li>
+                    <li><a href="#precedent">Precedent Search</a></li>
+                    <li><a href="#citing">Cite Checking</a></li>
+                    <li><a href="#roi">ROI Analysis</a></li>
+                </ul>
+            </div>
+
+            <div class="related">
+                <h4>Related Capabilities</h4>
+                <ul>
+                    <li><a href="/legal/">← Legal Services Overview</a></li>
+                    <li><a href="/legal/client-intake.html">Client Intake</a></li>
+                    <li><a href="/legal/case-management.html">Case Management</a></li>
+                    <li><a href="/legal/billing-timekeeping.html">Billing & Timekeeping</a></li>
+                    <li><a href="/legal/confidentiality-security.html">Security & Compliance</a></li>
+                    <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-shadow">
+            <h2>Attorney-Client Privilege in the Age of AI Orchestration</h2>
+            <p class="footer-shadow-intro">The #1 concern blocking law firm AI adoption: "If AI touches client communications, does privilege survive?" The answer requires understanding how AI orchestration differs fundamentally from traditional chatbot architectures—and why Claire's ephemeral data tunnels preserve privilege while legacy systems don't.</p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Technical Analysis</button>
+            <div class="shadow-content" id="shadowContent">
+                <h3>The Privilege Problem with Traditional Legal Tech</h3>
+                <p>Attorney-client privilege protects confidential communications between attorney and client made for the purpose of obtaining legal advice. Traditional legal technology operates on centralized data lake architectures where client data is stored in the vendor's database, used to train machine learning models, and accessible to vendor staff for "quality assurance."</p>
+                <h3>How AI Orchestration Differs: Ephemeral Data Tunnels</h3>
+                <p>Claire operates on a fundamentally different architecture: ephemeral data orchestration rather than centralized storage. Data lives in your practice management system, not in Claire's servers. I query only what's needed for the specific task, process it, and retain nothing after task completion. Attorney-client privilege is most secure when no third party possesses the privileged information.</p>
+            </div>
         </div>
 
-        <h2 style="margin-top: 4rem;">Read Next</h2>
-        <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-            <a href="/legal/case-management.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Case Management →</h3>
-                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Automate matter organization and deadline tracking</p>
-            </a>
-            <a href="/legal/billing-timekeeping.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Billing & Timekeeping →</h3>
-                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Capture billable time automatically</p>
-            </a>
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Legal Capabilities</h4>
+                <ul>
+                    <li><a href="/legal/client-intake.html">Client Intake</a></li>
+                    <li><a href="/legal/case-management.html">Case Management</a></li>
+                    <li><a href="/legal/document-automation.html">Document Automation</a></li>
+                    <li><a href="/legal/billing-timekeeping.html">Billing & Timekeeping</a></li>
+                    <li><a href="/legal/confidentiality-security.html">Security & Compliance</a></li>
+                    <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compliance</h4>
+                <ul>
+                    <li><a href="/compliance/attorney-client-privilege.html">Attorney-Client Privilege</a></li>
+                    <li><a href="/compliance/aba-model-rules.html">ABA Model Rules</a></li>
+                    <li><a href="/compliance/state-bar-compliance.html">State Bar Compliance</a></li>
+                    <li><a href="/compliance/soc2.html">SOC 2 Type II</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
         </div>
-    </article>
 
-    <aside>
-        <div class="toc">
-            <h4>On This Page</h4>
-            <ul>
-                <li><a href="#templates">Template Generation</a></li>
-                <li><a href="#pleadings">Pleading Generation</a></li>
-                <li><a href="#review">Contract Review</a></li>
-                <li><a href="#precedent">Precedent Search</a></li>
-                <li><a href="#citing">Cite Checking</a></li>
-                <li><a href="#roi">ROI Analysis</a></li>
-                <li><a href="#conclusion">Conclusion</a></li>
-            </ul>
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
         </div>
 
-        <div class="related">
-            <h4>Related Topics</h4>
-            <ul>
-                <li><a href="/legal/">← Legal Services Overview</a></li>
-                <li><a href="/legal/case-management.html">Case Management</a></li>
-                <li><a href="/legal/client-intake.html">Client Intake</a></li>
-                <li><a href="/legal/billing-timekeeping.html">Billing & Timekeeping</a></li>
-                <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
-            </ul>
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
         </div>
-    </aside>
-</main>
+    </footer>
+
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">C</div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">I'm Claire, your AI paralegal orchestrator. Want to see how I automate document generation and contract review for your firm?</p>
+                <a href="/legal/intake-reasoning-demo.html" class="dock-cta">Execute Live Document Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDock() { document.getElementById('dockPanel').classList.toggle('open'); }
+        function toggleShadow() { const content = document.getElementById('shadowContent'); const button = document.querySelector('.shadow-toggle'); content.classList.toggle('expanded'); button.textContent = content.classList.contains('expanded') ? 'Collapse Technical Analysis' : 'Read Full Technical Analysis'; }
+        document.addEventListener('click', function(event) { const dock = document.querySelector('.claire-dock'); const panel = document.getElementById('dockPanel'); if (!dock.contains(event.target) && panel.classList.contains('open')) { panel.classList.remove('open'); } });
+    </script>
 </body>
 </html>
