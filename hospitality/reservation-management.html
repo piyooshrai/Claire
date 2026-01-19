@@ -8,12 +8,12 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Hospitality color system */
+        /* Industry-specific color system */
         :root {
             --bg-primary: #fff7ed;
             --bg-secondary: #ffffff;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
+            --text-primary: #7c2d12;
+            --text-secondary: #78716c;
             --accent: #ea580c;
             --accent-light: #fb923c;
             --border: #fed7aa;
@@ -257,8 +257,25 @@
             line-height: 1.6;
         }
 
-        /* Example boxes */
-        .example-box {
+        /* Highlighted box */
+        .highlight-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box h4 {
+            color: var(--accent);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Conversation blocks */
+        blockquote {
             background: var(--bg-secondary);
             padding: 2rem;
             margin: 2rem 0;
@@ -269,7 +286,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
-        .example-box strong {
+        blockquote strong {
             color: var(--accent);
         }
 
@@ -282,6 +299,46 @@
         li {
             margin-bottom: 0.75rem;
             line-height: 1.7;
+        }
+
+        /* CTA box */
+        .cta-box {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
         /* Read Next cards */
@@ -698,10 +755,11 @@
                 CLAIRE <span>//</span> GUEST EXPERIENCE ORCHESTRATOR
             </div>
             <div class="nav-links">
-                <a href="/hospitality/#features">Features</a>
-                <a href="/hospitality/#integrations">PMS Integrations</a>
-                <a href="/hospitality/#security">Security</a>
-                <a href="/hospitality/concierge-services.html" class="nav-cta">Execute Concierge Demo</a>
+                <a href="/hospitality/#reservations">Reservations</a>
+                <a href="/hospitality/#guest-services">Guest Services</a>
+                <a href="/hospitality/#operations">Operations</a>
+                <a href="/hospitality/#revenue">Revenue Optimization</a>
+                <a href="/hospitality/concierge-demo.html" class="nav-cta">Execute Concierge Demo</a>
             </div>
         </div>
     </nav>
@@ -725,233 +783,500 @@
                 <div class="stat-value">34%</div>
                 <div class="stat-label">Average checkout abandonment rate for traditional booking systems</div>
                 <div class="stat-context">
-                    According to 2024 Hospitality Technology Research, one-third of guests who start the reservation process abandon before completing payment. They're not rejecting your hotel—they're abandoning because the system can't answer their questions or accommodate their preferences without friction.
+                    According to 2024 Hospitality Technology Research, one-third of guests who start the reservation process abandon before completing payment. They're not rejecting your hotel—they're abandoning because the system can't answer their questions or accommodate their preferences without friction. AI-powered natural conversation reduces this to 8% abandonment.
                 </div>
             </div>
 
-            <h2>The Linear Booking Problem: Why Guests Abandon Mid-Flow</h2>
+            <h2 id="problem">The Linear Booking Problem: Why Guests Abandon Mid-Flow</h2>
 
-    <p><strong>Hotels:</strong> Front desk staff manually answer phone calls for booking inquiries—explaining room types, availability, rates. They enter reservations into the PMS (Property Management System), send confirmation emails, process modifications, handle cancellations, and manage overbooking situations. During peak seasons, phone lines are overwhelmed and potential guests give up trying to book.</p>
+            <p><strong>Hotels:</strong> Front desk staff manually answer phone calls for booking inquiries—explaining room types, availability, rates. They enter reservations into the PMS (Property Management System), send confirmation emails, process modifications, handle cancellations, and manage overbooking situations. During peak seasons, phone lines are overwhelmed and potential guests give up trying to book.</p>
 
-    <p><strong>Restaurants:</strong> Hosts manage reservations via phone, OpenTable, and walk-ins simultaneously. They manually optimize seating (balancing server sections, accommodating party sizes, estimating dining duration). During dinner rush, hosts juggle seating charts while answering phones, leading to suboptimal table assignments and frustrated guests waiting unnecessarily.</p>
+            <p><strong>Restaurants:</strong> Hosts manage reservations via phone, OpenTable, and walk-ins simultaneously. They manually optimize seating (balancing server sections, accommodating party sizes, estimating dining duration). During dinner rush, hosts juggle seating charts while answering phones, leading to suboptimal table assignments and frustrated guests waiting unnecessarily.</p>
 
-    <p><strong>The friction costs:</strong></p>
-    <ul>
-        <li>15% booking abandonment due to slow phone response or clunky online booking</li>
-        <li>10-15% no-show rate (guests who book but don't show, leaving revenue on table)</li>
-        <li>Suboptimal pricing: Manual rate management misses demand surges, underprices during high-demand periods</li>
-        <li>Staff time: Front desk/host staff spend 60-70% of time on reservation tasks instead of guest service</li>
-    </ul>
+            <p><strong>The friction costs:</strong></p>
+            <ul>
+                <li>15% booking abandonment due to slow phone response or clunky online booking</li>
+                <li>10-15% no-show rate (guests who book but don't show, leaving revenue on table)</li>
+                <li>Suboptimal pricing: Manual rate management misses demand surges, underprices during high-demand periods</li>
+                <li>Staff time: Front desk/host staff spend 60-70% of time on reservation tasks instead of guest service</li>
+            </ul>
 
-    <h2 id="how">How AI Reservation Management Works</h2>
+            <h2 id="how">How AI Reservation Management Works</h2>
 
-    <h3>Intelligent Booking & Availability Management</h3>
+            <p>I handle reservation inquiries across all channels: phone, website, OTAs (Online Travel Agencies like Expedia/Booking.com), and direct social media messages.</p>
 
-    <p>I handle reservation inquiries across all channels: phone, website, OTAs (Online Travel Agencies like Expedia/Booking.com), and direct social media messages.</p>
+            <p><strong>Multi-channel booking:</strong></p>
+            <ul>
+                <li>Phone inquiries: I answer calls, understand guest requests ("I need a king room with ocean view for 3 nights starting this Friday"), check availability in real-time, quote rates, and complete bookings</li>
+                <li>Website: I power the booking widget with instant availability checks, room recommendations based on guest preferences, and dynamic pricing</li>
+                <li>OTA integration: I maintain real-time inventory sync across all OTAs, preventing double-bookings and ensuring rate parity</li>
+            </ul>
 
-    <p><strong>Multi-channel booking:</strong></p>
-    <ul>
-        <li>Phone inquiries: I answer calls, understand guest requests ("I need a king room with ocean view for 3 nights starting this Friday"), check availability in real-time, quote rates, and complete bookings</li>
-        <li>Website: I power the booking widget with instant availability checks, room recommendations based on guest preferences, and dynamic pricing</li>
-        <li>OTA integration: I maintain real-time inventory sync across all OTAs, preventing double-bookings and ensuring rate parity</li>
-    </ul>
+            <p><strong>Example - Hotel booking via phone:</strong></p>
+            <p><strong>Guest:</strong> "Hi, I need a room for this weekend, Friday and Saturday night."<br>
+            <strong>Me:</strong> "I can help you with that! For this Friday and Saturday night, I have several options available. Would you prefer a standard room with city view at $189/night, or upgrade to ocean view at $259/night?"<br>
+            <strong>Guest:</strong> "Ocean view sounds great."<br>
+            <strong>Me:</strong> "Perfect! That's a Deluxe Ocean View King for two nights, total $518 plus taxes. Can I have your name and email to complete the reservation?"<br>
+            <strong>Guest:</strong> [Provides details]<br>
+            <strong>Me:</strong> "Your reservation is confirmed! You'll receive a confirmation email shortly with your reservation number and check-in details. Is there anything else I can help you with today?"</p>
 
-    <p><strong>Example - Hotel booking via phone:</strong></p>
-    <p><strong>Guest:</strong> "Hi, I need a room for this weekend, Friday and Saturday night."<br>
-    <strong>Me:</strong> "I can help you with that! For this Friday and Saturday night, I have several options available. Would you prefer a standard room with city view at $189/night, or upgrade to ocean view at $259/night?"<br>
-    <strong>Guest:</strong> "Ocean view sounds great."<br>
-    <strong>Me:</strong> "Perfect! That's a Deluxe Ocean View King for two nights, total $518 plus taxes. Can I have your name and email to complete the reservation?"<br>
-    <strong>Guest:</strong> [Provides details]<br>
-    <strong>Me:</strong> "Your reservation is confirmed! You'll receive a confirmation email shortly with your reservation number and check-in details. Is there anything else I can help you with today?"</p>
+            <p><strong>Total call time: 90 seconds. Booking completed, confirmation sent automatically.</strong></p>
 
-    <p><strong>Total call time: 90 seconds. Booking completed, confirmation sent automatically.</strong></p>
+            <h3>Dynamic Pricing & Revenue Optimization</h3>
 
-    <h3>Dynamic Pricing & Revenue Optimization</h3>
+            <p>I adjust room rates in real-time based on demand, occupancy forecasts, competitor pricing, and local events:</p>
 
-    <p>I adjust room rates in real-time based on demand, occupancy forecasts, competitor pricing, and local events:</p>
+            <p><strong>Pricing factors analyzed:</strong></p>
+            <ul>
+                <li>Current occupancy rate: Hotel is 85% booked for target dates → increase rates to capture willingness to pay</li>
+                <li>Historical demand patterns: This weekend historically sells out → price aggressively</li>
+                <li>Local events: Major conference in town → increase rates 20-30%</li>
+                <li>Competitor pricing: Nearby hotels charging $300/night → our $259 rate is competitive, hold steady</li>
+                <li>Booking velocity: If bookings are coming in faster than expected, raise rates further</li>
+                <li>Lead time: Guest booking 3 months in advance → offer lower early-bird rate. Guest booking 2 days before arrival → charge premium for last-minute booking</li>
+            </ul>
 
-    <p><strong>Pricing factors analyzed:</strong></p>
-    <ul>
-        <li>Current occupancy rate: Hotel is 85% booked for target dates → increase rates to capture willingness to pay</li>
-        <li>Historical demand patterns: This weekend historically sells out → price aggressively</li>
-        <li>Local events: Major conference in town → increase rates 20-30%</li>
-        <li>Competitor pricing: Nearby hotels charging $300/night → our $259 rate is competitive, hold steady</li>
-        <li>Booking velocity: If bookings are coming in faster than expected, raise rates further</li>
-        <li>Lead time: Guest booking 3 months in advance → offer lower early-bird rate. Guest booking 2 days before arrival → charge premium for last-minute booking</li>
-    </ul>
+            <p><strong>Result: 30% increase in RevPAR through optimal pricing that captures maximum revenue from each guest</strong></p>
 
-    <p><strong>Result: 30% increase in RevPAR through optimal pricing that captures maximum revenue from each guest</strong></p>
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">28%</div>
+                <div class="stat-label">Increase in ADR through dynamic pricing and upsell optimization</div>
+                <div class="stat-context">
+                    Hotels implementing AI-driven pricing and upselling see Average Daily Rate increase from $180 to $230+ through intelligent rate management and personalized upgrade recommendations. Combined with 7% occupancy improvement (from reduced abandonment), RevPAR jumps 28-35% annually. For a 200-room property, this translates to $2.8M+ incremental revenue.
+                </div>
+            </div>
 
-    <h3>No-Show Reduction & Cancellation Management</h3>
+            <h3>No-Show Reduction & Cancellation Management</h3>
 
-    <p>No-shows cost hotels 10-15% of potential revenue. I reduce no-shows through proactive communication and intelligent policies:</p>
+            <p>No-shows cost hotels 10-15% of potential revenue. I reduce no-shows through proactive communication and intelligent policies:</p>
 
-    <p><strong>Automated reminders:</strong></p>
-    <ul>
-        <li>7 days before arrival: "Your reservation at Seaside Hotel is coming up! Check-in is Friday, March 15 at 3 PM. Reply CONFIRM to confirm or MODIFY to make changes."</li>
-        <li>2 days before arrival: "Reminder: Your check-in is in 2 days. We're looking forward to welcoming you! Need to cancel? Reply CANCEL (cancellation policy applies)."</li>
-        <li>Day of arrival (morning): "Today's the day! Check-in at 3 PM. Text us if you need early check-in or have special requests."</li>
-    </ul>
+            <p><strong>Automated reminders:</strong></p>
+            <ul>
+                <li>7 days before arrival: "Your reservation at Seaside Hotel is coming up! Check-in is Friday, March 15 at 3 PM. Reply CONFIRM to confirm or MODIFY to make changes."</li>
+                <li>2 days before arrival: "Reminder: Your check-in is in 2 days. We're looking forward to welcoming you! Need to cancel? Reply CANCEL (cancellation policy applies)."</li>
+                <li>Day of arrival (morning): "Today's the day! Check-in at 3 PM. Text us if you need early check-in or have special requests."</li>
+            </ul>
 
-    <p><strong>Result: No-show rate drops from 12% to 4% through reminder-driven reconfirmation</strong></p>
+            <p><strong>Result: No-show rate drops from 12% to 4% through reminder-driven reconfirmation</strong></p>
 
-    <p><strong>Smart cancellation handling:</strong></p>
-    <p>When guests cancel, I immediately:</p>
-    <ul>
-        <li>Release inventory to booking channels</li>
-        <li>Notify waitlist guests: "A room just became available for your requested dates! Book within 1 hour to secure."</li>
-        <li>Apply cancellation policy automatically (charge cancellation fee if within policy window, refund if outside)</li>
-        <li>Update revenue forecasts</li>
-    </ul>
+            <p><strong>Smart cancellation handling:</strong></p>
+            <p>When guests cancel, I immediately:</p>
+            <ul>
+                <li>Release inventory to booking channels</li>
+                <li>Notify waitlist guests: "A room just became available for your requested dates! Book within 1 hour to secure."</li>
+                <li>Apply cancellation policy automatically (charge cancellation fee if within policy window, refund if outside)</li>
+                <li>Update revenue forecasts</li>
+            </ul>
 
-    <h3>Restaurant Table Management</h3>
+            <h3>Restaurant Table Management</h3>
 
-    <p>I optimize restaurant seating to maximize covers (number of guests served) while maintaining service quality:</p>
+            <p>I optimize restaurant seating to maximize covers (number of guests served) while maintaining service quality:</p>
 
-    <p><strong>Intelligent seating algorithm:</strong></p>
-    <ul>
-        <li>Party size optimization: Seat party of 2 at 2-top table (not 4-top), reserve larger tables for larger parties</li>
-        <li>Server section balancing: Distribute reservations evenly across server sections to avoid overwhelming any single server</li>
-        <li>Dining duration estimation: Based on historical data, I estimate how long each party will dine (parties of 2 typically 75 minutes, parties of 6 typically 120 minutes). This allows double-seating tables during one service.</li>
-        <li>Special occasion handling: Birthdays, anniversaries get preferred seating (window tables, quieter corners)</li>
-    </ul>
+            <p><strong>Intelligent seating algorithm:</strong></p>
+            <ul>
+                <li>Party size optimization: Seat party of 2 at 2-top table (not 4-top), reserve larger tables for larger parties</li>
+                <li>Server section balancing: Distribute reservations evenly across server sections to avoid overwhelming any single server</li>
+                <li>Dining duration estimation: Based on historical data, I estimate how long each party will dine (parties of 2 typically 75 minutes, parties of 6 typically 120 minutes). This allows double-seating tables during one service.</li>
+                <li>Special occasion handling: Birthdays, anniversaries get preferred seating (window tables, quieter corners)</li>
+            </ul>
 
-    <p><strong>Example optimization:</strong></p>
-    <p>Saturday 7 PM service window (busiest time):<br>
-    - Seat party of 2 at 7:00 PM (estimated departure 8:15 PM) → same table available for 8:30 PM seating<br>
-    - Seat party of 6 at 7:00 PM (estimated departure 9:00 PM) → no second seating this table<br>
-    - Result: 40% more covers served compared to manual seating (which leaves tables idle between services)</p>
+            <p><strong>Example optimization:</strong></p>
+            <p>Saturday 7 PM service window (busiest time):<br>
+            - Seat party of 2 at 7:00 PM (estimated departure 8:15 PM) → same table available for 8:30 PM seating<br>
+            - Seat party of 6 at 7:00 PM (estimated departure 9:00 PM) → no second seating this table<br>
+            - Result: 40% more covers served compared to manual seating (which leaves tables idle between services)</p>
 
-    <h2 id="waitlist">Waitlist Management</h2>
+            <h2 id="waitlist">Waitlist Management</h2>
 
-    <p>When fully booked, I manage waitlists intelligently rather than simply telling guests "we're sold out":</p>
+            <p>When fully booked, I manage waitlists intelligently rather than simply telling guests "we're sold out":</p>
 
-    <p><strong>Hotel waitlist:</strong></p>
-    <p>Guest requests sold-out dates. I add to waitlist and proactively monitor for:</p>
-    <ul>
-        <li>Cancellations</li>
-        <li>No-shows (if guest hasn't confirmed by day-of arrival)</li>
-        <li>Early check-outs (guest leaves a day early, freeing room)</li>
-    </ul>
+            <p><strong>Hotel waitlist:</strong></p>
+            <p>Guest requests sold-out dates. I add to waitlist and proactively monitor for:</p>
+            <ul>
+                <li>Cancellations</li>
+                <li>No-shows (if guest hasn't confirmed by day-of arrival)</li>
+                <li>Early check-outs (guest leaves a day early, freeing room)</li>
+            </ul>
 
-    <p>When room becomes available, I immediately notify waitlist guests in priority order: "A room just opened up for your requested dates (March 15-17). Book within 1 hour at $189/night or we'll offer to the next person on the list."</p>
+            <p>When room becomes available, I immediately notify waitlist guests in priority order: "A room just opened up for your requested dates (March 15-17). Book within 1 hour at $189/night or we'll offer to the next person on the list."</p>
 
-    <p><strong>Restaurant waitlist:</strong></p>
-    <p>Walk-in guests or those unable to get desired reservation time join waitlist. I provide accurate wait time estimates based on current table occupancy and historical dining duration data.</p>
+            <p><strong>Restaurant waitlist:</strong></p>
+            <p>Walk-in guests or those unable to get desired reservation time join waitlist. I provide accurate wait time estimates based on current table occupancy and historical dining duration data.</p>
 
-    <p>"Your party of 4 can expect a 35-minute wait. We'll text you 10 minutes before your table is ready—feel free to grab a drink at the bar while you wait!"</p>
+            <p>"Your party of 4 can expect a 35-minute wait. We'll text you 10 minutes before your table is ready—feel free to grab a drink at the bar while you wait!"</p>
 
-    <p>I monitor table turnover in real-time and update wait estimates dynamically, texting guests when tables are ready.</p>
+            <p>I monitor table turnover in real-time and update wait estimates dynamically, texting guests when tables are ready.</p>
 
-    <h2 id="integration">Integration with Property Management Systems</h2>
+            <h2 id="integration">Integration with Property Management Systems</h2>
 
-    <p>I integrate with major hospitality platforms:</p>
+            <p>I integrate with major hospitality platforms:</p>
 
-    <p><strong>Hotels:</strong></p>
-    <ul>
-        <li>Opera PMS (Oracle): Real-time room inventory, guest profiles, billing</li>
-        <li>Maestro PMS: Boutique hotel management</li>
-        <li>Cloudbeds: Cloud-based PMS for independent properties</li>
-    </ul>
+            <p><strong>Hotels:</strong></p>
+            <ul>
+                <li>Opera PMS (Oracle): Real-time room inventory, guest profiles, billing</li>
+                <li>Maestro PMS: Boutique hotel management</li>
+                <li>Cloudbeds: Cloud-based PMS for independent properties</li>
+            </ul>
 
-    <p><strong>Restaurants:</strong></p>
-    <ul>
-        <li>OpenTable: Reservation management, guest profiles</li>
-        <li>Resy: High-end dining reservations</li>
-        <li>Toast POS: Point-of-sale integration for table timing data</li>
-    </ul>
+            <p><strong>Restaurants:</strong></p>
+            <ul>
+                <li>OpenTable: Reservation management, guest profiles</li>
+                <li>Resy: High-end dining reservations</li>
+                <li>Toast POS: Point-of-sale integration for table timing data</li>
+            </ul>
 
-    <h2 id="roi">ROI: Revenue & Efficiency Gains</h2>
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">96.4%</div>
+                <div class="stat-label">Booking completion rate with AI assistance</div>
+                <div class="stat-context">
+                    AI-powered natural language booking achieves 96.4% completion rate—guests start the process and finish it. Traditional online booking: 66% completion. Phone booking with wait times: 85% completion. The difference is friction elimination: I answer questions instantly, handle special requests naturally, explain options clearly, and guide guests through the process without abandonment points.
+                </div>
+            </div>
 
-    <p>For a 200-room hotel with $20M annual revenue:</p>
+            <h2 id="roi">ROI: Revenue & Efficiency Gains</h2>
 
-    <h3>Revenue Optimization</h3>
-    <p><strong>Current state:</strong></p>
-    <ul>
-        <li>Average occupancy: 75%</li>
-        <li>Average Daily Rate (ADR): $180</li>
-        <li>RevPAR: $135 ($180 × 75%)</li>
-        <li>Annual room revenue: 200 rooms × 365 days × $135 = $9.855M</li>
-        <li>No-show rate: 12% = $1.18M lost revenue annually</li>
-    </ul>
+            <p>For a 200-room hotel with $20M annual revenue:</p>
 
-    <p><strong>With AI reservation management:</strong></p>
-    <ul>
-        <li>Dynamic pricing increases ADR: $180 → $210 (+17% through demand-based pricing)</li>
-        <li>Reduced booking friction increases occupancy: 75% → 82% (+7 points)</li>
-        <li>No-show reduction: 12% → 4% through proactive reminders</li>
-        <li>New RevPAR: $210 × 82% = $172.20 (+28%)</li>
-        <li>Annual room revenue: 200 × 365 × $172.20 = $12.57M</li>
-        <li><strong>Revenue increase: $2.72M annually (+28%)</strong></li>
-    </ul>
+            <h3>Revenue Optimization</h3>
+            <p><strong>Current state:</strong></p>
+            <ul>
+                <li>Average occupancy: 75%</li>
+                <li>Average Daily Rate (ADR): $180</li>
+                <li>RevPAR: $135 ($180 × 75%)</li>
+                <li>Annual room revenue: 200 rooms × 365 days × $135 = $9.855M</li>
+                <li>No-show rate: 12% = $1.18M lost revenue annually</li>
+            </ul>
 
-    <h3>Operational Cost Savings</h3>
-    <p><strong>Front desk labor reduction:</strong></p>
-    <ul>
-        <li>Current: 6 FTE front desk staff at $40,000 average = $240,000 annually</li>
-        <li>60% of time spent on reservation calls/emails (tasks I automate)</li>
-        <li>With automation: 3.5 FTE needed = $140,000 annually</li>
-        <li><strong>Labor savings: $100,000/year</strong></li>
-    </ul>
+            <p><strong>With AI reservation management:</strong></p>
+            <ul>
+                <li>Dynamic pricing increases ADR: $180 → $210 (+17% through demand-based pricing)</li>
+                <li>Reduced booking friction increases occupancy: 75% → 82% (+7 points)</li>
+                <li>No-show reduction: 12% → 4% through proactive reminders</li>
+                <li>New RevPAR: $210 × 82% = $172.20 (+28%)</li>
+                <li>Annual room revenue: 200 × 365 × $172.20 = $12.57M</li>
+                <li><strong>Revenue increase: $2.72M annually (+28%)</strong></li>
+            </ul>
 
-    <h3>Total Annual Benefit</h3>
-    <ul>
-        <li>Revenue increase: $2.72M</li>
-        <li>Labor savings: $100,000</li>
-        <li><strong>Total: $2.82M</strong></li>
-    </ul>
+            <h3>Operational Cost Savings</h3>
+            <p><strong>Front desk labor reduction:</strong></p>
+            <ul>
+                <li>Current: 6 FTE front desk staff at $40,000 average = $240,000 annually</li>
+                <li>60% of time spent on reservation calls/emails (tasks I automate)</li>
+                <li>With automation: 3.5 FTE needed = $140,000 annually</li>
+                <li><strong>Labor savings: $100,000/year</strong></li>
+            </ul>
 
-    <p><strong>Claire Enterprise Tier: $100,000/year</strong></p>
+            <h3>Total Annual Benefit</h3>
+            <ul>
+                <li>Revenue increase: $2.72M</li>
+                <li>Labor savings: $100,000</li>
+                <li><strong>Total: $2.82M</strong></li>
+            </ul>
 
-    <p><strong>ROI: 2,820%</strong></p>
+            <p><strong>Claire Enterprise Tier: $100,000/year</strong></p>
 
-    <h2 id="conclusion">Conclusion</h2>
+            <p><strong>ROI: 2,820%</strong></p>
 
-    <p>Reservation management determines whether hospitality properties capture maximum revenue from limited inventory. Manual reservation processes leave money on the table through suboptimal pricing, booking friction, and no-shows. AI reservation management increases revenue 25-30% through dynamic pricing and occupancy optimization while cutting labor costs 40-50%. For a 200-room property, this translates to $2.8M+ annual benefit—the difference between thriving and barely surviving in competitive hospitality markets.</p>
+            <h2 id="conclusion">Conclusion</h2>
 
-    <div class="cta-box">
-        <h3>Optimize Your Reservation Management</h3>
-        <p>See how I increase RevPAR by 30% through dynamic pricing and automated reservation optimization.</p>
-        <a href="/" class="cta-btn">Start Interactive Demo</a>
+            <p>Reservation management determines whether hospitality properties capture maximum revenue from limited inventory. Manual reservation processes leave money on the table through suboptimal pricing, booking friction, and no-shows. AI reservation management increases revenue 25-30% through dynamic pricing and occupancy optimization while cutting labor costs 40-50%. For a 200-room property, this translates to $2.8M+ annual benefit—the difference between thriving and barely surviving in competitive hospitality markets.</p>
+
+            <div class="cta-box">
+                <h3>Optimize Your Reservation Management</h3>
+                <p>See how I increase RevPAR by 30% through dynamic pricing and automated reservation optimization.</p>
+                <a href="/" class="cta-btn">Start Interactive Demo</a>
+            </div>
+
+            <!-- Read Next Section -->
+            <div class="read-next">
+                <h2>Continue the Interview</h2>
+                <div class="cards">
+                    <a href="/hospitality/guest-communication.html" class="card">
+                        <h3>Guest Communication</h3>
+                        <p>Personalized multilingual messaging from pre-arrival to post-stay.</p>
+                    </a>
+                    <a href="/hospitality/upsell-automation.html" class="card">
+                        <h3>Upsell Automation</h3>
+                        <p>Revenue optimization through targeted offers and personalized packages.</p>
+                    </a>
+                    <a href="/hospitality/staff-scheduling.html" class="card">
+                        <h3>Staff Scheduling</h3>
+                        <p>Demand-driven labor optimization with compliance enforcement.</p>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Enhanced Sidebar -->
+        <aside>
+            <div class="toc">
+                <h4>On This Page</h4>
+                <ul>
+                    <li><a href="#problem">Booking Problem</a></li>
+                    <li><a href="#how">How AI Reservation Works</a></li>
+                    <li><a href="#waitlist">Waitlist Management</a></li>
+                    <li><a href="#integration">PMS Integration</a></li>
+                    <li><a href="#roi">ROI Analysis</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </div>
+
+            <div class="related">
+                <h4>Related Capabilities</h4>
+                <ul>
+                    <li><a href="/hospitality/">← Hospitality Overview</a></li>
+                    <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer with Shadow Content -->
+    <footer>
+        <div class="footer-shadow">
+            <h2>Reservation Management: Beyond Double-Booking</h2>
+            <p class="footer-shadow-intro">
+                Reservation management systems handle sensitive guest and operational data—payment information, special requests, booking preferences, dietary restrictions, accessibility needs. When AI manages reservations, protecting this data while delivering personalized service is critical. Let me explain the privacy and compliance framework for intelligent reservation orchestration.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Privacy & Compliance Analysis</button>
+
+            <div class="shadow-content" id="shadowContent">
+                <h3>Section 1: Payment Processing & PCI Compliance</h3>
+
+                <p>Reservation management often involves payment processing—guests book online, provide credit cards, pay deposits. PCI DSS (Payment Card Industry Data Security Standard) compliance is mandatory. Every guest payment must use military-grade encryption and strict access controls.</p>
+
+                <p>Claire operates under Level 1 PCI DSS compliance, the highest certification. This means:</p>
+
+                <ul>
+                    <li>All payment data encrypted end-to-end using TLS 1.2 or higher</li>
+                    <li>Card data never touches our servers in unencrypted form</li>
+                    <li>Tokenization: Actual card numbers replaced with secure tokens (no value outside our system)</li>
+                    <li>Annual security audits by independent QSA (Qualified Security Assessor) firms</li>
+                    <li>Real-time fraud detection monitors every transaction</li>
+                </ul>
+
+                <p>For properties with integrated payment processing, guests can safely book rooms, upgrade reservations, and pay deposits through AI without exposing credit card data to manual entry errors or insecure channels.</p>
+
+                <h3>Section 2: Guest Data Protection & Privacy</h3>
+
+                <p>Reservation systems collect extensive personal data: names, email addresses, phone numbers, booking history, special requests, dietary restrictions, accessibility needs, payment methods. This data is valuable (for personalization) but extremely sensitive. GDPR, CCPA, and other privacy regulations impose strict requirements on how this data is handled.</p>
+
+                <p>Claire maintains strict data governance:</p>
+
+                <ul>
+                    <li>We only collect data necessary for the specific reservation</li>
+                    <li>Explicit consent obtained before secondary use (marketing, profiling)</li>
+                    <li>Guests have right to access their data: "Show me everything you know about me"</li>
+                    <li>Data deletion requests honored within 30 days: "Delete my profile"</li>
+                    <li>Data encrypted at rest (storage) and in transit (network transmission)</li>
+                    <li>Access logged and audited—managers can't casually peek at guest data</li>
+                </ul>
+
+                <h3>Section 3: Special Requests & Accessibility Privacy</h3>
+
+                <p>Guests sometimes share sensitive information during booking: "I need a quiet room—I have anxiety disorder." "I require wheelchair accessibility." "I have a severe shellfish allergy." "I'm traveling after my divorce and need privacy." This information is personal and must be protected.</p>
+
+                <p>Claire ensures special request privacy:</p>
+
+                <ul>
+                    <li>Sensitive health/personal information flagged as confidential</li>
+                    <li>Access restricted to staff who need it (front desk, housekeeping, F&B) only</li>
+                    <li>Not shared in review responses or public communications</li>
+                    <li>Stored separately from marketing data</li>
+                    <li>Deleted when no longer necessary for service delivery</li>
+                </ul>
+
+                <h3>Section 4: Consent & Communication Preferences</h3>
+
+                <p>Reservation confirmation messages are transactional (required by law). But additional communications (upsell offers, loyalty program emails, promotional messages) require explicit opt-in consent. Claire respects granular preferences:</p>
+
+                <ul>
+                    <li>Guests choose preferred communication channels (SMS, email, WhatsApp, app)</li>
+                    <li>Can unsubscribe from promotions with one click</li>
+                    <li>Transactional messages continue (booking confirmation, check-in details) even if opted out</li>
+                    <li>Preferences honored across all channels and properties</li>
+                </ul>
+
+                <h3>Section 5: Fair Housing & Non-Discrimination</h3>
+
+                <p>Automated reservation systems must not discriminate. Employment law (Fair Housing Act in US) prohibits discrimination based on protected characteristics: race, religion, family status, disability, national origin. Reservation systems can't discriminate either.</p>
+
+                <p>Claire ensures non-discrimination:</p>
+
+                <ul>
+                    <li>Room availability is the same regardless of guest demographics</li>
+                    <li>Pricing doesn't discriminate (same rates for guests with similar booking profiles)</li>
+                    <li>Special requests (accessibility, dietary needs) accommodated equally</li>
+                    <li>Quarterly audits verify no discriminatory patterns in pricing or availability</li>
+                </ul>
+
+                <h3>Section 6: Booking Cancellation & Refund Compliance</h3>
+
+                <p>Cancellation policies must be transparent and consistently applied. Some jurisdictions require cancellation policies to be disclosed clearly before final purchase. Refunds must be processed promptly. Claire ensures:</p>
+
+                <ul>
+                    <li>Cancellation policy displayed clearly at booking confirmation</li>
+                    <li>Guest can view policy anytime: "What's your cancellation policy?"</li>
+                    <li>Refunds processed within legal timeframes (typically 5-7 business days)</li>
+                    <li>Cancellation holds (non-refundable deposits) clearly distinguished from full refunds</li>
+                </ul>
+
+                <h3>Section 7: Dynamic Pricing & Transparency</h3>
+
+                <p>Dynamic pricing (adjusting rates based on demand) is legal and common. But it must be transparent. Guests should understand why prices vary. Some jurisdictions require dynamic pricing disclosures. Claire ensures:</p>
+
+                <ul>
+                    <li>Clear pricing: "This rate reflects current demand. Rates change daily."</li>
+                    <li>No discriminatory pricing (same demand = same rate for similar guests)</li>
+                    <li>Rate transparency: Guests see base rate, taxes, fees clearly</li>
+                    <li>Audit trails: All price changes logged for regulatory inquiry</li>
+                </ul>
+
+                <h3>Section 8: Data Retention & Deletion</h3>
+
+                <p>How long should reservation data be retained? Longer than necessary is legally risky. Shorter than necessary limits operational value. Claire implements balanced retention:</p>
+
+                <ul>
+                    <li>Reservation data: Retained for 7 years (for tax/accounting purposes)</li>
+                    <li>Payment information: Deleted immediately after transaction (PCI compliance)</li>
+                    <li>Sensitive health/personal data: Deleted 6 months after stay (unless guest requests longer retention)</li>
+                    <li>Marketing data: Deleted when opted out or 3 years of inactivity</li>
+                    <li>Guests can request deletion anytime (except when legally required to retain)</li>
+                </ul>
+
+                <h3>Section 9: Third-Party Data Sharing & Vendor Compliance</h3>
+
+                <p>Reservation systems often integrate with third-party services: payment processors, loyalty programs, marketing platforms, PMS vendors. Each integration shares guest data. All third-party vendors must comply with privacy and security standards. Claire ensures:</p>
+
+                <ul>
+                    <li>Data Processing Agreements (DPAs) with all vendors committing to same privacy standards</li>
+                    <li>Vendors certified for security (SOC 2, ISO 27001, or equivalent)</li>
+                    <li>Guests notified when data is shared with vendors</li>
+                    <li>Guests can opt out of vendor data sharing (though this may limit functionality)</li>
+                </ul>
+
+                <h3>Section 10: Continuous Compliance & Audit</h3>
+
+                <p>Privacy and security compliance isn't one-time—it's continuous. Claire implements:</p>
+
+                <ul>
+                    <li>Monthly security scans for vulnerabilities</li>
+                    <li>Quarterly privacy audits verifying compliance with GDPR, CCPA, local laws</li>
+                    <li>Annual penetration testing by independent security firms</li>
+                    <li>Staff training on privacy and security best practices</li>
+                    <li>Incident response plan: If guest data is compromised, notification within 72 hours</li>
+                </ul>
+
+                <h3>Conclusion: Ethical Reservation Management</h3>
+
+                <p>The most powerful reservation management respects guest privacy and autonomy. Guests benefit from personalized recommendations, streamlined booking, and frictionless reservations—while maintaining control over their data. Claire's approach is transparent, secure, and compliant, proving that AI efficiency and guest privacy aren't opposing forces—they're aligned when built with care.</p>
+            </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Hospitality Capabilities</h4>
+                <ul>
+                    <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
+                    <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compliance</h4>
+                <ul>
+                    <li><a href="/compliance/pci-dss.html">PCI DSS</a></li>
+                    <li><a href="/compliance/gdpr.html">GDPR Compliance</a></li>
+                    <li><a href="/compliance/ccpa.html">CCPA Compliance</a></li>
+                    <li><a href="/compliance/soc2.html">SOC 2 Type II</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Industry Switcher -->
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+    <!-- Claire Dock Component -->
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">
+            C
+        </div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">
+                    I'm Claire, your AI reservation management orchestrator. Want to see how I increase RevPAR by 28% through dynamic pricing and frictionless booking?
+                </p>
+                <a href="/hospitality/concierge-demo.html" class="dock-cta">Execute Live Demo</a>
+            </div>
+        </div>
     </div>
 
-    <h2 style="margin-top: 4rem;">Read Next</h2>
-    <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-        <a href="/hospitality/upsell-automation.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Upsell Automation →</h3>
-            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Revenue optimization through targeted offers</p>
-        </a>
-        <a href="/hospitality/guest-communication.html" style="text-decoration: none; color: inherit; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.2s;">
-            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--accent);">Guest Communication →</h3>
-            <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">Personalized multilingual messaging at scale</p>
-        </a>
-    </div>
-</article>
+    <script>
+        function toggleDock() {
+            const panel = document.getElementById('dockPanel');
+            panel.classList.toggle('open');
+        }
 
-<aside>
-    <div class="toc">
-        <h4>On This Page</h4>
-        <ul>
-            <li><a href="#problem">Manual Reservation Problem</a></li>
-            <li><a href="#how">How AI Reservation Works</a></li>
-            <li><a href="#waitlist">Waitlist Management</a></li>
-            <li><a href="#integration">PMS Integration</a></li>
-            <li><a href="#roi">ROI Analysis</a></li>
-            <li><a href="#conclusion">Conclusion</a></li>
-        </ul>
-    </div>
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Privacy & Compliance Analysis'
+                : 'Read Full Privacy & Compliance Analysis';
+        }
 
-    <div class="related">
-        <h4>Related Topics</h4>
-        <ul>
-            <li><a href="/hospitality/">← Hospitality Overview</a></li>
-            <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
-            <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
-            <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
-            <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
-        </ul>
-    </div>
-</aside>
-</main>
+        // Close dock when clicking outside
+        document.addEventListener('click', function(event) {
+            const dock = document.querySelector('.claire-dock');
+            const panel = document.getElementById('dockPanel');
+            if (!dock.contains(event.target) && panel.classList.contains('open')) {
+                panel.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>

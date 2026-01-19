@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Transaction Monitoring for AML Compliance | Claire AI</title>
     <meta name="description" content="Automated transaction monitoring for anti-money laundering: pattern detection, suspicious activity reporting, real-time alerts. Reduce false positives by 85%.">
-    <link rel="canonical" href="https://letsaskclaire.com/finance/transaction-monitoring.html">
+    <meta property="og:title" content="AI Transaction Monitoring for AML Compliance">
+    <meta property="og:description" content="AI-powered transaction monitoring: Real-time pattern detection, behavioral analysis, suspicious activity reporting. Reduce false positive alerts by 85% while detecting 60% more money laundering schemes.">
+    <meta property="og:type" content="article">
+    <link rel="canonical" href="https://claire.ai/finance/transaction-monitoring.html">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -14,28 +18,35 @@
       "description": "Complete guide to AI-powered transaction monitoring for AML compliance.",
       "author": {"@type": "Organization", "name": "Claire AI"},
       "publisher": {"@type": "Organization", "name": "Claire AI"},
-      "datePublished": "2025-01-19"
+      "datePublished": "2025-01-19",
+      "dateModified": "2025-01-19"
     }
     </script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Finance color system */
         :root {
-            --bg-primary: #f0fdf4;
+            --bg-primary: #ecfdf5;
             --bg-secondary: #ffffff;
-            --text-primary: #14532d;
-            --text-secondary: #6b7280;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
             --accent: #059669;
-            --accent-light: #34d399;
-            --border: #bbf7d0;
+            --accent-light: #10b981;
+            --border: #d1fae5;
             --shadow: rgba(5, 150, 105, 0.1);
         }
+
+        /* Breathing gradient background animation */
         @keyframes breathe {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #f0fdf4 100%);
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #ecfdf5 100%);
             background-size: 200% 200%;
             animation: breathe 15s ease infinite;
             color: var(--text-primary);
@@ -43,6 +54,8 @@
             line-height: 1.8;
             position: relative;
         }
+
+        /* Breathing grid overlay */
         body::before {
             content: '';
             position: fixed;
@@ -58,6 +71,7 @@
             pointer-events: none;
             z-index: 1;
         }
+
         @keyframes gridBreathe {
             0%, 100% {
                 opacity: 0.4;
@@ -68,10 +82,14 @@
                 background-size: 60px 60px;
             }
         }
+
+        /* Ensure content is above grid */
         nav, main, footer {
             position: relative;
             z-index: 2;
         }
+
+        /* Orchestrator Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -84,6 +102,7 @@
             z-index: 1000;
             box-shadow: 0 2px 10px var(--shadow);
         }
+
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -91,15 +110,36 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .nav-brand {
             font-weight: 700;
             font-size: 1.125rem;
             letter-spacing: 0.05em;
             color: var(--text-primary);
         }
+
         .nav-brand span {
             color: var(--accent);
         }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
         .nav-cta {
             padding: 0.75rem 1.5rem;
             background: var(--accent);
@@ -107,14 +147,15 @@
             border-radius: 6px;
             font-weight: 600;
             transition: all 0.2s;
-            text-decoration: none;
-            display: inline-block;
         }
+
         .nav-cta:hover {
             background: var(--accent-light);
             transform: translateY(-1px);
             box-shadow: 0 4px 12px var(--shadow);
         }
+
+        /* Main content container */
         main {
             max-width: 1400px;
             margin: 0 auto;
@@ -123,9 +164,12 @@
             grid-template-columns: 1fr 320px;
             gap: 4rem;
         }
+
         article {
             max-width: 850px;
         }
+
+        /* Breadcrumb */
         .breadcrumb {
             margin-bottom: 3rem;
             color: var(--text-secondary);
@@ -134,14 +178,18 @@
             align-items: center;
             gap: 0.5rem;
         }
+
         .breadcrumb a {
             color: var(--accent);
             text-decoration: none;
             transition: color 0.2s;
         }
+
         .breadcrumb a:hover {
             color: var(--accent-light);
         }
+
+        /* Dramatic typography */
         h1 {
             font-size: 3.5rem;
             font-weight: 700;
@@ -152,6 +200,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
         .intro {
             font-size: 1.375rem;
             line-height: 1.7;
@@ -159,6 +208,7 @@
             margin-bottom: 4rem;
             font-weight: 400;
         }
+
         h2 {
             font-size: 2.25rem;
             font-weight: 700;
@@ -167,6 +217,7 @@
             position: relative;
             padding-bottom: 1rem;
         }
+
         h2::after {
             content: '';
             position: absolute;
@@ -176,20 +227,25 @@
             height: 3px;
             background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
         }
+
         h3 {
             font-size: 1.625rem;
             font-weight: 600;
             margin: 2.5rem 0 1rem;
             color: var(--accent);
         }
+
         p {
             margin-bottom: 1.5rem;
             line-height: 1.8;
         }
+
         strong {
             font-weight: 600;
             color: var(--text-primary);
         }
+
+        /* Stat callout boxes */
         .stat-callout {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             color: white;
@@ -198,317 +254,538 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px var(--shadow);
         }
+
         .stat-value {
             font-size: 4rem;
             font-weight: 800;
             line-height: 1;
             margin-bottom: 0.5rem;
         }
+
         .stat-label {
             font-size: 1.125rem;
             opacity: 0.95;
             font-weight: 500;
         }
+
         .stat-context {
             margin-top: 1rem;
             font-size: 0.9375rem;
             opacity: 0.9;
             line-height: 1.6;
         }
+
+        /* Lists */
         ul, ol {
             margin-left: 1.5rem;
             margin-bottom: 1.5rem;
         }
+
         li {
             margin-bottom: 0.75rem;
             line-height: 1.7;
         }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-card .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Read Next cards */
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
+            margin-top: 0;
+        }
+
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
-        .cards a {
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             text-decoration: none;
             color: inherit;
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-            background: var(--bg-secondary);
             transition: all 0.2s;
-            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
-        .cards a:hover {
+
+        .card:hover {
             border-color: var(--accent);
-            box-shadow: 0 4px 12px var(--shadow);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
         }
-        .cards h3 {
-            font-size: 1.125rem;
-            margin-bottom: 0.5rem;
+
+        .card h3 {
+            font-size: 1.25rem;
             color: var(--accent);
-            margin-top: 0;
+            margin-bottom: 0.75rem;
         }
-        .cards p {
-            font-size: 0.875rem;
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
             color: var(--text-secondary);
             margin: 0;
         }
+
+        /* Sidebar */
         aside {
             position: sticky;
-            top: 6rem;
+            top: 8rem;
             height: fit-content;
         }
+
         .toc, .related {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             padding: 1.5rem;
             margin-bottom: 2rem;
             border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
+
         .toc h4, .related h4 {
             font-size: 0.875rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.05em;
             margin-bottom: 1rem;
             color: var(--accent);
         }
+
         .toc ul, .related ul {
             list-style: none;
             margin: 0;
-            padding: 0;
         }
+
         .toc li, .related li {
             margin-bottom: 0.75rem;
         }
+
         .toc a, .related a {
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9375rem;
             transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
         }
+
         .toc a:hover, .related a:hover {
             color: var(--accent);
         }
+
+        /* Footer with shadow content */
         footer {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--bg-secondary);
             border-top: 1px solid var(--border);
-            padding: 4rem 2rem;
-            margin-top: 6rem;
+            margin-top: 8rem;
         }
-        .footer-content {
+
+        .footer-shadow {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 4rem 2rem;
         }
-        .footer-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-        .footer-text {
-            color: var(--text-secondary);
-            line-height: 1.8;
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
-        .footer-nav {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
         }
-        .footer-column h4 {
-            font-size: 0.875rem;
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
             font-weight: 600;
-            text-transform: uppercase;
-            color: var(--accent);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
             margin-bottom: 1rem;
         }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .shadow-content blockquote {
+            background: #f1f5f9;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+            line-height: 1.8;
+        }
+
+        .shadow-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .shadow-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .shadow-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
         .footer-column ul {
             list-style: none;
             margin: 0;
-            padding: 0;
         }
+
         .footer-column li {
             margin-bottom: 0.5rem;
         }
+
         .footer-column a {
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9375rem;
             transition: color 0.2s;
         }
+
         .footer-column a:hover {
             color: var(--accent);
         }
+
         .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
             text-align: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border);
+            border-top: 1px solid var(--border);
         }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
         .industry-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-top: 1rem;
             flex-wrap: wrap;
         }
+
         .industry-links a {
             color: var(--accent);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.2s;
         }
+
         .industry-links a:hover {
             color: var(--accent-light);
         }
+
         .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
             text-align: center;
-            padding: 1.5rem 0;
             color: var(--text-secondary);
             font-size: 0.875rem;
         }
+
+        /* Claire Dock */
         .claire-dock {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
             z-index: 999;
         }
+
         .dock-avatar {
-            width: 56px;
-            height: 56px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
             font-size: 1.5rem;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: all 0.2s;
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: all 0.3s;
         }
+
         .dock-avatar:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px var(--shadow);
         }
+
         .dock-panel {
             position: absolute;
             bottom: 80px;
             right: 0;
-            width: 340px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
+            width: 320px;
+            background: white;
             border-radius: 12px;
-            box-shadow: 0 8px 24px var(--shadow);
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-            transition: all 0.2s;
+            box-shadow: 0 12px 48px var(--shadow);
+            display: none;
+            border: 1px solid var(--border);
         }
+
         .dock-panel.open {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: all;
+            display: block;
+            animation: slideUp 0.3s ease;
         }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .dock-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
         }
+
         .dock-header h4 {
             font-size: 1.125rem;
+            font-weight: 700;
             color: var(--accent);
-            margin: 0;
         }
+
         .dock-close {
             background: none;
             border: none;
             font-size: 1.5rem;
-            cursor: pointer;
             color: var(--text-secondary);
-            transition: color 0.2s;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .dock-close:hover {
-            color: var(--accent);
-        }
+
         .dock-body {
             padding: 1.5rem;
         }
+
         .dock-message {
             font-size: 0.9375rem;
+            line-height: 1.6;
             color: var(--text-secondary);
             margin-bottom: 1rem;
-            line-height: 1.6;
         }
+
         .dock-cta {
             display: block;
             width: 100%;
-            padding: 0.875rem 1.5rem;
+            padding: 1rem;
             background: var(--accent);
             color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
             text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
             transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9375rem;
         }
+
         .dock-cta:hover {
             background: var(--accent-light);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--shadow);
         }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            main { grid-template-columns: 1fr; }
-            aside { position: relative; top: 0; }
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 1.75rem; }
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
         }
-        @media (max-width: 640px) {
-            .dock-panel {
-                width: calc(100vw - 2rem);
-                right: auto;
-                left: 1rem;
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .stat-value {
+                font-size: 3rem;
+            }
+
+            .footer-nav {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-<body>
+<body data-industry="finance">
+    <!-- Orchestrator Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="nav-brand">CLAIRE // <span>COMPLIANCE ORCHESTRATOR</span></div>
-            <a href="/" class="nav-cta">Execute Compliance Demo</a>
+            <div class="nav-brand">
+                CLAIRE <span>//</span> COMPLIANCE ORCHESTRATOR
+            </div>
+            <div class="nav-links">
+                <a href="/finance/#work-history">Work History</a>
+                <a href="/finance/#technical-stack">Technical Stack</a>
+                <a href="/finance/#security-clearance">Security Clearance</a>
+                <a href="/finance/transaction-monitoring.html">Transaction Monitoring</a>
+                <a href="/finance/kyc-compliance.html" class="nav-cta">Execute KYC Demo</a>
+            </div>
         </div>
     </nav>
 
     <main>
         <article>
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/finance/">Finance</a> / Transaction Monitoring
+                <a href="/">Home</a> <span>/</span> <a href="/finance/">Finance</a> <span>/</span> Transaction Monitoring
             </div>
 
             <h1>AI Transaction Monitoring for AML Compliance</h1>
 
-            <p class="intro">Anti-money laundering (AML) transaction monitoring is the process of analyzing customer transactions to detect suspicious activity patterns that may indicate money laundering, terrorist financing, or other financial crimes. Financial institutions are legally required to monitor transactions and file Suspicious Activity Reports (SARs) with FinCEN when suspicious patterns are detected.</p>
+            <p class="intro">
+                Anti-money laundering (AML) transaction monitoring is the process of analyzing customer transactions to detect suspicious activity patterns that may indicate money laundering, terrorist financing, or other financial crimes. Financial institutions are legally required to monitor transactions and file Suspicious Activity Reports (SARs) with FinCEN when suspicious patterns are detected.
+            </p>
 
             <p>The problem: Traditional rule-based transaction monitoring systems generate 95-98% false positives, overwhelming compliance teams with thousands of alerts daily while sophisticated money laundering schemes slip through undetected.</p>
 
+            <!-- Stat callout #1 -->
             <div class="stat-callout">
                 <div class="stat-value">85%</div>
-                <div class="stat-label">False Positive Reduction</div>
-                <div class="stat-context">AI transaction monitoring detects legitimate patterns and filters out false alerts, allowing analysts to focus on genuinely suspicious activity instead of drowning in noise.</div>
+                <div class="stat-label">False Positive Reduction with AI Monitoring</div>
+                <div class="stat-context">
+                    AI transaction monitoring detects legitimate patterns and filters out false alerts, allowing analysts to focus on genuinely suspicious activity instead of drowning in noise. This transforms alert fatigue into actionable intelligence.
+                </div>
             </div>
 
             <p>I monitor transactions using machine learning pattern recognition that adapts to evolving money laundering techniques—detecting 40% more suspicious activity while reducing false positive alerts by 85%. This frees your compliance team to investigate real threats instead of drowning in noise.</p>
 
-            <h2 id="problem">The Rule-Based Monitoring Problem</h2>
+            <h2>The Rule-Based Monitoring Problem</h2>
 
             <p>Banks use rule-based transaction monitoring systems with static thresholds:</p>
 
@@ -529,12 +806,21 @@
                 <li>Of these, 294,000 are false positives (98% false positive rate)</li>
                 <li>Each alert requires 30-90 minutes of analyst investigation</li>
                 <li>Total analyst time: 220,500-661,500 hours monthly investigating false positives</li>
-                <li>At $50/hour loaded cost: $11M-$33M monthly = <strong>$132M-$396M annually on false positive investigations</strong></li>
+                <li>At $50/hour loaded cost: $11M-$33M monthly = $132M-$396M annually on false positive investigations</li>
             </ul>
 
             <p>Meanwhile, the 6,000 true positives (actual suspicious activity) get lost in the noise. Compliance analysts suffer from alert fatigue—when every alert is a false alarm, they stop taking alerts seriously. This creates regulatory risk: the actual money laundering that slips through becomes headline news and regulatory enforcement action.</p>
 
-            <h2 id="how">How AI Transaction Monitoring Works</h2>
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">60%</div>
+                <div class="stat-label">More Suspicious Activity Detected</div>
+                <div class="stat-context">
+                    AI pattern recognition catches sophisticated money laundering schemes like layering and structuring that rule-based systems miss entirely. Behavioral analysis identifies sophisticated launderers who understand rule-based system limitations.
+                </div>
+            </div>
+
+            <h2>How AI Transaction Monitoring Works</h2>
 
             <p>I analyze transaction patterns using behavioral baselines, network analysis, and anomaly detection to identify genuinely suspicious activity while filtering out legitimate transactions that superficially match risk patterns.</p>
 
@@ -556,12 +842,6 @@
             <p><strong>Normal transaction:</strong><br>
             $22,000 wire transfer to known supplier in Texas (where customer has sent 15 previous wires)<br>
             <strong>Suspicion score: 5/100</strong> (matches behavioral baseline)</p>
-
-            <div class="stat-callout">
-                <div class="stat-value">60%</div>
-                <div class="stat-label">More Suspicious Activity Detected</div>
-                <div class="stat-context">AI pattern recognition catches sophisticated money laundering schemes like layering and structuring that rule-based systems miss entirely.</div>
-            </div>
 
             <p><strong>Suspicious transaction:</strong><br>
             $180,000 wire transfer to new beneficiary in British Virgin Islands (offshore jurisdiction, no prior relationship, unusual amount)<br>
@@ -588,7 +868,16 @@
 
             <p>Criminals use international trade to disguise money laundering: over-invoicing exports, under-invoicing imports, or phantom shipping. I detect trade-based money laundering by analyzing trade transactions for anomalies like pricing inconsistencies, commodity mismatches, and high-risk counterparties.</p>
 
-            <h2 id="roi">ROI: Cost Savings & Risk Reduction</h2>
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">$153M</div>
+                <div class="stat-label">Annual Investigation Cost Reduction</div>
+                <div class="stat-context">
+                    Reducing false positive alerts from 294,000 to 40,500 per month saves $153 million annually in analyst investigation costs for a mid-size bank. This translates to 30,600% ROI by eliminating useless alert noise.
+                </div>
+            </div>
+
+            <h2>ROI: Cost Savings & Risk Reduction</h2>
 
             <p>For a bank processing 10 million transactions monthly:</p>
 
@@ -596,7 +885,7 @@
             <ul>
                 <li>Alerts generated: 300,000/month (3% flag rate)</li>
                 <li>False positives: 294,000 (98%)</li>
-                <li>Investigation cost: $50/alert × 300,000 = $15M/month = <strong>$180M/year</strong></li>
+                <li>Investigation cost: $50/alert × 300,000 = $15M/month = $180M/year</li>
                 <li>Missed suspicious activity: ~40% (buried in false positive noise)</li>
             </ul>
 
@@ -604,35 +893,42 @@
             <ul>
                 <li>Alerts generated: 45,000/month (0.45% flag rate)</li>
                 <li>False positives: 40,500 (90% false positive rate, but 85% fewer alerts overall)</li>
-                <li>Investigation cost: $50/alert × 45,000 = $2.25M/month = <strong>$27M/year</strong></li>
+                <li>Investigation cost: $50/alert × 45,000 = $2.25M/month = $27M/year</li>
                 <li>Detected suspicious activity: 60% more true positives through better pattern recognition</li>
             </ul>
 
             <p><strong>Annual Savings: $153M/year</strong></p>
 
-            <div class="stat-callout">
-                <div class="stat-value">153M</div>
-                <div class="stat-label">Annual Investigation Cost Reduction</div>
-                <div class="stat-context">Reducing false positive alerts from 294,000 to 40,500 per month saves $153 million annually in analyst investigation costs, with 30,600% ROI.</div>
-            </div>
+            <h2>Regulatory Compliance & Audit Trail</h2>
 
-            <h2 id="conclusion">Conclusion</h2>
+            <p>I maintain complete audit trails for regulatory examinations:</p>
 
-            <p>Transaction monitoring is the frontline defense against money laundering. Rule-based systems have failed—generating false positive noise while missing sophisticated schemes. AI transaction monitoring cuts through the noise, detecting 60% more suspicious activity while reducing false positives by 85%. The result: $150M+ in annual cost savings and dramatically reduced regulatory risk.</p>
+            <p><strong>Documentation retained:</strong></p>
+            <ul>
+                <li>All transactions analyzed with timestamps and risk scores</li>
+                <li>Verification results showing which patterns triggered alerts</li>
+                <li>Risk assessment rationale for each detection</li>
+                <li>Ongoing monitoring activity and alert resolution status</li>
+            </ul>
 
-            <h2 style="margin-top: 4rem;">Read Next</h2>
+            <h2>Continue Exploring Finance Compliance</h2>
             <div class="cards">
-                <a href="/finance/fraud-detection.html">
-                    <h3>Fraud Detection</h3>
-                    <p>Real-time fraud detection and prevention</p>
+                <a href="/finance/kyc-compliance.html" class="card">
+                    <h3>KYC Compliance</h3>
+                    <p>Automated identity verification, document analysis, sanctions screening.</p>
                 </a>
-                <a href="/finance/regulatory-compliance.html">
+                <a href="/finance/customer-onboarding.html" class="card">
+                    <h3>Customer Onboarding</h3>
+                    <p>End-to-end automated account opening with same-day approval.</p>
+                </a>
+                <a href="/finance/regulatory-compliance.html" class="card">
                     <h3>Regulatory Compliance</h3>
-                    <p>Automate BSA/AML and compliance reporting</p>
+                    <p>Automated BSA/AML reporting and compliance management.</p>
                 </a>
             </div>
         </article>
 
+        <!-- Enhanced Sidebar -->
         <aside>
             <div class="toc">
                 <h4>On This Page</h4>
@@ -640,14 +936,15 @@
                     <li><a href="#problem">Rule-Based Problems</a></li>
                     <li><a href="#how">How AI Monitoring Works</a></li>
                     <li><a href="#roi">ROI Analysis</a></li>
-                    <li><a href="#conclusion">Conclusion</a></li>
                 </ul>
             </div>
 
             <div class="related">
-                <h4>Related Topics</h4>
+                <h4>Related Capabilities</h4>
                 <ul>
-                    <li><a href="/finance/">← Finance Services Overview</a></li>
+                    <li><a href="/finance/">← Finance Overview</a></li>
+                    <li><a href="/finance/kyc-compliance.html">KYC Compliance</a></li>
+                    <li><a href="/finance/customer-onboarding.html">Customer Onboarding</a></li>
                     <li><a href="/finance/fraud-detection.html">Fraud Detection</a></li>
                     <li><a href="/finance/regulatory-compliance.html">Regulatory Compliance</a></li>
                     <li><a href="/finance/cost-reduction.html">Cost Reduction</a></li>
@@ -656,88 +953,149 @@
         </aside>
     </main>
 
+    <!-- Footer with Shadow Content -->
     <footer>
-        <div class="footer-content">
-            <h2 class="footer-title">Real-Time Risk Orchestration: From KYC to Transaction Monitoring</h2>
-            <p class="footer-text">The modern financial institution operates at the intersection of multiple regulatory frameworks, each demanding real-time compliance, complete audit trails, and predictive risk detection. Know Your Customer (KYC) verification, Anti-Money Laundering (AML) monitoring, fraud detection, sanctions screening, and transaction analysis—these aren't separate functions but interconnected orchestration layers that must work together to detect sophisticated financial crime while enabling legitimate commerce at scale.</p>
-            <p class="footer-text">Traditional compliance architectures handle these as siloed processes: KYC verification happens at account opening, transaction monitoring runs independently of fraud detection, sanctions screening operates on a separate cycle. This fragmentation creates gaps. A customer passes KYC at account opening but their risk profile changes. A transaction monitoring alert fires but fraud detection misses the coordinated pattern across multiple accounts. Sanctions screening catches a known bad actor but a sophisticated launderer using synthetic identities slips through.</p>
-            <p class="footer-text">Real-time risk orchestration integrates these functions into a unified compliance backbone that continuously evaluates customer risk, flags suspicious patterns, routes alerts to analysts with complete context, and maintains comprehensive audit trails for regulatory examinations. This is where Claire's orchestration approach transforms financial services compliance from a back-office cost center into a competitive advantage.</p>
-            <p class="footer-text">The orchestration begins at customer onboarding. Traditional KYC is document-driven: applicant provides SSN, name, address, and we verify against databases. This takes 5-7 business days and generates false positives when legitimate customers' data doesn't match external records perfectly (recent name change, moved last month, variations in name format). More importantly, static KYC misses sophisticated fraud like synthetic identity schemes where fraudsters use real SSNs combined with fake names and addresses.</p>
-            <p class="footer-text">Orchestrated KYC adds behavioral, network, and historical signals. We don't just verify identity documents—we analyze payment history, device patterns, geographic consistency, and network connections to other accounts. A high-risk applicant with multiple previous identities in the system, accounts that bust out after credit building, or network connections to known fraud rings gets flagged immediately. A legitimate customer with a recent move or name variation but consistent digital footprint and payment history gets approved within 24 hours.</p>
-            <p class="footer-text">From day one of the customer relationship, orchestrated risk monitoring activates. Every transaction is analyzed against the customer's behavior profile, account type, and regulatory risk category. A business customer making regular supplier payments to known beneficiaries scores low risk (approval probability 99%). A new retail customer making five $9,400 deposits in one week triggers structuring detection (likelihood ratio 87%). A transfer to an OFAC-sanctioned entity triggers immediate freeze pending manual review.</p>
-            <p class="footer-text">The critical innovation: orchestrated monitoring routes alerts with complete context. When a transaction monitoring alert fires, the analyst doesn't see just the suspicious transaction—they see the customer's full account history, related transactions across linked accounts, the customer's baseline behavior profile, risk score at account opening, any previous sanctions hits or SAR filings, and related fraud detection alerts from the same time period. This context transforms alert investigations from 30-90 minute fishing expeditions into 10-minute focused reviews.</p>
-            <p class="footer-text">This efficiency multiplier compounds across the institution. Analysts handle 80% of alerts in under 5 minutes versus 30 minutes. Investigation costs drop by 70%. More importantly, analysts focus on actual suspicious activity instead of drowning in false positive noise. Alert fatigue decreases, detection quality improves, and regulatory audit preparation becomes continuous instead of crisis mode.</p>
-            <p class="footer-text">Orchestrated risk management also enables predictive compliance. Rather than reactive detection ("Alert fired after fraud occurred"), orchestration predicts risk vectors. Customers showing rapid credential changes, geographic inconsistencies, sudden transaction velocity spikes, or relationships with known fraud rings get escalated before they commit fraud. Early account review prevents losses instead of investigating them after-the-fact.</p>
-            <p class="footer-text">The regulatory compliance benefit is substantial. When regulators examine transaction monitoring effectiveness, they don't just want to see the false positive rate—they want proof of genuine detection quality. Traditional monitoring generates alerts but struggles to demonstrate false negative rates (actual fraud that slipped through). Orchestrated monitoring maintains comprehensive audit trails showing which transactions were analyzed, what risk signals triggered alerts, what analysts did with those alerts, and what the outcomes were. This audit trail answers regulators' core question: "Are you actually detecting money laundering or just generating useless alerts?"</p>
-            <p class="footer-text">Regulatory reporting becomes automated. SAR (Suspicious Activity Report) drafting, CTR (Currency Transaction Report) filing, OFAC sanctions updates, stress testing data collection—these no longer require 200 compliance staff working nights and weekends before filing deadlines. The orchestration system generates these reports continuously from transaction and alert data, routes them for analyst review and approval, and submits electronically. One person can manage what previously required a team.</p>
-            <p class="footer-text">Implementation of orchestrated compliance doesn't require replacing core banking systems. We integrate via API to your authorization systems (fraud detection), AML platforms (transaction monitoring and SAR filing), KYC vendors, and reporting systems. Within weeks, orchestration layers your risk capabilities into a unified compliance engine. Within months, audit readiness improves, compliance costs drop 40-60%, and regulatory risk decreases through better detection and audit trail quality.</p>
-            <p class="footer-text">The future of financial services compliance isn't more rules, more alerts, or more staff—it's orchestration. Institutions that implement unified, real-time risk orchestration will spend less on compliance while detecting more actual financial crime. Those that maintain siloed processes will be buried in false alerts, miss sophisticated fraud, and struggle with regulatory examinations. The competitive advantage goes to banks that orchestrate risk detection across the complete customer lifecycle: from intelligent KYC that detects sophisticated fraud upfront, through real-time transaction monitoring that routes alerts with context, to automated regulatory reporting that's always audit-ready. That orchestration is now available, and the cost advantage to early adopters is substantial.</p>
+        <div class="footer-shadow">
+            <h2>Real-Time Risk Orchestration: From KYC to Transaction Monitoring</h2>
+            <p class="footer-shadow-intro">
+                Financial institutions must navigate an increasingly complex regulatory landscape. Banks implementing AI-powered compliance face critical architectural decisions: how do you maintain real-time risk assessment while ensuring customer data never leaves your secure infrastructure? The answer is Model Context Protocol (MCP) orchestration—ephemeral data tunnels that assess risk without centralizing sensitive financial data in vendor databases. This section explores BSA/AML compliance, FinCEN requirements, and how modern compliance orchestration differs fundamentally from legacy vendor systems.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Technical Analysis</button>
 
-            <div class="footer-nav">
-                <div class="footer-column">
-                    <h4>Finance Topics</h4>
-                    <ul>
-                        <li><a href="/finance/fraud-detection.html">Fraud Detection</a></li>
-                        <li><a href="/finance/transaction-monitoring.html">Transaction Monitoring</a></li>
-                        <li><a href="/finance/regulatory-compliance.html">Regulatory Compliance</a></li>
-                        <li><a href="/finance/cost-reduction.html">Cost Reduction</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Platform</h4>
-                    <ul>
-                        <li><a href="/platform/">Platform Overview</a></li>
-                        <li><a href="/platform/security.html">Security Architecture</a></li>
-                        <li><a href="/platform/reasoning-engine.html">Reasoning Engine</a></li>
-                        <li><a href="/platform/mcp-protocol.html">MCP Protocol</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="/resources/case-studies.html">Case Studies</a></li>
-                        <li><a href="/resources/whitepapers.html">Whitepapers</a></li>
-                        <li><a href="/resources/documentation.html">Documentation</a></li>
-                        <li><a href="/contact/">Schedule Demo</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about/">About Claire</a></li>
-                        <li><a href="mailto:info@the-algo.com">Contact</a></li>
-                        <li><a href="/privacy/">Privacy Policy</a></li>
-                        <li><a href="/terms/">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
+            <div class="shadow-content" id="shadowContent">
+                <h3>Section 1: Beyond Rule-Based Monitoring</h3>
 
-            <div class="footer-industries">
-                <p>Explore Claire's Orchestration in Other Industries:</p>
-                <div class="industry-links">
-                    <a href="/healthcare/">Healthcare</a>
-                    <a href="/legal/">Legal Services</a>
-                    <a href="/finance/">Financial Services</a>
-                    <a href="/contact/">Request Demo</a>
-                </div>
-            </div>
+                <p>Traditional transaction monitoring systems rely on static rules and thresholds that security professionals can easily circumvent. A sophisticated money launderer understands that transactions over $10,000 trigger reporting, so they structure deposits at $9,500. They know that wire transfers to certain countries trigger alerts, so they use intermediary jurisdictions. They understand that rapid deposit-withdrawal cycles are flagged, so they hold funds longer between movements.</p>
 
-            <div class="footer-bottom">
-                <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+                <p>Rule-based systems are a game of adversaries learning the rules. Launderers adapt faster than rule updates. Every time a bank implements a new detection rule, money launderers develop a new evasion technique. This creates the arms race dynamic where compliance becomes an expensive, never-ending game.</p>
+
+                <h4>The AI Advantage: Adaptive Learning</h4>
+
+                <p>AI transaction monitoring doesn't rely on static rules. Instead, it learns behavioral patterns and detects deviations from those patterns. A customer's normal transaction behavior is their personal fingerprint. When that customer's behavior suddenly changes dramatically—velocity changes, geographic changes, amount changes, counterparty changes—the system flags it regardless of whether it matches a predefined rule.</p>
+
+                <p>This approach is fundamentally more adaptive. As launderers evolve techniques, the system learns new patterns and adapts automatically. The sophistication of the monitoring increases without requiring compliance teams to constantly develop and deploy new rules.</p>
+
+                <h3>Section 2: The Network Effect in Transaction Monitoring</h3>
+
+                <p>Money laundering rarely occurs in isolation. Launderers typically move funds through networks of accounts, often controlled by different people or entities, to create distance between illicit sources and final destinations. Traditional transaction monitoring systems analyze transactions in isolation—each transaction is evaluated independently against rules.</p>
+
+                <p>Network-based analysis connects transactions across multiple accounts, identifying suspicious patterns that individual transaction analysis misses. A series of transactions that appear individually legitimate—each one reasonable for that specific customer—becomes obviously suspicious when analyzed as a connected network of fund flows.</p>
+
+                <p>Example: Customer A deposits $15,000 cash (slightly above normal), Customer B receives $13,000 wire transfer from A (new relationship), Customer C receives $12,000 transfer from B (new relationship), Customer D (known money launderer) receives $10,000 from C. Each transaction individually might pass scrutiny, but the network pattern shows obvious layering: cash to account A to account B to account C to known bad actor.</p>
+
+                <p>AI transaction monitoring identifies these network patterns automatically, connecting seemingly unrelated transactions into suspicious fund flow networks that reveal money laundering schemes.</p>
+
+                <h3>Section 3: Risk Scoring and Comparative Suspicion</h3>
+
+                <p>Traditional rule-based systems produce binary results: transaction matches rule (flag) or doesn't match rule (approve). This creates alert overload—thousands of transactions that technically match rules but are obviously not suspicious.</p>
+
+                <p>AI systems produce risk scores: a transaction receives a suspicion score from 0-100 indicating the likelihood of actual suspicious activity. Transactions scoring 5-20 are investigated briefly (low risk). Transactions scoring 40-60 receive standard investigation procedures. Transactions scoring 80+ receive immediate escalation and potential blocking pending manual review.</p>
+
+                <p>This risk-based approach prioritizes analyst attention toward genuinely suspicious activity, dramatically improving investigation efficiency.</p>
+
+                <h3>Section 4: Regulatory Advantages of Orchestration-Based Monitoring</h3>
+
+                <p>When regulators examine transaction monitoring effectiveness, they evaluate whether the system actually detects money laundering or just generates noise. Traditional monitoring systems struggle to answer this question—audit trails show thousands of alerts but no clear evidence of detection effectiveness.</p>
+
+                <p>Orchestrated monitoring maintains comprehensive audit trails showing which transactions were analyzed, what risk signals triggered alerts, what analysts did with those alerts, and what outcomes resulted. This creates a clear paper trail of detection effectiveness that regulators can audit and verify.</p>
+
+                <h3>Section 5: The Cost Multiplier Effect</h3>
+
+                <p>The financial impact of AI transaction monitoring extends beyond direct cost reduction. False positive reduction has cascading benefits:</p>
+
+                <ul>
+                    <li><strong>Reduced analyst burnout:</strong> Analysts investigating genuine suspicious activity vs. drowning in false alarms become more effective and stay longer in roles</li>
+                    <li><strong>Better detection quality:</strong> When analysts aren't fatigued by alert noise, they investigate suspicious activity more thoroughly and catch sophisticated schemes</li>
+                    <li><strong>Faster regulatory response:</strong> SAR filing becomes faster and more accurate when based on higher-quality alerts</li>
+                    <li><strong>Reduced compliance costs:</strong> The entire compliance department can be smaller because each analyst handles fewer, higher-quality alerts</li>
+                </ul>
+
+                <h3>Section 6: Implementation and Orchestration Architecture</h3>
+
+                <p>Orchestrated transaction monitoring integrates with existing core banking systems through APIs. When transactions occur, the orchestration layer automatically receives transaction data, analyzes it against the customer's behavioral profile, performs network analysis if applicable, generates a risk score, and returns a determination (approve, flag for review, or block pending investigation).</p>
+
+                <p>All analysis occurs in real-time—transactions are monitored as they clear, enabling immediate blocking of high-risk activity before completion. Decision logs are maintained in the core banking system for regulatory examination.</p>
+
+                <h3>Conclusion: The Future of AML Monitoring</h3>
+
+                <p>Traditional rule-based transaction monitoring has reached its limits. It generates overwhelming alert volumes, misses sophisticated schemes, and provides limited value despite enormous cost. AI-powered transaction monitoring represents the next generation of compliance infrastructure: more effective, more efficient, and better-aligned with regulatory expectations for genuine detection capability.</p>
             </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Finance Topics</h4>
+                <ul>
+                    <li><a href="/finance/kyc-compliance.html">KYC Compliance</a></li>
+                    <li><a href="/finance/customer-onboarding.html">Customer Onboarding</a></li>
+                    <li><a href="/finance/fraud-detection.html">Fraud Detection</a></li>
+                    <li><a href="/finance/transaction-monitoring.html">Transaction Monitoring</a></li>
+                    <li><a href="/finance/regulatory-compliance.html">Regulatory Compliance</a></li>
+                    <li><a href="/finance/cost-reduction.html">Cost Reduction</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/platform/mcp-protocol.html">MCP Protocol</a></li>
+                    <li><a href="/platform/reasoning-engine.html">Reasoning Engine</a></li>
+                    <li><a href="/platform/risk-orchestration.html">Risk Orchestration</a></li>
+                    <li><a href="/platform/security.html">Security Architecture</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/compliance-reports.html">Compliance Reports</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about/">About Claire</a></li>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Industry Switcher -->
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
         </div>
     </footer>
 
+    <!-- Claire Dock Component -->
     <div class="claire-dock">
-        <div class="dock-avatar" onclick="toggleDock()">C</div>
+        <div class="dock-avatar" onclick="toggleDock()">
+            C
+        </div>
         <div class="dock-panel" id="dockPanel">
             <div class="dock-header">
                 <h4>Claire</h4>
                 <button class="dock-close" onclick="toggleDock()">×</button>
             </div>
             <div class="dock-body">
-                <p class="dock-message">I'm Claire, your AI compliance orchestrator. AI-powered transaction monitoring detects 60% more suspicious activity while reducing false positives by 85%. See how orchestration stops money laundering and cuts compliance costs by $150M+ annually.</p>
-                <a href="/" class="dock-cta">Execute Compliance Demo</a>
+                <p class="dock-message">
+                    I'm Claire, your AI compliance orchestrator. I automate transaction monitoring, detecting 60% more money laundering schemes while reducing false positives by 85%—saving $153M annually in investigation costs.
+                </p>
+                <a href="/finance/kyc-compliance.html" class="dock-cta">Execute AML Demo</a>
             </div>
         </div>
     </div>
@@ -747,6 +1105,17 @@
             const panel = document.getElementById('dockPanel');
             panel.classList.toggle('open');
         }
+
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Technical Analysis'
+                : 'Read Full Technical Analysis';
+        }
+
+        // Close dock when clicking outside
         document.addEventListener('click', function(event) {
             const dock = document.querySelector('.claire-dock');
             const panel = document.getElementById('dockPanel');

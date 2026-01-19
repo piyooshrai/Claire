@@ -7,99 +7,727 @@
     <meta name="description" content="AI-driven revenue optimization. Automated room upgrades, amenity packages, and personalized upsells that increase guest satisfaction and property revenue.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg-primary: #fff7ed; --bg-secondary: #ffffff; --text-primary: #7c2d12; --text-secondary: #78716c; --accent: #ea580c; --accent-light: #fb923c; --border: #fed7aa; --shadow: rgba(234, 88, 12, 0.1); }
-        @keyframes breathe { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fff7ed 100%); background-size: 200% 200%; animation: breathe 15s ease infinite; color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; position: relative; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(234, 88, 12, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(234, 88, 12, 0.03) 1px, transparent 1px); background-size: 50px 50px; animation: gridBreathe 8s ease-in-out infinite; pointer-events: none; z-index: 1; }
-        @keyframes gridBreathe { 0%, 100% { opacity: 0.4; background-size: 50px 50px; } 50% { opacity: 0.2; background-size: 60px 60px; } }
-        nav, main, footer { position: relative; z-index: 2; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 1rem 2rem; z-index: 1000; box-shadow: 0 2px 10px var(--shadow); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { font-weight: 700; font-size: 1.125rem; letter-spacing: 0.05em; color: var(--text-primary); }
-        .nav-brand span { color: var(--accent); }
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.9375rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
-        .nav-cta { padding: 0.75rem 1.5rem; background: var(--accent); color: white !important; border-radius: 6px; font-weight: 600; transition: all 0.2s; }
-        .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 12px var(--shadow); }
-        main { max-width: 1400px; margin: 0 auto; padding: 8rem 2rem 4rem; display: grid; grid-template-columns: 1fr 320px; gap: 4rem; }
-        article { max-width: 850px; }
-        .breadcrumb { margin-bottom: 3rem; color: var(--text-secondary); font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem; }
-        .breadcrumb a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-        .breadcrumb a:hover { color: var(--accent-light); }
-        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 2rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .intro { font-size: 1.375rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 4rem; font-weight: 400; }
-        h2 { font-size: 2.25rem; font-weight: 700; margin: 4rem 0 1.5rem; color: var(--text-primary); position: relative; padding-bottom: 1rem; }
-        h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent) 0%, transparent 100%); }
-        h3 { font-size: 1.625rem; font-weight: 600; margin: 2.5rem 0 1rem; color: var(--accent); }
-        p { margin-bottom: 1.5rem; line-height: 1.8; }
-        strong { font-weight: 600; color: var(--text-primary); }
-        .stat-callout { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; padding: 2.5rem; margin: 3rem 0; border-radius: 12px; box-shadow: 0 8px 24px var(--shadow); }
-        .stat-value { font-size: 4rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
-        .stat-label { font-size: 1.125rem; opacity: 0.95; font-weight: 500; }
-        .stat-context { margin-top: 1rem; font-size: 0.9375rem; opacity: 0.9; line-height: 1.6; }
-        blockquote { background: var(--bg-secondary); padding: 2rem; margin: 2rem 0; border-radius: 8px; border: 1px solid var(--border); font-size: 1rem; line-height: 1.8; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
-        blockquote strong { color: var(--accent); }
-        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.75rem; line-height: 1.7; }
-        .cta-box { margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; text-align: center; border-radius: 12px; box-shadow: 0 8px 24px var(--shadow); }
-        .cta-box h3 { color: white; font-size: 2rem; margin-bottom: 1rem; }
-        .cta-box p { font-size: 1.125rem; opacity: 0.95; margin-bottom: 1.5rem; }
-        .cta-btn { display: inline-block; padding: 1.25rem 2.5rem; background: white; color: var(--accent); text-decoration: none; font-weight: 700; border-radius: 8px; transition: all 0.2s; font-size: 1.125rem; }
-        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
-        .read-next { margin-top: 4rem; }
-        .read-next h2 { margin-top: 0; }
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-        .card { padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
-        .card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 24px var(--shadow); }
-        .card h3 { font-size: 1.25rem; color: var(--accent); margin-bottom: 0.75rem; }
-        .card h3::after { content: ' →'; opacity: 0; transition: opacity 0.2s; }
-        .card:hover h3::after { opacity: 1; }
-        .card p { font-size: 0.9375rem; color: var(--text-secondary); margin: 0; }
-        aside { position: sticky; top: 8rem; height: fit-content; }
-        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); }
-        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--accent); }
-        .toc ul, .related ul { list-style: none; margin: 0; }
-        .toc li, .related li { margin-bottom: 0.75rem; }
-        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; display: block; padding: 0.25rem 0; }
-        .toc a:hover, .related a:hover { color: var(--accent); }
-        footer { background: var(--bg-secondary); border-top: 1px solid var(--border); margin-top: 8rem; }
-        .footer-shadow { max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; }
-        .footer-shadow h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
-        .footer-shadow-intro { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.7; }
-        .shadow-toggle { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-bottom: 2rem; }
-        .shadow-toggle:hover { background: var(--accent-light); transform: translateY(-2px); }
-        .shadow-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-        .shadow-content.expanded { max-height: 10000px; }
-        .shadow-content h3 { font-size: 1.75rem; margin-top: 3rem; margin-bottom: 1rem; }
-        .shadow-content h4 { font-size: 1.375rem; margin-top: 2rem; margin-bottom: 0.75rem; color: var(--accent); }
-        .footer-nav { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; border-top: 1px solid var(--border); }
-        .footer-column h4 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--accent); }
-        .footer-column ul { list-style: none; margin: 0; }
-        .footer-column li { margin-bottom: 0.5rem; }
-        .footer-column a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
-        .footer-column a:hover { color: var(--accent); }
-        .footer-industries { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; border-top: 1px solid var(--border); }
-        .footer-industries p { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem; }
-        .industry-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .industry-links a { color: var(--accent); text-decoration: none; font-weight: 600; transition: color 0.2s; }
-        .industry-links a:hover { color: var(--accent-light); }
-        .footer-bottom { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem; }
-        .claire-dock { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; }
-        .dock-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px var(--shadow); transition: all 0.3s; }
-        .dock-avatar:hover { transform: scale(1.1); box-shadow: 0 12px 32px var(--shadow); }
-        .dock-panel { position: absolute; bottom: 80px; right: 0; width: 320px; background: white; border-radius: 12px; box-shadow: 0 12px 48px var(--shadow); display: none; border: 1px solid var(--border); }
-        .dock-panel.open { display: block; animation: slideUp 0.3s ease; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .dock-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .dock-header h4 { font-size: 1.125rem; font-weight: 700; color: var(--accent); }
-        .dock-close { background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
-        .dock-body { padding: 1.5rem; }
-        .dock-message { font-size: 0.9375rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1rem; }
-        .dock-cta { display: block; width: 100%; padding: 1rem; background: var(--accent); color: white; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.2s; }
-        .dock-cta:hover { background: var(--accent-light); }
-        @media (max-width: 1024px) { main { grid-template-columns: 1fr; gap: 2rem; } aside { position: relative; top: 0; } h1 { font-size: 2.5rem; } .nav-links { gap: 1rem; } .nav-links a:not(.nav-cta) { display: none; } }
-        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.75rem; } .stat-value { font-size: 3rem; } .footer-nav { grid-template-columns: 1fr; } }
+
+        /* Industry-specific color system */
+        :root {
+            --bg-primary: #fff7ed;
+            --bg-secondary: #ffffff;
+            --text-primary: #7c2d12;
+            --text-secondary: #78716c;
+            --accent: #ea580c;
+            --accent-light: #fb923c;
+            --border: #fed7aa;
+            --shadow: rgba(234, 88, 12, 0.1);
+        }
+
+        /* Breathing gradient background animation */
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fff7ed 100%);
+            background-size: 200% 200%;
+            animation: breathe 15s ease infinite;
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        /* Breathing grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(234, 88, 12, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(234, 88, 12, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        /* Ensure content is above grid */
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Orchestrator Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Main content container */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 850px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Dramatic typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 4rem 0 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+
+        h3 {
+            font-size: 1.625rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Stat callout boxes */
+        .stat-callout {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .stat-context {
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Conversation blocks */
+        blockquote {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        blockquote strong {
+            color: var(--accent);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* CTA box */
+        .cta-box {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Read Next cards */
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
+            margin-top: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 8rem;
+            height: fit-content;
+        }
+
+        .toc, .related {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .toc h4, .related h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .toc ul, .related ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li, .related li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a, .related a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc a:hover, .related a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer with shadow content */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+        }
+
+        .footer-shadow {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .industry-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .industry-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+        }
+
+        .dock-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .dock-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .dock-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px var(--shadow);
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .dock-panel.open {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dock-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dock-header h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .dock-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dock-body {
+            padding: 1.5rem;
+        }
+
+        .dock-message {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .dock-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .dock-cta:hover {
+            background: var(--accent-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .stat-value {
+                font-size: 3rem;
+            }
+
+            .footer-nav {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body data-industry="hospitality">
@@ -212,6 +840,101 @@
 
             <p>Upselling deepens loyalty through valuable experiences. Returning guests see long-term loyalty value: "You're close to platinum status. This upgrade puts you over the threshold for complimentary future upgrades." Loyalty members get exclusive package access unavailable to new guests. Repeat guests receive personalized recommendations based on their previous stays: "Last visit you loved the spa—we've created a wellness bundle you'll appreciate."</p>
 
+            <h2 id="offer-timing">Strategic Offer Timing & Channels</h2>
+
+            <p>When and how we present offers dramatically affects acceptance rates. Offering upgrades at check-in (when guests are in decision mode) converts at 38%. Offering via email days before arrival converts at only 8% (decision fatigue, forgetfulness). I optimize timing strategically: Pre-arrival emails establish expectations ("Upgrade options available at check-in"). Check-in personal recommendations achieve highest conversion (verbal, face-to-face, personalized). In-stay upsells target guests showing engagement (restaurant reservations, activity bookings). Post-stay loyalty offers build repeat booking intent.</p>
+
+            <h3>Multi-Channel Offer Presentation</h3>
+
+            <p>Different guests prefer different communication channels. I match offer presentation to guest preference:</p>
+
+            <ul>
+                <li><strong>Text/SMS:</strong> Instant, high-engagement channel. Perfect for time-sensitive offers ("Dinner reservation available 7 PM tonight at 20% discount")</li>
+                <li><strong>Email:</strong> More detailed information possible. Ideal for package descriptions with pricing breakdown and reviews</li>
+                <li><strong>In-app:</strong> Integrated into guest experience. Effective for loyalty rewards and stay add-ons</li>
+                <li><strong>Voice/concierge call:</strong> Personal touch. Best for high-value packages where explanation adds value</li>
+                <li><strong>In-person at check-in:</strong> Highest conversion for room upgrades (guest is already in transaction mode, seeing rooms in person helps)</li>
+            </ul>
+
+            <h3>Cross-Selling & Complementary Services</h3>
+
+            <p>Strategic cross-selling increases average guest spend by creating bundled experiences rather than isolated transactions:</p>
+
+            <blockquote>
+            <strong>Guest books restaurant reservation:</strong> "You're enjoying dinner tonight—would you like to upgrade to premium wine pairing (+$45) or reserve a late breakfast in bed tomorrow morning (+$28) to continue the relaxation?"<br><br>
+            <strong>Guest books activity (adventure tour):</strong> "You've booked our mountain bike tour—many guests add massage therapy (+$89) to recover after exertion. We offer discounted combo pricing: Tour + massage = $188 (normally $237)."<br><br>
+            <strong>Guest schedules spa appointment:</strong> "Your massage is at 3 PM tomorrow. Would you like to upgrade to our organic aromatherapy (+$25) or add a facial for the ultimate wellness experience (+$99)?"
+            </blockquote>
+
+            <h3>Dynamic Offer Sequencing</h3>
+
+            <p>Offer too many upsells and guests feel overwhelmed. Offer too few and you leave revenue on table. I sequence offers strategically: First offer targets highest-margin, highest-appeal item (room upgrade). If declined, second offer targets lower-price complementary service (breakfast package). If guest buys anything, third offer targets experience that complements purchase (wellness services if they bought romance package). If guest declines all offers, send loyalty/future incentive to keep relationship positive.</p>
+
+            <h2 id="integration">Systems Integration & Operational Implementation</h2>
+
+            <p>Effective upselling requires seamless integration with hotel operations. I connect with:</p>
+
+            <ul>
+                <li><strong>PMS integration:</strong> Real-time room availability, pricing, and inventory management</li>
+                <li><strong>Revenue management systems:</strong> Demand forecasting influences upgrade pricing and availability</li>
+                <li><strong>Guest preference systems:</strong> History of what each guest has purchased or requested</li>
+                <li><strong>Point-of-sale systems:</strong> Track acceptance rates and conversion performance by offer type</li>
+                <li><strong>Loyalty program database:</strong> Member status, points balance, tier benefits</li>
+                <li><strong>Communication platforms:</strong> SMS, email, push notification delivery across channels</li>
+            </ul>
+
+            <p>All systems sync in real-time to ensure: Guest sees consistent offers across channels. No duplicate offers presented. Real-time inventory prevents overselling. Pricing is consistent across all upsell channels. Declined offers are tracked and respected (don't keep offering same package).</p>
+
+            <h2 id="analytics">Performance Metrics & Continuous Optimization</h2>
+
+            <p>Effective revenue optimization requires continuous measurement and improvement. I track comprehensive metrics to understand what's working and where to improve.</p>
+
+            <h3>Key Performance Indicators</h3>
+
+            <ul>
+                <li><strong>Offer acceptance rate:</strong> What percentage of guests accept upsell offers? Industry baseline: 12% (manual), AI-powered: 38%</li>
+                <li><strong>Revenue per available room (RevPAR) lift:</strong> How much does upselling increase total revenue? Target: 18-25% increase</li>
+                <li><strong>Average incremental revenue per guest:</strong> Total upsell revenue ÷ number of stays = average value per guest</li>
+                <li><strong>Offer acceptance by type:</strong> Which offers convert best? Room upgrades, packages, dining, activities? Optimize budget toward highest-converting offers</li>
+                <li><strong>Offer acceptance by timing:</strong> When do guests convert best? Pre-arrival, check-in, in-stay, post-stay? Concentrate efforts on peak conversion windows</li>
+                <li><strong>Channel effectiveness:</strong> Email conversions 8%, SMS 22%, in-person 38%? Shift communication budget toward highest-performing channels</li>
+                <li><strong>Guest satisfaction impact:</strong> Do upsell offers enhance or degrade guest experience? Monitor post-stay NPS (Net Promoter Score) trends. Positive: "Loved the personalized packages!" Negative: "Too many upsell attempts." Adjust aggressiveness based on satisfaction data</li>
+            </ul>
+
+            <h3>Personalization Accuracy Metrics</h3>
+
+            <p>The quality of personalization directly impacts acceptance rates. I continuously measure accuracy:</p>
+
+            <blockquote>
+            <strong>Relevance scoring:</strong> For each offer accepted, rate how relevant it was: 1 (completely off-base) to 5 (perfectly matched). Target: 4.2+ average relevance score<br><br>
+            <strong>Expected vs. actual spend:</strong> Prediction algorithm estimated this guest would spend $340 on packages. They actually spent $285. Track prediction accuracy and retrain if estimates drift.<br><br>
+            <strong>Guest feedback:</strong> Post-stay survey: "How satisfied were you with personalized offers?" If dissatisfied, investigate: Too many offers? Wrong types? Improve next interaction.
+            </blockquote>
+
+            <h3>A/B Testing & Optimization</h3>
+
+            <p>Continuously test offer variations to improve performance:</p>
+
+            <ul>
+                <li><strong>Offer framing:</strong> Test "Upgrade to oceanview room (+$70/night)" vs. "Experience the view that made this hotel famous—oceanview rooms +$70/night." Which drives higher conversions?</li>
+                <li><strong>Price points:</strong> Test offering same upgrade at $50 vs. $70. Which maximizes revenue (acceptance rate × price)? Often lower prices drive higher volume but may not maximize revenue.</li>
+                <li><strong>Bundle composition:</strong> Test romance package #1 (upgrade + spa + champagne for $340) vs. romance package #2 (upgrade + dining credit + flowers for $280). Which converts better?</li>
+                <li><strong>Timing:</strong> Test offering upgrades at check-in vs. 2 days before arrival. Measure conversion rates and adjust timing accordingly.</li>
+            </ul>
+
+            <h3>Real-Time Dashboards & Monitoring</h3>
+
+            <p>Hotel managers need real-time visibility into offer performance. I provide comprehensive dashboards tracking:</p>
+
+            <ul>
+                <li><strong>Today's performance:</strong> How many guests offered upgrades today? How many accepted? Current acceptance rate: 38%. Revenue generated today: $2,840 (on pace for $1.04M annually)</li>
+                <li><strong>Week-to-date trends:</strong> Is this week performing better/worse than last week? Any concerning patterns?</li>
+                <li><strong>Top-performing offers:</strong> Which 3 offers converted best this month? Which underperformed? Use data to adjust offer mix</li>
+                <li><strong>Guest segment performance:</strong> Business travelers: 44% acceptance rate. Leisure travelers: 35% acceptance rate. Honeymooners: 62% acceptance rate. Optimize strategy per segment</li>
+                <li><strong>Revenue attribution:</strong> How much total incremental revenue generated by upselling vs. base bookings? Calculate true impact on bottom line</li>
+                <li><strong>Alerts & anomalies:</strong> System flags unusual patterns: "Acceptance rate dropped 12% Tuesday—why?" (Conference cancellation? New competing hotel?). Investigate root cause</li>
+            </ul>
+
             <h2 id="roi">ROI: Revenue Optimization Impact</h2>
 
             <h3>150-Room Resort Property</h3>
@@ -232,6 +955,7 @@
                 <a href="/" class="cta-btn">Execute Concierge Demo</a>
             </div>
 
+            <!-- Read Next Section -->
             <div class="read-next">
                 <h2>Continue the Interview</h2>
                 <div class="cards">
@@ -239,13 +963,13 @@
                         <h3>Guest Communication</h3>
                         <p>Personalized multilingual messaging from pre-arrival to post-stay.</p>
                     </a>
-                    <a href="/hospitality/concierge-services.html" class="card">
-                        <h3>Concierge Services</h3>
-                        <p>24/7 local recommendations and activity booking assistance.</p>
+                    <a href="/hospitality/reservation-management.html" class="card">
+                        <h3>Reservation Management</h3>
+                        <p>Dynamic pricing and intelligent booking to increase RevPAR by 30%.</p>
                     </a>
-                    <a href="/hospitality/complaint-resolution.html" class="card">
-                        <h3>Complaint Resolution</h3>
-                        <p>Proactive issue detection and service recovery that builds loyalty.</p>
+                    <a href="/hospitality/staff-scheduling.html" class="card">
+                        <h3>Staff Scheduling</h3>
+                        <p>Demand-driven labor optimization with compliance enforcement.</p>
                     </a>
                 </div>
             </div>
@@ -260,6 +984,9 @@
                     <li><a href="#packages">Amenity Packages</a></li>
                     <li><a href="#ethical-boundaries">Ethical Boundaries</a></li>
                     <li><a href="#loyalty-integration">Loyalty Integration</a></li>
+                    <li><a href="#offer-timing">Offer Timing & Channels</a></li>
+                    <li><a href="#integration">Systems Integration</a></li>
+                    <li><a href="#analytics">Performance Metrics</a></li>
                     <li><a href="#roi">ROI Analysis</a></li>
                     <li><a href="#conclusion">Conclusion</a></li>
                 </ul>
@@ -270,29 +997,71 @@
                 <ul>
                     <li><a href="/hospitality/">← Hospitality Overview</a></li>
                     <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
                     <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
-                    <li><a href="/hospitality/complaint-resolution.html">Complaint Resolution</a></li>
                     <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
                 </ul>
             </div>
         </aside>
     </main>
 
+    <!-- Footer with Shadow Content -->
     <footer>
         <div class="footer-shadow">
-            <h2>Guest Experience Orchestration: Privacy in Revenue Optimization</h2>
-            <p class="footer-shadow-intro">Personalized offers based on guest data require careful privacy handling. Analyzing guest spending patterns, preferences, and behaviors to optimize offers is powerful—but must respect guest privacy and comply with regulations around profiling and automated decision-making.</p>
+            <h2>Revenue Optimization: Privacy in Personalization</h2>
+            <p class="footer-shadow-intro">
+                Personalized offers based on guest data require careful privacy handling. Analyzing guest spending patterns, preferences, and behaviors to optimize offers is powerful—but must respect guest privacy and comply with regulations around profiling and automated decision-making.
+            </p>
             <button class="shadow-toggle" onclick="toggleShadow()">Read Full Privacy & Compliance Analysis</button>
 
             <div class="shadow-content" id="shadowContent">
                 <h3>Guest Profiling & Consent</h3>
+
                 <p>Using guest data to create detailed profiles for targeted upselling requires explicit consent. Claire obtains clear affirmative consent: "We'd like to provide personalized offers and recommendations based on your preferences and booking history. This helps us suggest upgrades and packages that match your needs. Would you like to receive these personalized recommendations?" Consent is granular—guests can opt into room upgrades while opting out of wellness packages. Consent is easy to revoke anytime, with immediate effect.</p>
 
                 <h3>Profiling Transparency & Fairness</h3>
+
                 <p>GDPR mandates transparency for automated decision-making. Claire provides a "What We Know" summary on guest account pages showing booking preferences, historical behavior, and feedback. Guests can view and edit their profile anytime. We audit offer patterns across demographic groups to detect bias. When bias is detected, we retrain the system. Testing ensures offers are accepted at similar rates across demographic groups.</p>
 
+                <h3>Spending Data & Behavioral Privacy</h3>
+
+                <p>Offer personalization uses spending history: previous upgrades purchased, dining preferences, activity interests, average spend per stay. This data is sensitive—it reveals financial capability and preferences. Claire protects this data: Spending data is encrypted separately from payment data. Guests can request summaries of what spending patterns we've tracked. Guests can opt out of spend-based personalization anytime. Behavioral data is deleted after 3 years of inactivity.</p>
+
+                <h3>Preference Inference & Algorithmic Transparency</h3>
+
+                <p>Our algorithms infer preferences from behavior (guest searched for spa services = likely spa interest). This inference can be wrong or intrusive. Claire ensures transparency: Guests can view inferred preferences: "We think you might like spa services (based on your previous booking)." Guests can correct inferences: "I actually hate spas" → System removes that preference. Guests can request deletion of inferred data. Algorithm explanations for each offer: "We recommend the romance package because you're celebrating an anniversary and previously enjoyed couples services."</p>
+
+                <h3>Behavioral Targeting & Vulnerability Protection</h3>
+
+                <p>Some guests are more vulnerable to aggressive upselling: stressed business travelers might be willing to overspend. Guests celebrating significant life events (honeymoon, divorce recovery) might be emotionally vulnerable. Claire implements ethical guardrails: Never upsell to guests showing distress signals (negative check-in feedback, complaint mentions). Limit offer frequency to vulnerable guest segments. Never exploit special occasions with artificially inflated pricing. Offer skepticism prompts: "This package might be more than you need—consider the standard offer instead."</p>
+
+                <h3>Price Discrimination & Fairness</h3>
+
+                <p>Dynamic pricing can become price discrimination if guests with identical profiles pay different prices. GDPR and consumer protection laws prohibit unfair discrimination. Claire ensures: A/B testing verifies similar guests receive similar offers and pricing. Audit trails show all price variations and justifications. Guests booking identical room categories pay similar rates regardless of demographic characteristics. Discounts are based on legitimate business factors (occupancy, lead time, loyalty status)—never on protected characteristics.</p>
+
+                <h3>Opt-Out Rights & Easy Decline</h3>
+
+                <p>Guests must be able to decline offers easily without penalty or judgment. Claire implements: Single-click opt-out for all offer categories. No penalties for declining (e.g., don't raise base room rate if guest rejects upgrade). Declining one offer doesn't prevent future offers. Clear messaging: "You can decline this offer anytime without affecting your reservation."</p>
+
+                <h3>Transparency in Discounting & Offers</h3>
+
+                <p>Upsell offers often use discounting psychology ("Save $150!"). This can be misleading if the baseline price is inflated. Claire ensures transparency: Show original price, discount amount, and final price clearly. Explain why this price is offered ("Industry rate is $400; we're offering $340 with this bundle"). Avoid artificial urgency: Never use fake scarcity ("Only 2 rooms left!") to pressure booking. Allow guests to research: Provide comparison pricing with competitors so they know if our offer is genuinely competitive.</p>
+
+                <h3>Data Minimization & Retention</h3>
+
+                <p>Personalized upselling requires guest data—but we shouldn't retain more than necessary. Claire implements: Collect only data essential for personalization. Profiles deleted after 2 years of inactivity. Guests can request immediate deletion of behavioral data. Granular retention: Keep booking preferences longer than spending data.</p>
+
+                <h3>Algorithm Explainability & Control</h3>
+
+                <p>Automated decision-making should be explainable. When Claire recommends an upgrade, the guest should understand why. Implementation: Every offer includes explanation: "We recommend this package because you're celebrating an anniversary (noted in your reservation) and previously purchased similar romance packages." Guests can rate recommendation quality: "This was a good recommendation" or "I don't like this suggestion." System learns from feedback and improves future recommendations.</p>
+
+                <h3>Audit & Monitoring for Bias</h3>
+
+                <p>Even with good intentions, automated systems can perpetuate bias. Claire monitors continuously: Quarterly analysis of offer acceptance rates by demographic group (age, gender, nationality if detectable). Investigation if acceptance rates differ significantly across groups. Retraining if bias is detected. Annual third-party audit verifying non-discrimination in upselling practices.</p>
+
                 <h3>Conclusion: Ethical Revenue Optimization</h3>
-                <p>The most sustainable revenue optimization respects guest privacy and autonomy. Guests should benefit from personalized offers (lower prices, better recommendations) while maintaining control over their data. Claire's approach is transparent, consensual, and fair—offering real value while protecting guest interests and complying with privacy law.</p>
+
+                <p>The most sustainable revenue optimization respects guest privacy and autonomy. Guests benefit from personalized offers (lower prices, better recommendations) while maintaining control over their data. Claire's approach is transparent, consensual, and fair—offering real value while protecting guest interests and complying with privacy law. Revenue growth that respects guest dignity is more sustainable than aggressive extraction tactics. Guests who feel respected become loyal customers who return and recommend your property to others.</p>
             </div>
         </div>
 
@@ -301,9 +1070,9 @@
                 <h4>Hospitality Capabilities</h4>
                 <ul>
                     <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
-                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
-                    <li><a href="/hospitality/complaint-resolution.html">Complaint Resolution</a></li>
+                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
                     <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
                     <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
                 </ul>
             </div>
@@ -358,16 +1127,34 @@
                 <button class="dock-close" onclick="toggleDock()">×</button>
             </div>
             <div class="dock-body">
-                <p class="dock-message">I'm Claire, your AI guest experience orchestrator. Want to see how I optimize revenue through personalized offers that guests actually appreciate?</p>
+                <p class="dock-message">
+                    I'm Claire, your AI revenue optimization orchestrator. Want to see how I increase revenue by 18% through personalized offers that guests actually appreciate?
+                </p>
                 <a href="/hospitality/concierge-demo.html" class="dock-cta">Execute Live Demo</a>
             </div>
         </div>
     </div>
 
     <script>
-        function toggleDock() { const panel = document.getElementById('dockPanel'); panel.classList.toggle('open'); }
-        function toggleShadow() { const content = document.getElementById('shadowContent'); const button = document.querySelector('.shadow-toggle'); content.classList.toggle('expanded'); button.textContent = content.classList.contains('expanded') ? 'Collapse Privacy & Compliance Analysis' : 'Read Full Privacy & Compliance Analysis'; }
-        document.addEventListener('click', function(event) { const dock = document.querySelector('.claire-dock'); const panel = document.getElementById('dockPanel'); if (!dock.contains(event.target) && panel.classList.contains('open')) { panel.classList.remove('open'); } });
+        function toggleDock() {
+            const panel = document.getElementById('dockPanel');
+            panel.classList.toggle('open');
+        }
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Privacy & Compliance Analysis'
+                : 'Read Full Privacy & Compliance Analysis';
+        }
+        document.addEventListener('click', function(event) {
+            const dock = document.querySelector('.claire-dock');
+            const panel = document.getElementById('dockPanel');
+            if (!dock.contains(event.target) && panel.classList.contains('open')) {
+                panel.classList.remove('open');
+            }
+        });
     </script>
 </body>
 </html>
