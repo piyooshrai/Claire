@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIPAA Compliance - Claire AI</title>
+    <style>
+        :root { --accent: #6366f1; --accent-dark: #4f46e5; --bg-primary: #ffffff; --bg-secondary: #f9fafb; --text-primary: #111827; --text-secondary: #6b7280; --border: #e5e7eb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8; color: var(--text-primary); background: var(--bg-primary); }
+        nav { position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; padding: 1rem 2rem; }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-img { height: 36px; width: auto; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+        main { max-width: 900px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+        h1 { font-size: 3rem; font-weight: 800; margin-bottom: 2rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .compliance-badge { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%); border-radius: 16px; padding: 2rem; margin-bottom: 3rem; text-align: center; border: 2px solid var(--accent); }
+        .compliance-badge h2 { font-size: 1.5rem; color: var(--accent); margin-bottom: 0.5rem; }
+        .last-updated { color: var(--text-secondary); margin-bottom: 3rem; font-size: 0.9375rem; }
+        h2 { font-size: 1.75rem; font-weight: 700; margin: 3rem 0 1rem; color: var(--accent); }
+        h3 { font-size: 1.25rem; font-weight: 600; margin: 2rem 0 0.75rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        ul { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; color: var(--text-secondary); }
+        .highlight-box { background: var(--bg-secondary); border-left: 4px solid var(--accent); padding: 1.5rem; margin: 2rem 0; border-radius: 8px; }
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h4 { font-weight: 600; margin-bottom: 1rem; }
+        .footer-section ul { list-style: none; margin: 0; }
+        .footer-section a { color: var(--text-secondary); text-decoration: none; display: block; padding: 0.25rem 0; transition: color 0.3s; }
+        .footer-section a:hover { color: var(--accent); }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); font-size: 0.9375rem; }
+        .footer-bottom a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/assets/claire-logo.png" alt="Claire" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/security">Security</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <h1>HIPAA Compliance</h1>
+        <p class="last-updated">Last Updated: January 2024</p>
+        
+        <div class="compliance-badge">
+            <h2>✓ HIPAA Compliant</h2>
+            <p style="color: var(--text-secondary); margin: 0;">Claire is built to meet HIPAA requirements for handling Protected Health Information (PHI)</p>
+        </div>
+        
+        <h2>Our Commitment to Healthcare Compliance</h2>
+        <p>Claire is designed from the ground up to support healthcare organizations in maintaining HIPAA compliance when orchestrating patient workflows. We understand that healthcare data is sensitive and protected under federal law, and we've built our platform accordingly.</p>
+        
+        <h2>HIPAA Safeguards</h2>
+        
+        <h3>Administrative Safeguards</h3>
+        <ul>
+            <li>Designated Privacy and Security Officers</li>
+            <li>Workforce training and management on HIPAA requirements</li>
+            <li>Regular risk assessments and security reviews</li>
+            <li>Incident response and breach notification procedures</li>
+            <li>Business Associate Agreements (BAAs) with all subprocessors</li>
+        </ul>
+        
+        <h3>Physical Safeguards</h3>
+        <ul>
+            <li>Secure data centers with controlled physical access</li>
+            <li>Workstation security policies and procedures</li>
+            <li>Device and media controls for data disposal</li>
+            <li>Facility access controls and monitoring</li>
+        </ul>
+        
+        <h3>Technical Safeguards</h3>
+        <ul>
+            <li>Encryption of PHI at rest and in transit (AES-256)</li>
+            <li>Unique user identification and authentication</li>
+            <li>Audit controls and activity logging</li>
+            <li>Automatic logoff after inactivity periods</li>
+            <li>Transmission security protocols (TLS 1.3)</li>
+            <li>Access controls and authorization management</li>
+        </ul>
+        
+        <h2>Business Associate Agreements</h2>
+        <p>Claire operates as a Business Associate under HIPAA. We execute Business Associate Agreements (BAAs) with all covered entities and healthcare organizations using our platform to orchestrate workflows involving PHI.</p>
+        
+        <div class="highlight-box">
+            <h3 style="margin-top: 0;">BAA Requirements</h3>
+            <p style="margin-bottom: 0;">If your organization handles PHI and requires a signed BAA before deployment, please contact us at <a href="mailto:info@the-algo.com" style="color: var(--accent); text-decoration: underline;">info@the-algo.com</a> to execute the agreement.</p>
+        </div>
+        
+        <h2>Data Handling Practices</h2>
+        <ul>
+            <li><strong>Minimum Necessary Standard:</strong> Claire processes only the PHI necessary to accomplish the intended workflow orchestration purpose</li>
+            <li><strong>Use and Disclosure Limitations:</strong> PHI is used and disclosed only as permitted by the BAA and HIPAA regulations</li>
+            <li><strong>Subcontractor Management:</strong> All subcontractors handling PHI execute BAAs and meet HIPAA requirements</li>
+            <li><strong>Data Retention:</strong> PHI retention periods follow HIPAA requirements and organization-specific policies</li>
+            <li><strong>Breach Notification:</strong> Procedures in place to identify, investigate, and report breaches within required timeframes</li>
+        </ul>
+        
+        <h2>Patient Rights</h2>
+        <p>Claire supports healthcare organizations in honoring patient rights under HIPAA, including:</p>
+        <ul>
+            <li>Right to access their health information</li>
+            <li>Right to request amendments to their health records</li>
+            <li>Right to an accounting of disclosures</li>
+            <li>Right to request restrictions on uses and disclosures</li>
+            <li>Right to confidential communications</li>
+        </ul>
+        
+        <h2>Ongoing Compliance</h2>
+        <p>HIPAA compliance is not a one-time achievement but an ongoing commitment. We continuously:</p>
+        <ul>
+            <li>Monitor for security vulnerabilities and threats</li>
+            <li>Update policies and procedures based on regulatory changes</li>
+            <li>Conduct regular security assessments and audits</li>
+            <li>Train personnel on privacy and security requirements</li>
+            <li>Review and update our compliance program</li>
+        </ul>
+        
+        <h2>Questions About HIPAA Compliance?</h2>
+        <p>If you have questions about how Claire maintains HIPAA compliance or need to discuss specific requirements for your healthcare organization, please contact our compliance team at <a href="mailto:info@the-algo.com" style="color: var(--accent); text-decoration: underline;">info@the-algo.com</a></p>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Claire</a></li>
+                    <li><a href="https://www.the-algo.com">The Algorithm</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                    <li><a href="/general/">Other Industries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/case-studies">Case Studies</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/hipaa">HIPAA Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com">The Algorithm</a></p>
+        </div>
+    </footer>
+</body>
+</html>
