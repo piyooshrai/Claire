@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" data-industry="general">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claire - Multi-Industry Orchestration Platform</title>
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-dark: #4f46e5;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            overflow-x: hidden;
+        }
+
+        /* Breathing Grid Background */
+        .breathing-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.10;
+        }
+
+        .breathing-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(var(--accent) 1px, transparent 1px),
+                linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 0.3;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.5;
+                background-size: 55px 55px;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .industry-note {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 3rem auto 0;
+            text-align: left;
+        }
+
+        .industry-note h3 {
+            color: var(--accent);
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .industry-note p {
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Capabilities Grid */
+        .capabilities {
+            margin-bottom: 6rem;
+        }
+
+        .capabilities h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .capabilities-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .capability-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .capability-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+
+        .capability-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .capability-card h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .capability-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .capability-examples {
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .capability-examples h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .capability-examples ul {
+            list-style: none;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .capability-examples li {
+            padding: 0.25rem 0;
+        }
+
+        .capability-examples li::before {
+            content: "→";
+            color: var(--accent);
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            margin-bottom: 6rem;
+        }
+
+        .how-it-works h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            border-radius: 24px;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .claire-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .claire-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        .claire-tooltip {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            background: white;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            white-space: nowrap;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .claire-dock:hover .claire-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: 80px;
+        }
+
+        .claire-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid white;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .claire-dock {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="breathing-grid"></div>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Claire</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/healthcare/">Healthcare</a></li>
+                <li><a href="/finance/">Finance</a></li>
+                <li><a href="/legal/">Legal</a></li>
+                <li><a href="/hospitality/">Hospitality</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>Universal Orchestration</h1>
+            <p>I'm Claire, and I orchestrate complex workflows across any industry. Whether you're in manufacturing, retail, logistics, education, or any other sector, I bring the same level of contextual intelligence and real-time coordination to your operations.</p>
+
+            <div class="industry-note">
+                <h3>Your Industry, Your Workflows</h3>
+                <p>While I have specialized expertise in Healthcare, Finance, Legal, and Hospitality, my orchestration capabilities extend to any industry with complex workflows. I adapt to your specific processes, systems, and business logic—learning your unique operational patterns and scaling with your needs.</p>
+            </div>
+        </section>
+
+        <section class="capabilities">
+            <h2>Universal Capabilities</h2>
+            <p class="capabilities-subtitle">Core orchestration functions that work across any industry</p>
+
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">💬</div>
+                    <h3>Customer Communications</h3>
+                    <p>I manage all customer interactions across email, SMS, phone, chat, and social media. I understand context, maintain conversation history, and route complex issues appropriately while handling routine inquiries automatically.</p>
+                    <div class="capability-examples">
+                        <h4>Industry Examples</h4>
+                        <ul>
+                            <li>Manufacturing: Order status, delivery updates</li>
+                            <li>Retail: Product inquiries, returns processing</li>
+                            <li>Education: Enrollment, course information</li>
+                            <li>Real Estate: Property inquiries, viewings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">📅</div>
+                    <h3>Intelligent Scheduling</h3>
+                    <p>I coordinate complex scheduling across people, resources, and locations. I handle conflicts, optimize for efficiency, send reminders, and manage last-minute changes without breaking the workflow.</p>
+                    <div class="capability-examples">
+                        <h4>Industry Examples</h4>
+                        <ul>
+                            <li>Logistics: Route planning, driver coordination</li>
+                            <li>Services: Appointment booking, technician dispatch</li>
+                            <li>Manufacturing: Production scheduling, maintenance</li>
+                            <li>Education: Class scheduling, room allocation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">🔄</div>
+                    <h3>Process Automation</h3>
+                    <p>I handle repetitive tasks that follow business rules—from data entry to status updates. I work with your existing systems, validate information, flag exceptions, and maintain audit trails for compliance.</p>
+                    <div class="capability-examples">
+                        <h4>Industry Examples</h4>
+                        <ul>
+                            <li>Retail: Inventory updates, price changes</li>
+                            <li>Manufacturing: Quality checks, compliance logs</li>
+                            <li>Logistics: Shipment tracking, customs docs</li>
+                            <li>Professional Services: Timesheet processing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">🎯</div>
+                    <h3>Multi-Channel Coordination</h3>
+                    <p>I synchronize activities across your entire operation. When something changes in one system, I propagate updates everywhere they're needed, ensuring all stakeholders have current information.</p>
+                    <div class="capability-examples">
+                        <h4>Industry Examples</h4>
+                        <ul>
+                            <li>Retail: Online/in-store inventory sync</li>
+                            <li>Logistics: Tracking across carriers</li>
+                            <li>Manufacturing: Supply chain coordination</li>
+                            <li>Services: Team and customer sync</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">📊</div>
+                    <h3>Data Processing & Analysis</h3>
+                    <p>I extract insights from your operational data, identify patterns, flag anomalies, and generate reports. I understand context behind the numbers and can explain what's happening in plain language.</p>
+                    <div class="capability-examples">
+                        <h4>Industry Examples</h4>
+                        <ul>
+                            <li>Retail: Sales trends, inventory optimization</li>
+                            <li>Manufacturing: Production efficiency, defect rates</li>
+                            <li>Logistics: Route optimization, cost analysis</li>
+                            <li>Services: Resource utilization, profitability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">⚡</div>
+                    <h3>Real-Time Decision Support</h3>
+                    <p>I provide contextual recommendations based on current conditions, historical patterns, and business rules. I explain my reasoning and adapt to your feedback, learning your preferences over time.</p>
+                    <div class="capability-examples">
+                        <h4>Industry Examples</h4>
+                        <ul>
+                            <li>Logistics: Route changes due to delays</li>
+                            <li>Retail: Dynamic pricing, promotions</li>
+                            <li>Manufacturing: Production adjustments</li>
+                            <li>Services: Resource allocation decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Your Systems</h3>
+                    <p>I integrate with your existing tools—CRM, ERP, communication platforms, databases, and specialized industry software. No need to replace what's working; I enhance it by orchestrating across everything.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Learn Your Workflows</h3>
+                    <p>I study how your business operates—understanding your processes, business rules, edge cases, and the context behind decisions. I learn from your team's expertise and adapt to your specific needs.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Orchestrate Operations</h3>
+                    <p>I take over routine coordination while keeping humans in control of strategic decisions. I handle the complexity of real-world operations—managing exceptions, coordinating timing, and ensuring nothing falls through the cracks.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <h2>Ready to Transform Your Operations?</h2>
+            <p>Let's discuss how orchestration can work for your specific industry and workflows.</p>
+            <a href="/" class="cta-button">Get Started</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com">About The Algorithm</a></li>
+                    <li><a href="https://www.the-algo.com/team">Team</a></li>
+                    <li><a href="https://www.the-algo.com/careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/documentation">Documentation</a></li>
+                    <li><a href="/api">API Reference</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com" style="color: var(--accent); text-decoration: none;">The Algorithm</a></p>
+        </div>
+    </footer>
+
+    <div class="claire-dock">
+        <div class="claire-avatar">C</div>
+        <div class="claire-tooltip">
+            <span id="claire-greeting">Ready to orchestrate your workflows</span>
+        </div>
+    </div>
+
+    <script>
+        // Personalization Script
+        (function() {
+            const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
+
+            // Personalize Claire Dock greeting
+            if (userData.name) {
+                const greetingEl = document.getElementById('claire-greeting');
+                greetingEl.textContent = `Welcome, ${userData.name}!`;
+            }
+
+            // Add personalization bar if user data exists
+            if (userData.name && userData.email) {
+                const bar = document.createElement('div');
+                bar.style.cssText = `
+                    background: linear-gradient(90deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%);
+                    padding: 0.75rem 2rem;
+                    font-size: 0.9375rem;
+                    color: var(--text-primary);
+                    font-weight: 500;
+                    border-bottom: 2px solid var(--accent);
+                    text-align: center;
+                    position: relative;
+                    z-index: 100;
+                `;
+
+                let greeting = `Welcome back, ${userData.name}`;
+
+                if (userData.location && userData.location.city && userData.location.country) {
+                    greeting += ` from ${userData.location.city}, ${userData.location.country}`;
+                }
+
+                // Add time-based context
+                if (userData.timezone) {
+                    const hour = new Date().getHours();
+                    if (hour >= 22 || hour < 5) {
+                        greeting += ` - Burning the midnight oil?`;
+                    } else if (hour >= 5 && hour < 8) {
+                        greeting += ` - Early start to the day!`;
+                    }
+                }
+
+                // Add weather context
+                if (userData.weather && userData.weather.temp) {
+                    const temp = parseInt(userData.weather.temp);
+                    if (temp < 40) {
+                        greeting += ` Stay warm out there!`;
+                    } else if (temp > 85) {
+                        greeting += ` Stay cool out there!`;
+                    }
+                }
+
+                bar.textContent = greeting;
+                document.body.insertBefore(bar, document.body.firstChild);
+            }
+
+            // Inject name into content for personalization
+            if (userData.name) {
+                const heroP = document.querySelector('.hero p');
+                if (heroP) {
+                    heroP.innerHTML = heroP.innerHTML.replace("I'm Claire, and I", `${userData.name}, I'm Claire, and I`);
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
