@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Claire - AI Orchestration Platform</title>
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-dark: #4f46e5;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 6rem;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .section p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        .section ul {
+            list-style: none;
+            max-width: 900px;
+        }
+
+        .section li {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .section li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .column {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        .column h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .column p {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Statistics Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid var(--border);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* The Algorithm Section */
+        .algorithm-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            margin-bottom: 6rem;
+        }
+
+        .algorithm-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .algorithm-section p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            text-align: center;
+        }
+
+        .algorithm-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            display: block;
+            text-align: center;
+            max-width: 300px;
+            margin: 2rem auto 0;
+        }
+
+        .algorithm-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/assets/claire-logo.png" alt="Claire" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/healthcare/">Healthcare</a></li>
+                <li><a href="/finance/">Finance</a></li>
+                <li><a href="/legal/">Legal</a></li>
+                <li><a href="/hospitality/">Hospitality</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>Meet Claire</h1>
+            <p>An AI orchestration platform that brings reasoning-powered automation to complex, multi-step workflows across industries.</p>
+        </section>
+
+        <section class="section">
+            <h2>What Is Claire?</h2>
+            <p>Claire is not a chatbot. She's not a simple automation tool. Claire is a digital labor platform that orchestrates complex workflows with the context awareness and reasoning capability of a senior team member.</p>
+            <p>Unlike traditional automation that breaks on edge cases, Claire understands context, handles exceptions, and coordinates across systems the way humans do—but with the consistency, availability, and scalability that only AI can provide.</p>
+        </section>
+
+        <div class="two-column">
+            <div class="column">
+                <h3>The Problem We're Solving</h3>
+                <p>Modern businesses run on complex workflows that span multiple systems, channels, and stakeholders. These workflows require constant human coordination: routing messages, scheduling resources, updating records, handling exceptions, and keeping everyone informed.</p>
+                <p>Traditional automation fails because real-world operations are messy. Rules-based systems can't handle the nuance. Chatbots can't orchestrate across systems. And humans can't scale to handle the volume.</p>
+            </div>
+            <div class="column">
+                <h3>How Claire Works</h3>
+                <p>Claire uses advanced reasoning engines to understand context, maintain state across long-running workflows, and coordinate actions across your entire tech stack. She learns your business logic, adapts to exceptions, and handles the operational complexity that typically requires human oversight.</p>
+                <p>The result: workflows that run smoothly end-to-end, with Claire managing the coordination, humans focusing on strategic decisions, and customers receiving seamless experiences.</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2>What Makes Claire Different</h2>
+            <ul>
+                <li><strong>Reasoning Over Scripting:</strong> Claire understands "why" behind workflows, not just "what" to do. She adapts to context rather than following rigid scripts.</li>
+                <li><strong>True Orchestration:</strong> Claire coordinates across your entire operation—CRM, scheduling, communications, billing, documentation—maintaining context throughout.</li>
+                <li><strong>Exception Handling:</strong> Real-world workflows are full of edge cases. Claire recognizes when standard processes don't apply and routes appropriately.</li>
+                <li><strong>Multi-Channel Native:</strong> Email, SMS, phone, chat, portal—Claire manages all customer touchpoints with consistent context and personality.</li>
+                <li><strong>Industry Specialized:</strong> Deep expertise in Healthcare, Legal, Finance, and Hospitality workflows, with universal capabilities for any industry.</li>
+                <li><strong>Human-in-the-Loop:</strong> Claire doesn't replace your team; she amplifies them by handling operational complexity while keeping humans in control.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Industries We Serve</h2>
+            <p>Claire has specialized orchestration capabilities across multiple industries:</p>
+            <ul>
+                <li><strong>Healthcare:</strong> Patient journey orchestration from first contact through post-visit follow-up, including scheduling, insurance, prescription management, and care coordination.</li>
+                <li><strong>Legal:</strong> Matter lifecycle management, client intake, document coordination, deadline tracking, and multi-party communication across complex legal workflows.</li>
+                <li><strong>Financial Services:</strong> Client onboarding, compliance workflows, transaction coordination, client communications, and relationship management.</li>
+                <li><strong>Hospitality:</strong> Guest experience orchestration, reservation management, service coordination, and operational synchronization across properties.</li>
+                <li><strong>Universal Orchestration:</strong> Manufacturing, retail, logistics, education, real estate, and professional services benefit from Claire's core coordination capabilities.</li>
+            </ul>
+        </section>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Availability</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">Turnover Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Process Consistency</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Scalability</div>
+            </div>
+        </div>
+
+        <div class="algorithm-section">
+            <h2>Built by The Algorithm</h2>
+            <p>Claire is a product of The Algorithm LLC, a company building the future of AI-powered operational automation. The Algorithm specializes in creating reasoning-capable AI systems that handle real-world complexity with human-level context awareness.</p>
+            <p>Where traditional automation stops at simple rules and chatbots stop at conversation, The Algorithm builds systems that truly orchestrate—coordinating complex workflows, managing exceptions, and maintaining context across long-running operations.</p>
+            <a href="https://www.the-algo.com" class="algorithm-link">Learn More About The Algorithm</a>
+        </div>
+
+        <section class="section" style="text-align: center;">
+            <h2>Ready to Experience Claire?</h2>
+            <p style="margin: 0 auto 2rem;">Discover how orchestration can transform your operational workflows.</p>
+            <a href="/" class="algorithm-link" style="display: inline-block;">Start Your Conversation</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Claire</a></li>
+                    <li><a href="https://www.the-algo.com">The Algorithm</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                    <li><a href="/general/">Other Industries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/case-studies">Case Studies</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/hipaa">HIPAA Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com">The Algorithm</a></p>
+        </div>
+    </footer>
+</body>
+</html>
