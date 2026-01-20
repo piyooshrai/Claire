@@ -650,12 +650,21 @@
                         return;
                     }
 
-                    // Basic email validation
-                    if (!value.includes('@') || !value.includes('.')) {
-                        input.placeholder = 'That doesn\'t look like an email... try again';
+                    // Proper email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+                    const commonTLDs = ['com', 'net', 'org', 'edu', 'gov', 'mil', 'co', 'io', 'ai', 'app', 'dev', 'tech'];
+                    const domain = value.split('@')[1];
+                    const tld = domain ? domain.split('.').pop().toLowerCase() : '';
+
+                    if (!emailRegex.test(value) || !commonTLDs.includes(tld)) {
+                        input.disabled = true;
+                        const msg = addMessage('');
+                        await type(msg, `"${value}"? Really? Give me a real email address.`);
+                        await pause(1000);
+                        input.disabled = false;
                         input.value = '';
-                        input.classList.add('shake');
-                        setTimeout(() => input.classList.remove('shake'), 500);
+                        input.placeholder = 'Your actual email...';
+                        input.focus();
                         validationMessageShown = true;
                         return;
                     }
