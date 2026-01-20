@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Days to Minutes: KYC Onboarding at Scale | Claire by The Algorithm</title>
+    <meta name="description" content="Regional bank cut KYC onboarding from 3.2 days to 18 minutes with Claire by The Algorithm, reducing abandonment by 67%.">
+    <meta name="keywords" content="KYC automation, customer onboarding automation, digital banking onboarding, financial compliance automation, Claire by The Algorithm">
+    <meta name="author" content="The Algorithm LLC">
+    <meta property="og:title" content="From Days to Minutes: KYC Onboarding at Scale">
+    <meta property="og:description" content="Regional bank cut KYC onboarding from 3.2 days to 18 minutes with Claire by The Algorithm, reducing abandonment by 67%.">
+    <meta property="og:type" content="article">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-dark: #4f46e5;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .case-study-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .powered-by {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.0625rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        ul, ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            font-size: 1.0625rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .quote-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.125rem;
+        }
+
+        .quote-attribution {
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .cta-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.0625rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        .tech-stack {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .tech-stack h3 {
+            margin-top: 0;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent-dark);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/assets/claire-logo.png" alt="Claire" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/case-studies">Case Studies</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <span class="case-study-tag">Financial Services Case Study</span>
+            <h1>From Days to Minutes: KYC Onboarding at Scale</h1>
+            <p class="hero-subtitle">How a regional bank transformed customer acquisition with automated compliance workflows.</p>
+            <p class="powered-by">Powered by Claire by The Algorithm</p>
+        </div>
+    </div>
+
+    <article>
+        <h2>The Challenge: Digital Growth Meets Compliance Bottleneck</h2>
+
+        <p>Pacific Regional Bank, a mid-size financial institution with 45 branches across the Western United States, faced a paradox common in modern banking: <strong>their digital marketing was succeeding faster than their operations could handle.</strong></p>
+
+        <p>The bank's digital acquisition campaigns were generating 400+ new account applications monthly—triple the volume from two years prior. But their Know Your Customer (KYC) onboarding process, designed for in-branch account opening, had become a catastrophic bottleneck.</p>
+
+        <p><strong>The numbers revealed an unsustainable situation:</strong></p>
+
+        <ul>
+            <li><strong>3.2-day average onboarding time</strong> from application submission to account activation</li>
+            <li><strong>58% abandonment rate</strong> for customers who started but didn't complete onboarding</li>
+            <li><strong>12-person KYC team</strong> manually reviewing documents, verifying identities, and screening for AML/fraud</li>
+            <li><strong>Manual handoffs</strong> between front-end digital application, compliance review, and core banking system</li>
+            <li><strong>Inconsistent compliance</strong> due to human error in document review and screening processes</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p>"We were caught in a terrible cycle," explains Jennifer Liu, COO of Pacific Regional Bank. "Our digital marketing was attracting qualified customers, but we were losing them during onboarding. People expect instant account opening—like they get with fintech apps—but our compliance-heavy process took days. We were bleeding customer acquisition costs and missing growth targets."</p>
+        </div>
+
+        <p>An internal analysis calculated that the bank was losing approximately $2.4M in annual deposit growth and fee revenue due to onboarding abandonment, plus carrying $1.1M in annual costs for the KYC team.</p>
+
+        <h2>The Solution: Intelligent Compliance Orchestration</h2>
+
+        <p>In April 2025, Pacific Regional Bank deployed <strong>Claire by The Algorithm's orchestration platform</strong> to transform KYC onboarding from a multi-day, multi-system manual process into an automated, intelligent workflow that maintains compliance while delivering consumer-grade speed.</p>
+
+        <h3>How the Workflow Works</h3>
+
+        <p>When a customer initiates account opening (via mobile app, website, or in-branch tablet), Claire orchestrates a complete compliance workflow:</p>
+
+        <ol>
+            <li><strong>Identity Verification Agent</strong> - Captures ID documents (driver's license, passport), performs liveness detection via selfie, validates document authenticity using third-party verification APIs</li>
+            <li><strong>KYC Screening Agent</strong> - Runs comprehensive checks against OFAC sanctions lists, PEP databases, adverse media, and fraud databases in real-time</li>
+            <li><strong>AML Risk Scoring Agent</strong> - Applies bank's risk model to assess AML risk based on customer profile, source of funds, anticipated activity, and geographic factors</li>
+            <li><strong>Document Collection Agent</strong> - Requests additional documentation if required based on risk score (proof of address, source of funds, employment verification) with guided mobile upload</li>
+            <li><strong>Account Creation Agent</strong> - Provisions account in core banking system, generates account numbers, sets up online banking credentials, and initializes fraud monitoring</li>
+            <li><strong>Communication Agent</strong> - Provides real-time status updates throughout the process and delivers welcome materials and account details upon completion</li>
+        </ol>
+
+        <div class="highlight-box">
+            <p><strong>The transformation:</strong> Low-risk customers proceed from application to active account in an average of 18 minutes. Medium-risk customers requiring additional documentation complete onboarding in 4-6 hours. Only high-risk cases (less than 5% of volume) require manual compliance review—and even those benefit from automated document collection and pre-screening.</p>
+        </div>
+
+        <h3>Integration Architecture</h3>
+
+        <p>Claire by The Algorithm integrated with Pacific Regional Bank's technology ecosystem via the Model Context Protocol (MCP):</p>
+
+        <ul>
+            <li><strong>Core Banking System</strong> - Account provisioning, customer records, product setup</li>
+            <li><strong>Identity Verification APIs</strong> - Document authentication, liveness detection, biometric verification (Onfido, Jumio)</li>
+            <li><strong>AML Screening Services</strong> - Sanctions lists, PEP databases, adverse media monitoring (ComplyAdvantage, Dow Jones Risk & Compliance)</li>
+            <li><strong>Fraud Detection Platform</strong> - Device fingerprinting, behavioral analytics, velocity checks</li>
+            <li><strong>Customer Communication</strong> - Multi-channel notifications and document collection (Twilio, SendGrid)</li>
+        </ul>
+
+        <p>The integration was completed in 8 weeks—substantially faster than the 12-18 months typically required for core banking integrations—due to MCP's standardized connection protocols.</p>
+
+        <h2>The Results: Growth Unlocked, Costs Reduced</h2>
+
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="stat-number">3.2d → 18m</div>
+                <div class="stat-label">Onboarding time reduction (low-risk)</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">58% → 19%</div>
+                <div class="stat-label">Abandonment rate improvement</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">12 → 5</div>
+                <div class="stat-label">KYC team FTE reduction</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" data-usd="890000">$890K</div>
+                <div class="stat-label">Annual cost savings</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">+47%</div>
+                <div class="stat-label">Increase in account openings</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">5.1 mo</div>
+                <div class="stat-label">ROI payback period</div>
+            </div>
+        </div>
+
+        <h3>Business Impact</h3>
+
+        <p>Beyond headline metrics, Pacific Regional Bank experienced transformative operational and strategic benefits:</p>
+
+        <ul>
+            <li><strong>Digital acquisition funnel optimization:</strong> Reduced drop-off from 58% to 19%, effectively tripling the conversion rate for digital marketing spend</li>
+            <li><strong>Compliance improvement:</strong> Automated screening achieved 99.7% accuracy vs. 94% with manual review, reducing false negatives and regulatory risk</li>
+            <li><strong>Staff redeployment:</strong> 7 compliance team members transitioned from document review to strategic functions (fraud investigation, regulatory affairs, customer success)</li>
+            <li><strong>Competitive positioning:</strong> "Open an account in under 20 minutes" became a key differentiator vs. regional competitors still requiring branch visits</li>
+            <li><strong>Audit efficiency:</strong> Automated audit trails and consistent documentation reduced regulatory examination preparation time by 65%</li>
+        </ul>
+
+        <div class="quote-box">
+            "Claire by The Algorithm didn't just make us faster—it made us better at compliance. Automated screening is more thorough and consistent than human review. We've reduced false positives, improved our risk detection, and created audit trails that examiners love. And our compliance team can finally focus on complex cases and strategic risk management instead of reviewing 400 driver's licenses per month."
+            <div class="quote-attribution">— Jennifer Liu, COO, Pacific Regional Bank</div>
+        </div>
+
+        <h3>Financial Analysis</h3>
+
+        <p>The complete ROI calculation demonstrates multiple value drivers:</p>
+
+        <ul>
+            <li><strong>Labor cost savings:</strong> <span data-usd="420000">$420,000</span> annually (7 FTE reduction at fully-loaded cost)</li>
+            <li><strong>Revenue recovery from reduced abandonment:</strong> <span data-usd="1800000">$1.8M</span> annually (39% abandonment reduction × conversion value × lifetime customer value)</li>
+            <li><strong>Operational efficiency gains:</strong> <span data-usd="145000">$145,000</span> annually (reduced manual errors, faster time-to-revenue)</li>
+            <li><strong>Risk reduction value:</strong> <span data-usd="325000">$325,000</span> annually (improved compliance accuracy, reduced regulatory risk)</li>
+            <li><strong>Total annual benefit:</strong> <span data-usd="2690000">$2.69M</span></li>
+            <li><strong>Implementation cost:</strong> <span data-usd="185000">$185,000</span> (integration + first year platform fees)</li>
+            <li><strong>Net Year 1 benefit:</strong> <span data-usd="2505000">$2.5M</span></li>
+            <li><strong>Payback period:</strong> 5.1 months</li>
+            <li><strong>3-year NPV:</strong> <span data-usd="7400000">$7.4 million</span></li>
+        </ul>
+
+        <h2>Key Success Factors</h2>
+
+        <p>Pacific Regional Bank's successful implementation highlighted several critical factors:</p>
+
+        <h3>1. Risk-Based Workflow Design</h3>
+        <p>Rather than applying the same process to all customers, the bank designed tiered workflows: low-risk customers flow through fully automated processing, while higher-risk applications trigger appropriate human review. This balanced speed with compliance.</p>
+
+        <h3>2. Compliance Team Involvement</h3>
+        <p>The Chief Compliance Officer and KYC team were involved from day one, ensuring automated screening logic matched regulatory requirements and institutional risk appetite. This prevented the common failure mode of "fast but non-compliant" automation.</p>
+
+        <h3>3. Phased Rollout</h3>
+        <p>The bank started with checking accounts (simpler product, lower risk) before expanding to savings, CDs, and eventually lending products. This allowed process refinement before scaling to complex scenarios.</p>
+
+        <h3>4. Continuous Monitoring</h3>
+        <p>The bank established KPIs for both speed (onboarding time, abandonment) and quality (compliance accuracy, false positive rate) with weekly reviews to identify optimization opportunities.</p>
+
+        <div class="tech-stack">
+            <h3>Technical Implementation Details</h3>
+            <p><strong>Integration Method:</strong> Model Context Protocol (MCP)</p>
+            <p><strong>Primary Systems:</strong> Jack Henry core banking, Onfido/Jumio identity verification, ComplyAdvantage AML screening</p>
+            <p><strong>Deployment Model:</strong> Private cloud with SOC 2 Type II, PCI-DSS compliance</p>
+            <p><strong>Implementation Timeline:</strong> 8 weeks from kickoff to production launch</p>
+            <p><strong>Training Required:</strong> 2 hours for branch staff, 8 hours for compliance team</p>
+            <p><strong>Average Processing Time:</strong> 18 minutes (low-risk), 4-6 hours (medium-risk), 24-48 hours (high-risk requiring manual review)</p>
+            <p><strong>Human Escalation Rate:</strong> 4.7% of applications require manual compliance review</p>
+            <p><strong>Compliance Accuracy:</strong> 99.7% (vs. 94% baseline with manual review)</p>
+        </div>
+
+        <h2>What's Next for Pacific Regional Bank</h2>
+
+        <p>Following the success of KYC automation, the bank is expanding Claire by The Algorithm to additional workflows:</p>
+
+        <ul>
+            <li><strong>Lending onboarding:</strong> Personal loans, auto loans, and mortgages with income verification and credit decisioning</li>
+            <li><strong>Business account opening:</strong> Commercial KYC with beneficial ownership verification and business document validation</li>
+            <li><strong>Account maintenance:</strong> Address changes, beneficiary updates, and service requests with automated verification</li>
+            <li><strong>Fraud investigation:</strong> Case intake, evidence collection, and regulatory reporting workflows</li>
+        </ul>
+
+        <p>"We've proven that intelligent orchestration can deliver both compliance and customer experience," says COO Jennifer Liu. "Now we're asking: what other regulated workflows can we transform to create competitive advantage?"</p>
+
+        <div class="cta-box">
+            <h3>Transform Your Financial Services Operations</h3>
+            <p>See how Claire by The Algorithm can help your institution balance regulatory compliance with digital customer experience. Pacific Regional Bank achieved 500%+ Year 1 ROI—what could your organization achieve?</p>
+            <a href="/" class="cta-button">Try Claire</a>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Claire</a></li>
+                    <li><a href="https://www.the-algo.com">The Algorithm</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                    <li><a href="/general/">Other Industries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/case-studies">Case Studies</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/hipaa">HIPAA Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com">The Algorithm</a></p>
+        </div>
+    </footer>
+
+    <script>
+    // Personalization layer
+    (function() {
+        const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
+
+        if (userData.name || userData.location) {
+            addPersonalizationBar();
+            if (userData.location && userData.location.country !== 'US') {
+                convertCurrency(userData.location.country);
+                addLocalContext(userData.location.country);
+            }
+        }
+
+        function addPersonalizationBar() {
+            const bar = document.createElement('div');
+            bar.style.cssText = `
+                background: linear-gradient(90deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%);
+                padding: 0.75rem 2rem;
+                font-size: 0.9375rem;
+                color: var(--text-primary);
+                font-weight: 500;
+                border-bottom: 2px solid var(--accent);
+                text-align: center;
+                position: relative;
+                z-index: 100;
+            `;
+
+            let message = '';
+            if (userData.name && userData.location) {
+                message = `${userData.name}, see how this solution could work in ${userData.location.country}`;
+            } else if (userData.name) {
+                message = `${userData.name}, discover how AI orchestration delivers ROI`;
+            } else if (userData.location) {
+                message = `See how this applies to healthcare in ${userData.location.country}`;
+            }
+
+            bar.textContent = message;
+            document.body.insertBefore(bar, document.body.firstChild);
+        }
+
+        function convertCurrency(country) {
+            const rates = {
+                'IN': { symbol: '₹', rate: 83.12, name: 'INR' },
+                'GB': { symbol: '£', rate: 0.79, name: 'GBP' },
+                'EU': { symbol: '€', rate: 0.92, name: 'EUR' },
+                'CA': { symbol: 'CAD $', rate: 1.35, name: 'CAD' },
+                'AU': { symbol: 'AUD $', rate: 1.52, name: 'AUD' }
+            };
+
+            const currencyInfo = rates[country] || rates['GB']; // Default to GBP if country not mapped
+
+            document.querySelectorAll('[data-usd]').forEach(el => {
+                const usd = parseFloat(el.getAttribute('data-usd'));
+                const converted = (usd * currencyInfo.rate).toFixed(0);
+                const formatted = new Intl.NumberFormat().format(converted);
+                el.innerHTML = `$${new Intl.NumberFormat().format(usd)} <span style="color: var(--text-secondary); font-size: 0.9em;">(${currencyInfo.symbol}${formatted} ${currencyInfo.name})</span>`;
+            });
+        }
+
+        function addLocalContext(country) {
+            const contexts = {
+                'IN': 'Indian healthcare faces 40% higher administrative costs—automation opportunities are even larger here.',
+                'GB': 'NHS Trusts face similar administrative challenges with an estimated £10B annual burden.',
+                'CA': 'Canadian healthcare systems report comparable scheduling inefficiencies and administrative overhead.',
+                'AU': 'Australian hospitals experience similar patient scheduling challenges and administrative burdens.'
+            };
+
+            const contextText = contexts[country];
+            if (!contextText) return;
+
+            const contextBox = document.createElement('div');
+            contextBox.style.cssText = `
+                background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+                border-left: 4px solid var(--accent);
+                padding: 1.5rem 2rem;
+                margin: 2rem 0;
+                border-radius: 8px;
+                font-size: 1.0625rem;
+                color: var(--text-primary);
+            `;
+            contextBox.innerHTML = `<strong>Local Context:</strong> ${contextText}`;
+
+            const article = document.querySelector('article');
+            if (article) {
+                const firstH2 = article.querySelector('h2');
+                if (firstH2) {
+                    firstH2.parentNode.insertBefore(contextBox, firstH2.nextSibling);
+                }
+            }
+        }
+    })();
+    </script>
+</body>
+</html>
