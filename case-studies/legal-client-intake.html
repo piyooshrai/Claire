@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From 48 Hours to 15 Minutes: Legal Intake Transformation | Claire by The Algorithm</title>
+    <meta name="description" content="Thompson & Associates increased conversion by 34% using Claire by The Algorithm for automated client intake. See the complete workflow.">
+    <meta name="keywords" content="legal client intake automation, law firm automation, personal injury intake, legal workflow automation, Claire by The Algorithm">
+    <meta name="author" content="The Algorithm LLC">
+    <meta property="og:title" content="From 48 Hours to 15 Minutes: Legal Intake Transformation">
+    <meta property="og:description" content="Thompson & Associates increased conversion by 34% using Claire by The Algorithm for automated client intake.">
+    <meta property="og:type" content="article">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-dark: #4f46e5;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .case-study-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .powered-by {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.0625rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        ul, ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            font-size: 1.0625rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .quote-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.125rem;
+        }
+
+        .quote-attribution {
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .cta-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.0625rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        .tech-stack {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .tech-stack h3 {
+            margin-top: 0;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent-dark);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/assets/claire-logo.png" alt="Claire" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/case-studies">Case Studies</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <span class="case-study-tag">Legal Case Study</span>
+            <h1>From 48 Hours to 15 Minutes: Legal Intake Transformation</h1>
+            <p class="hero-subtitle">How a personal injury firm nearly doubled client conversion with automated intake.</p>
+            <p class="powered-by">Powered by Claire by The Algorithm</p>
+        </div>
+    </div>
+
+    <article>
+        <h2>The Challenge: Speed Kills (Cases)</h2>
+
+        <p>Thompson & Associates, a 12-attorney personal injury firm in Atlanta, had a problem that plagues law firms nationwide: <strong>they were losing winnable cases to faster competitors.</strong></p>
+
+        <p>The firm's intake process was sophisticated on paper—detailed questionnaires, comprehensive conflicts checks, thorough case evaluation—but fatally slow in practice. Prospective clients who submitted inquiries via the firm's website, phone, or referral partners waited an average of 48 hours for initial response.</p>
+
+        <p><strong>In personal injury, 48 hours is an eternity.</strong></p>
+
+        <p>The numbers revealed the cost of this delay:</p>
+
+        <ul>
+            <li><strong>18% conversion rate</strong> from initial inquiry to signed engagement (industry average: 25-30%)</li>
+            <li><strong>48-hour average response time</strong> from initial contact to substantive attorney communication</li>
+            <li><strong>Manual conflicts checking</strong> requiring paralegal time and attorney review for every inquiry</li>
+            <li><strong>Disconnected systems</strong> between intake forms, case management (Clio), and client communication</li>
+            <li><strong>No after-hours capability</strong> - inquiries submitted evenings/weekends waited until Monday 9am</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p>"We'd see the same pattern repeatedly," explains Managing Partner David Thompson. "A strong case would come in Friday evening. We'd reach out Monday morning. They'd already signed with another firm Sunday afternoon. We weren't losing on case quality—we were losing on response speed."</p>
+        </div>
+
+        <p>An analysis of lost opportunities revealed that the firm was missing approximately $1.2M in annual case value due to slow intake response times and conversion failures.</p>
+
+        <h2>The Solution: Intelligent Intake Orchestration</h2>
+
+        <p>In June 2025, Thompson & Associates implemented <strong>Claire by The Algorithm's intake orchestration platform</strong> to transform their client acquisition workflow from a manual, multi-day process into an automated, intelligent system that responds in minutes, not days.</p>
+
+        <h3>How the Workflow Works</h3>
+
+        <p>When a prospective client submits an inquiry (web form, phone, email, or chat), Claire orchestrates a complete intake workflow:</p>
+
+        <ol>
+            <li><strong>Initial Screening Agent</strong> - Analyzes case details against firm criteria (practice areas, jurisdiction, case value thresholds) to qualify leads instantly</li>
+            <li><strong>Conflicts Check Agent</strong> - Runs automated conflicts search across existing clients, adverse parties, and related entities via Clio API integration</li>
+            <li><strong>Case Evaluation Agent</strong> - Applies firm's case evaluation rubric to assess strength, likely value, and resource requirements</li>
+            <li><strong>Attorney Routing Agent</strong> - Matches qualified cases to attorneys based on practice area expertise, current caseload, and availability</li>
+            <li><strong>Engagement Agent</strong> - Generates customized engagement letter via DocuSign, schedules initial consultation, sends case-specific FAQ, and creates matter file in Clio</li>
+            <li><strong>Communication Agent</strong> - Provides real-time updates to prospective client via their preferred channel (SMS/email) throughout the process</li>
+        </ol>
+
+        <div class="highlight-box">
+            <p><strong>The transformation:</strong> From inquiry submission to engagement letter delivery now takes an average of 15 minutes—even at 11pm on Sunday. The entire workflow executes automatically, with attorneys only involved when a qualified case is ready for consultation scheduling.</p>
+        </div>
+
+        <h3>Integration Architecture</h3>
+
+        <p>Claire by The Algorithm integrated with Thompson & Associates' existing technology stack:</p>
+
+        <ul>
+            <li><strong>Clio Manage</strong> - Case management, conflicts database, matter creation</li>
+            <li><strong>Conflicts API</strong> - Cross-referencing against parties, opposing counsel, and related entities</li>
+            <li><strong>DocuSign</strong> - Automated engagement letter generation and e-signature workflow</li>
+            <li><strong>Twilio</strong> - Multi-channel client communication (SMS, voice, email)</li>
+            <li><strong>Calendly</strong> - Attorney consultation scheduling with availability management</li>
+        </ul>
+
+        <p>The integration was completed in 4 weeks using the Model Context Protocol (MCP), compared to the 3-6 months typically required for custom legal tech integrations.</p>
+
+        <h2>The Results: Competitive Advantage Through Speed</h2>
+
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="stat-number">48h → 15m</div>
+                <div class="stat-label">Response time reduction</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">18% → 34%</div>
+                <div class="stat-label">Conversion rate improvement</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">+89%</div>
+                <div class="stat-label">Increase in conversion rate</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">89%</div>
+                <div class="stat-label">Reduction in intake staff time</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" data-usd="425000">$425K</div>
+                <div class="stat-label">Additional annual revenue from improved conversion</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">4.8 mo</div>
+                <div class="stat-label">ROI payback period</div>
+            </div>
+        </div>
+
+        <h3>Business Impact</h3>
+
+        <p>Beyond faster response times, Thompson & Associates experienced comprehensive business transformation:</p>
+
+        <ul>
+            <li><strong>24/7 intake capability</strong> - After-hours inquiries (previously 35% of volume) now receive immediate response instead of next-business-day delays</li>
+            <li><strong>Higher-quality caseload</strong> - Automated screening consistently applies qualification criteria, improving case selection consistency</li>
+            <li><strong>Paralegal redeployment</strong> - 2 FTE previously dedicated to intake now focus on case investigation and client service</li>
+            <li><strong>Referral source satisfaction</strong> - Referring attorneys receive instant acknowledgment and status updates, strengthening referral relationships</li>
+            <li><strong>Competitive differentiation</strong> - Prospects frequently cite "immediate response" as key factor in choosing Thompson & Associates</li>
+        </ul>
+
+        <div class="quote-box">
+            "We used to compete on reputation and case results. Now we compete on client experience from minute one. Claire doesn't just make us faster—it makes us better. Automated conflicts checking is more thorough than manual review. Instant engagement letter generation eliminates errors. And our attorneys focus on practicing law, not processing intake forms."
+            <div class="quote-attribution">— David Thompson, Managing Partner, Thompson & Associates</div>
+        </div>
+
+        <h3>Financial Analysis</h3>
+
+        <p>The complete ROI breakdown demonstrates multiple value streams:</p>
+
+        <ul>
+            <li><strong>Revenue increase from conversion improvement:</strong> <span data-usd="425000">$425,000</span> annually (16% conversion increase × average case value × inquiry volume)</li>
+            <li><strong>Labor cost savings:</strong> <span data-usd="95000">$95,000</span> annually (1.8 FTE paralegal time saved at fully-loaded cost)</li>
+            <li><strong>Opportunity cost recovery:</strong> <span data-usd="180000">$180,000</span> annually (cases that would have gone to competitors due to slow response)</li>
+            <li><strong>Total annual benefit:</strong> <span data-usd="700000">$700,000</span></li>
+            <li><strong>Implementation cost:</strong> <span data-usd="85000">$85,000</span> (integration + first year platform fees)</li>
+            <li><strong>Payback period:</strong> 4.8 months</li>
+            <li><strong>3-year NPV:</strong> <span data-usd="1900000">$1.9 million</span></li>
+        </ul>
+
+        <h2>Key Success Factors</h2>
+
+        <p>Thompson & Associates' successful implementation highlighted several critical factors:</p>
+
+        <h3>1. Leadership Buy-In</h3>
+        <p>Managing Partner David Thompson championed the project, framing it not as "automation replacing humans" but as "technology enabling attorneys to focus on legal work instead of administrative tasks."</p>
+
+        <h3>2. Data-Driven Case Criteria</h3>
+        <p>Rather than generic screening questions, the firm encoded their actual case evaluation rubric—informed by 15 years of case data—into the qualification workflow. This ensured automated screening matched attorney judgment.</p>
+
+        <h3>3. Staff Involvement</h3>
+        <p>Intake paralegals were involved in workflow design from day one, providing insights that improved automation logic and identifying edge cases that required human escalation paths.</p>
+
+        <h3>4. Iterative Optimization</h3>
+        <p>The firm continuously refines the workflow based on conversion data, using A/B testing for engagement letter language and consultation scheduling approaches.</p>
+
+        <div class="tech-stack">
+            <h3>Technical Implementation Details</h3>
+            <p><strong>Integration Method:</strong> Model Context Protocol (MCP)</p>
+            <p><strong>Primary Systems:</strong> Clio Manage, conflicts databases, DocuSign, Twilio, Calendly</p>
+            <p><strong>Deployment Model:</strong> Cloud-hosted with attorney-client privilege protections</p>
+            <p><strong>Implementation Timeline:</strong> 4 weeks from kickoff to production</p>
+            <p><strong>Training Required:</strong> 3 hours for attorneys, 6 hours for intake staff</p>
+            <p><strong>Average Workflow Completion Time:</strong> 15 minutes (qualified cases)</p>
+            <p><strong>Human Escalation Rate:</strong> 8% (complex conflicts or borderline case evaluation)</p>
+        </div>
+
+        <h2>What's Next for Thompson & Associates</h2>
+
+        <p>Following the success of intake automation, the firm is expanding Claire by The Algorithm to additional workflows:</p>
+
+        <ul>
+            <li><strong>Discovery automation:</strong> Document request generation, response tracking, and follow-up orchestration</li>
+            <li><strong>Client communication:</strong> Proactive case status updates, milestone notifications, and satisfaction monitoring</li>
+            <li><strong>Settlement negotiation:</strong> Demand letter generation, counter-offer analysis, and negotiation tracking</li>
+            <li><strong>Case investigation:</strong> Automated medical record requests, expert witness identification, and evidence organization</li>
+        </ul>
+
+        <p>"Intake was just the beginning," says Managing Partner Thompson. "We've proven that AI orchestration delivers real ROI. Now we're asking: what other workflows can we transform to provide better client outcomes while improving our economics?"</p>
+
+        <div class="cta-box">
+            <h3>Transform Your Legal Intake</h3>
+            <p>See how Claire by The Algorithm can help your firm convert more cases with faster response times and better client experience. Thompson & Associates achieved 89% conversion improvement—what could your firm achieve?</p>
+            <a href="/" class="cta-button">Try Claire</a>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Claire</a></li>
+                    <li><a href="https://www.the-algo.com">The Algorithm</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                    <li><a href="/general/">Other Industries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/case-studies">Case Studies</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/hipaa">HIPAA Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com">The Algorithm</a></p>
+        </div>
+    </footer>
+
+    <script>
+    // Personalization layer
+    (function() {
+        const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
+
+        if (userData.name || userData.location) {
+            addPersonalizationBar();
+            if (userData.location && userData.location.country !== 'US') {
+                convertCurrency(userData.location.country);
+                addLocalContext(userData.location.country);
+            }
+        }
+
+        function addPersonalizationBar() {
+            const bar = document.createElement('div');
+            bar.style.cssText = `
+                background: linear-gradient(90deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%);
+                padding: 0.75rem 2rem;
+                font-size: 0.9375rem;
+                color: var(--text-primary);
+                font-weight: 500;
+                border-bottom: 2px solid var(--accent);
+                text-align: center;
+                position: relative;
+                z-index: 100;
+            `;
+
+            let message = '';
+            if (userData.name && userData.location) {
+                message = `${userData.name}, see how this solution could work in ${userData.location.country}`;
+            } else if (userData.name) {
+                message = `${userData.name}, discover how AI orchestration delivers ROI`;
+            } else if (userData.location) {
+                message = `See how this applies to healthcare in ${userData.location.country}`;
+            }
+
+            bar.textContent = message;
+            document.body.insertBefore(bar, document.body.firstChild);
+        }
+
+        function convertCurrency(country) {
+            const rates = {
+                'IN': { symbol: '₹', rate: 83.12, name: 'INR' },
+                'GB': { symbol: '£', rate: 0.79, name: 'GBP' },
+                'EU': { symbol: '€', rate: 0.92, name: 'EUR' },
+                'CA': { symbol: 'CAD $', rate: 1.35, name: 'CAD' },
+                'AU': { symbol: 'AUD $', rate: 1.52, name: 'AUD' }
+            };
+
+            const currencyInfo = rates[country] || rates['GB']; // Default to GBP if country not mapped
+
+            document.querySelectorAll('[data-usd]').forEach(el => {
+                const usd = parseFloat(el.getAttribute('data-usd'));
+                const converted = (usd * currencyInfo.rate).toFixed(0);
+                const formatted = new Intl.NumberFormat().format(converted);
+                el.innerHTML = `$${new Intl.NumberFormat().format(usd)} <span style="color: var(--text-secondary); font-size: 0.9em;">(${currencyInfo.symbol}${formatted} ${currencyInfo.name})</span>`;
+            });
+        }
+
+        function addLocalContext(country) {
+            const contexts = {
+                'IN': 'Indian healthcare faces 40% higher administrative costs—automation opportunities are even larger here.',
+                'GB': 'NHS Trusts face similar administrative challenges with an estimated £10B annual burden.',
+                'CA': 'Canadian healthcare systems report comparable scheduling inefficiencies and administrative overhead.',
+                'AU': 'Australian hospitals experience similar patient scheduling challenges and administrative burdens.'
+            };
+
+            const contextText = contexts[country];
+            if (!contextText) return;
+
+            const contextBox = document.createElement('div');
+            contextBox.style.cssText = `
+                background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+                border-left: 4px solid var(--accent);
+                padding: 1.5rem 2rem;
+                margin: 2rem 0;
+                border-radius: 8px;
+                font-size: 1.0625rem;
+                color: var(--text-primary);
+            `;
+            contextBox.innerHTML = `<strong>Local Context:</strong> ${contextText}`;
+
+            const article = document.querySelector('article');
+            if (article) {
+                const firstH2 = article.querySelector('h2');
+                if (firstH2) {
+                    firstH2.parentNode.insertBefore(contextBox, firstH2.nextSibling);
+                }
+            }
+        }
+    })();
+    </script>
+</body>
+</html>

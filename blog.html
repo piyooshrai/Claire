@@ -152,6 +152,64 @@
             color: var(--text-secondary);
         }
 
+        .blog-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+
+        .blog-post-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .blog-post-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+
+        .blog-post-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post-card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .blog-post-card p {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
         footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border);
@@ -232,28 +290,26 @@
             <p>Insights on AI orchestration, workflow automation, and the future of digital labor.</p>
         </section>
 
-        <div class="coming-soon">
-            <h2>Blog Coming Soon</h2>
-            <p>We're preparing in-depth content on AI orchestration, reasoning engines, workflow automation, and industry-specific implementations.</p>
+        <div class="blog-posts-grid">
+            <a href="/blog/agentic-workflows-2026.html" class="blog-post-card">
+                <span class="blog-post-category">AI Orchestration</span>
+                <h2>From AI Agents to Agentic Workflows: What Changed in 2026</h2>
+                <p>Single AI agents answered questions. Agentic workflows get work done. Discover why enterprises are shifting from testing agents to orchestrating complete workflows that deliver real business outcomes.</p>
+                <div class="blog-post-meta">
+                    <span>January 2026</span>
+                    <span>8 min read</span>
+                </div>
+            </a>
 
-            <div class="topics-grid">
-                <div class="topic-card">
-                    <h3>Orchestration vs. Automation</h3>
-                    <p>Understanding the difference and when each approach applies</p>
+            <a href="/blog/healthcare-roi-reality-check.html" class="blog-post-card">
+                <span class="blog-post-category">Healthcare ROI</span>
+                <h2>The ROI Reality Check: What Healthcare Actually Saves with AI Orchestration</h2>
+                <p>$83 billion in administrative burden, 300-600% Year 1 ROI potential. Here's what healthcare organizations actually achieve with workflow automation—backed by real data.</p>
+                <div class="blog-post-meta">
+                    <span>January 2026</span>
+                    <span>10 min read</span>
                 </div>
-                <div class="topic-card">
-                    <h3>Reasoning Engines</h3>
-                    <p>How context-aware AI handles real-world complexity</p>
-                </div>
-                <div class="topic-card">
-                    <h3>Industry Deep Dives</h3>
-                    <p>Workflow patterns across Healthcare, Legal, Finance, and Hospitality</p>
-                </div>
-                <div class="topic-card">
-                    <h3>Implementation Strategies</h3>
-                    <p>Best practices for deploying AI orchestration</p>
-                </div>
-            </div>
+            </a>
         </div>
     </main>
 

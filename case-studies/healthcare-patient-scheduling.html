@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Valley Health Reduced Scheduling Costs by 63% | Claire by The Algorithm</title>
+    <meta name="description" content="Valley Health eliminated administrative bottlenecks and achieved $780K annual savings with Claire by The Algorithm's patient scheduling orchestration. 6.2-month ROI payback.">
+    <meta name="keywords" content="patient scheduling automation, healthcare workflow automation, reduce administrative costs, hospital scheduling efficiency, Claire by The Algorithm">
+    <meta name="author" content="The Algorithm LLC">
+    <meta property="og:title" content="How Valley Health Reduced Scheduling Costs by 63%">
+    <meta property="og:description" content="Valley Health eliminated administrative bottlenecks and achieved $780K annual savings with Claire by The Algorithm's patient scheduling orchestration.">
+    <meta property="og:type" content="article">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-dark: #4f46e5;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .case-study-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .powered-by {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.0625rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        ul, ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            font-size: 1.0625rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .quote-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.125rem;
+        }
+
+        .quote-attribution {
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .cta-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.0625rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        .tech-stack {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .tech-stack h3 {
+            margin-top: 0;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent-dark);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/assets/claire-logo.png" alt="Claire" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/case-studies">Case Studies</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <span class="case-study-tag">Healthcare Case Study</span>
+            <h1>How Valley Health Reduced Scheduling Costs by 63%</h1>
+            <p class="hero-subtitle">From 8-minute hold times to 45 seconds. From $1.2M to $420K annual costs.</p>
+            <p class="powered-by">Powered by Claire by The Algorithm</p>
+        </div>
+    </div>
+
+    <article>
+        <h2>The Challenge: Administrative Burden at Breaking Point</h2>
+
+        <p>Valley Health, a 300-bed regional hospital in the Pacific Northwest, faced a problem familiar to healthcare administrators nationwide: their patient scheduling operation had become a costly, inefficient bottleneck that was actively degrading patient experience and operational efficiency.</p>
+
+        <p><strong>The numbers told a stark story:</strong></p>
+
+        <ul>
+            <li><strong>$1.2 million annual costs</strong> for a 15-person scheduling team working across multiple shifts</li>
+            <li><strong>8-minute average hold times</strong> for patients trying to schedule appointments</li>
+            <li><strong>30% no-show rate</strong> due to manual confirmation processes and scheduling errors</li>
+            <li><strong>Manual insurance verification</strong> requiring callback workflows and delaying appointments</li>
+            <li><strong>Disconnected systems</strong> between EHR, scheduling, and patient communication</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p>"We were stuck in a vicious cycle," explains Sarah Chen, Valley Health's COO. "High hold times meant frustrated patients. Manual processes meant errors. Errors meant no-shows. No-shows meant wasted provider time and lost revenue. Our administrative costs were skyrocketing while patient satisfaction plummeted."</p>
+        </div>
+
+        <p>The hospital's CFO commissioned an analysis that revealed the true cost: beyond direct staffing, they were losing an estimated $340,000 annually in revenue due to scheduling inefficiencies, no-shows, and missed appointment opportunities.</p>
+
+        <h2>The Solution: Agentic Workflow Orchestration</h2>
+
+        <p>In March 2025, Valley Health implemented <strong>Claire by The Algorithm's orchestration platform</strong> to transform their patient scheduling workflow from a manual, multi-step process into an automated, intelligent system.</p>
+
+        <h3>How the Workflow Works</h3>
+
+        <p>When a patient requests an appointment (via phone, SMS, patient portal, or website chat), Claire orchestrates a complete workflow across multiple systems:</p>
+
+        <ol>
+            <li><strong>Eligibility Verification Agent</strong> - Checks insurance coverage in real-time via payer APIs, verifying active status and coverage details</li>
+            <li><strong>Scheduling Intelligence Agent</strong> - Analyzes provider availability, patient preferences, appointment type requirements, and historical patterns to suggest optimal slots</li>
+            <li><strong>Authorization Agent</strong> - Determines if prior authorization is required based on insurance type, appointment type, and clinical protocols</li>
+            <li><strong>Coordination Agent</strong> - Books the appointment in the EHR, sends multi-channel confirmations (SMS + email + portal notification), adds to provider calendar, and notifies front desk</li>
+            <li><strong>Follow-up Agent</strong> - Manages pre-appointment reminders, collects required paperwork digitally, and sends navigation/parking instructions</li>
+        </ol>
+
+        <div class="highlight-box">
+            <p><strong>The key difference:</strong> Instead of 5-7 manual touchpoints across multiple staff members and systems, the entire workflow executes automatically in under 60 seconds—with human staff only involved for exception handling.</p>
+        </div>
+
+        <h3>Integration Architecture</h3>
+
+        <p>Claire by The Algorithm integrated with Valley Health's existing technology stack via the Model Context Protocol (MCP):</p>
+
+        <ul>
+            <li><strong>Epic EHR</strong> - Appointment scheduling, provider calendars, patient records</li>
+            <li><strong>Payer APIs</strong> - Real-time eligibility verification with major insurance providers</li>
+            <li><strong>Twilio</strong> - Multi-channel patient communication (SMS, voice, email)</li>
+            <li><strong>Patient Portal</strong> - Appointment confirmations and paperwork collection</li>
+        </ul>
+
+        <p>The entire integration was completed in 6 weeks—dramatically faster than the 6-9 months typically required for custom healthcare IT integrations.</p>
+
+        <h2>The Results: Measurable ROI in 6 Months</h2>
+
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="stat-number">63%</div>
+                <div class="stat-label">Reduction in scheduling FTEs (15 → 6 staff)</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" data-usd="780000">$780,000</div>
+                <div class="stat-label">Annual savings from efficiency gains</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">8m → 45s</div>
+                <div class="stat-label">Hold time reduction</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">30% → 12%</div>
+                <div class="stat-label">No-show rate improvement</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">6.2 mo</div>
+                <div class="stat-label">ROI payback period</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">99.2%</div>
+                <div class="stat-label">Insurance verification accuracy</div>
+            </div>
+        </div>
+
+        <h3>Operational Impact</h3>
+
+        <p>Beyond the headline numbers, Valley Health experienced transformative operational improvements:</p>
+
+        <ul>
+            <li><strong>Patient satisfaction scores increased 34 points</strong> (Press Ganey) due to reduced wait times and improved scheduling experience</li>
+            <li><strong>Provider utilization improved 18%</strong> as no-show reduction meant fuller schedules and fewer gaps</li>
+            <li><strong>Staff redeployment, not layoffs:</strong> 9 scheduling staff members were transitioned to patient navigation and care coordination roles where human interaction adds value</li>
+            <li><strong>Same-day appointment availability</strong> increased 40% due to real-time scheduling optimization</li>
+            <li><strong>Insurance denial rate decreased 23%</strong> through accurate upfront eligibility verification</li>
+        </ul>
+
+        <div class="quote-box">
+            "The Algorithm's platform delivered ROI faster than any technology investment in our history. But the real win isn't just cost savings—it's that we can now offer patients an experience that matches their expectations from other industries. They can schedule complex medical appointments as easily as booking a restaurant reservation."
+            <div class="quote-attribution">— Michael Torres, CFO, Valley Health</div>
+        </div>
+
+        <h3>Financial Breakdown</h3>
+
+        <p>The complete financial analysis revealed multiple sources of ROI:</p>
+
+        <ul>
+            <li><strong>Direct labor savings:</strong> <span data-usd="540000">$540,000</span> annually (9 FTE reduction at fully-loaded cost)</li>
+            <li><strong>No-show revenue recovery:</strong> <span data-usd="180000">$180,000</span> annually (18% reduction in no-shows × average appointment value)</li>
+            <li><strong>Insurance denial reduction:</strong> <span data-usd="60000">$60,000</span> annually (fewer claims rejected due to eligibility issues)</li>
+            <li><strong>Total annual benefit:</strong> <span data-usd="780000">$780,000</span></li>
+            <li><strong>Implementation cost:</strong> <span data-usd="125000">$125,000</span> (integration + first year platform fees)</li>
+            <li><strong>Payback period:</strong> 6.2 months</li>
+            <li><strong>3-year NPV:</strong> <span data-usd="2100000">$2.1 million</span></li>
+        </ul>
+
+        <h2>Key Success Factors</h2>
+
+        <p>Valley Health's successful implementation highlighted several critical factors:</p>
+
+        <h3>1. Executive Sponsorship</h3>
+        <p>The COO championed the project, ensuring cross-departmental alignment between IT, operations, and clinical leadership. This prevented the "pilot purgatory" that kills many healthcare AI initiatives.</p>
+
+        <h3>2. Focus on Outcomes, Not Features</h3>
+        <p>Rather than getting distracted by AI capabilities, the team defined success metrics upfront: hold times, no-show rates, staff costs, and patient satisfaction. Every decision was evaluated against these outcomes.</p>
+
+        <h3>3. Change Management</h3>
+        <p>Scheduling staff were involved from day one, with transparent communication about redeployment opportunities rather than layoffs. This turned potential resistors into advocates.</p>
+
+        <h3>4. Rapid Integration via MCP</h3>
+        <p>The Model Context Protocol eliminated the typical 6-9 month integration timeline, enabling Valley Health to achieve ROI in the first year rather than waiting years for payback.</p>
+
+        <div class="tech-stack">
+            <h3>Technical Implementation Details</h3>
+            <p><strong>Integration Method:</strong> Model Context Protocol (MCP)</p>
+            <p><strong>Primary Systems:</strong> Epic EHR, payer eligibility APIs, Twilio communications platform</p>
+            <p><strong>Deployment Model:</strong> Cloud-hosted with SOC 2 Type II compliance</p>
+            <p><strong>Implementation Timeline:</strong> 6 weeks from kickoff to production</p>
+            <p><strong>Training Required:</strong> 4 hours for scheduling staff, 2 hours for front desk</p>
+            <p><strong>Uptime Since Launch:</strong> 99.7% (exceeding SLA)</p>
+        </div>
+
+        <h2>What's Next for Valley Health</h2>
+
+        <p>Following the success of scheduling automation, Valley Health is expanding Claire by The Algorithm to additional workflows:</p>
+
+        <ul>
+            <li><strong>Pre-visit preparation:</strong> Automated collection of medical history, medications, and insurance documentation</li>
+            <li><strong>Post-visit follow-up:</strong> Appointment summaries, prescription information, and follow-up scheduling</li>
+            <li><strong>Care coordination:</strong> Multi-provider appointment sequencing for complex cases</li>
+            <li><strong>Revenue cycle:</strong> Prior authorization orchestration and claims follow-up</li>
+        </ul>
+
+        <p>"We've proven the model works," says COO Sarah Chen. "Now we're asking: what other administrative workflows can we transform from cost centers into competitive advantages?"</p>
+
+        <div class="cta-box">
+            <h3>Transform Your Healthcare Operations</h3>
+            <p>See how Claire by The Algorithm can reduce your administrative costs while improving patient experience. Valley Health achieved 300%+ Year 1 ROI—what could your organization achieve?</p>
+            <a href="/" class="cta-button">Try Claire</a>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Claire</a></li>
+                    <li><a href="https://www.the-algo.com">The Algorithm</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                    <li><a href="/general/">Other Industries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/case-studies">Case Studies</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/hipaa">HIPAA Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com">The Algorithm</a></p>
+        </div>
+    </footer>
+
+    <script>
+    // Personalization layer
+    (function() {
+        const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
+
+        if (userData.name || userData.location) {
+            addPersonalizationBar();
+            if (userData.location && userData.location.country !== 'US') {
+                convertCurrency(userData.location.country);
+                addLocalContext(userData.location.country);
+            }
+        }
+
+        function addPersonalizationBar() {
+            const bar = document.createElement('div');
+            bar.style.cssText = `
+                background: linear-gradient(90deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%);
+                padding: 0.75rem 2rem;
+                font-size: 0.9375rem;
+                color: var(--text-primary);
+                font-weight: 500;
+                border-bottom: 2px solid var(--accent);
+                text-align: center;
+                position: relative;
+                z-index: 100;
+            `;
+
+            let message = '';
+            if (userData.name && userData.location) {
+                message = `${userData.name}, see how this solution could work in ${userData.location.country}`;
+            } else if (userData.name) {
+                message = `${userData.name}, discover how AI orchestration delivers ROI`;
+            } else if (userData.location) {
+                message = `See how this applies to healthcare in ${userData.location.country}`;
+            }
+
+            bar.textContent = message;
+            document.body.insertBefore(bar, document.body.firstChild);
+        }
+
+        function convertCurrency(country) {
+            const rates = {
+                'IN': { symbol: '₹', rate: 83.12, name: 'INR' },
+                'GB': { symbol: '£', rate: 0.79, name: 'GBP' },
+                'EU': { symbol: '€', rate: 0.92, name: 'EUR' },
+                'CA': { symbol: 'CAD $', rate: 1.35, name: 'CAD' },
+                'AU': { symbol: 'AUD $', rate: 1.52, name: 'AUD' }
+            };
+
+            const currencyInfo = rates[country] || rates['GB']; // Default to GBP if country not mapped
+
+            document.querySelectorAll('[data-usd]').forEach(el => {
+                const usd = parseFloat(el.getAttribute('data-usd'));
+                const converted = (usd * currencyInfo.rate).toFixed(0);
+                const formatted = new Intl.NumberFormat().format(converted);
+                el.innerHTML = `$${new Intl.NumberFormat().format(usd)} <span style="color: var(--text-secondary); font-size: 0.9em;">(${currencyInfo.symbol}${formatted} ${currencyInfo.name})</span>`;
+            });
+        }
+
+        function addLocalContext(country) {
+            const contexts = {
+                'IN': 'Indian healthcare faces 40% higher administrative costs—automation opportunities are even larger here.',
+                'GB': 'NHS Trusts face similar administrative challenges with an estimated £10B annual burden.',
+                'CA': 'Canadian healthcare systems report comparable scheduling inefficiencies and administrative overhead.',
+                'AU': 'Australian hospitals experience similar patient scheduling challenges and administrative burdens.'
+            };
+
+            const contextText = contexts[country];
+            if (!contextText) return;
+
+            const contextBox = document.createElement('div');
+            contextBox.style.cssText = `
+                background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+                border-left: 4px solid var(--accent);
+                padding: 1.5rem 2rem;
+                margin: 2rem 0;
+                border-radius: 8px;
+                font-size: 1.0625rem;
+                color: var(--text-primary);
+            `;
+            contextBox.innerHTML = `<strong>Local Context:</strong> ${contextText}`;
+
+            const article = document.querySelector('article');
+            if (article) {
+                const firstH2 = article.querySelector('h2');
+                if (firstH2) {
+                    firstH2.parentNode.insertBefore(contextBox, firstH2.nextSibling);
+                }
+            }
+        }
+    })();
+    </script>
+</body>
+</html>
