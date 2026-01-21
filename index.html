@@ -553,7 +553,7 @@
         }
 
         async function startConversation() {
-            await pause(1000);
+            await pause(500);
 
             // Check if returning visitor
             const existingName = sessionStorage.getItem('userName');
@@ -565,10 +565,18 @@
                 userEmail = existingEmail || '';
                 userLocation = sessionStorage.getItem('userLocation') || '';
 
+                showTypingIndicator();
+                await pause(800);
+                removeTypingIndicator();
+
                 const msg1 = addMessage('');
                 await type(msg1, `Welcome back, ${userName}!`);
 
                 await pause(1200);
+
+                showTypingIndicator();
+                await pause(600);
+                removeTypingIndicator();
 
                 const msg2 = addMessage('');
                 await type(msg2, 'Which industry would you like to explore today?');
@@ -579,27 +587,27 @@
             }
 
             // New visitor flow
-            // Show typing indicator while detecting location
+            // Start location detection in background (non-blocking)
+            detectLocation().then(location => {
+                if (location) {
+                    userLocation = location;
+                    sessionStorage.setItem('userLocation', location);
+                }
+            });
+
+            // Show greeting immediately without waiting for location
             showTypingIndicator();
-
-            // Detect location and WAIT for it to complete
-            userLocation = await detectLocation();
-            if (userLocation) {
-                sessionStorage.setItem('userLocation', userLocation);
-            }
-
-            // Remove typing indicator
+            await pause(800);
             removeTypingIndicator();
 
-            // Get localized greeting based on detected location
-            const countryCode = sessionStorage.getItem('userCountryCode') || '';
-            const regionCode = sessionStorage.getItem('userRegionCode') || '';
-            const greeting = getLocalizedGreeting(countryCode, regionCode);
-
             const msg1 = addMessage('');
-            await type(msg1, `${greeting}, I am Claire.`);
+            await type(msg1, `Hello, I am Claire.`);
 
             await pause(800);
+
+            showTypingIndicator();
+            await pause(600);
+            removeTypingIndicator();
 
             const msg2 = addMessage('');
             await type(msg2, 'What is your name?');
@@ -638,6 +646,9 @@
                     // Validate name is realistic (more than 1 char, contains vowels or common names)
                     if (value.length < 2 || !/[aeiouAEIOU]/.test(value)) {
                         input.disabled = true;
+                        showTypingIndicator();
+                        await pause(500);
+                        removeTypingIndicator();
                         const msg = addMessage('');
                         await type(msg, `${value}... and how do you pronounce that exactly? Try again with your real name.`);
                         await pause(1000);
@@ -669,6 +680,10 @@
         }
 
         async function respondToName() {
+            showTypingIndicator();
+            await pause(800);
+            removeTypingIndicator();
+
             const msg = addMessage('');
             if (userLocation) {
                 await type(msg, `Thank you, ${userName} from ${userLocation}.`);
@@ -677,6 +692,10 @@
             }
 
             await pause(1200);
+
+            showTypingIndicator();
+            await pause(600);
+            removeTypingIndicator();
 
             const msg2 = addMessage('');
             await type(msg2, 'Which industry shall we orchestrate today?');
@@ -748,6 +767,10 @@
 
             // If returning visitor with existing email, skip to redirect
             if (userEmail && userEmail.trim()) {
+                showTypingIndicator();
+                await pause(700);
+                removeTypingIndicator();
+
                 const msg = addMessage('');
                 await type(msg, `Excellent. Let's orchestrate your ${path.split('/')[1]} workflows, ${userName}.`);
 
@@ -757,6 +780,10 @@
             }
 
             // New visitor - ask for email
+            showTypingIndicator();
+            await pause(700);
+            removeTypingIndicator();
+
             const msg = addMessage('');
             await type(msg, `Perfect. May I have your email to personalize your experience?`);
 
@@ -797,6 +824,9 @@
                     // Check basic format first
                     if (!emailRegex.test(value)) {
                         input.disabled = true;
+                        showTypingIndicator();
+                        await pause(500);
+                        removeTypingIndicator();
                         const msg = addMessage('');
                         await type(msg, `That doesn't look like an email. Try again.`);
                         await pause(1000);
@@ -839,6 +869,9 @@
 
                     if (hasRepeatedPattern || hasKeyboardPattern || hasExcessiveRepeats || looksLikeGibberish || invalidTLD) {
                         input.disabled = true;
+                        showTypingIndicator();
+                        await pause(500);
+                        removeTypingIndicator();
                         const msg = addMessage('');
                         await type(msg, `"${value}"? Come on. I need your real email.`);
                         await pause(1000);
@@ -876,6 +909,10 @@
             if (userLocation) {
                 sessionStorage.setItem('userLocation', userLocation);
             }
+
+            showTypingIndicator();
+            await pause(700);
+            removeTypingIndicator();
 
             const msg = addMessage('');
             await type(msg, `Excellent. Let's orchestrate your ${path.split('/')[1]} workflows, ${userName}.`);
