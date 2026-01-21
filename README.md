@@ -1,6 +1,6 @@
-# Claire AI Website
+# Claire By The Algorithm Website
 
-Multi-page website for Claire AI, a digital labor platform for healthcare. The site features an interactive conversational demo as the hub, with deep-dive SEO content pages as spokes.
+Multi-page website for Claire By The Algorithm, a digital labor platform for healthcare. The site features an interactive conversational demo as the hub, with deep-dive SEO content pages as spokes.
 
 ## Repository Structure
 
@@ -259,7 +259,7 @@ All healthcare spoke pages follow:
 
 ## License
 
-UNLICENSED - Private repository for Claire AI
+UNLICENSED - Private repository for Claire By The Algorithm
 
 ## Contact
 
