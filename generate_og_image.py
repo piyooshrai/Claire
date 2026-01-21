@@ -72,7 +72,7 @@ draw.rectangle([box_x1, box_y1, box_x2, box_y2], outline='#ffffff', width=2)
 draw.text((text_x, cta_y), cta, fill='#ffffff', font=cta_font)
 
 # Save the image
-output_path = "/home/user/Claire/assets/claire-og-image.png"
+output_path = "/home/user/Claire/assets/og-image.png"
 img.save(output_path, 'PNG')
 print(f"Open Graph image created: {output_path}")
 print(f"Dimensions: {width}x{height}")
