@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en" data-industry="healthcare">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claire By The Algorithm for Healthcare | Digital Labor Platform</title>
+    <meta name="description" content="Claire automates patient orchestration, insurance verification, and administrative workflows for healthcare practices. HIPAA compliant, FHIR-integrated, zero turnover.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Claire By The Algorithm for Healthcare | Digital Labor Platform">
+    <meta property="og:description" content="Claire automates patient orchestration, insurance verification, and administrative workflows for healthcare practices. HIPAA compliant, FHIR-integrated, zero turnover.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.letsaskclaire.com/healthcare/index.html">
+    <meta property="og:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Claire By The Algorithm">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Claire By The Algorithm for Healthcare | Digital Labor Platform">
+    <meta name="twitter:description" content="Claire automates patient orchestration, insurance verification, and administrative workflows for healthcare practices. HIPAA compliant, FHIR-integrated, zero turnover.">
+    <meta name="twitter:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent: #2563eb;
+            --border: #e2e8f0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            z-index: 100;
+        }
+        
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover { color: var(--accent); }
+        
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+        
+        .section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-label {
+            font-size: 0.875rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        h1, h2 {
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .metric {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .card {
+            display: block;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px var(--shadow);
+            transform: translateY(-2px);
+        }
+        
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        
+        .card-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .card-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        
+        .card-list li::before {
+            content: '→ ';
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        
+        .link-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid var(--accent);
+            background: var(--bg-secondary);
+        }
+        
+        .link-box a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .link-box a:hover { text-decoration: underline; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            .section { padding: 3rem 0; }
+            .cards { grid-template-columns: 1fr; }
+        }
+
+        /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .claire-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .claire-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        .claire-tooltip {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            background: white;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            white-space: nowrap;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .claire-dock:hover .claire-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: 80px;
+        }
+
+        .claire-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-brand"><img src="/assets/claire-logo.png" alt="Claire" style="height: 36px;"> // HEALTHCARE</div>
+        <div class="nav-links">
+            <a href="#capabilities">Capabilities</a>
+            <a href="#integration">Integration</a>
+            <a href="#security">Security</a>
+            <a href="/healthcare/cost-analysis.html">ROI</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section" id="capabilities">
+            <div class="section-label">Current Role: Patient Orchestrator</div>
+            <h2>Handling the 'Administrative Front-Door'</h2>
+            <p>I manage the complete patient journey from first contact through post-visit follow-up. My reasoning engine handles the chaos of real-world healthcare interactions—from insurance changes to last-minute rescheduling—with the context awareness of a senior team member.</p>
+
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">60%</div>
+                    <div class="metric-label">Staff Reduction Potential</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">0s</div>
+                    <div class="metric-label">Average Wait Time</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">99.2%</div>
+                    <div class="metric-label">Appointment Confirmation Rate</div>
+                </div>
+            </div>
+
+            <div class="cards">
+                <a href="/healthcare/patient-intake.html" class="card">
+                    <h3>Patient Intake</h3>
+                    <p>I collect demographic information, medical history, and consent forms through natural conversation. No more clipboards or outdated patient portals.</p>
+                </a>
+                <a href="/healthcare/insurance-verification.html" class="card">
+                    <h3>Insurance Verification</h3>
+                    <p>I verify eligibility in real-time with payer APIs, check prior authorizations, and estimate patient responsibility before appointments.</p>
+                </a>
+                <a href="/healthcare/intelligent-scheduling.html" class="card">
+                    <h3>Intelligent Scheduling</h3>
+                    <p>I understand provider preferences, appointment types, and patient needs to optimize scheduling. I handle conflicts and rescheduling autonomously.</p>
+                </a>
+                <a href="/healthcare/prescription-refills.html" class="card">
+                    <h3>Prescription Refills</h3>
+                    <p>I process refill requests, check medication history in your EHR, and route to providers based on clinical protocols you define.</p>
+                </a>
+                <a href="/healthcare/pre-visit-preparation.html" class="card">
+                    <h3>Pre-Visit Preparation</h3>
+                    <p>I send appointment reminders, collect pre-visit questionnaires, and ensure all documentation is ready when patients arrive.</p>
+                </a>
+                <a href="/healthcare/post-visit-follow-up.html" class="card">
+                    <h3>Post-Visit Follow-Up</h3>
+                    <p>I schedule follow-ups, send care instructions, and coordinate referrals with external specialists—maintaining continuity of care.</p>
+                </a>
+            </div>
+
+            <div class="link-box">
+                <p>→ Learn how I automate insurance verification: <a href="/healthcare/insurance-verification.html">Insurance Verification Deep Dive</a></p>
+            </div>
+        </section>
+
+        <section class="section" id="integration">
+            <div class="section-label">Technical Skillset</div>
+            <h2>Integration Architecture</h2>
+            <p>I integrate with your existing healthcare infrastructure through industry-standard protocols. No rip-and-replace required. Implementation typically takes 2-4 weeks from contract signature to first patient interaction.</p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>EHR Integration</h3>
+                    <p>FHIR R4/R5 for modern systems, HL7 v2 for legacy platforms</p>
+                    <ul class="card-list">
+                        <li>Epic (Hyperspace, MyChart)</li>
+                        <li>Cerner (PowerChart)</li>
+                        <li>Athenahealth</li>
+                        <li>eClinicalWorks</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Payer APIs</h3>
+                    <p>Real-time eligibility verification via X12 EDI 270/271 transactions</p>
+                    <ul class="card-list">
+                        <li>Change Healthcare</li>
+                        <li>Availity</li>
+                        <li>Direct payer connections</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Telephony Integration</h3>
+                    <p>Voice and SMS communication channels</p>
+                    <ul class="card-list">
+                        <li>Twilio integration</li>
+                        <li>Existing phone system APIs</li>
+                        <li>SMS/MMS messaging</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Practice Management</h3>
+                    <p>Scheduling and billing system synchronization</p>
+                    <ul class="card-list">
+                        <li>Schedule optimization</li>
+                        <li>Revenue cycle management</li>
+                        <li>Patient payment processing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="link-box">
+                <p>→ Technical deep dive on EHR integration: <a href="/healthcare/ehr-integration.html">Epic and Cerner Integration Guide</a></p>
+            </div>
+        </section>
+
+        <section class="section" id="security">
+            <div class="section-label">Security & Compliance</div>
+            <h2>Model Context Protocol (MCP) Architecture</h2>
+            <p>I don't store or train on your patient data. Period. My architecture uses ephemeral connections to your EHR—I read what I need for the current conversation, reason through the task, and close the connection. No central database. No training data retention.</p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>HIPAA Compliant</h3>
+                    <p>BAA signed with all clients, full audit trail, SOC 2 Type II certified</p>
+                </div>
+                <div class="card">
+                    <h3>Zero Trust Architecture</h3>
+                    <p>Least-privilege access, encryption at rest (AES-256) and in transit (TLS 1.3)</p>
+                </div>
+                <div class="card">
+                    <h3>MCP Security</h3>
+                    <p>Ephemeral data access, no persistent PHI storage, session-based connections</p>
+                </div>
+                <div class="card">
+                    <h3>Full Audit Trail</h3>
+                    <p>Every data access logged with reasoning trace, 7-year retention for HIPAA</p>
+                </div>
+            </div>
+
+            <div class="link-box">
+                <p>→ Is your patient data used to train AI models? <a href="/healthcare/mcp-security.html">MCP Security Deep Dive</a></p>
+                <p style="margin-top: 1rem;">→ Complete HIPAA compliance documentation: <a href="/healthcare/hipaa-compliance.html">HIPAA Compliance Requirements</a></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Interview Claire for Your Team</h2>
+            <p>I don't require benefits, never call in sick, and work 24/7 without overtime. I'm a digital teammate, not a software implementation. Let's discuss how I can handle your administrative front-door.</p>
+        </section>
+    </main>
+
+    <script>
+// Content Personalization - Inject user name naturally into prose
+// This runs on landing pages (healthcare/index.html, finance/index.html, etc.)
+
+const userData = {
+    name: sessionStorage.getItem('userName') || ''
+};
+
+if (userData.name) {
+    personalizeContent();
+}
+
+function personalizeContent() {
+    // Find all paragraphs in the main content area
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    const paragraphs = main.querySelectorAll('p');
+
+    paragraphs.forEach((p, index) => {
+        let text = p.innerHTML;
+
+        // Pattern 1: Any first-person statement "I [verb]..." → "Alex, I [verb]..."
+        // Matches: "I collect", "I verify", "I manage", "I don't", etc.
+        if (text.match(/^I [a-z]/)) {
+            text = `${userData.name}, ${text}`;
+        }
+
+        // Pattern 2: "When you..." → "When you, Alex,..."
+        // Only do this for the first occurrence to avoid being repetitive
+        else if (index < 3 && text.match(/^When you /)) {
+            text = text.replace(/^When you /, `When you, ${userData.name}, `);
+        }
+
+        // Pattern 3: "You'll notice..." → "Alex, you'll notice..."
+        else if (text.match(/^You'(ll|re) /)) {
+            text = `${userData.name}, you${text.slice(3)}`;
+        }
+
+        // Pattern 4: Mid-sentence injection for key phrases
+        // "The difference is..." → "The difference, Alex, is..."
+        else if (text.match(/^The difference is/) && index < 5) {
+            text = text.replace(/^The difference is/, `The difference, ${userData.name}, is`);
+        }
+
+        // Pattern 5: "Here's how..." → "Here's how, Alex,..."
+        else if (text.match(/^Here'?s how/) && index < 5) {
+            text = text.replace(/^(Here'?s how)/, `$1, ${userData.name},`);
+        }
+
+        // Pattern 6: Questions directed at reader
+        // "Want to see..." → "Want to see this in action, Alex?"
+        else if (text.match(/^Want to /)) {
+            text = text.replace(/\?$/, `, ${userData.name}?`);
+        }
+
+        p.innerHTML = text;
+    });
+
+    // Personalize headings that are questions or direct address
+    const headings = main.querySelectorAll('h1, h2, h3');
+    headings.forEach(h => {
+        let text = h.innerHTML;
+
+        // "Why Choose Claire?" → "Why Choose Claire, Alex?"
+        if (text.match(/\?$/)) {
+            text = text.replace(/\?$/, `, ${userData.name}?`);
+            h.innerHTML = text;
+        }
+    });
+
+    // Personalize section labels with direct address
+    const labels = main.querySelectorAll('.section-label');
+    labels.forEach(label => {
+        let text = label.textContent;
+
+        // Add casual address to role labels
+        // "Current Role: Patient Orchestrator" → "Current Role: Your Patient Orchestrator, Alex"
+        if (text.includes('Current Role:')) {
+            text = text.replace('Current Role:', `Current Role: Your`) + `, ${userData.name}`;
+            label.textContent = text;
+        }
+    });
+}
+
+// === CONVERSATIONAL PERSONALIZATION ===
+// Time + weather aware greetings
+// (Merged with content personalization - using same userData object)
+
+// Extend userData with additional fields for conversational greetings
+userData.email = sessionStorage.getItem('userEmail') || '';
+userData.location = sessionStorage.getItem('userLocation') || '';
+userData.timezone = sessionStorage.getItem('userTimezone') || '';
+userData.weatherTemp = sessionStorage.getItem('userWeatherTemp') || '';
+userData.weatherDesc = sessionStorage.getItem('userWeatherDesc') || '';
+userData.industry = document.documentElement.getAttribute('data-industry') || '';
+
+// Personalize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    if (userData.name) {
+        personalizeExperience();
+    }
+});
+
+function personalizeExperience() {
+    // Add personalization bar to navigation
+    addPersonalizationBar();
+
+    // Personalize Claire Dock message
+    personalizeDock();
+}
+
+function getTimeOfDay() {
+    // Get current hour in user's timezone
+    const userTime = userData.timezone ?
+        new Date().toLocaleString('en-US', { timeZone: userData.timezone, hour: '2-digit', hour12: false }) :
+        new Date().getHours();
+
+    const hour = parseInt(userTime);
+
+    if (hour >= 5 && hour < 7) return 'early_morning';
+    if (hour >= 7 && hour < 12) return 'morning';
+    if (hour >= 12 && hour < 17) return 'afternoon';
+    if (hour >= 17 && hour < 21) return 'evening';
+    return 'late_night';
+}
+
+function getConversationalGreeting() {
+    const timeOfDay = getTimeOfDay();
+    const temp = parseInt(userData.weatherTemp);
+    const weather = userData.weatherDesc;
+    const name = userData.name;
+    const location = userData.location;
+
+    // Time-based context
+    const timeContexts = {
+        early_morning: [
+            `You're up early, ${name}!`,
+            `Early riser, ${name}?`,
+            `Good morning, ${name}! You're ahead of the game`
+        ],
+        morning: [
+            `Good morning, ${name}!`,
+            `Morning, ${name}!`,
+            `Hey ${name}!`
+        ],
+        afternoon: [
+            `Good afternoon, ${name}!`,
+            `Afternoon, ${name}!`,
+            `Hey ${name}!`
+        ],
+        evening: [
+            `Evening, ${name}!`,
+            `Good evening, ${name}!`,
+            `Hey ${name}!`
+        ],
+        late_night: [
+            `Burning the midnight oil, ${name}?`,
+            `Working late, ${name}?`,
+            `Still at it, ${name}?`
+        ]
+    };
+
+    // Weather-based context (if available)
+    const weatherContexts = [];
+    if (temp && location) {
+        if (temp < 35) {
+            weatherContexts.push(`Hope you're staying warm in ${location} today`);
+            weatherContexts.push(`Bundle up out there in ${location} — it's ${temp}°F`);
+        } else if (temp > 85) {
+            weatherContexts.push(`Stay cool in ${location} — it's ${temp}°F today`);
+            weatherContexts.push(`Hot day in ${location} at ${temp}°F`);
+        }
+    }
+
+    if (weather && location) {
+        if (weather.includes('rain') || weather.includes('drizzle')) {
+            weatherContexts.push(`Rainy day in ${location}? Perfect time for workflow orchestration`);
+        } else if (weather.includes('snow')) {
+            weatherContexts.push(`Snowy in ${location}? Let's get you set up efficiently`);
+        } else if (weather.includes('sunny') || weather.includes('clear')) {
+            weatherContexts.push(`Beautiful day in ${location}`);
+        }
+    }
+
+    // Pick random greeting from time context
+    const timeGreetings = timeContexts[timeOfDay];
+    const timeGreeting = timeGreetings[Math.floor(Math.random() * timeGreetings.length)];
+
+    // Add weather context if available
+    const weatherContext = weatherContexts.length > 0 ?
+        weatherContexts[Math.floor(Math.random() * weatherContexts.length)] : '';
+
+    return { timeGreeting, weatherContext };
+}
+
+function addPersonalizationBar() {
+    const nav = document.querySelector('nav');
+    if (!nav || document.getElementById('personalization-bar')) {
+        return;
+    }
+
+    const bar = document.createElement('div');
+    bar.id = 'personalization-bar';
+    bar.style.cssText = `
+        background: linear-gradient(90deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.04) 100%);
+        padding: 0.75rem 2rem;
+        font-size: 0.9375rem;
+        color: var(--text-primary);
+        font-weight: 500;
+        border-bottom: 2px solid var(--accent);
+        text-align: center;
+        position: relative;
+        z-index: 100;
+    `;
+
+    const { timeGreeting, weatherContext } = getConversationalGreeting();
+    let greeting = `<strong>${timeGreeting}</strong>`;
+    if (weatherContext) {
+        greeting += ` ${weatherContext}.`;
+    }
+    greeting += ` Orchestrating <strong>${capitalizeIndustry(userData.industry)}</strong> workflows`;
+
+    bar.innerHTML = greeting;
+    nav.parentNode.insertBefore(bar, nav.nextSibling);
+}
+
+function personalizeDock() {
+    const dockMessage = document.querySelector('.dock-message');
+    if (!dockMessage) return;
+
+    const { timeGreeting, weatherContext } = getConversationalGreeting();
+
+    // Create conversational greeting
+    let greeting = `<strong>${timeGreeting}</strong>`;
+    if (weatherContext) {
+        greeting += ` ${weatherContext}.`;
+    } else if (userData.location) {
+        greeting += ` from ${userData.location}!`;
+    } else {
+        greeting += `!`;
+    }
+
+    // Wrap in paragraph and prepend to dock body
+    const greetingP = document.createElement('p');
+    greetingP.style.cssText = 'margin-bottom: 1rem; font-weight: 500;';
+    greetingP.innerHTML = greeting;
+
+    const dockBody = document.querySelector('.dock-body');
+    if (dockBody) {
+        dockBody.insertBefore(greetingP, dockBody.firstChild);
+    }
+}
+
+function capitalizeIndustry(industry) {
+    const map = {
+        'finance': 'Financial Services',
+        'healthcare': 'Healthcare',
+        'legal': 'Legal Services',
+        'hospitality': 'Hospitality'
+    };
+    return map[industry] || industry;
+}
+
+        </script>
+
+    <footer style="background: var(--bg-secondary, #f9fafb); border-top: 1px solid var(--border, #e5e7eb); padding: 3rem 2rem 2rem; margin-top: 6rem;">
+        <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 2rem;">
+            <div>
+                <h4 style="font-weight: 600; margin-bottom: 1rem;">Company</h4>
+                <ul style="list-style: none; margin: 0; padding: 0;">
+                    <li style="padding: 0.25rem 0;"><a href="/about" style="color: var(--text-secondary, #6b7280); text-decoration: none;">About Claire</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="https://www.the-algo.com" style="color: var(--text-secondary, #6b7280); text-decoration: none;">The Algorithm</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/contact" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight: 600; margin-bottom: 1rem;">Platform</h4>
+                <ul style="list-style: none; margin: 0; padding: 0;">
+                    <li style="padding: 0.25rem 0;"><a href="/healthcare/" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Healthcare</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/finance/" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Finance</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/legal/" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Legal</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/hospitality/" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Hospitality</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/general/" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Other Industries</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight: 600; margin-bottom: 1rem;">Resources</h4>
+                <ul style="list-style: none; margin: 0; padding: 0;">
+                    <li style="padding: 0.25rem 0;"><a href="/case-studies" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Case Studies</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/blog" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Blog</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/support" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight: 600; margin-bottom: 1rem;">Legal</h4>
+                <ul style="list-style: none; margin: 0; padding: 0;">
+                    <li style="padding: 0.25rem 0;"><a href="https://www.the-algo.com/privacy-policy" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Privacy Policy</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/terms" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Terms of Service</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/hipaa" style="color: var(--text-secondary, #6b7280); text-decoration: none;">HIPAA Compliance</a></li>
+                    <li style="padding: 0.25rem 0;"><a href="/security" style="color: var(--text-secondary, #6b7280); text-decoration: none;">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="max-width: 1400px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--border, #e5e7eb); text-align: center; color: var(--text-secondary, #6b7280); font-size: 0.875rem;">
+            <p>&copy; 2026 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com" style="color: var(--accent, #6366f1); text-decoration: none;">The Algorithm</a></p>
+        </div>
+    </footer>
+
+    <div class="claire-dock">
+        <img src="/assets/claire-avatar.png" alt="Claire" class="claire-avatar">
+        <div class="claire-tooltip">
+            <span id="claire-greeting">Ready to help with your workflows</span>
+        </div>
+    </div>
+</body>
+</html>

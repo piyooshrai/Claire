@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" data-industry="legal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Document Automation for Law Firms | Claire By The Algorithm</title>
+    <meta name="description" content="AI Document Automation for Law Firms | Claire By The Algorithm - Claire By The Algorithm for Legal Practices">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI Document Automation for Law Firms | Claire By The Algorithm">
+    <meta property="og:description" content="AI Document Automation for Law Firms | Claire By The Algorithm - Claire By The Algorithm for Legal Practices">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.letsaskclaire.com/legal/document-automation.html">
+    <meta property="og:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Claire By The Algorithm">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Document Automation for Law Firms | Claire By The Algorithm">
+    <meta name="twitter:description" content="AI Document Automation for Law Firms | Claire By The Algorithm - Claire By The Algorithm for Legal Practices">
+    <meta name="twitter:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta name="description" content="AI document automation for law firms: contracts, briefs, pleadings. Template generation, clause libraries, precedent search for legal practice.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg-primary: #faf5ff; --bg-secondary: #ffffff; --text-primary: #1e1b4b; --text-secondary: #6b7280; --accent: #7c3aed; --accent-light: #a78bfa; --border: #e9d5ff; --shadow: rgba(124, 58, 237, 0.1); }
+        @keyframes breathe { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%); background-size: 200% 200%; animation: breathe 15s ease infinite; color: var(--text-primary); font-size: 1.0625rem; line-height: 1.8; position: relative; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(124, 58, 237, 0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, 0.10) 1px, transparent 1px); background-size: 50px 50px; animation: gridBreathe 8s ease-in-out infinite; pointer-events: none; z-index: 1; }
+        @keyframes gridBreathe { 0%, 100% { opacity: 0.4; background-size: 50px 50px; } 50% { opacity: 0.2; background-size: 60px 60px; } }
+        nav, main, footer { position: relative; z-index: 2; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 1rem 2rem; z-index: 1000; box-shadow: 0 2px 10px var(--shadow); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-brand span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.9375rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-cta { padding: 0.75rem 1.5rem; background: var(--accent); color: white !important; border-radius: 6px; font-weight: 600; transition: all 0.2s; }
+        .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 12px var(--shadow); }
+        main { max-width: 1400px; margin: 0 auto; padding: 8rem 2rem 4rem; display: grid; grid-template-columns: 1fr 320px; gap: 4rem; }
+        article { max-width: 850px; }
+        .breadcrumb { margin-bottom: 3rem; color: var(--text-secondary); font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--accent-light); }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 2rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .intro { font-size: 1.375rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 4rem; font-weight: 400; }
+        h2 { font-size: 2.25rem; font-weight: 700; margin: 4rem 0 1.5rem; color: var(--text-primary); position: relative; padding-bottom: 1rem; }
+        h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent) 0%, transparent 100%); }
+        h3 { font-size: 1.625rem; font-weight: 600; margin: 2.5rem 0 1rem; color: var(--accent); }
+        p { margin-bottom: 1.5rem; line-height: 1.8; }
+        strong { font-weight: 600; color: var(--text-primary); }
+        .stat-callout { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; padding: 2.5rem; margin: 3rem 0; border-radius: 12px; box-shadow: 0 8px 24px var(--shadow); }
+        .stat-value { font-size: 4rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 1.125rem; opacity: 0.95; font-weight: 500; }
+        .stat-context { margin-top: 1rem; font-size: 0.9375rem; opacity: 0.9; line-height: 1.6; }
+        .highlight-box { background: var(--bg-secondary); border-left: 4px solid var(--accent); padding: 2rem; margin: 2.5rem 0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .highlight-box h4 { color: var(--accent); font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.75rem; line-height: 1.7; }
+        .cta-box { margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; text-align: center; border-radius: 12px; box-shadow: 0 8px 24px var(--shadow); }
+        .cta-box h3 { color: white; font-size: 2rem; margin-bottom: 1rem; }
+        .cta-box p { font-size: 1.125rem; opacity: 0.95; margin-bottom: 1.5rem; }
+        .cta-btn { display: inline-block; padding: 1.25rem 2.5rem; background: white; color: var(--accent); text-decoration: none; font-weight: 700; border-radius: 8px; transition: all 0.2s; font-size: 1.125rem; }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
+        .read-next { margin-top: 4rem; }
+        .read-next h2 { margin-top: 0; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .card { padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
+        .card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 24px var(--shadow); }
+        .card h3 { font-size: 1.25rem; color: var(--accent); margin-bottom: 0.75rem; }
+        .card h3::after { content: ' →'; opacity: 0; transition: opacity 0.2s; }
+        .card:hover h3::after { opacity: 1; }
+        .card p { font-size: 0.9375rem; color: var(--text-secondary); margin: 0; }
+        aside { position: sticky; top: 8rem; height: fit-content; }
+        .toc, .related { background: var(--bg-secondary); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); }
+        .toc h4, .related h4 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--accent); }
+        .toc ul, .related ul { list-style: none; margin: 0; }
+        .toc li, .related li { margin-bottom: 0.75rem; }
+        .toc a, .related a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; display: block; padding: 0.25rem 0; }
+        .toc a:hover, .related a:hover { color: var(--accent); }
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border); margin-top: 8rem; }
+        .footer-shadow { max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; }
+        .footer-shadow h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .footer-shadow-intro { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.7; }
+        .shadow-toggle { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-bottom: 2rem; }
+        .shadow-toggle:hover { background: var(--accent-light); transform: translateY(-2px); }
+        .shadow-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .shadow-content.expanded { max-height: 10000px; }
+        .shadow-content h3 { font-size: 1.75rem; margin-top: 3rem; margin-bottom: 1rem; }
+        .shadow-content h4 { font-size: 1.375rem; margin-top: 2rem; margin-bottom: 0.75rem; color: var(--accent); }
+        .footer-nav { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; border-top: 1px solid var(--border); }
+        .footer-column h4 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--accent); }
+        .footer-column ul { list-style: none; margin: 0; }
+        .footer-column li { margin-bottom: 0.5rem; }
+        .footer-column a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
+        .footer-column a:hover { color: var(--accent); }
+        .footer-industries { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; border-top: 1px solid var(--border); }
+        .footer-industries p { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .industry-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+        .industry-links a { color: var(--accent); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .industry-links a:hover { color: var(--accent-light); }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem; }
+        .claire-dock { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; }
+        .dock-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px var(--shadow); transition: all 0.3s; }
+        .dock-avatar:hover { transform: scale(1.1); box-shadow: 0 12px 32px var(--shadow); }
+        .dock-panel { position: absolute; bottom: 80px; right: 0; width: 320px; background: white; border-radius: 12px; box-shadow: 0 12px 48px var(--shadow); display: none; border: 1px solid var(--border); }
+        .dock-panel.open { display: block; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .dock-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .dock-header h4 { font-size: 1.125rem; font-weight: 700; color: var(--accent); }
+        .dock-close { background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+        .dock-body { padding: 1.5rem; }
+        .dock-message { font-size: 0.9375rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1rem; }
+        .dock-cta { display: block; width: 100%; padding: 1rem; background: var(--accent); color: white; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.2s; }
+        .dock-cta:hover { background: var(--accent-light); }
+        @media (max-width: 1024px) { main { grid-template-columns: 1fr; gap: 2rem; } aside { position: relative; top: 0; } h1 { font-size: 2.5rem; } .nav-links { gap: 1rem; } .nav-links a:not(.nav-cta) { display: none; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.75rem; } .stat-value { font-size: 3rem; } .footer-nav { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body data-industry="legal">
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="/assets/claire-logo.png" alt="Claire" style="height: 36px;"> // LEGAL
+            </div>
+            <div class="nav-links">
+                <a href="/legal/#case-experience">Case Experience</a>
+                <a href="/legal/#skillset">Skillset</a>
+                <a href="/legal/#privilege-security">Privilege & Security</a>
+                <a href="/legal/#billable-efficiency">Billable Efficiency</a>
+                <a href="/legal/intake-reasoning-demo.html" class="nav-cta">Execute Intake Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> <span>/</span> <a href="/legal/">Legal</a> <span>/</span> Document Automation Orchestration
+            </div>
+
+            <h1>Document Automation Orchestration: Contracts, Pleadings & Briefs</h1>
+
+            <p class="intro">Attorneys spend 48% of their time on document preparation—drafting contracts, pleadings, briefs, discovery responses, and transactional documents (ABA Legal Technology Survey 2024). Much of this work is repetitive: pulling clauses from past documents, adapting templates to new facts, cite-checking, and formatting. This is billable time, but it's not the high-value strategic work that justifies premium rates or differentiates your firm from competitors.</p>
+
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">48%</div>
+                <div class="stat-label">Of attorney time spent on document preparation</div>
+                <div class="stat-context">
+                    The ABA Legal Technology Survey 2024 found nearly half of attorney hours are spent on document drafting, template customization, and formatting. This mechanical work doesn't require legal expertise and represents inefficient allocation of expensive attorney resources.
+                </div>
+            </div>
+
+            <p>I automate document generation while maintaining attorney oversight and customization. This isn't about replacing legal judgment—it's about eliminating the mechanical work so attorneys can focus on strategy, argumentation, and client counseling. Think of me as the paralegal who does the first draft, freeing you to add the legal expertise and persuasive force that justifies your fees.</p>
+
+            <h2 id="templates">Template-Based Document Generation</h2>
+
+            <p>Most legal documents start from templates—your firm has developed and refined these over years of practice. The challenge is customizing templates efficiently without introducing errors.</p>
+
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">85-90%</div>
+                <div class="stat-label">Document completion via AI first draft</div>
+                <div class="stat-context">
+                    My generated documents require minimal attorney review and editing (10-15% of time compared to starting from scratch). For routine documents like engagement letters, discovery responses, and standard contracts, AI-generated first drafts are 80-90% complete, requiring only minor customizations or legal refinements.
+                </div>
+            </div>
+
+            <p>I work with your existing document templates and automate the customization process:</p>
+
+            <h3>Smart Merge Fields</h3>
+            <p>I populate templates with client and matter-specific information from your practice management system automatically. Client name, opposing party, court name, case number, attorney name—all updated automatically with zero find-and-replace errors.</p>
+
+            <h3>Conditional Logic</h3>
+            <p>Templates can include conditional clauses that appear or disappear based on matter characteristics. Commercial lease template? I include triple-net or gross lease provisions based on your specifications. Employment contract? I add equity compensation for executives but exclude it for standard employees.</p>
+
+            <h3>Clause Libraries</h3>
+            <p>I maintain your firm's clause library and insert appropriate clauses based on document type and client preferences. Indemnification language, limitation of liability provisions, arbitration clauses, governing law specifications—I pull the exact versions your firm prefers and ensure consistency across related provisions.</p>
+
+            <h3>Version Control & Template Updates</h3>
+            <p>As your templates evolve (new case law, updated statutes, refined language), I track versions and apply updates to future documents. This prevents the common problem where associates use outdated templates saved on local drives instead of current firm-approved versions.</p>
+
+            <h2 id="pleadings">Intelligent Pleading Generation</h2>
+
+            <p>For litigation practice, I generate first drafts of standard pleadings based on case facts and your firm's preferred approaches. This isn't boilerplate generation—I adapt to specific case circumstances while following proven templates.</p>
+
+            <h3>Complaints</h3>
+            <p>I draft complaints based on cause of action, pulling relevant allegations from intake information and inserting jurisdiction-appropriate elements. Breach of contract? I draft jurisdiction & venue analysis, detailed descriptions of plaintiff and defendant, factual allegations showing contract formation and breach, and prayer for relief with appropriate damages calculations.</p>
+
+            <h3>Answers & Affirmative Defenses</h3>
+            <p>I analyze the complaint and generate answers with appropriate responses: Admit for undisputed facts, Deny for disputed allegations, Deny on information and belief for allegations outside defendant's knowledge. I draft affirmative defenses based on case type: statute of limitations, failure to state a claim, contributory negligence, assumption of risk, contractual limitations.</p>
+
+            <h3>Discovery Requests</h3>
+            <p>I generate interrogatories, requests for production, and requests for admission tailored to case type—personal injury discovery differs from employment discrimination which differs from contract disputes. I customize based on specific case facts and identify relevant document classes.</p>
+
+            <h3>Motions</h3>
+            <p>I draft motions to dismiss, motions for summary judgment, and procedural motions using your argument templates. The output is a formatted Word document ready for attorney review and editing—not a finished product, but an 80% complete first draft that saves 2-4 hours of associate time.</p>
+
+            <h2 id="review">Contract Review & Redlining</h2>
+
+            <p>For transactional practice, contract review is time-intensive. A 50-page commercial agreement can take an associate 3-5 hours to review thoroughly. I accelerate this process while maintaining thoroughness.</p>
+
+            <!-- Stat callout #3 -->
+            <div class="stat-callout">
+                <div class="stat-value">60-80%</div>
+                <div class="stat-label">Time savings on contract review</div>
+                <div class="stat-context">
+                    My clause-by-clause comparison and risk identification reduces contract review time from 3-5 hours to 45 minutes to 1.5 hours. I identify high-risk provisions, compare to your standard positions, and generate proposed redlines—allowing attorneys to focus on negotiation strategy and deal economics rather than mechanical review work.
+                </div>
+            </div>
+
+            <h3>Clause-by-Clause Comparison</h3>
+            <p>I compare incoming contracts to your standard forms, highlighting deviations and flagging risks. High-risk provisions like unlimited liability, unilateral termination rights, automatic renewal clauses, and broad IP assignments are immediately identified with suggested revisions.</p>
+
+            <h3>Risk Identification & Flagging</h3>
+            <p>I flag high-risk provisions and alert the reviewing attorney with location, exact language, risk explanation, and suggested revision. Each high-risk provision receives specific attention with defensible alternative language from your clause library.</p>
+
+            <h3>Automated Redline Generation</h3>
+            <p>I generate proposed redlines to bring incoming contracts in line with your standard positions, showing original language and my proposed revision. Attorneys review, accept, modify, or provide alternative language based on negotiation strategy.</p>
+
+            <h2 id="precedent">Precedent Search & Integration</h2>
+            <p>I search your firm's document repository for relevant precedents. "Find motions to dismiss we've filed in copyright cases in the Ninth Circuit." I return the 12 most similar documents ranked by relevance, and adapt the most relevant precedent to your current case by updating facts, parties, and citations.</p>
+
+            <h2 id="citing">Cite Checking & Formatting</h2>
+            <p>I handle mechanical cite-checking and formatting tasks: Bluebook compliance, case citation formatting with reporters and pinpoint citations, Shepardizing to flag overruled cases with negative subsequent history, and table of authorities generation for briefs. These tasks consume hours of paralegal and associate time; automation reduces this to minutes.</p>
+
+            <h2 id="roi">Time Savings & ROI</h2>
+
+            <p><strong>Document automation delivers immediate, measurable time savings:</strong></p>
+
+            <p><strong>Pleading Drafting:</strong> Manual = 3-5 hours per pleading. With AI first draft = 30-60 minutes. Time saved = 2.5-4 hours per pleading at $250-$300/hour = $625-$1,200 savings per pleading. Monthly volume = 15-20 pleadings = $9,375-$20,000/month savings.</p>
+
+            <p><strong>Discovery Drafting:</strong> Manual = 4-6 hours per discovery set. With AI = 1-1.5 hours. Time saved = 3-4.5 hours per set at $250/hour = $750-$1,125 per set. Monthly volume = 10-15 sets = $7,500-$16,875/month savings.</p>
+
+            <p><strong>Contract Review:</strong> Manual = 2-4 hours per contract. With AI-assisted = 45-90 minutes. Time saved = 1.25-2.5 hours at $300/hour = $375-$750 per contract. Monthly volume = 20-30 contracts = $7,500-$22,500/month savings.</p>
+
+            <p><strong>Total annual benefit (conservative):</strong> $247,500-$510,000 in direct time savings<br>
+            <strong>Additional billable capacity benefit:</strong> $637,500/year if reallocated to billable work<br>
+            <strong>ROI: 516%-1,063%</strong></p>
+
+            <div class="cta-box">
+                <h3>Interview Claire for Your Firm</h3>
+                <p>See how I automate document generation and contract review for your practice areas.</p>
+                <a href="/" class="cta-btn">Start Interactive Demo</a>
+            </div>
+
+            <!-- Read Next Section -->
+            <div class="read-next">
+                <h2>Continue the Interview</h2>
+                <div class="cards">
+                    <a href="/legal/case-management.html" class="card">
+                        <h3>Case Management</h3>
+                        <p>Automate matter organization and deadline tracking.</p>
+                    </a>
+                    <a href="/legal/billing-timekeeping.html" class="card">
+                        <h3>Billing & Timekeeping</h3>
+                        <p>Capture billable time automatically as work happens.</p>
+                    </a>
+                    <a href="/legal/roi-calculator.html" class="card">
+                        <h3>ROI Calculator</h3>
+                        <p>Calculate your potential savings and ROI.</p>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <aside>
+            <div class="toc">
+                <h4>On This Page</h4>
+                <ul>
+                    <li><a href="#templates">Template Generation</a></li>
+                    <li><a href="#pleadings">Pleading Generation</a></li>
+                    <li><a href="#review">Contract Review</a></li>
+                    <li><a href="#precedent">Precedent Search</a></li>
+                    <li><a href="#citing">Cite Checking</a></li>
+                    <li><a href="#roi">ROI Analysis</a></li>
+                </ul>
+            </div>
+
+            <div class="related">
+                <h4>Related Capabilities</h4>
+                <ul>
+                    <li><a href="/legal/">← Legal Services Overview</a></li>
+                    <li><a href="/legal/client-intake.html">Client Intake</a></li>
+                    <li><a href="/legal/case-management.html">Case Management</a></li>
+                    <li><a href="/legal/billing-timekeeping.html">Billing & Timekeeping</a></li>
+                    <li><a href="/legal/confidentiality-security.html">Security & Compliance</a></li>
+                    <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-shadow">
+            <h2>Attorney-Client Privilege in the Age of AI Orchestration</h2>
+            <p class="footer-shadow-intro">The #1 concern blocking law firm AI adoption: "If AI touches client communications, does privilege survive?" The answer requires understanding how AI orchestration differs fundamentally from traditional chatbot architectures—and why Claire's ephemeral data tunnels preserve privilege while legacy systems don't.</p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Technical Analysis</button>
+            <div class="shadow-content" id="shadowContent">
+                <h3>The Privilege Problem with Traditional Legal Tech</h3>
+                <p>Attorney-client privilege protects confidential communications between attorney and client made for the purpose of obtaining legal advice. Traditional legal technology operates on centralized data lake architectures where client data is stored in the vendor's database, used to train machine learning models, and accessible to vendor staff for "quality assurance."</p>
+                <h3>How AI Orchestration Differs: Ephemeral Data Tunnels</h3>
+                <p>Claire operates on a fundamentally different architecture: ephemeral data orchestration rather than centralized storage. Data lives in your practice management system, not in Claire's servers. I query only what's needed for the specific task, process it, and retain nothing after task completion. Attorney-client privilege is most secure when no third party possesses the privileged information.</p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Legal Capabilities</h4>
+                <ul>
+                    <li><a href="/legal/client-intake.html">Client Intake</a></li>
+                    <li><a href="/legal/case-management.html">Case Management</a></li>
+                    <li><a href="/legal/document-automation.html">Document Automation</a></li>
+                    <li><a href="/legal/billing-timekeeping.html">Billing & Timekeeping</a></li>
+                    <li><a href="/legal/confidentiality-security.html">Security & Compliance</a></li>
+                    <li><a href="/legal/roi-calculator.html">ROI Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compliance</h4>
+                <ul>
+                    <li><a href="/compliance/attorney-client-privilege.html">Attorney-Client Privilege</a></li>
+                    <li><a href="/compliance/aba-model-rules.html">ABA Model Rules</a></li>
+                    <li><a href="/compliance/state-bar-compliance.html">State Bar Compliance</a></li>
+                    <li><a href="/compliance/soc2.html">SOC 2 Type II</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+    <div class="claire-dock">
+        <div class="dock-avatar" onclick="toggleDock()">C</div>
+        <div class="dock-panel" id="dockPanel">
+            <div class="dock-header">
+                <h4>Claire</h4>
+                <button class="dock-close" onclick="toggleDock()">×</button>
+            </div>
+            <div class="dock-body">
+                <p class="dock-message">I'm Claire, your AI paralegal orchestrator. Want to see how I automate document generation and contract review for your firm?</p>
+                <a href="/legal/intake-reasoning-demo.html" class="dock-cta">Execute Live Document Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDock() { document.getElementById('dockPanel').classList.toggle('open'); }
+        function toggleShadow() { const content = document.getElementById('shadowContent'); const button = document.querySelector('.shadow-toggle'); content.classList.toggle('expanded'); button.textContent = content.classList.contains('expanded') ? 'Collapse Technical Analysis' : 'Read Full Technical Analysis'; }
+        document.addEventListener('click', function(event) { const dock = document.querySelector('.claire-dock'); const panel = document.getElementById('dockPanel'); if (!dock.contains(event.target) && panel.classList.contains('open')) { panel.classList.remove('open'); } });
+    </script>
+
+    <script>
+        // Conversational Personalization Script
+// Time + weather aware greetings
+
+// Load user data from sessionStorage
+const userData = {
+    name: sessionStorage.getItem('userName') || '',
+    email: sessionStorage.getItem('userEmail') || '',
+    location: sessionStorage.getItem('userLocation') || '',
+    timezone: sessionStorage.getItem('userTimezone') || '',
+    weatherTemp: sessionStorage.getItem('userWeatherTemp') || '',
+    weatherDesc: sessionStorage.getItem('userWeatherDesc') || '',
+    industry: document.documentElement.getAttribute('data-industry') || ''
+};
+
+// Personalize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    if (userData.name) {
+        personalizeExperience();
+    }
+});
+
+function personalizeExperience() {
+    // Add personalization bar to navigation
+    addPersonalizationBar();
+
+    // Personalize Claire Dock message
+    personalizeDock();
+}
+
+function getTimeOfDay() {
+    // Get current hour in user's timezone
+    const userTime = userData.timezone ?
+        new Date().toLocaleString('en-US', { timeZone: userData.timezone, hour: '2-digit', hour12: false }) :
+        new Date().getHours();
+
+    const hour = parseInt(userTime);
+
+    if (hour >= 5 && hour < 7) return 'early_morning';
+    if (hour >= 7 && hour < 12) return 'morning';
+    if (hour >= 12 && hour < 17) return 'afternoon';
+    if (hour >= 17 && hour < 21) return 'evening';
+    return 'late_night';
+}
+
+function getConversationalGreeting() {
+    const timeOfDay = getTimeOfDay();
+    const temp = parseInt(userData.weatherTemp);
+    const weather = userData.weatherDesc;
+    const name = userData.name;
+    const location = userData.location;
+
+    // Time-based context
+    const timeContexts = {
+        early_morning: [
+            `You're up early, ${name}!`,
+            `Early riser, ${name}?`,
+            `Good morning, ${name}! You're ahead of the game`
+        ],
+        morning: [
+            `Good morning, ${name}!`,
+            `Morning, ${name}!`,
+            `Hey ${name}!`
+        ],
+        afternoon: [
+            `Good afternoon, ${name}!`,
+            `Afternoon, ${name}!`,
+            `Hey ${name}!`
+        ],
+        evening: [
+            `Evening, ${name}!`,
+            `Good evening, ${name}!`,
+            `Hey ${name}!`
+        ],
+        late_night: [
+            `Burning the midnight oil, ${name}?`,
+            `Working late, ${name}?`,
+            `Still at it, ${name}?`
+        ]
+    };
+
+    // Weather-based context (if available)
+    const weatherContexts = [];
+    if (temp && location) {
+        if (temp < 35) {
+            weatherContexts.push(`Hope you're staying warm in ${location} today`);
+            weatherContexts.push(`Bundle up out there in ${location} — it's ${temp}°F`);
+        } else if (temp > 85) {
+            weatherContexts.push(`Stay cool in ${location} — it's ${temp}°F today`);
+            weatherContexts.push(`Hot day in ${location} at ${temp}°F`);
+        }
+    }
+
+    if (weather && location) {
+        if (weather.includes('rain') || weather.includes('drizzle')) {
+            weatherContexts.push(`Rainy day in ${location}? Perfect time for workflow orchestration`);
+        } else if (weather.includes('snow')) {
+            weatherContexts.push(`Snowy in ${location}? Let's get you set up efficiently`);
+        } else if (weather.includes('sunny') || weather.includes('clear')) {
+            weatherContexts.push(`Beautiful day in ${location}`);
+        }
+    }
+
+    // Pick random greeting from time context
+    const timeGreetings = timeContexts[timeOfDay];
+    const timeGreeting = timeGreetings[Math.floor(Math.random() * timeGreetings.length)];
+
+    // Add weather context if available
+    const weatherContext = weatherContexts.length > 0 ?
+        weatherContexts[Math.floor(Math.random() * weatherContexts.length)] : '';
+
+    return { timeGreeting, weatherContext };
+}
+
+function addPersonalizationBar() {
+    const nav = document.querySelector('nav');
+    if (!nav || document.getElementById('personalization-bar')) return;
+
+    const bar = document.createElement('div');
+    bar.id = 'personalization-bar';
+    bar.style.cssText = `
+        background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        padding: 0.5rem 2rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+    `;
+
+    const { timeGreeting, weatherContext } = getConversationalGreeting();
+
+    let greeting = `<strong>${timeGreeting}</strong>`;
+    if (weatherContext) {
+        greeting += ` ${weatherContext}.`;
+    }
+    greeting += ` Orchestrating <strong>${capitalizeIndustry(userData.industry)}</strong> workflows`;
+
+    bar.innerHTML = greeting;
+    nav.parentNode.insertBefore(bar, nav.nextSibling);
+}
+
+function personalizeDock() {
+    const dockMessage = document.querySelector('.dock-message');
+    if (!dockMessage) return;
+
+    const { timeGreeting, weatherContext } = getConversationalGreeting();
+
+    // Create conversational greeting
+    let greeting = `<strong>${timeGreeting}</strong>`;
+    if (weatherContext) {
+        greeting += ` ${weatherContext}.`;
+    } else if (userData.location) {
+        greeting += ` from ${userData.location}!`;
+    } else {
+        greeting += `!`;
+    }
+
+    // Wrap in paragraph and prepend to dock body
+    const greetingP = document.createElement('p');
+    greetingP.style.cssText = 'margin-bottom: 1rem; font-weight: 500;';
+    greetingP.innerHTML = greeting;
+
+    const dockBody = document.querySelector('.dock-body');
+    if (dockBody) {
+        dockBody.insertBefore(greetingP, dockBody.firstChild);
+    }
+}
+
+function capitalizeIndustry(industry) {
+    const map = {
+        'finance': 'Financial Services',
+        'healthcare': 'Healthcare',
+        'legal': 'Legal Services',
+        'hospitality': 'Hospitality'
+    };
+    return map[industry] || industry;
+}
+
+        </script>
+</body>
+</html>

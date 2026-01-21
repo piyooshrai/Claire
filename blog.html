@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Claire By The Algorithm</title>
+    <meta name="description" content="Insights on AI agents, digital labor, and workflow automation from Claire By The Algorithm.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Blog - Claire By The Algorithm">
+    <meta property="og:description" content="Insights on AI agents, digital labor, and workflow automation from Claire By The Algorithm.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.letsaskclaire.com/blog.html">
+    <meta property="og:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Claire By The Algorithm">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog - Claire By The Algorithm">
+    <meta name="twitter:description" content="Insights on AI agents, digital labor, and workflow automation from Claire By The Algorithm.">
+    <meta name="twitter:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-dark: #4f46e5;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 6rem;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .coming-soon {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+
+        .coming-soon h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+
+        .topic-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .topic-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+
+        .blog-post-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .blog-post-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+
+        .blog-post-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post-card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .blog-post-card p {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/assets/claire-logo.png" alt="Claire" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/case-studies">Case Studies</a></li>
+                <li><a href="/support">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>Claire Blog</h1>
+            <p>Insights on AI orchestration, workflow automation, and the future of digital labor.</p>
+        </section>
+
+        <div class="blog-posts-grid">
+            <a href="/blog/agentic-workflows-2026.html" class="blog-post-card">
+                <span class="blog-post-category">AI Orchestration</span>
+                <h2>From AI Agents to Agentic Workflows: What Changed in 2026</h2>
+                <p>Single AI agents answered questions. Agentic workflows get work done. Discover why enterprises are shifting from testing agents to orchestrating complete workflows that deliver real business outcomes.</p>
+                <div class="blog-post-meta">
+                    <span>January 2026</span>
+                    <span>8 min read</span>
+                </div>
+            </a>
+
+            <a href="/blog/healthcare-roi-reality-check.html" class="blog-post-card">
+                <span class="blog-post-category">Healthcare ROI</span>
+                <h2>The ROI Reality Check: What Healthcare Actually Saves with AI Orchestration</h2>
+                <p>$83 billion in administrative burden, 300-600% Year 1 ROI potential. Here's what healthcare organizations actually achieve with workflow automation—backed by real data.</p>
+                <div class="blog-post-meta">
+                    <span>January 2026</span>
+                    <span>10 min read</span>
+                </div>
+            </a>
+
+            <a href="/blog/agent-os-era-2026.html" class="blog-post-card">
+                <span class="blog-post-category">Platform Strategy</span>
+                <h2>The Agent OS Era: Why 2026 is the Year of Orchestration Platforms</h2>
+                <p>The AI landscape is shifting from isolated agents to comprehensive orchestration platforms. Here's why 2026 marks the beginning of the Agent OS era.</p>
+                <div class="blog-post-meta">
+                    <span>December 2025</span>
+                    <span>10 min read</span>
+                </div>
+            </a>
+
+            <a href="/blog/human-ai-conductor-model.html" class="blog-post-card">
+                <span class="blog-post-category">Workforce Transformation</span>
+                <h2>Human + AI = Conductor: The New Role Model for Workflows</h2>
+                <p>The most effective AI implementations aren't about replacement—they're about transformation. Meet the conductor model: where humans orchestrate and AI executes.</p>
+                <div class="blog-post-meta">
+                    <span>November 2025</span>
+                    <span>9 min read</span>
+                </div>
+            </a>
+
+            <a href="/blog/mcp-protocol-deep-dive.html" class="blog-post-card">
+                <span class="blog-post-category">Technical Deep Dive</span>
+                <h2>Model Context Protocol: The Hidden Tech Making AI Orchestration Work</h2>
+                <p>MCP is to AI agents what HTTP was to the web—a standard protocol enabling seamless communication. Here's how it powers orchestration platforms.</p>
+                <div class="blog-post-meta">
+                    <span>October 2025</span>
+                    <span>12 min read</span>
+                </div>
+            </a>
+
+            <a href="/blog/pilot-to-production.html" class="blog-post-card">
+                <span class="blog-post-category">Implementation Strategy</span>
+                <h2>From Pilot to Production: Why Most AI Projects Fail (And How to Fix It)</h2>
+                <p>87% of AI pilots never reach production. Here's the systematic playbook for getting AI workflows from proof-of-concept to full-scale deployment.</p>
+                <div class="blog-post-meta">
+                    <span>September 2025</span>
+                    <span>11 min read</span>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Claire</a></li>
+                    <li><a href="https://www.the-algo.com">The Algorithm</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                    <li><a href="/general/">Other Industries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/case-studies">Case Studies</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/hipaa">HIPAA Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com">The Algorithm</a></p>
+        </div>
+    </footer>
+</body>
+</html>

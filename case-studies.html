@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies - Claire By The Algorithm</title>
+    <meta name="description" content="Real-world success stories of AI automation in Healthcare, Legal, Finance, and Hospitality.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Case Studies - Claire By The Algorithm">
+    <meta property="og:description" content="Real-world success stories of AI automation in Healthcare, Legal, Finance, and Hospitality.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.letsaskclaire.com/case-studies.html">
+    <meta property="og:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Claire By The Algorithm">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Case Studies - Claire By The Algorithm">
+    <meta name="twitter:description" content="Real-world success stories of AI automation in Healthcare, Legal, Finance, and Hospitality.">
+    <meta name="twitter:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-dark: #4f46e5;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 6rem;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+
+        .case-study-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .case-study-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+
+        .case-study-industry {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study-card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .case-study-card p {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .coming-soon {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+
+        .coming-soon h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .case-studies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/assets/claire-logo.png" alt="Claire" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/case-studies">Case Studies</a></li>
+                <li><a href="/support">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>Case Studies</h1>
+            <p>Real-world results from organizations using Claire to orchestrate complex workflows and transform operations.</p>
+        </section>
+
+        <div class="case-studies-grid">
+            <a href="/case-studies/healthcare-patient-scheduling.html" class="case-study-card" style="text-decoration: none;">
+                <span class="case-study-industry">Healthcare</span>
+                <h2>63% Cost Reduction in Patient Scheduling</h2>
+                <p>A 300-bed regional hospital eliminated administrative bottlenecks and achieved $780K annual savings with Claire by The Algorithm's orchestration platform.</p>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">63%</div>
+                        <div class="metric-label">FTE Reduction</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$780K</div>
+                        <div class="metric-label">Annual Savings</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">6.2mo</div>
+                        <div class="metric-label">ROI Payback</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/case-studies/legal-client-intake.html" class="case-study-card" style="text-decoration: none;">
+                <span class="case-study-industry" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);">Legal</span>
+                <h2>From 48 Hours to 15 Minutes: Legal Intake Transformation</h2>
+                <p>A personal injury law firm increased lead-to-client conversion by 34% using Claire by The Algorithm for automated client intake.</p>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">89%</div>
+                        <div class="metric-label">Conversion Increase</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">15min</div>
+                        <div class="metric-label">Response Time</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$425K</div>
+                        <div class="metric-label">Additional Revenue</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/case-studies/financial-kyc-onboarding.html" class="case-study-card" style="text-decoration: none;">
+                <span class="case-study-industry" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">Financial Services</span>
+                <h2>From Days to Minutes: KYC Onboarding at Scale</h2>
+                <p>A mid-size regional bank cut KYC onboarding from 3.2 days to 18 minutes with Claire by The Algorithm, reducing abandonment by 67%.</p>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">67%</div>
+                        <div class="metric-label">Abandonment Reduction</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">18min</div>
+                        <div class="metric-label">Onboarding Time</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$890K</div>
+                        <div class="metric-label">Annual Savings</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/case-studies/hospitality-guest-services.html" class="case-study-card" style="text-decoration: none;">
+                <span class="case-study-industry" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);">Hospitality</span>
+                <h2>71% Response Time Reduction in Hotel Guest Services</h2>
+                <p>An upscale hotel chain achieved 71% faster guest service response and 42% higher satisfaction scores with Claire by The Algorithm's orchestration platform.</p>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">71%</div>
+                        <div class="metric-label">Faster Response</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">42%</div>
+                        <div class="metric-label">Higher Satisfaction</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$620K</div>
+                        <div class="metric-label">Annual Savings</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Claire</a></li>
+                    <li><a href="https://www.the-algo.com">The Algorithm</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                    <li><a href="/general/">Other Industries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/case-studies">Case Studies</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/hipaa">HIPAA Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com">The Algorithm</a></p>
+        </div>
+    </footer>
+</body>
+</html>

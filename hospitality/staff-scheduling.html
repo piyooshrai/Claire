@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en" data-industry="hospitality">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Staff Scheduling | Claire By The Algorithm for Hospitality</title>
+    <meta name="description" content="AI-Powered Staff Scheduling | Claire By The Algorithm for Hospitality - Claire By The Algorithm for Hospitality">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI-Powered Staff Scheduling | Claire By The Algorithm for Hospitality">
+    <meta property="og:description" content="AI-Powered Staff Scheduling | Claire By The Algorithm for Hospitality - Claire By The Algorithm for Hospitality">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.letsaskclaire.com/hospitality/staff-scheduling.html">
+    <meta property="og:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Claire By The Algorithm">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI-Powered Staff Scheduling | Claire By The Algorithm for Hospitality">
+    <meta name="twitter:description" content="AI-Powered Staff Scheduling | Claire By The Algorithm for Hospitality - Claire By The Algorithm for Hospitality">
+    <meta name="twitter:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta name="description" content="Automated staff scheduling for hotels and restaurants. Optimize labor costs, forecast demand, ensure compliance, and reduce scheduling conflicts.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Industry-specific color system */
+        :root {
+            --bg-primary: #fff7ed;
+            --bg-secondary: #ffffff;
+            --text-primary: #7c2d12;
+            --text-secondary: #78716c;
+            --accent: #ea580c;
+            --accent-light: #fb923c;
+            --border: #fed7aa;
+            --shadow: rgba(234, 88, 12, 0.1);
+        }
+
+        /* Breathing gradient background animation */
+        @keyframes breathe {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fff7ed 100%);
+            background-size: 200% 200%;
+            animation: breathe 15s ease infinite;
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        /* Breathing grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(234, 88, 12, 0.10) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(234, 88, 12, 0.10) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridBreathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridBreathe {
+            0%, 100% {
+                opacity: 0.4;
+                background-size: 50px 50px;
+            }
+            50% {
+                opacity: 0.2;
+                background-size: 60px 60px;
+            }
+        }
+
+        /* Ensure content is above grid */
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Orchestrator Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-brand span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white !important;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Main content container */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+
+        article {
+            max-width: 850px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Dramatic typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 4rem 0 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+
+        h3 {
+            font-size: 1.625rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Stat callout boxes */
+        .stat-callout {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .stat-context {
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Conversation blocks */
+        blockquote {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        blockquote strong {
+            color: var(--accent);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* CTA box */
+        .cta-box {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Read Next cards */
+        .read-next {
+            margin-top: 4rem;
+        }
+
+        .read-next h2 {
+            margin-top: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3::after {
+            content: ' →';
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 8rem;
+            height: fit-content;
+        }
+
+        .toc, .related {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .toc h4, .related h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .toc ul, .related ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li, .related li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a, .related a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc a:hover, .related a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer with shadow content */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 8rem;
+        }
+
+        .footer-shadow {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .footer-shadow h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-shadow-intro {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .shadow-toggle {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .shadow-toggle:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .shadow-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .shadow-content.expanded {
+            max-height: 10000px;
+        }
+
+        .shadow-content h3 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .shadow-content h4 {
+            font-size: 1.375rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .footer-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-column h4 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-industries {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-industries p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .industry-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .industry-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .industry-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+                /* Claire Dock */
+        .claire-dock {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .claire-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .claire-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        .claire-tooltip {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            background: white;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            white-space: nowrap;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .claire-dock:hover .claire-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: 80px;
+        }
+
+        .claire-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .stat-value {
+                font-size: 3rem;
+            }
+
+            .footer-nav {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body data-industry="hospitality">
+    <!-- Orchestrator Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="/assets/claire-logo.png" alt="Claire" style="height: 36px;"> // HOSPITALITY
+            </div>
+            <div class="nav-links">
+                <a href="/hospitality/#reservations">Reservations</a>
+                <a href="/hospitality/#guest-services">Guest Services</a>
+                <a href="/hospitality/#operations">Operations</a>
+                <a href="/hospitality/#revenue">Revenue Optimization</a>
+                <a href="/hospitality/concierge-demo.html" class="nav-cta">Execute Concierge Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <div class="breadcrumb">
+                <a href="/">Home</a> <span>/</span> <a href="/hospitality/">Hospitality</a> <span>/</span> Staff Scheduling
+            </div>
+
+            <h1>AI-Powered Staff Scheduling: Labor Optimization & Compliance</h1>
+            <p class="intro">Labor is the largest controllable expense in hospitality—representing 35-55% of operating costs for hotels and 30-40% for restaurants. Yet most properties still schedule staff manually using spreadsheets, manager intuition, and reactive adjustments. The result: chronic overstaffing during slow periods (bleeding labor costs) and understaffing during busy periods (degrading service quality). A 150-room hotel overstaffed by just 2 FTEs wastes $85,000-$110,000 annually. Understaffing costs even more—service failures, guest complaints, negative reviews, and lost revenue.</p>
+
+            <p>The scheduling challenge is balancing competing constraints: forecast demand, match skill requirements, honor availability preferences, comply with labor laws, minimize overtime, ensure adequate coverage, and adjust for last-minute callouts—all while controlling costs. Manual scheduling takes managers 8-12 hours per week and still produces suboptimal schedules riddled with conflicts, compliance violations, and inefficiencies.</p>
+
+            <p>I automate the complete scheduling process with demand forecasting, constraint optimization, and real-time adjustment. By analyzing historical occupancy, reservation patterns, events, and weather, I predict staffing needs 3 weeks in advance and generate optimal schedules in minutes—reducing labor costs 12-18% while improving service quality and employee satisfaction.</p>
+
+            <!-- Stat callout #1 -->
+            <div class="stat-callout">
+                <div class="stat-value">15-20%</div>
+                <div class="stat-label">Typical labor cost savings from intelligent scheduling</div>
+                <div class="stat-context">
+                    Properties implementing AI-driven scheduling reduce labor costs 15-20% through demand-driven staffing, overtime reduction, and efficiency optimization. This isn't from cutting staff—it's from deploying the right number of skilled people at the right times. A 150-room hotel saving 15% on $2.5M annual labor costs gains $375,000 in profit annually.
+                </div>
+            </div>
+
+            <h2 id="forecasting">Demand Forecasting: Predicting Staffing Needs</h2>
+
+            <p>Effective scheduling starts with accurate demand forecasting. I analyze multiple data sources to predict how many staff you'll need, in which departments, and when.</p>
+
+            <h3>Occupancy-Based Forecasting</h3>
+
+            <p>I pull reservation data from your PMS to forecast daily occupancy:</p>
+
+            <ul>
+                <li><strong>Booked occupancy:</strong> Current confirmed reservations</li>
+                <li><strong>Historical pickup patterns:</strong> How many additional bookings you typically receive between now and arrival date</li>
+                <li><strong>Cancellation rates:</strong> Historical cancellation patterns by lead time, season, room type</li>
+                <li><strong>Walk-in estimates:</strong> Same-day bookings based on day-of-week and season</li>
+            </ul>
+
+            <blockquote>
+            <strong>Example forecast (Friday 3 weeks out):</strong><br>
+            Current bookings: 112 rooms (74% occupancy)<br>
+            Expected pickup: +18 rooms (historical Friday bookings increase 16% in final 3 weeks)<br>
+            Expected cancellations: -4 rooms (3% cancellation rate)<br>
+            Expected walk-ins: +2 rooms<br>
+            <strong>Final forecast: 128 rooms (85% occupancy)</strong>
+            </blockquote>
+
+            <h3>Event & Season Impact</h3>
+
+            <p>I adjust forecasts based on local events and seasonal patterns:</p>
+
+            <ul>
+                <li><strong>Citywide events:</strong> Convention, concert, sporting event → Expect near-100% occupancy + extended stay durations</li>
+                <li><strong>Weather forecasts:</strong> Beach resort in rainy weekend → Lower occupancy, more indoor F&B demand</li>
+                <li><strong>Holiday periods:</strong> Thanksgiving week → Higher family occupancy, increased restaurant demand</li>
+                <li><strong>Day-of-week patterns:</strong> Business hotel Friday-Sunday → Lower occupancy, reduce staffing</li>
+            </ul>
+
+            <h3>Department-Specific Workload Models</h3>
+
+            <p>I convert occupancy forecasts into departmental staffing needs:</p>
+
+            <ul>
+                <li><strong>Front desk:</strong> 1 agent per 50 arrivals/departures (stagger shifts for peak check-in/out periods)</li>
+                <li><strong>Housekeeping:</strong> 1 room attendant per 12-15 checkout rooms + turndown service for premium tiers</li>
+                <li><strong>Maintenance:</strong> Base staffing + additional technician if occupancy >85% (higher service request volume)</li>
+                <li><strong>F&B:</strong> Restaurant covers forecast (influenced by occupancy, day-of-week, weather, events)</li>
+                <li><strong>Valet:</strong> 1 attendant per 30 occupied rooms during peak arrival/departure windows</li>
+            </ul>
+
+            <!-- Stat callout #2 -->
+            <div class="stat-callout">
+                <div class="stat-value">85%</div>
+                <div class="stat-label">Forecast accuracy for staffing needs (3-week ahead)</div>
+                <div class="stat-context">
+                    AI demand forecasting achieves 85% accuracy for staffing predictions 3 weeks out. This accuracy drives optimal scheduling—avoiding both overstaffing (expensive) and understaffing (service quality damage). Human managers typically achieve 65-70% accuracy, leading to chronic misalignment between forecasted demand and scheduled labor.
+                </div>
+            </div>
+
+            <h2 id="optimization">Schedule Optimization: Balancing Constraints</h2>
+
+            <p>Once I know staffing needs, I generate optimal schedules that balance business requirements with employee preferences and legal constraints.</p>
+
+            <h3>Core Scheduling Constraints</h3>
+
+            <p>I ensure schedules meet all requirements:</p>
+
+            <ul>
+                <li><strong>Coverage requirements:</strong> Minimum staff per shift based on forecasted demand</li>
+                <li><strong>Skill matching:</strong> Certified bartender for bar shifts, bilingual front desk for international guest periods</li>
+                <li><strong>Employee availability:</strong> Honor requested time off, school schedules, second jobs</li>
+                <li><strong>Fairness:</strong> Distribute desirable shifts (weekends off, day shifts) equitably</li>
+                <li><strong>Continuity:</strong> Limit consecutive days worked, ensure adequate rest between shifts</li>
+            </ul>
+
+            <h3>Labor Law Compliance</h3>
+
+            <p>I automatically enforce federal, state, and local labor regulations:</p>
+
+            <ul>
+                <li><strong>Overtime rules:</strong> California requires overtime after 8 hours/day (not just 40 hours/week like federal law)</li>
+                <li><strong>Meal breaks:</strong> California requires 30-minute unpaid meal break for shifts >5 hours, second break for shifts >10 hours</li>
+                <li><strong>Rest breaks:</strong> 10-minute paid rest break for every 4 hours worked</li>
+                <li><strong>Split shift rules:</strong> California requires additional pay for shifts with >1 hour gap</li>
+                <li><strong>Predictive scheduling laws:</strong> San Francisco, Seattle, Oregon require 2-week advance notice of schedules</li>
+                <li><strong>Minor restrictions:</strong> Under-18 employees can't work late nights, serve alcohol, or exceed weekly hour limits</li>
+            </ul>
+
+            <h3>Cost Optimization</h3>
+
+            <p>I minimize labor costs while maintaining service quality:</p>
+
+            <ul>
+                <li><strong>Overtime reduction:</strong> Spread hours across more part-time staff rather than OT for full-time employees</li>
+                <li><strong>Wage tier optimization:</strong> Schedule higher-wage senior staff during peak complexity periods, lower-wage newer staff during routine shifts</li>
+                <li><strong>Cross-training utilization:</strong> Use cross-trained employees to cover multiple departments (e.g., front desk agent who can also work concierge)</li>
+            </ul>
+
+            <h2 id="real-time">Real-Time Schedule Adjustments</h2>
+
+            <p>Schedules are never static—staff call out sick, occupancy changes, unexpected events occur. I handle real-time adjustments automatically.</p>
+
+            <h3>Callout Management</h3>
+
+            <p>When an employee calls out, I immediately find coverage:</p>
+
+            <blockquote>
+            <strong>6 AM callout:</strong> Front desk agent calls in sick for 7 AM-3 PM shift<br><br>
+            <strong>My response:</strong><br>
+            1. Alert manager immediately via SMS<br>
+            2. Check coverage requirements: Need minimum 2 front desk agents during check-out period (7-11 AM)<br>
+            3. Search for replacement: Query all front desk staff for availability today<br>
+            4. Find 3 available employees, prioritize by: (a) not scheduled today, (b) below 40 hours/week (avoid OT), (c) lives closest to property<br>
+            5. Auto-text top candidate: "Hi Sarah, Maria called out sick. Can you cover front desk 7 AM-3 PM today? Respond YES/NO."<br>
+            6. If YES: Update schedule, notify manager and Maria's supervisor<br>
+            7. If NO: Text next candidate, repeat<br><br>
+            <strong>Average coverage time: 12 minutes</strong> (vs 45+ minutes for manual callout replacement)
+            </blockquote>
+
+            <h3>Occupancy Fluctuation Response</h3>
+
+            <p>When occupancy changes significantly from forecast, I adjust staffing:</p>
+
+            <blockquote>
+            <strong>Scenario:</strong> Convention cancels 3 days before arrival, occupancy drops from 95% to 62%<br><br>
+            <strong>My response:</strong><br>
+            - Housekeeping: Reduce from 8 room attendants to 5 (3 fewer checkout rooms/attendant)<br>
+            - Front desk: Reduce from 3 agents to 2 during check-in window<br>
+            - F&B: Notify restaurant manager of lower breakfast forecast (adjust prep and staffing)<br>
+            - Notify affected employees 48+ hours in advance (compliance with predictive scheduling laws)<br>
+            - Offer voluntary time off (VTO) before mandating schedule changes<br><br>
+            <strong>Labor cost savings: $1,850</strong> (3 days × 12 reduced hours × $51 avg wage)
+            </blockquote>
+
+            <h2 id="employee">Employee Self-Service & Engagement</h2>
+
+            <p>Modern employees expect scheduling flexibility and mobile access. I provide self-service tools that reduce manager workload while improving employee satisfaction.</p>
+
+            <h3>Shift Swapping</h3>
+
+            <p>Employees request shift swaps directly:</p>
+
+            <blockquote>
+            <strong>Employee request (via mobile app):</strong> "I need to swap my Saturday dinner shift. Can anyone cover?"<br><br>
+            <strong>My response:</strong><br>
+            1. Identify eligible swap candidates: F&B staff with server certification, available Saturday, below weekly hour cap<br>
+            2. Send push notification to 6 eligible employees: "John needs coverage for Saturday 5-11 PM dinner shift. Want it?"<br>
+            3. First to respond YES gets the shift<br>
+            4. Auto-update schedule, notify both employees and manager<br>
+            5. Ensure swap doesn't violate overtime or rest period rules<br><br>
+            <strong>Swap completion rate: 87%</strong> (vs 45% for manual swap requests via group text)
+            </blockquote>
+
+            <h3>Availability Management</h3>
+
+            <p>Employees update availability preferences in real-time:</p>
+
+            <ul>
+                <li><strong>Recurring availability:</strong> "I can't work Tuesdays—I have class" → Never schedule Tuesday shifts</li>
+                <li><strong>Time-off requests:</strong> "I need May 15-20 off for vacation" → Block those dates, require approval if during peak period</li>
+                <li><strong>Shift preferences:</strong> "Prefer day shifts, but can work nights if needed" → Prioritize day shifts, use nights as backup</li>
+            </ul>
+
+            <h2 id="analytics">Labor Analytics & Reporting</h2>
+
+            <p>I provide real-time visibility into labor metrics to help managers optimize staffing strategies.</p>
+
+            <h3>Key Labor Metrics</h3>
+
+            <ul>
+                <li><strong>Labor cost percentage:</strong> Total labor cost ÷ total revenue (target: 35-40% for full-service hotels)</li>
+                <li><strong>Overtime percentage:</strong> OT hours ÷ total hours (target: <5%—OT is expensive)</li>
+                <li><strong>Schedule adherence:</strong> Actual hours worked vs scheduled hours (detect chronic early clock-ins or late departures)</li>
+                <li><strong>Callout rate:</strong> Callouts ÷ total scheduled shifts (high callout rate = engagement or scheduling problem)</li>
+                <li><strong>Labor productivity:</strong> Revenue per labor hour (higher = more efficient staffing)</li>
+            </ul>
+
+            <h2 id="roi">ROI: Labor Cost Reduction & Efficiency</h2>
+
+            <h3>200-Room Full-Service Hotel</h3>
+
+            <p><strong>Current state (manual scheduling):</strong></p>
+            <ul>
+                <li>Total staff: 145 FTE (0.725 FTE per room—industry average)</li>
+                <li>Average wage: $22.50/hour</li>
+                <li>Annual labor cost: $6.76M (145 FTE × 2,080 hours × $22.50)</li>
+                <li>Overtime: 8% of hours (above optimal 5% target)</li>
+                <li>Overstaffing during low occupancy: ~6% excess labor</li>
+                <li>Manager scheduling time: 10 hours/week × 8 managers = 80 hours/week = $145,000/year</li>
+            </ul>
+
+            <p><strong>With automated scheduling (Claire):</strong></p>
+            <ul>
+                <li><strong>Overtime reduction:</strong> 8% → 5% OT = 3% labor savings × $6.76M = $203,000/year</li>
+                <li><strong>Staffing optimization:</strong> Eliminate 6% overstaffing = 8.7 FTE reduction = $405,000/year</li>
+                <li><strong>Manager time savings:</strong> Reduce scheduling from 80 hrs/week to 15 hrs/week = $117,000/year</li>
+                <li><strong>Compliance violation reduction:</strong> Avoid 2-3 labor board violations/year = $30,000 in penalties + legal fees</li>
+                <li><strong>Turnover reduction:</strong> Better schedules = happier employees = 8% lower turnover = $185,000/year (turnover cost is 50-75% of annual salary)</li>
+            </ul>
+
+            <p><strong>Total annual benefit: $940,000</strong></p>
+            <p><strong>Claire Enterprise Tier: $72,000/year</strong></p>
+            <p><strong>Net benefit: $868,000 | ROI: 1,206%</strong></p>
+
+            <h2 id="conclusion">Conclusion: Labor as Strategic Asset</h2>
+
+            <p>Labor is your largest expense and your most valuable asset. The properties that thrive aren't the ones that cut labor to the bone (destroying service quality), but the ones that optimize labor—ensuring the right number of skilled staff at the right times, while minimizing waste, overtime, and compliance risk.</p>
+
+            <p>Automated scheduling transforms labor from a necessary evil to a strategic advantage. Instead of spreadsheets and manager guesswork, you're using demand forecasting, constraint optimization, and real-time adjustment to match staffing precisely to business needs. The result: lower costs, better service, happier employees, and managers who spend time coaching staff instead of building schedules.</p>
+
+            <div class="cta-box">
+                <h3>See AI Scheduling in Action</h3>
+                <p>Experience demand forecasting, optimization, and real-time adjustments for hotel operations.</p>
+                <a href="/" class="cta-btn">Execute Concierge Demo</a>
+            </div>
+
+            <!-- Read Next Section -->
+            <div class="read-next">
+                <h2>Continue the Interview</h2>
+                <div class="cards">
+                    <a href="/hospitality/reservation-management.html" class="card">
+                        <h3>Reservation Management</h3>
+                        <p>Dynamic pricing and intelligent booking to increase RevPAR by 30%.</p>
+                    </a>
+                    <a href="/hospitality/guest-communication.html" class="card">
+                        <h3>Guest Communication</h3>
+                        <p>Personalized multilingual messaging from pre-arrival to post-stay.</p>
+                    </a>
+                    <a href="/hospitality/upsell-automation.html" class="card">
+                        <h3>Upsell Automation</h3>
+                        <p>Revenue optimization through personalized offers and packages.</p>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Enhanced Sidebar -->
+        <aside>
+            <div class="toc">
+                <h4>On This Page</h4>
+                <ul>
+                    <li><a href="#forecasting">Demand Forecasting</a></li>
+                    <li><a href="#optimization">Schedule Optimization</a></li>
+                    <li><a href="#real-time">Real-Time Adjustments</a></li>
+                    <li><a href="#employee">Employee Self-Service</a></li>
+                    <li><a href="#analytics">Labor Analytics</a></li>
+                    <li><a href="#roi">ROI Analysis</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </div>
+
+            <div class="related">
+                <h4>Related Capabilities</h4>
+                <ul>
+                    <li><a href="/hospitality/">← Hospitality Overview</a></li>
+                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
+                    <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer with Shadow Content -->
+    <footer>
+        <div class="footer-shadow">
+            <h2>Staff Scheduling: Privacy, Fairness & Compliance</h2>
+            <p class="footer-shadow-intro">
+                Staff scheduling systems access sensitive employee data—work preferences, availability constraints, personal circumstances. Managing this data with privacy and compliance requires careful attention to employee rights and legal obligations. Let me explain the ethical framework for intelligent scheduling orchestration.
+            </p>
+            <button class="shadow-toggle" onclick="toggleShadow()">Read Full Privacy & Compliance Analysis</button>
+
+            <div class="shadow-content" id="shadowContent">
+                <h3>Employee Privacy in Scheduling Systems</h3>
+
+                <p>Scheduling collects sensitive information about employees: Availability preferences (can't work Tuesdays due to class). Time-off requests (vacation, medical appointments). Shift preferences (prefers mornings, not evenings). Personal circumstances (single parent, second job, health condition). Availability constraints affect compensation and opportunities. This data must be protected.</p>
+
+                <p>Claire respects employee privacy: We collect only data necessary for scheduling. Employees control who sees their availability (manager, not all staff). Sensitive information (medical reasons for time off) is kept confidential. Scheduling data is encrypted separately from payroll data. Employees have access to their own scheduling data. Employees can request corrections: "That note about my medical appointment should be removed."</p>
+
+                <h3>Fair Scheduling & Non-Discrimination</h3>
+
+                <p>Scheduling algorithms must not discriminate. Employment law prohibits discrimination based on protected characteristics (race, religion, gender, national origin, disability, age). Scheduling decisions can't discriminate either: Don't consistently assign undesirable shifts (evenings, weekends, split shifts) to minority employees. Don't deny scheduling flexibility for childcare to female employees while granting it to male employees. Don't fail to accommodate religious observances (Sabbath, prayer times) equally. Don't schedule employees with disabilities differently without legitimate operational reasons.</p>
+
+                <p>Claire monitors scheduling for discriminatory patterns: Quarterly audits comparing shift distribution by protected characteristics. Escalation if patterns indicate discrimination. Bias training for managers. Transparent scheduling policies published to all staff.</p>
+
+                <h3>Availability Data & Personal Autonomy</h3>
+
+                <p>Scheduling respects employee autonomy: Employees enter their own availability (not managers guessing). Recurring constraints (can't work Tuesdays) are honored. Time-off requests are accommodated unless operationally impossible. Schedule changes are made with adequate notice (as required by predictive scheduling laws). Employees can swap shifts with peers (automatically verified by system for compliance).</p>
+
+                <h3>Medical Accommodations & Disability Privacy</h3>
+
+                <p>Employees sometimes disclose medical conditions affecting scheduling: "I have narcolepsy and can't work night shifts." "I'm in physical therapy and can't do double shifts." "I take medication that makes early mornings difficult." These disclosures are highly sensitive.</p>
+
+                <p>Claire protects medical disclosures: Medical information is flagged as confidential. Access is restricted to HR and managers only. Medical info is never shared with other employees. Accommodations are implemented promptly and discreetly. Medical notes are deleted when no longer relevant for accommodations. If a manager needs to inform staff about a schedule exception (e.g., "John can't close Fridays"), we never mention the medical reason—just "John won't be available Fridays."</p>
+
+                <h3>Predictive Scheduling Laws & Right to Disconnect</h3>
+
+                <p>Many jurisdictions (California, New York, Oregon, Seattle, Philadelphia) have predictive scheduling laws requiring: Schedule posting 14+ days in advance. Predictability pay if schedules change with inadequate notice. Minimum 11 hours between shifts (clopening premium if violated). Right to request time off. Offer additional hours to existing part-time staff before hiring temporaries. Claire ensures automatic compliance: Schedules posted 14+ days before start. Changes within 7 days trigger predictability pay calculation. Shift assignments with <11 hour rest period auto-add premium pay. Part-time staff are offered hours first.</p>
+
+                <h3>Wage & Hour Compliance in Scheduling</h3>
+
+                <p>Scheduling directly impacts wage compliance. Scheduling too many hours = overtime owed. Scheduled shifts that turn into longer shifts = pay obligations. Split shifts = premium pay required in some jurisdictions. Claire ensures: Automatic tracking of scheduled vs. actual hours. Overtime alerts if weekly or daily limits approached. Break requirements enforced (meal breaks, rest breaks). Split shift premium pay auto-applied. Reporting time pay applied if employee called in for <4 hours worked (California).</p>
+
+                <h3>Transparency & Employee Data Access</h3>
+
+                <p>Employees should understand what scheduling data we hold and how it's used. Claire provides: Access to own scheduling data and performance notes. Right to correct inaccurate information: "That note says I called out when I didn't." Right to see who accessed their data. Right to request deletion of outdated availability preferences. Right to data portability: "Give me my scheduling data in a standard format."</p>
+
+                <h3>Schedule Equity & Fairness Audits</h3>
+
+                <p>Scheduling should be equitable. Some employees get premium shifts (high tips, desirable hours); others get minimum wage graveyard shifts. Is this fair or exploitative? Claire implements fairness monitoring: Quarterly audits of shift distribution by employee tenure (newer staff shouldn't always get worst shifts). Equity policies (premium shift rotation, scheduled fair access). Transparent criteria for shift assignment. Grievance process if employee believes scheduling is unfair.</p>
+
+                <h3>Continuous Improvement & Compliance Audits</h3>
+
+                <p>Scheduling compliance is audited regularly: Quarterly reviews of labor law compliance (overtime, breaks, predictive scheduling). Annual bias audits for non-discrimination. Semi-annual employee surveys on scheduling fairness: "Do you feel the schedule is equitable?" Third-party audits verifying compliance with employment law. Staff training on scheduling policies and employee rights.</p>
+
+                <h3>Conclusion: Ethical Labor Optimization</h3>
+
+                <p>Automated scheduling is powerful for efficiency—but it touches on fundamental employee rights: fair compensation, non-discrimination, work-life balance, medical privacy, and autonomy. Scheduling systems must respect these rights through careful data handling, law compliance, fairness monitoring, and transparency. Employees are not just labor units—they're people deserving of dignity and respect in how their work is managed.</p>
+            </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <div class="footer-column">
+                <h4>Hospitality Capabilities</h4>
+                <ul>
+                    <li><a href="/hospitality/guest-communication.html">Guest Communication</a></li>
+                    <li><a href="/hospitality/reservation-management.html">Reservation Management</a></li>
+                    <li><a href="/hospitality/upsell-automation.html">Upsell Automation</a></li>
+                    <li><a href="/hospitality/concierge-services.html">Concierge Services</a></li>
+                    <li><a href="/hospitality/staff-scheduling.html">Staff Scheduling</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/resources/reasoning-logs.html">Reasoning Logs</a></li>
+                    <li><a href="/resources/voice-samples.html">Voice Samples</a></li>
+                    <li><a href="/resources/case-studies.html">Case Studies</a></li>
+                    <li><a href="/resources/technical-docs.html">Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compliance</h4>
+                <ul>
+                    <li><a href="/compliance/pci-dss.html">PCI DSS</a></li>
+                    <li><a href="/compliance/gdpr.html">GDPR Compliance</a></li>
+                    <li><a href="/compliance/ccpa.html">CCPA Compliance</a></li>
+                    <li><a href="/compliance/soc2.html">SOC 2 Type II</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@the-algo.com">info@the-algo.com</a></li>
+                    <li><a href="tel:+17203347249">+1 (720) 334-7249</a></li>
+                    <li><a href="/contact/">Schedule Demo</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Industry Switcher -->
+        <div class="footer-industries">
+            <p>Explore Claire's Orchestration in Other Industries:</p>
+            <div class="industry-links">
+                <a href="/healthcare/">Healthcare</a>
+                <a href="/legal/">Legal</a>
+                <a href="/finance/">Financial Services</a>
+                <a href="/hospitality/">Hospitality</a>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p><strong>CLAIRE</strong> by The Algorithm LLC © 2026 All rights reserved</p>
+        </div>
+    </footer>
+
+        <!-- Claire Dock Component -->
+    <div class="claire-dock">
+        <img src="/assets/claire-avatar.png" alt="Claire" class="claire-avatar">
+        <div class="claire-tooltip">
+            <span id="claire-greeting">Ready to help with your workflows</span>
+        </div>
+    </div>
+
+    <script>
+        function toggleShadow() {
+            const content = document.getElementById('shadowContent');
+            const button = document.querySelector('.shadow-toggle');
+            content.classList.toggle('expanded');
+            button.textContent = content.classList.contains('expanded')
+                ? 'Collapse Technical Analysis'
+                : 'Read Full Technical Analysis';
+        }
+    </script>
+
+    <script>
+        // Conversational Personalization Script
+// Time + weather aware greetings
+
+// Load user data from sessionStorage
+const userData = {
+    name: sessionStorage.getItem('userName') || '',
+    email: sessionStorage.getItem('userEmail') || '',
+    location: sessionStorage.getItem('userLocation') || '',
+    timezone: sessionStorage.getItem('userTimezone') || '',
+    weatherTemp: sessionStorage.getItem('userWeatherTemp') || '',
+    weatherDesc: sessionStorage.getItem('userWeatherDesc') || '',
+    industry: document.documentElement.getAttribute('data-industry') || ''
+};
+
+// Personalize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    if (userData.name) {
+        personalizeExperience();
+    }
+});
+
+function personalizeExperience() {
+    // Add personalization bar to navigation
+    addPersonalizationBar();
+
+    // Personalize Claire Dock message
+    personalizeDock();
+}
+
+function getTimeOfDay() {
+    // Get current hour in user's timezone
+    const userTime = userData.timezone ?
+        new Date().toLocaleString('en-US', { timeZone: userData.timezone, hour: '2-digit', hour12: false }) :
+        new Date().getHours();
+
+    const hour = parseInt(userTime);
+
+    if (hour >= 5 && hour < 7) return 'early_morning';
+    if (hour >= 7 && hour < 12) return 'morning';
+    if (hour >= 12 && hour < 17) return 'afternoon';
+    if (hour >= 17 && hour < 21) return 'evening';
+    return 'late_night';
+}
+
+function getConversationalGreeting() {
+    const timeOfDay = getTimeOfDay();
+    const temp = parseInt(userData.weatherTemp);
+    const weather = userData.weatherDesc;
+    const name = userData.name;
+    const location = userData.location;
+
+    // Time-based context
+    const timeContexts = {
+        early_morning: [
+            `You're up early, ${name}!`,
+            `Early riser, ${name}?`,
+            `Good morning, ${name}! You're ahead of the game`
+        ],
+        morning: [
+            `Good morning, ${name}!`,
+            `Morning, ${name}!`,
+            `Hey ${name}!`
+        ],
+        afternoon: [
+            `Good afternoon, ${name}!`,
+            `Afternoon, ${name}!`,
+            `Hey ${name}!`
+        ],
+        evening: [
+            `Evening, ${name}!`,
+            `Good evening, ${name}!`,
+            `Hey ${name}!`
+        ],
+        late_night: [
+            `Burning the midnight oil, ${name}?`,
+            `Working late, ${name}?`,
+            `Still at it, ${name}?`
+        ]
+    };
+
+    // Weather-based context (if available)
+    const weatherContexts = [];
+    if (temp && location) {
+        if (temp < 35) {
+            weatherContexts.push(`Hope you're staying warm in ${location} today`);
+            weatherContexts.push(`Bundle up out there in ${location} — it's ${temp}°F`);
+        } else if (temp > 85) {
+            weatherContexts.push(`Stay cool in ${location} — it's ${temp}°F today`);
+            weatherContexts.push(`Hot day in ${location} at ${temp}°F`);
+        }
+    }
+
+    if (weather && location) {
+        if (weather.includes('rain') || weather.includes('drizzle')) {
+            weatherContexts.push(`Rainy day in ${location}? Perfect time for workflow orchestration`);
+        } else if (weather.includes('snow')) {
+            weatherContexts.push(`Snowy in ${location}? Let's get you set up efficiently`);
+        } else if (weather.includes('sunny') || weather.includes('clear')) {
+            weatherContexts.push(`Beautiful day in ${location}`);
+        }
+    }
+
+    // Pick random greeting from time context
+    const timeGreetings = timeContexts[timeOfDay];
+    const timeGreeting = timeGreetings[Math.floor(Math.random() * timeGreetings.length)];
+
+    // Add weather context if available
+    const weatherContext = weatherContexts.length > 0 ?
+        weatherContexts[Math.floor(Math.random() * weatherContexts.length)] : '';
+
+    return { timeGreeting, weatherContext };
+}
+
+function addPersonalizationBar() {
+    const nav = document.querySelector('nav');
+    if (!nav || document.getElementById('personalization-bar')) return;
+
+    const bar = document.createElement('div');
+    bar.id = 'personalization-bar';
+    bar.style.cssText = `
+        background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        padding: 0.5rem 2rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+    `;
+
+    const { timeGreeting, weatherContext } = getConversationalGreeting();
+
+    let greeting = `<strong>${timeGreeting}</strong>`;
+    if (weatherContext) {
+        greeting += ` ${weatherContext}.`;
+    }
+    greeting += ` Orchestrating <strong>${capitalizeIndustry(userData.industry)}</strong> workflows`;
+
+    bar.innerHTML = greeting;
+    nav.parentNode.insertBefore(bar, nav.nextSibling);
+}
+
+function personalizeDock() {
+    const dockMessage = document.querySelector('.dock-message');
+    if (!dockMessage) return;
+
+    const { timeGreeting, weatherContext } = getConversationalGreeting();
+
+    // Create conversational greeting
+    let greeting = `<strong>${timeGreeting}</strong>`;
+    if (weatherContext) {
+        greeting += ` ${weatherContext}.`;
+    } else if (userData.location) {
+        greeting += ` from ${userData.location}!`;
+    } else {
+        greeting += `!`;
+    }
+
+    // Wrap in paragraph and prepend to dock body
+    const greetingP = document.createElement('p');
+    greetingP.style.cssText = 'margin-bottom: 1rem; font-weight: 500;';
+    greetingP.innerHTML = greeting;
+
+    const dockBody = document.querySelector('.dock-body');
+    if (dockBody) {
+        dockBody.insertBefore(greetingP, dockBody.firstChild);
+    }
+}
+
+function capitalizeIndustry(industry) {
+    const map = {
+        'finance': 'Financial Services',
+        'healthcare': 'Healthcare',
+        'legal': 'Legal Services',
+        'hospitality': 'Hospitality'
+    };
+    return map[industry] || industry;
+}
+
+        </script>
+</body>
+</html>

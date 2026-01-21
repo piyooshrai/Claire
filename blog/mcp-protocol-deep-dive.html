@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Context Protocol: The Hidden Tech Making AI Orchestration Work | Claire by The Algorithm</title>
+    <meta name="description" content="Model Context Protocol: The Hidden Tech Making AI Orchestration Work | Claire by The Algorithm - Insights from Claire By The Algorithm">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Model Context Protocol: The Hidden Tech Making AI Orchestration Work | Claire by The Algorithm">
+    <meta property="og:description" content="Model Context Protocol: The Hidden Tech Making AI Orchestration Work | Claire by The Algorithm - Insights from Claire By The Algorithm">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.letsaskclaire.com/blog/mcp-protocol-deep-dive.html">
+    <meta property="og:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Claire By The Algorithm">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Model Context Protocol: The Hidden Tech Making AI Orchestration Work | Claire by The Algorithm">
+    <meta name="twitter:description" content="Model Context Protocol: The Hidden Tech Making AI Orchestration Work | Claire by The Algorithm - Insights from Claire By The Algorithm">
+    <meta name="twitter:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta name="description" content="MCP is to AI agents what HTTP was to the web—a standard protocol enabling seamless communication. Here's how it powers orchestration platforms.">
+    <meta name="keywords" content="Model Context Protocol, MCP protocol, AI agent communication, agent interoperability, AI orchestration, Claire by The Algorithm">
+    <meta property="og:title" content="Model Context Protocol: The Hidden Tech Making AI Orchestration Work">
+    <meta property="og:description" content="MCP is to AI agents what HTTP was to the web—a standard protocol enabling seamless communication. Here's how it powers orchestration platforms.">
+    <meta property="og:type" content="article">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-dark: #4f46e5;
+            --accent-secondary: #a855f7;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .blog-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-category {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .blog-title {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .blog-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .blog-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .blog-content h2 {
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .blog-content h3 {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content ul, .blog-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .blog-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .code-snippet {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .code-snippet .comment {
+            color: var(--text-secondary);
+        }
+
+        .code-snippet .keyword {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .protocol-diagram {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .stat-callout {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .stat-callout .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-callout .stat-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--accent);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 2rem;
+            }
+
+            .blog-post {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav style="padding: 1.5rem 2rem; border-bottom: 2px solid var(--border);">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="/" style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); text-decoration: none;">
+                CLAIRE // <span style="color: var(--accent);">BY THE ALGORITHM</span>
+            </a>
+            <div style="display: flex; gap: 2rem;">
+                <a href="/about.html" style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s;">About</a>
+                <a href="/case-studies.html" style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s;">Case Studies</a>
+                <a href="/blog.html" style="color: var(--accent); text-decoration: none; font-weight: 600;">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <header class="blog-header">
+            <div class="blog-meta">
+                <span class="blog-category">Technical Deep Dive</span>
+                <span>October 10, 2025</span>
+                <span>12 min read</span>
+            </div>
+            <h1 class="blog-title">Model Context Protocol: The Hidden Tech Making AI Orchestration Work</h1>
+            <p class="blog-subtitle">MCP is to AI agents what HTTP was to the web—a standard protocol enabling seamless communication. Here's how it powers orchestration platforms.</p>
+        </header>
+
+        <div class="blog-content">
+            <p>Every major technology platform needs a communication standard. The web has HTTP. Mobile apps have REST APIs. Microservices have gRPC.</p>
+
+            <p>AI agent orchestration has MCP—the Model Context Protocol.</p>
+
+            <p>If you're building or buying AI workflow automation, understanding MCP is critical. It's the technical foundation that determines whether your agents can actually work together, or whether you're locked into a walled garden of proprietary integrations.</p>
+
+            <h2>The Problem MCP Solves</h2>
+
+            <p>Imagine you want to build a healthcare patient scheduling workflow. You need:</p>
+
+            <ul>
+                <li>A conversational AI to handle patient phone calls</li>
+                <li>A scheduling engine to find available appointment slots</li>
+                <li>An insurance verification agent to check coverage</li>
+                <li>An EHR integration to update patient records</li>
+                <li>A notification system to send appointment confirmations</li>
+            </ul>
+
+            <p>Before MCP, each of these components spoke a different "language." Integrating them required custom code to translate between systems. Change one component? Rewrite all the integration code.</p>
+
+            <div class="highlight-box">
+                <strong>The Classic Integration Problem:</strong> Building N agents requires N×(N-1) custom integrations—exponential complexity. With 5 agents, you need 20 integration points. With 10 agents, you need 90.
+            </div>
+
+            <p>MCP solves this by providing a standard protocol for agents to:</p>
+            <ol>
+                <li><strong>Share context:</strong> Pass information between agents without losing details</li>
+                <li><strong>Request actions:</strong> One agent can invoke capabilities of another</li>
+                <li><strong>Maintain state:</strong> Keep track of what's happened in a multi-agent workflow</li>
+                <li><strong>Handle errors:</strong> Communicate failures and retry strategies</li>
+            </ol>
+
+            <p>With MCP, you build N agents and they can all communicate through a single standardized protocol. Linear complexity instead of exponential.</p>
+
+            <h2>How MCP Works: The Technical Fundamentals</h2>
+
+            <p>At its core, MCP defines three key concepts:</p>
+
+            <h3>1. Context Objects</h3>
+
+            <p>A context object is a standardized data structure that carries information between agents. It includes:</p>
+
+            <div class="code-snippet">
+{<br>
+&nbsp;&nbsp;<span class="keyword">"context_id"</span>: "ctx_abc123",<br>
+&nbsp;&nbsp;<span class="keyword">"workflow_id"</span>: "patient_scheduling",<br>
+&nbsp;&nbsp;<span class="keyword">"state"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"patient_id": "12345",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"requested_specialty": "cardiology",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"insurance_verified": true,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"preferred_times": ["morning"]<br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="keyword">"history"</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{"agent": "conversation", "action": "extract_intent"},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{"agent": "insurance", "action": "verify_coverage"}<br>
+&nbsp;&nbsp;],<br>
+&nbsp;&nbsp;<span class="keyword">"metadata"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"priority": "standard",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"created_at": "2025-10-10T14:30:00Z"<br>
+&nbsp;&nbsp;}<br>
+}
+            </div>
+
+            <p>Every agent in the workflow receives and updates this context object. It's like a baton being passed in a relay race—each runner adds their contribution before passing it on.</p>
+
+            <h3>2. Capability Declarations</h3>
+
+            <p>Each agent declares what it can do using a standardized schema:</p>
+
+            <div class="code-snippet">
+{<br>
+&nbsp;&nbsp;<span class="keyword">"agent_id"</span>: "insurance_verifier",<br>
+&nbsp;&nbsp;<span class="keyword">"capabilities"</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "verify_coverage",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"inputs": ["patient_id", "insurance_id", "procedure_code"],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"outputs": ["coverage_status", "copay_amount", "auth_required"],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"latency_p95": 2.3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"success_rate": 0.99<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;]<br>
+}
+            </div>
+
+            <p>This enables the orchestration engine to dynamically route work to the right agent, understanding what inputs each requires and what outputs each provides.</p>
+
+            <h3>3. Protocol Messages</h3>
+
+            <p>MCP defines standardized message types for agent communication:</p>
+
+            <ul>
+                <li><strong>INVOKE:</strong> Request an agent to perform an action</li>
+                <li><strong>RESPOND:</strong> Return results from an action</li>
+                <li><strong>ERROR:</strong> Report failure with details for retry/escalation</li>
+                <li><strong>QUERY:</strong> Ask about agent capabilities or status</li>
+                <li><strong>SUBSCRIBE:</strong> Register for notifications about state changes</li>
+            </ul>
+
+            <p>Here's an example INVOKE message:</p>
+
+            <div class="code-snippet">
+{<br>
+&nbsp;&nbsp;<span class="keyword">"type"</span>: "INVOKE",<br>
+&nbsp;&nbsp;<span class="keyword">"from"</span>: "orchestration_engine",<br>
+&nbsp;&nbsp;<span class="keyword">"to"</span>: "insurance_verifier",<br>
+&nbsp;&nbsp;<span class="keyword">"context"</span>: { /* context object */ },<br>
+&nbsp;&nbsp;<span class="keyword">"action"</span>: "verify_coverage",<br>
+&nbsp;&nbsp;<span class="keyword">"parameters"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"patient_id": "12345",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"insurance_id": "INS-789",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"procedure_code": "99213"<br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="keyword">"timeout_ms"</span>: 5000<br>
+}
+            </div>
+
+            <h2>MCP in Action: A Complete Example</h2>
+
+            <p>Let's walk through a real workflow to see how MCP enables orchestration. A patient calls to schedule a cardiology appointment:</p>
+
+            <div class="protocol-diagram">
+                <h4 style="margin-bottom: 1.5rem;">Patient Scheduling Workflow via MCP</h4>
+                <div style="text-align: left; max-width: 600px; margin: 0 auto;">
+                    <p><strong>1. Conversation Agent</strong> (Phone AI)<br>
+                    → Extracts intent from call<br>
+                    → Updates context: "patient wants cardiology, prefers morning"<br>
+                    → INVOKE → Insurance Verifier</p>
+
+                    <p><strong>2. Insurance Verifier Agent</strong><br>
+                    → Reads context: patient_id, insurance_id<br>
+                    → Checks coverage with payer API<br>
+                    → Updates context: "coverage verified, no auth needed"<br>
+                    → RESPOND → Orchestration Engine</p>
+
+                    <p><strong>3. Orchestration Engine</strong> (Reasoning)<br>
+                    → Reads context: verified coverage, morning preference<br>
+                    → Determines next step: find appointment<br>
+                    → INVOKE → Scheduling Agent</p>
+
+                    <p><strong>4. Scheduling Agent</strong><br>
+                    → Reads context: specialty=cardiology, time=morning<br>
+                    → Queries provider calendars<br>
+                    → Updates context: "slot available Thu 9AM"<br>
+                    → RESPOND → Orchestration Engine</p>
+
+                    <p><strong>5. Orchestration Engine</strong><br>
+                    → Reads context: slot found<br>
+                    → INVOKE → Conversation Agent (confirm with patient)<br>
+                    → INVOKE → EHR Integration (record appointment)<br>
+                    → INVOKE → Notification Agent (send confirmation)</p>
+                </div>
+            </div>
+
+            <p>Notice how the context object flows through each agent, accumulating information. By the time the workflow completes, the context contains the full history of decisions and actions—critical for auditing and debugging.</p>
+
+            <h2>Why MCP Matters for Enterprises</h2>
+
+            <h3>Vendor Interoperability</h3>
+
+            <p>MCP is an open protocol, similar to how HTTP is open. This means:</p>
+            <ul>
+                <li>You can use agents from different vendors in the same workflow</li>
+                <li>You're not locked into a single platform provider</li>
+                <li>You can migrate workflows between orchestration platforms</li>
+            </ul>
+
+            <p>This is a big deal. In the early days of cloud computing, vendor lock-in was a major concern. MCP prevents the AI equivalent.</p>
+
+            <h3>Future-Proofing</h3>
+
+            <p>As AI models improve (GPT-5, Claude 4, etc.), you can swap in better models without rewriting your workflows. The MCP interface stays consistent even as the underlying AI capabilities evolve.</p>
+
+            <h3>Ecosystem Development</h3>
+
+            <p>Because MCP is standardized, third-party developers can build specialized agents that work with any MCP-compliant platform. This creates a marketplace of pre-built components:</p>
+
+            <ul>
+                <li>Industry-specific agents (HIPAA-compliant healthcare agents, SOC2 financial agents)</li>
+                <li>Integration agents (Salesforce, Epic, ServiceNow connectors)</li>
+                <li>Utility agents (email senders, PDF generators, data validators)</li>
+            </ul>
+
+            <p>Claire by The Algorithm's agent marketplace is entirely built on MCP—any developer can publish an agent that works with Claire's orchestration platform.</p>
+
+            <div class="stat-callout">
+                <div class="stat-number">300+</div>
+                <div class="stat-description">MCP-compliant agents available in Claire's marketplace as of October 2025</div>
+            </div>
+
+            <h2>MCP vs. Other Approaches</h2>
+
+            <p>You might wonder: couldn't we just use REST APIs or message queues? Let's compare:</p>
+
+            <h3>REST APIs</h3>
+            <p><strong>Problem:</strong> REST is stateless. Each request is independent. AI workflows need to maintain context across multiple steps, remember what's been tried, and handle complex state.</p>
+            <p><strong>Result:</strong> You end up building a custom state management layer on top of REST—essentially reinventing MCP.</p>
+
+            <h3>Message Queues (RabbitMQ, Kafka)</h3>
+            <p><strong>Problem:</strong> Message queues are great for async communication, but they don't provide structure for AI-specific needs like context passing, capability discovery, or reasoning integration.</p>
+            <p><strong>Result:</strong> You can use message queues as the transport layer (many MCP implementations do), but you still need MCP's protocol structure on top.</p>
+
+            <h3>Proprietary Orchestration</h3>
+            <p><strong>Problem:</strong> Many early AI platforms built custom protocols. This worked for their own agents, but created vendor lock-in.</p>
+            <p><strong>Result:</strong> You're stuck with whatever agents that vendor provides. No ecosystem. No interoperability.</p>
+
+            <p>MCP provides the best of all approaches: structured communication designed for AI, built on standard transports, with no vendor lock-in.</p>
+
+            <h2>Building on MCP: What to Look For</h2>
+
+            <p>If you're evaluating orchestration platforms, here are key MCP-related questions:</p>
+
+            <ol>
+                <li><strong>Is the platform MCP-compliant?</strong> Not all "orchestration" platforms use open standards.</li>
+                <li><strong>Can you bring your own agents?</strong> True MCP support means any MCP agent works, not just the vendor's.</li>
+                <li><strong>Is context preserved across handoffs?</strong> Some implementations drop context between agents—defeating MCP's purpose.</li>
+                <li><strong>Can you export workflow definitions?</strong> If you can't export, you're still locked in despite MCP.</li>
+                <li><strong>What's the agent SDK like?</strong> Building custom MCP agents should be straightforward.</li>
+            </ol>
+
+            <div class="cta-box">
+                <h3>Claire is Built on MCP from the Ground Up</h3>
+                <p>Full MCP compliance, open agent SDK, and marketplace of 300+ pre-built agents. See how enterprises are building portable AI workflows.</p>
+                <a href="/case-studies.html" class="cta-button">View Case Studies →</a>
+            </div>
+
+            <h2>The Future of MCP</h2>
+
+            <p>MCP is evolving rapidly. Recent additions to the spec include:</p>
+
+            <ul>
+                <li><strong>Multimodal context:</strong> Passing images, audio, and video between agents</li>
+                <li><strong>Streaming responses:</strong> Agents can stream partial results for lower latency</li>
+                <li><strong>Capability negotiation:</strong> Agents can dynamically discover each other's features</li>
+                <li><strong>Security enhancements:</strong> Signed contexts for audit trails and compliance</li>
+            </ul>
+
+            <p>As AI capabilities expand, MCP provides the foundation for agents to leverage new modalities without breaking existing workflows.</p>
+
+            <h2>The Bottom Line</h2>
+
+            <p>MCP is infrastructure. It's not flashy, but it's essential.</p>
+
+            <p>Just as HTTP enabled the web to explode with diverse applications, MCP is enabling an ecosystem of specialized AI agents that work together seamlessly.</p>
+
+            <p>If you're building AI workflows, insist on MCP compliance. If you're buying an orchestration platform, verify it's not a proprietary walled garden.</p>
+
+            <p>The future of AI is orchestrated, multi-agent workflows. And MCP is the protocol that makes it possible.</p>
+
+            <hr style="margin: 3rem 0; border: none; border-top: 2px solid var(--border);">
+
+            <p style="color: var(--text-secondary); font-style: italic;">
+                Claire by The Algorithm implements the Model Context Protocol specification for maximum interoperability and future-proofing. Learn more at <a href="/" style="color: var(--accent);">www.letsaskclaire.com</a>
+            </p>
+        </div>
+    </article>
+
+    <footer style="background: var(--bg-secondary); border-top: 2px solid var(--border); padding: 4rem 2rem; margin-top: 6rem;">
+        <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;">
+            <div>
+                <h3 style="margin-bottom: 1rem; color: var(--text-primary);">CLAIRE</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6;">AI orchestration platform for enterprise workflows. Built by The Algorithm.</p>
+                <p style="margin-top: 1rem;"><a href="https://www.the-algo.com" style="color: var(--accent); text-decoration: none;">A product of The Algorithm LLC →</a></p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem; color: var(--text-primary);">Platform</h4>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="/about.html" style="color: var(--text-secondary); text-decoration: none;">About Claire</a>
+                    <a href="/case-studies.html" style="color: var(--text-secondary); text-decoration: none;">Case Studies</a>
+                    <a href="/blog.html" style="color: var(--text-secondary); text-decoration: none;">Blog</a>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem; color: var(--text-primary);">Company</h4>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="https://www.the-algo.com" style="color: var(--text-secondary); text-decoration: none;">The Algorithm</a>
+                    <a href="https://www.the-algo.com/contact" style="color: var(--text-secondary); text-decoration: none;">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div style="max-width: 1400px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+            <p>&copy; 2025 The Algorithm LLC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - Claire By The Algorithm</title>
+    <meta name="description" content="Enterprise-grade security for Claire By The Algorithm. SOC 2 compliant, encrypted, and secure.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Security - Claire By The Algorithm">
+    <meta property="og:description" content="Enterprise-grade security for Claire By The Algorithm. SOC 2 compliant, encrypted, and secure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.letsaskclaire.com/security.html">
+    <meta property="og:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Claire By The Algorithm">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Security - Claire By The Algorithm">
+    <meta name="twitter:description" content="Enterprise-grade security for Claire By The Algorithm. SOC 2 compliant, encrypted, and secure.">
+    <meta name="twitter:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <style>
+        :root { --accent: #6366f1; --accent-dark: #4f46e5; --bg-primary: #ffffff; --bg-secondary: #f9fafb; --text-primary: #111827; --text-secondary: #6b7280; --border: #e5e7eb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8; color: var(--text-primary); background: var(--bg-primary); }
+        nav { position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; padding: 1rem 2rem; }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-img { height: 36px; width: auto; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+        main { max-width: 900px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+        h1 { font-size: 3rem; font-weight: 800; margin-bottom: 2rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .last-updated { color: var(--text-secondary); margin-bottom: 3rem; font-size: 0.9375rem; }
+        h2 { font-size: 1.75rem; font-weight: 700; margin: 3rem 0 1rem; color: var(--accent); }
+        h3 { font-size: 1.25rem; font-weight: 600; margin: 2rem 0 0.75rem; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        ul { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; color: var(--text-secondary); }
+        .security-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .security-card { background: var(--bg-secondary); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--border); }
+        .security-card h3 { margin-top: 0; font-size: 1.125rem; color: var(--accent); }
+        .highlight-box { background: var(--bg-secondary); border-left: 4px solid var(--accent); padding: 1.5rem; margin: 2rem 0; border-radius: 8px; }
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h4 { font-weight: 600; margin-bottom: 1rem; }
+        .footer-section ul { list-style: none; margin: 0; }
+        .footer-section a { color: var(--text-secondary); text-decoration: none; display: block; padding: 0.25rem 0; transition: color 0.3s; }
+        .footer-section a:hover { color: var(--accent); }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); font-size: 0.9375rem; }
+        .footer-bottom a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/assets/claire-logo.png" alt="Claire" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/hipaa">HIPAA</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <h1>Security</h1>
+        <p class="last-updated">Last Updated: January 2024</p>
+        
+        <p>Security is fundamental to Claire's architecture. As an orchestration platform handling sensitive business workflows and data, we've built comprehensive security measures into every layer of our system.</p>
+        
+        <h2>Infrastructure Security</h2>
+        
+        <div class="security-grid">
+            <div class="security-card">
+                <h3>Data Encryption</h3>
+                <p style="margin: 0; font-size: 0.9375rem;">AES-256 encryption at rest, TLS 1.3 in transit</p>
+            </div>
+            <div class="security-card">
+                <h3>Network Security</h3>
+                <p style="margin: 0; font-size: 0.9375rem;">Firewall protection, DDoS mitigation, VPN access</p>
+            </div>
+            <div class="security-card">
+                <h3>Data Centers</h3>
+                <p style="margin: 0; font-size: 0.9375rem;">SOC 2 certified facilities with physical access controls</p>
+            </div>
+            <div class="security-card">
+                <h3>Backups</h3>
+                <p style="margin: 0; font-size: 0.9375rem;">Automated encrypted backups with point-in-time recovery</p>
+            </div>
+        </div>
+        
+        <h2>Application Security</h2>
+        
+        <h3>Authentication & Authorization</h3>
+        <ul>
+            <li>Multi-factor authentication (MFA) support</li>
+            <li>Role-based access control (RBAC)</li>
+            <li>Single Sign-On (SSO) integration</li>
+            <li>Session management with automatic timeout</li>
+            <li>Password policies enforcing complexity requirements</li>
+        </ul>
+        
+        <h3>Data Protection</h3>
+        <ul>
+            <li>Field-level encryption for sensitive data</li>
+            <li>Data isolation between customer tenants</li>
+            <li>Secure API authentication with rate limiting</li>
+            <li>Input validation and sanitization</li>
+            <li>Protection against OWASP Top 10 vulnerabilities</li>
+        </ul>
+        
+        <h3>Audit & Monitoring</h3>
+        <ul>
+            <li>Comprehensive activity logging</li>
+            <li>Real-time security monitoring and alerting</li>
+            <li>Intrusion detection systems</li>
+            <li>Automated vulnerability scanning</li>
+            <li>Security Information and Event Management (SIEM)</li>
+        </ul>
+        
+        <h2>Operational Security</h2>
+        
+        <h3>Development Practices</h3>
+        <ul>
+            <li>Secure Software Development Lifecycle (SSDLC)</li>
+            <li>Code reviews and security testing</li>
+            <li>Dependency scanning for vulnerabilities</li>
+            <li>Penetration testing by third-party security firms</li>
+            <li>Bug bounty program for responsible disclosure</li>
+        </ul>
+        
+        <h3>Access Management</h3>
+        <ul>
+            <li>Principle of least privilege access</li>
+            <li>Regular access reviews and revocation</li>
+            <li>Privileged access management (PAM)</li>
+            <li>Separation of duties for critical operations</li>
+            <li>Background checks for personnel with data access</li>
+        </ul>
+        
+        <h3>Incident Response</h3>
+        <ul>
+            <li>24/7 security operations center</li>
+            <li>Documented incident response procedures</li>
+            <li>Breach notification protocols</li>
+            <li>Regular incident response drills</li>
+            <li>Post-incident reviews and remediation</li>
+        </ul>
+        
+        <h2>Compliance & Certifications</h2>
+        <ul>
+            <li><strong>HIPAA:</strong> Compliant with healthcare data protection requirements (<a href="/hipaa" style="color: var(--accent); text-decoration: underline;">details</a>)</li>
+            <li><strong>SOC 2 Type II:</strong> Annual audits of security controls (in progress)</li>
+            <li><strong>GDPR:</strong> Compliant with EU data protection regulations</li>
+            <li><strong>CCPA:</strong> Compliant with California privacy requirements</li>
+        </ul>
+        
+        <h2>Data Residency & Privacy</h2>
+        <p>We provide options for data residency to meet regulatory requirements. Customer data is processed and stored according to contractual agreements and applicable privacy laws.</p>
+        
+        <div class="highlight-box">
+            <h3 style="margin-top: 0;">Privacy by Design</h3>
+            <p style="margin-bottom: 0;">Claire is built with privacy as a core principle. We collect only the data necessary for orchestration, implement data minimization, support data portability, and honor deletion requests in accordance with privacy regulations.</p>
+        </div>
+        
+        <h2>Third-Party Security</h2>
+        <p>All third-party vendors and subprocessors undergo security assessments. We maintain data processing agreements and ensure vendors meet our security standards and applicable regulatory requirements.</p>
+        
+        <h2>Security Training</h2>
+        <p>All employees receive security awareness training, including:</p>
+        <ul>
+            <li>Secure coding practices for engineering teams</li>
+            <li>Data handling and privacy requirements</li>
+            <li>Phishing and social engineering awareness</li>
+            <li>Incident identification and reporting</li>
+            <li>HIPAA and compliance training for relevant roles</li>
+        </ul>
+        
+        <h2>Responsible Disclosure</h2>
+        <p>If you discover a security vulnerability in Claire, please report it responsibly to <a href="mailto:security@the-algo.com" style="color: var(--accent); text-decoration: underline;">security@the-algo.com</a>. We investigate all legitimate reports and work to address verified issues promptly.</p>
+        
+        <h2>Questions About Security?</h2>
+        <p>For detailed information about our security practices or to discuss specific security requirements for your organization, contact our security team at <a href="mailto:security@the-algo.com" style="color: var(--accent); text-decoration: underline;">security@the-algo.com</a></p>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Claire</a></li>
+                    <li><a href="https://www.the-algo.com">The Algorithm</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/healthcare/">Healthcare</a></li>
+                    <li><a href="/finance/">Finance</a></li>
+                    <li><a href="/legal/">Legal</a></li>
+                    <li><a href="/hospitality/">Hospitality</a></li>
+                    <li><a href="/general/">Other Industries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/case-studies">Case Studies</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://www.the-algo.com/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/hipaa">HIPAA Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 The Algorithm LLC. All rights reserved. | A product of <a href="https://www.the-algo.com">The Algorithm</a></p>
+        </div>
+    </footer>
+</body>
+</html>
