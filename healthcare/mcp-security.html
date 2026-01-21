@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Is My Patient Data Being Used to Train AI Models? | Claire AI</title>
+    <title>Is My Patient Data Being Used to Train AI Models? | Claire By The Algorithm</title>
+    <meta name="description" content="Is My Patient Data Being Used to Train AI Models? | Claire By The Algorithm - Claire By The Algorithm for Healthcare">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Is My Patient Data Being Used to Train AI Models? | Claire By The Algorithm">
+    <meta property="og:description" content="Is My Patient Data Being Used to Train AI Models? | Claire By The Algorithm - Claire By The Algorithm for Healthcare">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.letsaskclaire.com/healthcare/mcp-security.html">
+    <meta property="og:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Claire By The Algorithm">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Is My Patient Data Being Used to Train AI Models? | Claire By The Algorithm">
+    <meta name="twitter:description" content="Is My Patient Data Being Used to Train AI Models? | Claire By The Algorithm - Claire By The Algorithm for Healthcare">
+    <meta name="twitter:image" content="https://www.letsaskclaire.com/assets/claire-logo.png">
     <meta name="description" content="Learn how Model Context Protocol (MCP) architecture prevents patient data from being used to train AI models. Claire uses ephemeral connections and zero training data retention for healthcare.">
     <meta property="og:title" content="Is My Patient Data Being Used to Train AI Models?">
-    <meta property="og:description" content="MCP architecture explained: How Claire AI ensures your patient data never trains AI models through ephemeral connections and secure tunnels.">
+    <meta property="og:description" content="MCP architecture explained: How Claire By The Algorithm ensures your patient data never trains AI models through ephemeral connections and secure tunnels.">
     <meta property="og:type" content="article">
-    <link rel="canonical" href="https://claire.ai/healthcare/mcp-security.html">
+    <link rel="canonical" href="https://www.letsaskclaire.com/healthcare/mcp-security.html">
 
     <script type="application/ld+json">
     {
@@ -18,11 +35,11 @@
       "description": "Learn how Model Context Protocol (MCP) architecture prevents patient data from being used to train AI models.",
       "author": {
         "@type": "Organization",
-        "name": "Claire AI"
+        "name": "Claire By The Algorithm"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Claire AI"
+        "name": "Claire By The Algorithm"
       },
       "datePublished": "2025-01-19",
       "dateModified": "2025-01-19"
@@ -746,7 +763,7 @@
                 <li><strong>Scoped data access:</strong> I query only the resources needed for scheduling: the patient's demographic information, existing appointments, and provider availability. I don't pull their full medical history, diagnoses, or medication lists unless the conversation requires it.</li>
                 <li><strong>Local reasoning:</strong> I process the patient's request using my reasoning engine. The patient says, "I need to reschedule my appointment because my car broke down." I understand the context, check their existing appointment, find alternative slots, and propose options—all without sending their PHI to a central training database.</li>
                 <li><strong>Transaction execution:</strong> If the patient confirms a new appointment time, I write that change directly to your EHR via the same FHIR connection. The update happens in your system, not mine.</li>
-                <li><strong>Session termination:</strong> When the call ends, I close the MCP tunnel. The session ID expires. I retain no PHI. The only record is the audit log in your EHR showing that "Claire AI" accessed specific resources at specific timestamps with specific reasoning traces.</li>
+                <li><strong>Session termination:</strong> When the call ends, I close the MCP tunnel. The session ID expires. I retain no PHI. The only record is the audit log in your EHR showing that "Claire By The Algorithm" accessed specific resources at specific timestamps with specific reasoning traces.</li>
             </ol>
 
             <p>Contrast this with a traditional chatbot that would upload the entire conversation—including patient identifiers, appointment details, and the reason for rescheduling—to a central server for processing. Even if that server promises not to use the data for training, you've still created a honeypot of PHI outside your security perimeter.</p>
